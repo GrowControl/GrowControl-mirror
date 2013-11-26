@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/jansi-1.11.jar" sourcepath="lib/jansi-src-1.11.zip"/>
-	<classpathentry kind="lib" path="lib/jline-2.11.jar" sourcepath="lib/jline-src-2.11.jar"/>
-	<classpathentry kind="lib" path="lib/snakeyaml-1.11.jar" sourcepath="lib/snakeyaml-1.11-sources.jar"/>
-	<classpathentry kind="lib" path="lib/RXTXcomm.jar"/>
-	<classpathentry kind="lib" path="lib/jcl-core-2.5-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="resources/jansi-1.11.jar" sourcepath="lib/jansi-src-1.11.zip"/>
+	<classpathentry kind="lib" path="resources/jline-2.11.jar" sourcepath="lib/jline-src-2.11.jar"/>
+	<classpathentry kind="lib" path="resources/snakeyaml-1.11.jar" sourcepath="lib/snakeyaml-1.11-sources.jar"/>
+	<classpathentry kind="lib" path="resources/jcl-core-2.5-SNAPSHOT.jar" sourcepath="lib/jcl-core-2.5-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
