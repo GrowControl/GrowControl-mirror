@@ -17,14 +17,30 @@
             </resource>
         </resources>
         <plugins>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.1</version>
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.growcontrol.gcClient.Main</mainClass>
+                            <mainClass>com.growcontrol.client.Main</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
@@ -40,6 +56,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+<!--
     <repositories>
         <repository>
             <id>gclibs</id>
@@ -48,21 +65,22 @@
             <url>file://${project.basedir}/lib/</url>
         </repository>
     </repositories>
+-->
     <organization>
-    	<name>PoiXson</name>
-    	<url>http://poixson.com</url>
+        <name>PoiXson</name>
+        <url>http://poixson.com</url>
     </organization>
     <scm>
-    	<url>https://github.com/lorenzop/GrowControl</url>
-    	<connection>scm:git:https://github.com/lorenzop/GrowControl.git</connection>
-    	<developerConnection>scm:git:https://github.com/lorenzop/GrowControl.git</developerConnection>
+        <url>https://github.com/PoiXson/GrowControl</url>
+        <connection>scm:git:https://github.com/PoiXson/GrowControl.git</connection>
+        <developerConnection>scm:git:https://github.com/PoiXson/GrowControl.git</developerConnection>
     </scm>
     <issueManagement>
-    	<url>https://github.com/lorenzop/GrowControl/issues</url>
-    	<system>github</system>
+        <url>https://github.com/PoiXson/GrowControl/issues</url>
+        <system>github</system>
     </issueManagement>
     <ciManagement>
-    	<url>ci.poixson.com</url>
-    	<system>pxnci</system>
+        <url>ci.poixson.com</url>
+        <system>pxnci</system>
     </ciManagement>
 </project>
