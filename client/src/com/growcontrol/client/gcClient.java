@@ -21,7 +21,7 @@ import com.growcontrol.gcCommon.pxnUtils.pxnUtilsMath;
 
 public class gcClient extends pxnApp {
 	public static final String appName = "gcClient";
-	public static final String version = "3.0.10";
+	public static final String version = "3.1.0";
 	public static final String defaultPrompt = "";
 
 	// client socket
