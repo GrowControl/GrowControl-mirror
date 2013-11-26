@@ -1,4 +1,4 @@
-package com.growcontrol.gcClient.frames;
+package com.growcontrol.client.frames;
 
 
 public interface gcFrameInterface {

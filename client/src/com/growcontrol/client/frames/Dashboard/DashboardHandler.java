@@ -1,4 +1,4 @@
-package com.growcontrol.gcClient.frames.Dashboard;
+package com.growcontrol.client.frames.Dashboard;
 
 import java.lang.reflect.InvocationTargetException;
 

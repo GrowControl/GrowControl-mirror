@@ -1,4 +1,4 @@
-package com.growcontrol.gcClient.clientPlugin;
+package com.growcontrol.client.clientPlugin;
 
 import com.growcontrol.gcCommon.pxnPlugin.pxnPlugin;
 

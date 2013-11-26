@@ -1,4 +1,4 @@
-package com.growcontrol.gcClient.frames;
+package com.growcontrol.client.frames;
 
 import javax.swing.JFrame;
 

@@ -1,4 +1,4 @@
-package com.growcontrol.gcServer;
+package com.growcontrol.server;
 
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;

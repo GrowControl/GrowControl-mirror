@@ -1,4 +1,4 @@
-package com.growcontrol.gcClient.clientSocket;
+package com.growcontrol.client.clientSocket;
 
 import com.growcontrol.gcCommon.pxnSocket.worker.pxnSocketWorker;
 

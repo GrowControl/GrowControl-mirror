@@ -1,4 +1,4 @@
-package com.growcontrol.gcServer.serverSocket;
+package com.growcontrol.server.serverSocket;
 
 import java.util.List;
 

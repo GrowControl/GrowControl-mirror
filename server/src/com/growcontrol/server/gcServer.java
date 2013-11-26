@@ -1,4 +1,4 @@
-package com.growcontrol.gcServer;
+package com.growcontrol.server;
 
 import java.util.ArrayList;
 import java.util.List;

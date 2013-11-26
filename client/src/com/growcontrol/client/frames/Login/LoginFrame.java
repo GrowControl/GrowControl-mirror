@@ -1,4 +1,4 @@
-package com.growcontrol.gcClient.frames.Login;
+package com.growcontrol.client.frames.Login;
 
 import java.awt.CardLayout;
 import java.awt.Color;

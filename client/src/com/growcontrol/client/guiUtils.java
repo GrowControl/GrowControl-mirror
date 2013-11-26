@@ -1,4 +1,4 @@
-package com.growcontrol.gcClient;
+package com.growcontrol.client;
 
 import java.io.File;
 

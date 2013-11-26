@@ -1,4 +1,4 @@
-package com.growcontrol.gcClient.frames.Dashboard;
+package com.growcontrol.client.frames.Dashboard;
 
 import it.cnr.imaa.essi.lablib.gui.checkboxtree.CheckboxTree;
 

@@ -1,4 +1,4 @@
-package com.growcontrol.gcClient;
+package com.growcontrol.client;
 
 import com.growcontrol.gcCommon.pxnCommand.pxnCommandListenerGroup;
 import com.growcontrol.gcCommon.pxnCommand.pxnCommandsHolder;
