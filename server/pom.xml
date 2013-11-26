@@ -9,6 +9,9 @@
     <version>3.0.10-SNAPSHOT</version>
     <name>Grow Control Server</name>
     <url>http://growcontrol.com</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <build>
         <sourceDirectory>src</sourceDirectory>
         <resources>
