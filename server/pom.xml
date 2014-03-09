@@ -43,7 +43,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.growcontrol.server.Main</mainClass>
+                            <mainClass>com.growcontrol.server.gcServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
