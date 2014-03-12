@@ -1,7 +1,6 @@
 package com.growcontrol.server;
 
-import com.growcontrol.gcCommon.pxnCommand.pxnCommandListenerGroup;
-import com.growcontrol.gcCommon.pxnCommand.pxnCommandsHolder;
+import com.poixson.commonjava.EventListener.xHandler;
 
 
 public final class ServerListeners {
@@ -10,34 +9,45 @@ public final class ServerListeners {
 		throw new CloneNotSupportedException();
 	}
 
-	// single instance
-	private static volatile ServerListeners listeners = null;
+
+	// single instance of holder class
+	private static volatile ServerListeners instance = null;
 	private static final Object lock = new Object();
-
-
 	public static ServerListeners get() {
-		if(listeners == null) {
+		if(instance == null) {
 			synchronized(lock) {
-				if(listeners == null)
-					listeners = new ServerListeners();
+				if(instance == null)
+					instance = new ServerListeners();
 			}
 		}
-		return listeners;
+		return instance;
 	}
-	// init listeners
+
+
+	private final xHandler system;
+	private final xHandler commands;
+	private final xHandler plugins;
+
+
+	// new instance of holder
 	private ServerListeners() {
-		// server commands listener
-		register(ServerCommands.get());
+		system   = new xHandler();
+		commands = new xHandler();
+		plugins  = new xHandler();
 	}
 
 
-	// commands holder
-	public void register(pxnCommandsHolder listener) {
-		pxnCommandListenerGroup.get().register(listener);
+	// system event handler
+	public xHandler system() {
+		return system;
 	}
-	// trigger command
-	public boolean triggerCommand(String line) {
-		return pxnCommandListenerGroup.get().triggerCommandEvent(line);
+	// command event handler
+	public xHandler commands() {
+		return commands;
+	}
+	// plugin event handler
+	public xHandler plugins() {
+		return plugins;
 	}
 
 
