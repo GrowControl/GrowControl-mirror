@@ -4,14 +4,13 @@ import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
 import com.poixson.commonjava.app.xApp;
+import com.poixson.commonjava.app.listeners.CommandEvent;
+import com.poixson.commonjava.xLogger.xLevel;
 
 
 public class gcServer extends xApp {
 	public static final String APPNAME = "gcServer";
 	public static final String VERSION = "3.1.0";
-
-	// log level
-//	private volatile xLevel level = null;
 
 	// server socket pool
 //	private volatile pxnSocketServer socket = null;
@@ -98,7 +97,7 @@ public class gcServer extends xApp {
 		// command prompt
 		case 3:
 			// start console input thread
-//			StartConsole();
+			initConsole();
 			return true;
 		case 4:
 
@@ -230,6 +229,29 @@ public class gcServer extends xApp {
 	@Override
 	public String getVersion() {
 		return VERSION;
+	}
+
+
+	// process a command
+	@Override
+	public void processCommand(final String commandStr) {
+		getThreadPool().runLater(new Runnable() {
+
+			private volatile String commandStr = null;
+			protected Runnable init(final String commandStr) {
+				this.commandStr = commandStr;
+				return this;
+			}
+
+			@Override
+			public void run() {
+				ServerListeners.get()
+					.commands().trigger(
+						new CommandEvent(commandStr)
+					);
+			}
+
+		}.init(commandStr));
 	}
 
 
