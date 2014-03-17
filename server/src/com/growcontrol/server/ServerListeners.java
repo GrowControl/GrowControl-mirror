@@ -31,23 +31,23 @@ public final class ServerListeners {
 
 	// new instance of holder
 	private ServerListeners() {
-		system   = new xHandler();
-		commands = new xHandler();
-		plugins  = new xHandler();
+		this.system   = new xHandler();
+		this.commands = new xHandler();
+		this.plugins  = new xHandler();
 	}
 
 
 	// system event handler
 	public xHandler system() {
-		return system;
+		return this.system;
 	}
 	// command event handler
 	public xHandler commands() {
-		return commands;
+		return this.commands;
 	}
 	// plugin event handler
 	public xHandler plugins() {
-		return plugins;
+		return this.plugins;
 	}
 
 
