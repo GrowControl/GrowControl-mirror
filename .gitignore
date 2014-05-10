@@ -18,4 +18,5 @@ target
 
 server/src/com/poixson/commonjava
 client/src/com/poixson/commonjava
-
+server/src/com/poixson/growcontrol/gccommon
+client/src/com/poixson/growcontrol/gccommon
