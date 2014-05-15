@@ -18,5 +18,10 @@ target
 
 server/src/com/poixson/commonjava
 client/src/com/poixson/commonjava
+server/src/com/poixson/commonapp
+client/src/com/poixson/commonapp
 server/src/com/growcontrol/gccommon
 client/src/com/growcontrol/gccommon
+
+server/src/com/poixson/nanosocket
+
