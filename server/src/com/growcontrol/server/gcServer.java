@@ -3,9 +3,11 @@ package com.growcontrol.server;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
-import com.poixson.commonjava.app.xApp;
-import com.poixson.commonjava.app.listeners.CommandEvent;
-import com.poixson.commonjava.xLogger.xLevel;
+import com.growcontrol.gccommon.listeners.CommandEvent;
+import com.growcontrol.gccommon.listeners.MetaEvent;
+import com.poixson.commonapp.app.xApp;
+import com.poixson.commonjava.xLogger.xLog;
+import com.poixson.commonjava.xLogger.handlers.CommandHandler;
 
 
 public class gcServer extends xApp {
@@ -88,14 +90,29 @@ public class gcServer extends xApp {
 		// listeners
 		case 2:
 			// init listeners
-			final ServerListeners listeners = ServerListeners.get();
+			final gcServerVars vars = gcServerVars.get();
 			// server command listener
-			listeners.commands().register(new ServerCommands());
+			vars.commands().register(
+				new ServerCommands()
+			);
 			// io event listener
 			//getLogicQueue();
 			return true;
 		// command prompt
 		case 3:
+			// command processor
+			xLog.setCommandHandler(new CommandHandler() {
+				@Override
+				public void processCommand(String line) {
+					final CommandEvent event = new CommandEvent(line);
+					gcServerVars.get()
+						.commands().trigger(
+							event
+						);
+					if(!event.isHandled())
+						log().warning("Unknown command: "+event.arg(0));
+				}
+			});
 			// start console input thread
 			initConsole();
 			return true;
@@ -231,28 +248,6 @@ public class gcServer extends xApp {
 		return VERSION;
 	}
 
-
-	// process a command
-	@Override
-	public void processCommand(final String commandStr) {
-		getThreadPool().runLater(new Runnable() {
-
-			private volatile String commandStr = null;
-			protected Runnable init(final String commandStr) {
-				this.commandStr = commandStr;
-				return this;
-			}
-
-			@Override
-			public void run() {
-				ServerListeners.get()
-					.commands().trigger(
-						new CommandEvent(commandStr)
-					);
-			}
-
-		}.init(commandStr));
-	}
 
 
 
