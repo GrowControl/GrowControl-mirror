@@ -1,229 +1,313 @@
 package com.growcontrol.server;
 
-import java.io.IOException;
-
-import jline.console.ConsoleReader;
-
-import com.growcontrol.gcCommon.meta.metaValue;
-import com.growcontrol.gcCommon.pxnCommand.pxnCommandEvent;
-import com.growcontrol.gcCommon.pxnCommand.pxnCommandsHolder;
-import com.growcontrol.gcCommon.pxnLogger.pxnConsole;
-import com.growcontrol.gcCommon.pxnLogger.pxnLevel;
-import com.growcontrol.gcCommon.pxnLogger.pxnLog;
+import com.growcontrol.gccommon.listeners.CommandEvent;
+import com.poixson.commonapp.app.xApp;
+import com.poixson.commonjava.EventListener.xEvent;
+import com.poixson.commonjava.EventListener.xEvent.Priority;
+import com.poixson.commonjava.EventListener.xListener;
 
 
-public final class ServerCommands extends pxnCommandsHolder {
-	private ServerCommands() {}
+public final class ServerCommands implements xListener {
+
+
+	@xEvent(
+		priority=Priority.NORMAL,
+		filtered=false,
+		threaded=false,
+		ignoreHandled=true,
+		ignoreCancelled=true)
+	public void onCommand(final CommandEvent event) {
+		switch(event.arg(0)) {
+		// shutdown
+		//.setUsage("Stops and closes the server.");
+		case "shutdown":
+		case "stop":
+		case "exit":
+		case "quit":
+			_shutdown(event);
+			break;
+		// kill
+		//.setUsage("Emergency shutdown, no saves or power-downs. Don't use this unless you need to.");
+		case "kill":
+		case "end":
+			_kill(event);
+			System.exit(0);
+//		addCommand("start")
+//			.addAlias("resume")
+//			.setUsage("Starts or resumes server tasks and schedulers.");
+//		addCommand("pause")
+//			.setUsage("Pauses or resumes the scheduler and some plugin tasks. Optional argument: [on/off/true/false/1/0]");
+		case "set":
+			_set(event);
+			break;
+//		addCommand("get")
+//		addCommand("watch")
+
+//		addCommand("clear")
+//			.addAlias("cls")
+//			.setUsage("Clears the console screen.");
+//		addCommand("help")
+//			.addAlias("?");
+//		addCommand("log")
+//			.addAlias("level")
+//			.setUsage("log level info - Sets or displays the log level.");
+//		addCommand("show")
+//			.setUsage("Displays additional information.");
+//		addCommand("version")
+//			.setUsage("Displays the current running version, and the latest available (if enabled)");
+//		addCommand("say")
+//			.addAlias("broadcast")
+//			.addAlias("wall")
+//			.setUsage("");
+//		addCommand("list")
+//		// input / output
+//		// tools
+//		addCommand("ping")
+//			.setUsage("");
+//		addCommand("threads")
+//			.setUsage("Displays number of loaded threads, and optional details.");
+//		setAllPriority(EventPriority.LOWEST);
+//		addCommand("route")
+//			.addAlias("send")
+//			.setUsage("Sends an event to the meta data router, which passes to plugins.\nUsage: route <ReceiverName> [MetaType] <Value>");
+		case "test":
+			_test(event);
+			break;
+		}
+	}
+
+
+	private static void _test(final CommandEvent event) {
+		event.setHandled();
+//final long tim = System.nanoTime();
+//xThreadPool.get().runNow(
+//new Runnable() {
+//@Override
+//public void run() {
+//final long ln = (System.nanoTime() - tim) / 1000;
+//final double ns = (double) ln;
+//System.out.println(Double.toString( ns / 1000 )+"ms");
+//}
+//}
+//);
+	}
+
+
+	// shutdown command
+	private static void _shutdown(final CommandEvent event) {
+		event.setHandled();
+		xApp.get().shutdown();
+	}
+	// kill command
+	private static void _kill(final CommandEvent event) {
+		event.setHandled();
+		System.out.println("Killed by command.");
+		System.out.println();
+		System.exit(0);
+	}
+
+
+	// trigger event manually
+	private void _set(final CommandEvent event) {
+String str = "";
+int i = 0;
+for(final String a : event.arg)
+	str += Integer.toString(++i)+")"+a+" ";
+
+System.out.println("ROUTE: "+str);
+event.setHandled();
+
+//		// route an action
+//		public void processMeta(final String destStr, final Meta value) {
+//			getThreadPool().runLater(new Runnable() {
+//				private volatile String destStr2 = null;;
+//				private volatile Meta value2 = null;
+//				protected Runnable init(final String destStr1, final Meta value1) {
+//					this.destStr2 = destStr1;
+//					this.value2 = value1;
+//					return this;
+//				}
+//				@Override
+//				public void run() {
+//					ServerListeners.get()
+//						.router().trigger(
+//							new MetaEvent(
+//								this.destStr2,
+//								this.value2
+//							)
+//						);
+//				}
+//			}.init(destStr, value));
+//		}
+	}
+
+
+//	// help command
+//	private static boolean _route(pxnCommandEvent commandEvent) {
+//		String[] args = commandEvent.getArgs();
+//		if(args.length != 3) {
+//			pxnLog.get().Publish("Invalid arguments!\n"+commandEvent.command.getUsageStr());
+//			return true;
+//		}
+//		String toName = args[0];
+//		metaValue meta = metaValue.newValue(args[1], args[2]);
+//		if(meta == null) {
+//			pxnLog.get().Publish("Invalid meta type!");
+//TODO: list meta types
+//			return true;
+//		}
+//		// send to router
+//		meta.Send(toName);
+//		return true;
+//	}
+
+
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
 	}
 
-	private static ServerCommands instance = null;
-	private static final Object lock = new Object();
 
-
-	public static ServerCommands get() {
-		if(instance == null) {
-			synchronized(lock) {
-				if(instance == null)
-					instance = new ServerCommands();
-			}
-		}
-		return instance;
-	}
-	@Override
-	public void initCommands() {
-		// server control
-		addCommand("stop")
-			.addAlias("exit")
-			.addAlias("quit")
-			.addAlias("shutdown")
-//TODO: remove this
-.addAlias("s")
-			.setUsage("Stops and closes the server.");
-		addCommand("kill")
-//TODO: remove this
-.addAlias("k")
-			.setUsage("Emergency shutdown, no saves or power-downs. Don't use this unless you need to.");
-		addCommand("start")
-			.addAlias("resume")
-			.setUsage("Starts or resumes server tasks and schedulers.");
-		addCommand("pause")
-			.setUsage("Pauses or resumes the scheduler and some plugin tasks. Optional argument: [on/off/true/false/1/0]");
-		addCommand("clear")
-			.addAlias("cls")
-			.setUsage("Clears the console screen.");
-		addCommand("help")
-			.addAlias("?");
-		addCommand("log")
-			.addAlias("level")
-			.setUsage("log level info - Sets or displays the log level.");
-		addCommand("show")
-			.setUsage("Displays additional information.");
-		addCommand("version")
-			.setUsage("Displays the current running version, and the latest available (if enabled)");
-		addCommand("say")
-			.addAlias("broadcast")
-			.addAlias("wall")
-			.setUsage("");
-//		addCommand("list")
-//		// input / output
-//		addCommand("set")
-//		addCommand("get")
-//		addCommand("watch")
-//		// tools
-//		addCommand("ping")
-//			.setUsage("");
-		addCommand("threads")
-			.setUsage("Displays number of loaded threads, and optional details.");
-//		setAllPriority(EventPriority.LOWEST);
-		addCommand("route")
-			.addAlias("send")
-			.setUsage("Sends an event to the meta data router, which passes to plugins.\nUsage: route <ReceiverName> [MetaType] <Value>");
-	}
-
-
-	@Override
-	public boolean onCommand(pxnCommandEvent commandEvent) {
-		if(commandEvent.isHandled()) return false;
-		switch(commandEvent.getCommandStr()) {
-		// server control
-		case "stop":
-			return ServerCommands._stop();
-		case "kill":
-			return _kill();
-		case "start":
-			return _start();
-		case "pause":
-			return _pause();
-		case "clear":
-			return _clear();
-		case "help":
-			return _help(commandEvent.getArgs());
-		case "log":
-			return _log(commandEvent.getArgs());
-		case "show":
-			return _show(commandEvent.getArgs());
-		case "version":
-			return _version();
-		case "say":
-			String msg = commandEvent.raw;
-			if(msg.contains(" ")) msg = msg.substring(msg.indexOf(" ") + 1);
-			return _say(msg);
+//	@Override
+//	public boolean onCommand(pxnCommandEvent commandEvent) {
+//		if(commandEvent.isHandled()) return false;
+//		switch(commandEvent.getCommandStr()) {
+//		// server control
+//		case "stop":
+//			return ServerCommands._stop();
+//		case "kill":
+//			return _kill();
+//		case "start":
+//			return _start();
+//		case "pause":
+//			return _pause();
+//		case "clear":
+//			return _clear();
+//		case "help":
+//			return _help(commandEvent.getArgs());
+//		case "log":
+//			return _log(commandEvent.getArgs());
+//		case "show":
+//			return _show(commandEvent.getArgs());
+//		case "version":
+//			return _version();
+//		case "say":
+//			String msg = commandEvent.raw;
+//			if(msg.contains(" ")) msg = msg.substring(msg.indexOf(" ") + 1);
+//			return _say(msg);
 //		// tools
 //		case "ping":
 //			return _ping( (String[]) event.args.toArray());
-		case "threads":
-			return _threads();
-		case "route":
-			return _route(commandEvent);
-		default:
-			break;
-		}
-		return false;
-	}
+//		case "threads":
+//			return _threads();
+//		case "route":
+//			return _route(commandEvent);
+//		default:
+//			break;
+//		}
+//		return false;
+//	}
 
 
-	// stop command
-	private static boolean _stop() {
-		gcServer.get().Shutdown();
-		return true;
-	}
+//	// stop command
+//	private static boolean _stop() {
+//		gcServer.get().Shutdown();
+//		return true;
+//	}
 
 
-	// kill command
-	private static boolean _kill() {
-		try {
-			pxnLog.get().warning("Killing server! (Triggered by console command)");
-		} catch(Exception ignore) {}
-		System.out.println();
-		System.out.println();
-		System.exit(0);
-		return true;
-	}
+//	// kill command
+//	private static boolean _kill() {
+//		try {
+//			pxnLog.get().warning("Killing server! (Triggered by console command)");
+//		} catch(Exception ignore) {}
+//		System.out.println();
+//		System.out.println();
+//		System.exit(0);
+//		return true;
+//	}
 
 
-	// start command
-	private static boolean _start() {
-		return true;
-	}
-	// pause command
-	private static boolean _pause() {
-		return true;
-	}
+//	// start command
+//	private static boolean _start() {
+//		return true;
+//	}
+//	// pause command
+//	private static boolean _pause() {
+//		return true;
+//	}
 
 
-	// clear command
-	private static boolean _clear() {
-		try {
-			ConsoleReader reader = pxnConsole.getReader();
-			if(reader == null) return false;
-			reader.clearScreen();
-			reader.flush();
-		} catch (IOException e) {
-			pxnLog.get().exception(e);
-		}
-		return true;
-	}
+//	// clear command
+//	private static boolean _clear() {
+//		try {
+//			ConsoleReader reader = pxnConsole.getReader();
+//			if(reader == null) return false;
+//			reader.clearScreen();
+//			reader.flush();
+//		} catch (IOException e) {
+//			pxnLog.get().exception(e);
+//		}
+//		return true;
+//	}
 
 
-	// help command
-	private static boolean _help(String[] args) {
-		return true;
-	}
+//	// help command
+//	private static boolean _help(String[] args) {
+//		return true;
+//	}
 
 
-	// log command
-	private static boolean _log(String[] args) {
-		pxnLevel level = null;
-		// 0 args
-		if(args.length == 0) {
-			_log();
-			return true;
-		} else
-		// 1 arg
-		if(args.length == 1) {
-			if(args[0].equalsIgnoreCase("level")) {
-				_log();
-				return true;
-			}
-			level = pxnLevel.Parse(args[0]);
-		} else
-		// 2 args
-		if(args.length == 2 && args[0].equalsIgnoreCase("level")) {
-			level = pxnLevel.Parse(args[1]);
-		}
-		// invalid
-		if(level == null)
-			return false;
-		gcServer.get().setLogLevel(level);
-		return true;
-	}
-	private static void _log() {
-		pxnLog.get().Publish("Current log level: "+pxnLog.get().getLevel().toString());
-	}
+//	// log command
+//	private static boolean _log(String[] args) {
+//		pxnLevel level = null;
+//		// 0 args
+//		if(args.length == 0) {
+//			_log();
+//			return true;
+//		} else
+//		// 1 arg
+//		if(args.length == 1) {
+//			if(args[0].equalsIgnoreCase("level")) {
+//				_log();
+//				return true;
+//			}
+//			level = pxnLevel.Parse(args[0]);
+//		} else
+//		// 2 args
+//		if(args.length == 2 && args[0].equalsIgnoreCase("level")) {
+//			level = pxnLevel.Parse(args[1]);
+//		}
+//		// invalid
+//		if(level == null)
+//			return false;
+//		gcServer.get().setLogLevel(level);
+//		return true;
+//	}
+//	private static void _log() {
+//		pxnLog.get().Publish("Current log level: "+pxnLog.get().getLevel().toString());
+//	}
 
 
-	// show command
-	private static boolean _show(String[] args) {
-		return true;
-	}
+//	// show command
+//	private static boolean _show(String[] args) {
+//		return true;
+//	}
 
 
-	// version command
-	private static boolean _version() {
-		pxnLog.get().info("Version: "+gcServer.version);
-		return true;
-	}
+//	// version command
+//	private static boolean _version() {
+//		pxnLog.get().info("Version: "+gcServer.version);
+//		return true;
+//	}
 
 
-	// say command
-	private static boolean _say(String msg) {
-		msg = "(console) "+msg;
-		pxnLog.get().Publish(msg);
-		return true;
-	}
+//	// say command
+//	private static boolean _say(String msg) {
+//		msg = "(console) "+msg;
+//		pxnLog.get().Publish(msg);
+//		return true;
+//	}
 
 
 //	// ping command
@@ -232,30 +316,10 @@ public final class ServerCommands extends pxnCommandsHolder {
 //	}
 
 
-	// threads command
-	private static boolean _threads() {
-		return true;
-	}
-
-
-	// help command
-	private static boolean _route(pxnCommandEvent commandEvent) {
-		String[] args = commandEvent.getArgs();
-		if(args.length != 3) {
-			pxnLog.get().Publish("Invalid arguments!\n"+commandEvent.command.getUsageStr());
-			return true;
-		}
-		String toName = args[0];
-		metaValue meta = metaValue.newValue(args[1], args[2]);
-		if(meta == null) {
-			pxnLog.get().Publish("Invalid meta type!");
-//TODO: list meta types
-			return true;
-		}
-		// send to router
-		meta.Send(toName);
-		return true;
-	}
+//	// threads command
+//	private static boolean _threads() {
+//		return true;
+//	}
 
 
 //		// help
