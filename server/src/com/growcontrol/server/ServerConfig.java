@@ -1,132 +1,107 @@
 package com.growcontrol.server;
 
-import com.growcontrol.gcCommon.TimeU;
-import com.growcontrol.gcCommon.TimeUnitTime;
-import com.growcontrol.gcCommon.pxnConfig.pxnConfig;
-import com.growcontrol.gcCommon.pxnConfig.pxnConfigLoader;
-import com.growcontrol.gcCommon.pxnLogger.pxnLevel;
-import com.growcontrol.gcCommon.pxnThreadQueue.pxnThreadQueue;
-import com.growcontrol.gcCommon.pxnUtils.pxnUtilsMath;
+import java.util.Collection;
+import java.util.Map;
+
+import com.poixson.commonapp.config.xConfig;
+import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.Utils.utilsMath;
+import com.poixson.commonjava.Utils.xThreadPool;
+import com.poixson.commonjava.Utils.xTime;
+import com.poixson.commonjava.Utils.xTimeU;
+import com.poixson.commonjava.xLogger.xLevel;
 
 
-public final class ServerConfig {
-	private ServerConfig() {}
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		throw new CloneNotSupportedException();
-	}
+public final class ServerConfig extends xConfig {
 
-	private static final String CONFIG_FILE = "config.yml";
-	private static volatile String configPath = null;
+	public static final String CONFIG_FILE = "config.yml";
 
-	// config dao
-	protected static volatile pxnConfig config = null;
-	protected static final Object lock = new Object();
+	// key names
+	public static final String VERSION       = "Version";
+	public static final String LOG_LEVEL     = "Log Level";
+	public static final String DEBUG         = "Debug";
+	public static final String TICK_INTERVAL = "Tick Interval";
+	public static final String LISTEN_PORT   = "Listen Port";
+	public static final String LOGIC_THREADS = "Logic Threads";
+	public static final String ZONES         = "Zones";
 
-
-	public static pxnConfig get() {
-		if(config == null) {
-			synchronized(lock) {
-				if(config == null)
-					config = pxnConfigLoader.Load(getPath(), CONFIG_FILE);
-			}
-		}
-		return config;
-	}
-	public static boolean isLoaded() {
-		return (config != null);
-	}
+	// defaults
+	public static final xTime default_TICK_INTERVAL = xTime.get("1s");
+	public static final int default_LISTEN_PORT     = 1142;
+	public static final int default_LOGIC_THREADS   = 0;
 
 
-	// configs path
-	public static String getPath() {
-		if(configPath == null || configPath.isEmpty())
-			return "./";
-		return configPath;
-	}
-	public static void setPath(String path) {
-		configPath = path;
+	public ServerConfig(Map<String, Object> data) {
+		super(data);
 	}
 
 
 	// version
-	public static String Version() {
-		pxnConfig config = get();
-		if(config == null) return null;
-		return config.getString("Version");
+	public String getVersion() {
+		final String value = getString(VERSION);
+		if(utils.notEmpty(value))
+			return value;
+		return null;
 	}
+
+
 	// log level
-	public static pxnLevel LogLevel() {
-		pxnConfig config = get();
-		if(config == null) return null;
-		String str = config.getString("Log Level");
-		if(str == null || str.isEmpty()) return null;
-		return pxnLevel.Parse(str);
+	public xLevel getLogLevel() {
+		final String value = getString(LOG_LEVEL);
+		if(utils.notEmpty(value))
+			return xLevel.parse(value);
+		return null;
 	}
+
+
+	// debug
+	public Boolean getDebug() {
+		return getBoolean(DEBUG);
+	}
+
+
 	// tick interval
-	public static TimeUnitTime TickInterval() {
-		final TimeUnitTime time = new TimeUnitTime(1, TimeU.S);
-		pxnConfig config = get();
-		if(config == null)
-			return time;
-		// numeric
-		Integer i = config.getInt("Tick Interval");
-		if(i != null) {
-			time.set(i, TimeU.MS);
-		} else {
-			// string
-			String str = config.getString("Tick Interval");
-			if(str != null) {
-				TimeUnitTime t = TimeUnitTime.Parse(str);
-				if(t != null)
-					time.set(t);
-			}
+	public xTime getTickInterval() {
+		if(!exists(TICK_INTERVAL))
+			return default_TICK_INTERVAL;
+		{
+			final Long value = getLong(TICK_INTERVAL);
+			if(value != null)
+				return xTime.get(value, xTimeU.MS);
 		}
-		if(time.get(TimeU.MS) < 1 ) time.set(1,  TimeU.MS);
-		if(time.get(TimeU.S ) > 60) time.set(60, TimeU.S );
-		return time;
+		{
+			final String value = getString(TICK_INTERVAL);
+			if(utils.notEmpty(value))
+				return xTime.parse(value);
+		}
+		return default_TICK_INTERVAL;
 	}
+
+
 	// listen port
-	public static int ListenPort() {
-		int def = 1142;
-		pxnConfig config = get();
-		if(config == null) return def;
-		Integer i = config.getInt("Listen Port");
-		if(i == null) return def;
-		return pxnUtilsMath.MinMax(i.intValue(), 1, 65536);
+	public int getListenPort() {
+		final Integer value = getInteger(LISTEN_PORT);
+		if(value != null)
+			return utilsMath.MinMax(value.intValue(), 1, 65536);
+		return default_LISTEN_PORT;
 	}
+
+
 	// logic threads (0 uses main thread)
-	public static int LogicThreads() {
-		int def = 0;
-		pxnConfig config = get();
-		if(config == null) return def;
-		Integer i = config.getInt("Logic Threads");
-		if(i == null) return def;
-		return pxnUtilsMath.MinMax(i.intValue(), 0, pxnThreadQueue.HardLimit);
+	public int getLogicThreads() {
+		if(!exists(LOGIC_THREADS))
+			return default_LOGIC_THREADS;
+		final Integer value = getInteger(LOGIC_THREADS);
+		return utilsMath.MinMax(value.intValue(), 0, xThreadPool.HARD_LIMIT);
 	}
-//	// max logic threads
-//	public static int LogicThreads() {
-//		if(config == null) return 1;
-//		return pxnUtils.MinMax(
-//			config.getInt("Logic Threads"),
-//			1,
-//			100);
-//	}
-//
-//
-//	// zones (rooms)
-//	public static void PopulateZones(Collection<String> zones) {
-//		if(config == null) return;
-//		if(zones  == null) throw new NullPointerException("zones list can't be null!");
-//		try {
-//			zones.addAll(config.getStringList("Zones"));
-////			zones.addAll( pxnUtils.castList(String.class, config.get("Zones")) );
-////			zones.addAll((Collection<? extends String>) config.get("Zones"));
-//		} catch(Exception ignore) {
-//pxnLog.get().debug(ignore);
-//			return;
-//		}
-//	}
+
+
+	// zones (rooms)
+	public void populateZones(final Collection<String> zones) {
+		if(zones == null) throw new NullPointerException();
+		if(exists(ZONES))
+			zones.addAll(getStringList(ZONES));
+	}
 
 
 }

@@ -1,11 +1,18 @@
 package com.growcontrol.server;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
 import com.growcontrol.gccommon.listeners.CommandEvent;
 import com.growcontrol.gccommon.listeners.MetaEvent;
 import com.poixson.commonapp.app.xApp;
+import com.poixson.commonapp.config.xConfigLoader;
+import com.poixson.commonjava.xVars;
+import com.poixson.commonjava.Utils.xTime;
+import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.handlers.CommandHandler;
 
@@ -17,8 +24,11 @@ public class gcServer extends xApp {
 	// server socket pool
 //	private volatile pxnSocketServer socket = null;
 
+	// config
+	private volatile ServerConfig config = null;
+
 	// zones
-//	private final List<String> zones = new ArrayList<String>();
+	private final List<String> zones = new ArrayList<String>();
 
 
 	/**
@@ -47,13 +57,53 @@ public class gcServer extends xApp {
 	// init config
 	@Override
 	protected void initConfig() {
-//		ServerConfig.get();
-//		if(!ServerConfig.isLoaded()) {
-//		log.fatal("Failed to load config.yml, exiting..");
-//		System.exit(1);
-//		return;
-//		// set log level
-//		UpdateLogLevel();
+		log().fine("Loading server config..");
+		this.config = (ServerConfig) xConfigLoader.Load(ServerConfig.CONFIG_FILE, ServerConfig.class);
+		if(this.config == null)
+			fail("Failed to load "+ServerConfig.CONFIG_FILE);
+		else
+			updateConfig();
+	}
+	protected void updateConfig() {
+		// version
+		{
+@SuppressWarnings("unused")
+			final String version = this.config.getVersion();
+//TODO: compare to running version
+		}
+		// log level
+		{
+			final xLevel level = this.config.getLogLevel();
+			if(level != null)
+				log().setLevel(level);
+		}
+		// debug
+		{
+			final Boolean debug = this.config.getDebug();
+			if(debug != null)
+				gcServerVars.get().debug(debug.booleanValue());
+		}
+		// tick interval
+		{
+@SuppressWarnings("unused")
+			final xTime tick = this.config.getTickInterval();
+//TODO: apply this to scheduler
+		}
+		// listen port
+		{
+@SuppressWarnings("unused")
+			final int port = this.config.getListenPort();
+
+//TODO: apply this to socket server
+		}
+		// logic threads (0 uses main thread)
+		{
+@SuppressWarnings("unused")
+			final int logic = this.config.getLogicThreads();
+//TODO: apply this to logic thread pool
+		}
+		// zones
+		this.config.populateZones(this.zones);
 	}
 
 
@@ -296,25 +346,6 @@ public class gcServer extends xApp {
 
 
 
-//	// log level
-//	@Override
-//	public void setLogLevel(pxnLevel level) {
-//		if(level == null) return;
-//		this.level = level;
-//		UpdateLogLevel();
-//	}
-//	@Override
-//	protected void UpdateLogLevel() {
-//		if(forceDebug) {
-//			pxnLog.get().setLevel(pxnLevel.DEBUG);
-//			return;
-//		}
-//		if(level == null)
-//			if(ServerConfig.isLoaded())
-//				level = ServerConfig.LogLevel();
-//		if(level != null)
-//			pxnLog.get().setLevel(level);
-//	}
 
 
 
