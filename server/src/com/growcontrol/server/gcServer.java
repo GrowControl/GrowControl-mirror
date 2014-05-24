@@ -11,6 +11,7 @@ import com.growcontrol.gccommon.listeners.MetaEvent;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonjava.xVars;
+import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
@@ -46,6 +47,8 @@ public class gcServer extends xApp {
 	 */
 	public static void main(final String[] args) {
 		displayStartupVars();
+		if(xVars.get().debug())
+			displayColors();
 		displayLogoHeader();
 		initMain(args, new gcServer());
 	}
@@ -374,6 +377,24 @@ public class gcServer extends xApp {
 //		String argsMsg = getArgsMsg();
 //		if(argsMsg != null && !argsMsg.isEmpty())
 //			AnsiConsole.out.println(" args: [ "+argsMsg+" ]");
+		AnsiConsole.out.println();
+		AnsiConsole.out.flush();
+	}
+	protected static void displayColors() {
+		AnsiConsole.out.println(Ansi.ansi().reset());
+		for(final Ansi.Color color : Ansi.Color.values()) {
+			final String name = utilsString.center(color.name(), 7);
+			AnsiConsole.out.println(Ansi.ansi()
+				.a("   ")
+				.fg(color).a(name)
+				.a("   ")
+				.bold().a("BOLD-"+name)
+				.a("   ")
+				.boldOff().fg(Ansi.Color.WHITE).bg(color).a(name)
+				.reset()
+			);
+		}
+		AnsiConsole.out.println(Ansi.ansi().reset());
 		AnsiConsole.out.println();
 		AnsiConsole.out.flush();
 	}
