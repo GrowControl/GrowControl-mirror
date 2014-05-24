@@ -7,9 +7,9 @@ import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
 import com.growcontrol.gccommon.listeners.CommandEvent;
-import com.growcontrol.gccommon.listeners.MetaEvent;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
+import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.Utils.xTime;
@@ -132,9 +132,9 @@ public class gcServer extends xApp {
 	 *   2. Listeners
 	 *   3. Command prompt
 	 *   4.
-	 *   5.
-	 *   6. Load plugins and sockets
-	 *   7. Start plugins and sockets
+	 *   5. Load plugins and sockets
+	 *   6. Start plugins and sockets
+	 *   7.
 	 * @return true if success, false if problem.
 	 */
 	@Override
@@ -170,26 +170,21 @@ public class gcServer extends xApp {
 			initConsole();
 			return true;
 		case 4:
-
 // load zones
 // load scheduler
 // load plugins
 // start devices
 // start socket listener
 // server ready
-
 //			// load scheduler
 //			log.info("Starting schedulers..");
 //			pxnScheduler.get().Start();
 //			pxnTicker.get().setInterval(ServerConfig.TickInterval());
 //			pxnTicker.get().Start();
-
 //			// load devices
 //			deviceLoader.LoadDevices(Arrays.asList(new String[] {"Lamp"}));
-
-			return true;
-		case 5:
-
+//			return true;
+//		case 4:
 			// load zones
 //			synchronized(zones) {
 //				config.PopulateZones(zones);
@@ -197,22 +192,13 @@ public class gcServer extends xApp {
 //			}
 			// start logic thread queue
 //			getLogicQueue();
-
 			return true;
 		// load plugins and sockets
-		case 6:
-
-//			try {
-//				gcServerPluginManager pluginManager = gcServerPluginManager.get("plugins/");
-//				pluginManager.LoadPluginsDir();
-//				pluginManager.InitPlugins();
-//				pluginManager.EnablePlugins();
-//			} catch (Exception e) {
-//				log.exception(e);
-//				Shutdown();
-//				System.exit(1);
-//			}
-
+		case 5:
+			{
+				final xPluginManager manager = xPluginManager.get();
+				manager.loadAll("plugins/");
+			}
 //			// start socket listener
 //			if(socket == null)
 //				socket = new pxnSocketServer();
@@ -226,9 +212,14 @@ public class gcServer extends xApp {
 //				}
 //			});
 //			socket.Start();
-
 			return true;
 		// start plugins and sockets
+		case 6:
+			{
+				final xPluginManager manager = xPluginManager.get();
+				manager.enableAll();
+			}
+			return true;
 		case 7:
 			return true;
 		}
@@ -247,39 +238,31 @@ public class gcServer extends xApp {
 	@Override
 	protected boolean shutdown(final int step) {
 		switch(step) {
-		// stop plugins and sockets
 		case 7:
-
+			return true;
+		// stop plugins and sockets
+		case 6:
 //			// close socket listener
 //			if(socket != null)
 //				socket.Close();
 //			// pause scheduler
 //			pxnScheduler.PauseAll();
-
-//			{
-//				gcServerPluginManager manager = gcServerPluginManager.get();
-//				if(manager != null)
-//					manager.DisablePlugins();
-//			}
-//			// end schedulers
-//			pxnScheduler.ShutdownAll();
-
+			{
+				final xPluginManager manager = xPluginManager.get();
+				manager.disableAll();
+			}
 			return true;
 		// unload plugins and sockets
-		case 6:
-
-//			{
-//				gcServerPluginManager manager = gcServerPluginManager.get();
-//				if(manager != null)
-//					manager.UnloadPlugins();
-//			}
-
+		case 5:
+//			// end schedulers
+//			pxnScheduler.ShutdownAll();
+			{
+				final xPluginManager manager = xPluginManager.get();
+				manager.unloadAll();
+			}
 //			// close sockets
 //			if(socket != null)
 //				socket.ForceClose();
-
-			return true;
-		case 5:
 			return true;
 		case 4:
 			return true;
