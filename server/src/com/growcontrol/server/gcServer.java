@@ -197,7 +197,9 @@ public class gcServer extends xApp {
 		case 5:
 			{
 				final xPluginManager manager = xPluginManager.get();
-				manager.loadAll("plugins/");
+				manager.setClassField("Server Main");
+				manager.loadAll();
+				manager.initAll();
 			}
 //			// start socket listener
 //			if(socket == null)
