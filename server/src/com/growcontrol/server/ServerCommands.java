@@ -72,10 +72,12 @@ public final class ServerCommands implements xListener {
 //			String msg = commandEvent.raw;
 //			if(msg.contains(" ")) msg = msg.substring(msg.indexOf(" ") + 1);
 //			return _say(msg);
-//		addCommand("say")
-//			.addAlias("broadcast")
-//			.addAlias("wall")
-//			.setUsage("");
+		// say
+		case "say":
+		case "wall":
+		case "broadcast":
+			_say(event);
+			break;
 //		addCommand("list")
 //		// input / output
 //		// tools
@@ -181,24 +183,20 @@ event.setHandled();
 	}
 
 
+	// say command
+	private static void _say(final CommandEvent event) {
+		event.setHandled();
+		final StringBuilder msg = new StringBuilder();
+		msg.append(" (console) ");
+		msg.append(event.commandStr.substring(event.arg(0).length() + 1));
+		xLog.getRoot().publish(msg.toString());
+	}
+
+
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
 	}
-
-
-//	private static boolean _say(String msg) {
-//		msg = "(console) "+msg;
-//		pxnLog.get().Publish(msg);
-//		return true;
-//	}
-//	// say
-//	if(command.equals("say")) {
-//		String msg = "";
-//		for(String line : args) msg += " "+line;
-//		gcServer.log.info("Server says:"+msg);
-//		return true;
-//	}
 
 
 //		// help
