@@ -5,6 +5,7 @@ import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
 import com.poixson.commonjava.EventListener.xListener;
+import com.poixson.commonjava.xLogger.xLog;
 
 
 public final class ServerCommands implements xListener {
@@ -32,6 +33,13 @@ public final class ServerCommands implements xListener {
 		case "end":
 			_kill(event);
 			System.exit(0);
+			break;
+		// clear
+//		.setUsage("Clears the console screen.");
+		case "clear":
+		case "cls":
+			_clear(event);
+			break;
 //		addCommand("start")
 //			.addAlias("resume")
 //			.setUsage("Starts or resumes server tasks and schedulers.");
@@ -43,11 +51,16 @@ public final class ServerCommands implements xListener {
 //		addCommand("get")
 //		addCommand("watch")
 
-//		addCommand("clear")
-//			.addAlias("cls")
-//			.setUsage("Clears the console screen.");
 //		addCommand("help")
 //			.addAlias("?");
+		// log
+		case "log":
+			_log(event);
+			break;
+		// log level
+		case "level":
+			_level(event);
+			break;
 //		addCommand("log")
 //			.addAlias("level")
 //			.setUsage("log level info - Sets or displays the log level.");
@@ -55,6 +68,10 @@ public final class ServerCommands implements xListener {
 //			.setUsage("Displays additional information.");
 //		addCommand("version")
 //			.setUsage("Displays the current running version, and the latest available (if enabled)");
+//		case "say":
+//			String msg = commandEvent.raw;
+//			if(msg.contains(" ")) msg = msg.substring(msg.indexOf(" ") + 1);
+//			return _say(msg);
 //		addCommand("say")
 //			.addAlias("broadcast")
 //			.addAlias("wall")
@@ -101,9 +118,16 @@ public final class ServerCommands implements xListener {
 	// kill command
 	private static void _kill(final CommandEvent event) {
 		event.setHandled();
-		System.out.println("Killed by command.");
+		System.out.println("Killed by command..");
 		System.out.println();
 		System.exit(0);
+	}
+
+
+	// clear command
+	private static void _clear(final CommandEvent event) {
+		event.setHandled();
+		xLog.getConsole().clear();
 	}
 
 
@@ -142,6 +166,19 @@ event.setHandled();
 	}
 
 
+	private static void _log(final CommandEvent event) {
+		if(event.arg(1) == null) {
+			_level(event);
+			return;
+		}
+//		event.setHandled();
+//TODO:
+	}
+	private static void _level(final CommandEvent event) {
+		event.setHandled();
+		final xLog log = xLog.getRoot();
+		log.publish("Current log level: "+log.getLevel().toString());
+	}
 //	// help command
 //	private static boolean _route(pxnCommandEvent commandEvent) {
 //		String[] args = commandEvent.getArgs();
@@ -238,20 +275,6 @@ event.setHandled();
 //	}
 
 
-//	// clear command
-//	private static boolean _clear() {
-//		try {
-//			ConsoleReader reader = pxnConsole.getReader();
-//			if(reader == null) return false;
-//			reader.clearScreen();
-//			reader.flush();
-//		} catch (IOException e) {
-//			pxnLog.get().exception(e);
-//		}
-//		return true;
-//	}
-
-
 //	// help command
 //	private static boolean _help(String[] args) {
 //		return true;
@@ -284,11 +307,6 @@ event.setHandled();
 //		gcServer.get().setLogLevel(level);
 //		return true;
 //	}
-//	private static void _log() {
-//		pxnLog.get().Publish("Current log level: "+pxnLog.get().getLevel().toString());
-//	}
-
-
 //	// show command
 //	private static boolean _show(String[] args) {
 //		return true;
