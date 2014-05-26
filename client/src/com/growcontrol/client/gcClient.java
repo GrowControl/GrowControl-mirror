@@ -3,279 +3,321 @@ package com.growcontrol.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.growcontrol.gcClient.clientPlugin.gcClientPluginManager;
-import com.growcontrol.gcClient.clientSocket.gcPacketReader;
-import com.growcontrol.gcClient.clientSocket.gcPacketSender;
-import com.growcontrol.gcCommon.pxnApp;
-import com.growcontrol.gcCommon.pxnLogger.pxnLevel;
-import com.growcontrol.gcCommon.pxnLogger.pxnLog;
-import com.growcontrol.gcCommon.pxnLogger.pxnLogger;
-import com.growcontrol.gcCommon.pxnScheduler.pxnScheduler;
-import com.growcontrol.gcCommon.pxnScheduler.pxnTicker;
-import com.growcontrol.gcCommon.pxnSocket.pxnSocketClient;
-import com.growcontrol.gcCommon.pxnSocket.pxnSocketUtils.pxnSocketState;
-import com.growcontrol.gcCommon.pxnSocket.processor.pxnSocketProcessorFactory;
-import com.growcontrol.gcCommon.pxnThreadQueue.pxnThreadQueue;
-import com.growcontrol.gcCommon.pxnUtils.pxnUtilsMath;
+import org.fusesource.jansi.AnsiConsole;
+
+import com.poixson.commonapp.app.xApp;
+import com.poixson.commonapp.config.xConfigLoader;
+import com.poixson.commonapp.listeners.CommandEvent;
+import com.poixson.commonapp.plugin.xPluginManager;
+import com.poixson.commonjava.xLogger.xLevel;
+import com.poixson.commonjava.xLogger.xLog;
+import com.poixson.commonjava.xLogger.handlers.CommandHandler;
 
 
-public class gcClient extends pxnApp {
-	public static final String appName = "gcClient";
-	public static final String version = "3.1.0";
-	public static final String defaultPrompt = "";
+public class gcClient extends xApp {
+	public static final String APPNAME = "gcClient";
+	public static final String VERSION = "3.1.0";
 
-	// client socket
-	private volatile pxnSocketClient socket = null;
+	private volatile ClientConfig config = null;
+
+//	// client socket
+//	private volatile pxnSocketClient socket = null;
 //	// client connection state
 //	private final gcConnectState state = new gcConnectState();
 
 	// zones
+@SuppressWarnings("unused")
 	private final List<String> zones = new ArrayList<String>();
 
 
-	// client instance
+	/**
+	 * Get the client class instance.
+	 * @return client instance object.
+	 */
 	public static gcClient get() {
-		return (gcClient) appInstance;
+		return (gcClient) xApp.get();
 	}
-	public gcClient() {
+
+
+	/**
+	 * Application start entry point.
+	 * @param args Command line arguments.
+	 */
+	public static void main(final String[] args) {
+		displayStartupVars();
+		displayLogoHeader();
+		initMain(args, new gcClient());
+	}
+	protected gcClient() {
 		super();
+	}
+
+
+	// init config
+	@Override
+	protected void initConfig() {
+		log().fine("Loading client config..");
+		this.config = (ClientConfig) xConfigLoader.Load(
+			ClientConfig.CONFIG_FILE,
+			ClientConfig.class
+		);
+		if(this.config == null)
+			fail("Failed to load "+ClientConfig.CONFIG_FILE);
+		else
+			updateConfig();
+	}
+	protected void updateConfig() {
+		// version
+		{
+@SuppressWarnings("unused")
+			final String version = this.config.getVersion();
+		}
+		// log level
+		{
+			final xLevel level = this.config.getLogLevel();
+			if(level != null)
+				xLog.getRoot().setLevel(level);
+		}
+		// debug
+		{
+			final Boolean debug = this.config.getDebug();
+			if(debug != null)
+				gcClientVars.get().debug(debug.booleanValue());
+		}
+	}
+
+
+	@Override
+	protected void processArgs(final String[] args) {
+	}
+
+
+	/**
+	 * Client startup sequence.
+	 *   2. Listeners
+	 *   3.
+	 *   4.
+	 *   5. Load plugins and sockets
+	 *   6. Start plugins and sockets
+	 *   7. Start GUI
+	 * @return true if success, false if problem.
+	 */
+	@Override
+	protected boolean startup(final int step) {
+		switch(step) {
+		// listeners
+		case 2:
+			// init listeners
+			final gcClientVars vars = gcClientVars.get();
+			// client command listener
+			vars.commands().register(
+				new ClientCommands()
+			);
+			// io event listener
+			//getLogicQueue();
+			return true;
+		// command prompt
+		case 3:
+			// command processor
+			xLog.setCommandHandler(new CommandHandler() {
+				@Override
+				public void processCommand(String line) {
+					final CommandEvent event = new CommandEvent(line);
+					gcClientVars.get()
+						.commands().triggerNow(
+							event
+						);
+					if(!event.isHandled())
+						log().warning("Unknown command: "+event.arg(0));
+				}
+			});
+			// start console input thread
+			initConsole();
+			return true;
+		case 4:
+			return true;
+		// load plugins and sockets
+		case 5:
+			{
+				final xPluginManager manager = xPluginManager.get();
+				manager.setClassField("Client Main");
+				manager.loadAll();
+				manager.initAll();
+			}
+			return true;
+		// start plugins and sockets
+		case 6:
+			{
+				final xPluginManager manager = xPluginManager.get();
+				manager.enableAll();
+			}
+			return true;
+		// start gui manager
+		case 7:
+///////			guiManager.get();
+//			// show connect window
+//			state.setStateClosed();
+//			// connect to server
+//			conn = new connection("192.168.3.3", 1142);
+//			conn.sendPacket(clientPacket.sendHELLO(version, "lorenzo", "pass"));
+		}
+		return false;
+	}
+	/**
+	 * Server shutdown sequence.
+	 *   7.
+	 *   6. Stop plugins and sockets
+	 *   5. Unload plugins and sockets
+	 *   4.
+	 *   3.
+	 *   2.
+	 * @return true if success, false if problem.
+	 */
+	@Override
+	protected boolean shutdown(final int step) {
+		switch(step) {
+		// stop gui
+		case 7:
+			// close windows
+///////			guiManager.Shutdown();
+			return true;
+		// stop plugins and sockets
+		case 6:
+//			// close socket listener
+//			if(socket != null)
+//				socket.Close();
+//			// pause scheduler
+//			pxnScheduler.PauseAll();
+			{
+				final xPluginManager manager = xPluginManager.get();
+				manager.disableAll();
+			}
+			return true;
+		// unload plugins and sockets
+		case 5:
+//			// end schedulers
+//			pxnScheduler.ShutdownAll();
+			{
+				final xPluginManager manager = xPluginManager.get();
+				manager.unloadAll();
+			}
+//			// close sockets
+			return true;
+		case 4:
+			return true;
+		case 3:
+			return true;
+		case 2:
+			return true;
+		}
+		return false;
 	}
 
 
 	@Override
 	public String getAppName() {
-		return appName;
+		return APPNAME;
 	}
 	@Override
 	public String getVersion() {
-		return version;
+		return VERSION;
 	}
 
 
-	// init client
-	@Override
-	public void Start() {
-		super.Start();
-		pxnLogger log = pxnLog.get();
-if(!consoleEnabled) {
-System.out.println("Console input is disabled due to noconsole command argument.");
-//TODO: currently no way to stop the server with no console input
-System.exit(0);
-}
+//	// connect to server
+//	public void Connect(String host, int port, String user, String pass) {
+//		pxnThreadQueue.addToMain("SocketConnect",
+//			new doConnect(host, port, user, pass));
+//	}
 
-		log.info("GrowControl "+version+" Client is starting..");
-		// load configs
-		ClientConfig.get();
-		if(!ClientConfig.isLoaded()) {
-			log.fatal("Failed to load config.yml, exiting..");
-			System.exit(1);
-			return;
-		}
-		// set log level
-		UpdateLogLevel();
-		// init listeners
-		ClientListeners.get();
-		// start console input thread
-		StartConsole();
 
-		// load scheduler
-		log.info("Starting schedulers..");
-		pxnScheduler.get(getAppName())
-			.start();
-		// load ticker
-		pxnTicker.get();
-
-		// load plugins
-		try {
-			gcClientPluginManager pluginManager = gcClientPluginManager.get("plugins/");
-			pluginManager.LoadPluginsDir();
-			pluginManager.InitPlugins();
-			pluginManager.EnablePlugins();
-		} catch (Exception e) {
-			log.exception(e);
-			Shutdown();
-			System.exit(1);
-		}
-
-		// start gui manager
-		guiManager.get();
-
-//		// show connect window
-//		state.setStateClosed();
+//	private class doConnect implements Runnable {
+//
+//		public pxnSocketClient socket = null;
+//		private final String host;
+//		private final int    port;
+//@SuppressWarnings("unused")
+//		private final String user;
+//@SuppressWarnings("unused")
+//		private final String pass;
+//
+//
+//		public doConnect(String host, int port, String user, String pass) {
+//			if(host == null || host.isEmpty())
+//				host = "127.0.0.1";
+//			if(port < 1) port = 1142;
+//			if(user == null || user.isEmpty()) user = null;
+//			if(pass == null || pass.isEmpty()) pass = null;
+//			this.host = host;
+//			this.port = pxnUtilsMath.MinMax(port, 1, 65535);
+//			this.user = user;
+//			this.pass = pass;
+//		}
+//
+//
 //		// connect to server
-//		conn = new connection("192.168.3.3", 1142);
-//		conn.sendPacket(clientPacket.sendHELLO(version, "lorenzo", "pass"));
+//		@Override
+//		public synchronized void run() {
+//pxnLog.get().info("Connecting..");
+//			// create socket
+//			if(socket == null)
+//				socket = new pxnSocketClient();
+//			socket.setHost(this.host);
+//			socket.setPort(this.port);
+//			// create processor
+//			socket.setFactory(new pxnSocketProcessorFactory() {
+//				@Override
+//				public gcPacketReader newProcessor() {
+//					return new gcPacketReader();
+//				}
+//			});
+//			socket.Start();
+//			if(!pxnSocketState.CONNECTED.equals(socket.getState())) {
+//				pxnLog.get().warning("Failed to connect!");
+//				return;
+//			}
+//			// send HELLO packet
+//			gcPacketSender.sendHELLO(
+//				socket.getWorker(),
+//				gcClient.version);
+////				connectInfo.username,
+////				connectInfo.password);
+//pxnLog.get().severe("CONNECTED!!!!!!!!!!!!!!!!!!!");
+//			guiManager.get().Update(guiManager.GUI.DASH);
+//		}
+//
+//
+//	}
 
+
+//	// get zones
+//	public List<String> getZones() {
+//		synchronized(zones) {
+//			return new ArrayList<String>(zones);
+//		}
+//	}
+//	public String[] getZonesArray() {
+//		synchronized(zones) {
+//			return (String[]) zones.toArray();
+//		}
+//	}
+
+
+	// ascii header
+	public static void displayStartupVars() {
+		AnsiConsole.out.println(" Grow Control Client "+gcClient.VERSION);
+		AnsiConsole.out.println(" Running as:  "+System.getProperty("user.name"));
+		AnsiConsole.out.println(" Current dir: "+System.getProperty("user.dir"));
+		AnsiConsole.out.println(" java home:   "+System.getProperty("java.home"));
+//		if(gcServer.get().forceDebug())
+//			AnsiConsole.out.println(" Force Debug: true");
+//		String argsMsg = getArgsMsg();
+//		if(argsMsg != null && !argsMsg.isEmpty())
+//			AnsiConsole.out.println(" args: [ "+argsMsg+" ]");
+		AnsiConsole.out.println();
+		AnsiConsole.out.flush();
 	}
-
-
-	// connect to server
-	public void Connect(String host, int port, String user, String pass) {
-		pxnThreadQueue.addToMain("SocketConnect",
-			new doConnect(host, port, user, pass));
-	}
-
-
-	private class doConnect implements Runnable {
-	
-		public pxnSocketClient socket = null;
-		private final String host;
-		private final int    port;
-@SuppressWarnings("unused")
-		private final String user;
-@SuppressWarnings("unused")
-		private final String pass;
-
-
-		public doConnect(String host, int port, String user, String pass) {
-			if(host == null || host.isEmpty())
-				host = "127.0.0.1";
-			if(port < 1) port = 1142;
-			if(user == null || user.isEmpty()) user = null;
-			if(pass == null || pass.isEmpty()) pass = null;
-			this.host = host;
-			this.port = pxnUtilsMath.MinMax(port, 1, 65535);
-			this.user = user;
-			this.pass = pass;
-		}
-
-
-		// connect to server
-		@Override
-		public synchronized void run() {
-pxnLog.get().info("Connecting..");
-			// create socket
-			if(socket == null)
-				socket = new pxnSocketClient();
-			socket.setHost(this.host);
-			socket.setPort(this.port);
-			// create processor
-			socket.setFactory(new pxnSocketProcessorFactory() {
-				@Override
-				public gcPacketReader newProcessor() {
-					return new gcPacketReader();
-				}
-			});
-			socket.Start();
-			if(!pxnSocketState.CONNECTED.equals(socket.getState())) {
-				pxnLog.get().warning("Failed to connect!");
-				return;
-			}
-			// send HELLO packet
-			gcPacketSender.sendHELLO(
-				socket.getWorker(),
-				gcClient.version);
-//				connectInfo.username,
-//				connectInfo.password);
-pxnLog.get().severe("CONNECTED!!!!!!!!!!!!!!!!!!!");
-			guiManager.get().Update(guiManager.GUI.DASH);
-		}
-
-
-	}
-
-
-	@Override
-	protected void doShutdown(int step) {
-		switch(step) {
-		// first step (announce)
-		case 10:
-			pxnLog.get().info("Stopping GC Client..");
-			break;
-		case 9:
-			// close socket
-			if(socket != null)
-				socket.Close();
-			// pause scheduler
-			pxnScheduler.PauseAll();
-			break;
-		case 8:
-			// close windows
-			guiManager.Shutdown();
-			break;
-		case 7:
-			break;
-		case 6:
-			break;
-		case 5:
-			// stop plugins
-			{
-				gcClientPluginManager manager = gcClientPluginManager.get();
-				if(manager != null)
-					manager.DisablePlugins();
-			}
-			// end schedulers
-			pxnScheduler.ShutdownAll();
-			break;
-		case 4:
-			// unload plugins
-			{
-				gcClientPluginManager manager = gcClientPluginManager.get();
-				if(manager != null)
-					manager.UnloadPlugins();
-			}
-			break;
-		case 3:
-			// close sockets
-			if(socket != null)
-				socket.ForceClose();
-			break;
-		case 2:
-			break;
-		// last step
-		case 1:
-//TODO: display total time running
-			break;
-		}
-	}
-
-
-	// log level
-	@Override
-	protected void UpdateLogLevel() {
-		if(forceDebug) {
-			pxnLog.get().setLevel(pxnLevel.DEBUG);
-			return;
-		}
-		if(!ClientConfig.isLoaded()) return;
-		String levelStr = ClientConfig.LogLevel();
-		if(levelStr != null && !levelStr.isEmpty()) {
-			pxnLog.get().setLevel(
-				pxnLevel.Parse(levelStr)
-			);
-		}
-	}
-
-
-	// process command
-	@Override
-	public void ProcessCommand(String line) {
-		if(line == null) throw new NullPointerException("line cannot be null");
-		line = line.trim();
-		if(line.isEmpty()) return;
-		// trigger event
-		if(!ClientListeners.get().triggerCommand(line)) {
-			// command not found
-			pxnLog.get().warning("Unknown command: "+line);
-		}
-	}
-
-
-	// get zones
-	public List<String> getZones() {
-		synchronized(zones) {
-			return new ArrayList<String>(zones);
-		}
-	}
-	public String[] getZonesArray() {
-		synchronized(zones) {
-			return (String[]) zones.toArray();
-		}
-	}
-
-
-	@Override
-	public void setLogLevel(pxnLevel level) {
+	protected static void displayLogoHeader() {
 	}
 
 
