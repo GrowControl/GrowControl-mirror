@@ -1,6 +1,7 @@
 package com.growcontrol.client;
 
 import com.poixson.commonapp.xAppVars;
+import com.poixson.commonjava.EventListener.xHandler;
 
 
 public class gcClientVars extends xAppVars {
@@ -26,42 +27,41 @@ public class gcClientVars extends xAppVars {
 	// new instance of holder
 	protected gcClientVars() {
 		super();
-		// clone vars
+		// clone event handlers
 		if(instance != null) {
-System.out.println("CLONING gcClientVars");
-//			this.system   = instance.system;
-//			this.commands = instance.commands;
-//			this.plugins  = instance.plugins;
+			this.system   = instance.system;
+			this.commands = instance.commands;
+			this.plugins  = instance.plugins;
 //			this.router   = instance.router;
 		// new instance
 		} else {
-//			this.system   = new xHandler();
-//			this.commands = new xHandler();
-//			this.plugins  = new xHandler();
+			this.system   = new xHandler();
+			this.commands = new xHandler();
+			this.plugins  = new xHandler();
 //			this.router   = new xHandler();
 		}
 	}
 
 
-//	// system event handler
-//	private final xHandler system;
-//	public xHandler system() {
-//		return this.system;
-//	}
+	// system event handler
+	private final xHandler system;
+	public xHandler system() {
+		return this.system;
+	}
 
 
-//	// command event handler
-//	private final xHandler commands;
-//	public xHandler commands() {
-//		return this.commands;
-//	}
+	// command event handler
+	private final xHandler commands;
+	public xHandler commands() {
+		return this.commands;
+	}
 
 
-//	// plugin event handler
-//	private final xHandler plugins;
-//	public xHandler plugins() {
-//		return this.plugins;
-//	}
+	// plugin event handler
+	private final xHandler plugins;
+	public xHandler plugins() {
+		return this.plugins;
+	}
 
 
 //	// meta router handler
