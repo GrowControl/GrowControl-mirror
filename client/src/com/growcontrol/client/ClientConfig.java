@@ -1,60 +1,50 @@
 package com.growcontrol.client;
 
-import com.growcontrol.gcCommon.pxnConfig.pxnConfig;
-import com.growcontrol.gcCommon.pxnConfig.pxnConfigLoader;
+import java.util.Map;
+
+import com.poixson.commonapp.config.xConfig;
+import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.xLogger.xLevel;
 
 
-public final class ClientConfig {
-	private ClientConfig() {}
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		throw new CloneNotSupportedException();
-	}
+public final class ClientConfig extends xConfig {
 
-	private static final String CONFIG_FILE = "config.yml";
-	private static volatile String configPath = null;
+	public static final String CONFIG_FILE = "config.yml";
 
-	// config dao
-	private static volatile pxnConfig config = null;
-	private static final Object lock = new Object();
+	// key names
+	public static final String VERSION       = "Version";
+	public static final String LOG_LEVEL     = "Log Level";
+	public static final String DEBUG         = "Debug";
+
+	// defaults
 
 
-	public static pxnConfig get() {
-		if(config == null) {
-			synchronized(lock) {
-				if(config == null)
-					config = pxnConfigLoader.Load(configPath, CONFIG_FILE);
-			}
-		}
-		return config;
-	}
-	public static boolean isLoaded() {
-		return (config != null);
-	}
-
-
-	// configs path
-	public static String getPath() {
-		if(configPath == null || configPath.isEmpty())
-			return "./";
-		return configPath;
-	}
-	public static void setPath(String path) {
-		configPath = path;
+	public ClientConfig(Map<String, Object> data) {
+		super(data);
 	}
 
 
 	// version
-	public static String Version() {
-		pxnConfig config = get();
-		if(config == null) return null;
-		return config.getString("Version");
+	public String getVersion() {
+		final String value = getString(VERSION);
+		if(utils.notEmpty(value))
+			return value;
+		return null;
 	}
+
+
 	// log level
-	public static String LogLevel() {
-		pxnConfig config = get();
-		if(config == null) return null;
-		return config.getString("Log Level");
+	public xLevel getLogLevel() {
+		final String value = getString(LOG_LEVEL);
+		if(utils.notEmpty(value))
+			return xLevel.parse(value);
+		return null;
+	}
+
+
+	// debug
+	public Boolean getDebug() {
+		return getBoolean(DEBUG);
 	}
 
 
