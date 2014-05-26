@@ -27,9 +27,8 @@ public final class gcServerVars extends xAppVars {
 	// new instance of holder
 	protected gcServerVars() {
 		super();
-		// clone vars
+		// clone event handlers
 		if(instance != null) {
-System.out.println("CLONING gcServerVars");
 			this.system   = instance.system;
 			this.commands = instance.commands;
 			this.plugins  = instance.plugins;

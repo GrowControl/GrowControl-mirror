@@ -153,7 +153,7 @@ public final class ServerCommands implements xListener {
 //		}
 String str = "";
 int i = 0;
-for(final String a : event.arg)
+for(final String a : event.args)
 	str += Integer.toString(++i)+")"+a+" ";
 
 System.out.println("ROUTE: "+str);

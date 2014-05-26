@@ -46,6 +46,9 @@ public class gcServer extends xApp {
 	 * @param args Command line arguments.
 	 */
 	public static void main(final String[] args) {
+
+xVars.get().debug(true);
+
 		displayStartupVars();
 		if(xVars.get().debug())
 			displayColors();
@@ -61,7 +64,10 @@ public class gcServer extends xApp {
 	@Override
 	protected void initConfig() {
 		log().fine("Loading server config..");
-		this.config = (ServerConfig) xConfigLoader.Load(ServerConfig.CONFIG_FILE, ServerConfig.class);
+		this.config = (ServerConfig) xConfigLoader.Load(
+			ServerConfig.CONFIG_FILE,
+			ServerConfig.class
+		);
 		if(this.config == null)
 			fail("Failed to load "+ServerConfig.CONFIG_FILE);
 		else
@@ -78,7 +84,7 @@ public class gcServer extends xApp {
 		{
 			final xLevel level = this.config.getLogLevel();
 			if(level != null)
-				log().setLevel(level);
+				xLog.getRoot().setLevel(level);
 		}
 		// debug
 		{
@@ -113,18 +119,6 @@ public class gcServer extends xApp {
 	@Override
 	protected void processArgs(final String[] args) {
 	}
-//	// process command
-//	@Override
-//	public void ProcessCommand(String line) {
-//		if(line == null) throw new NullPointerException("line cannot be null");
-//		line = line.trim();
-//		if(line.isEmpty()) return;
-//		// trigger event
-//		if(!ServerListeners.get().triggerCommand(line)) {
-//			// command not found
-//			pxnLog.get().Publish("Unknown command: "+line);
-//		}
-//	}
 
 
 	/**
@@ -159,11 +153,11 @@ public class gcServer extends xApp {
 				public void processCommand(String line) {
 					final CommandEvent event = new CommandEvent(line);
 					gcServerVars.get()
-						.commands().trigger(
+						.commands().triggerNow(
 							event
 						);
 					if(!event.isHandled())
-						log().warning("Unknown command: "+event.arg(0));
+						log().publish("Unknown command: "+event.arg(0));
 				}
 			});
 			// start console input thread
@@ -292,10 +286,6 @@ public class gcServer extends xApp {
 
 
 
-//System.out.println("Trying to trigger an event");
-//listeners.commands().trigger(
-//	new CommandEvent("stop")
-//);
 
 
 
@@ -307,12 +297,10 @@ public class gcServer extends xApp {
 //}
 
 
-
 //TODO: remove this
 //log.severe("Listing Com Ports:");
 //for(Map.Entry<String, String> entry : Serial.listPorts().entrySet())
 //log.severe(entry.getKey()+" - "+entry.getValue());
-
 
 
 //TODO: remove temp scheduled task
@@ -333,10 +321,6 @@ public class gcServer extends xApp {
 //System.out.println("next run: "+task.UntilNextTrigger().get(TimeU.MS));
 
 
-
-
-
-
 //	// get zones
 //	public List<String> getZones() {
 //		synchronized(zones) {
@@ -348,7 +332,6 @@ public class gcServer extends xApp {
 //			return (String[]) zones.toArray();
 //		}
 //	}
-
 
 
 	// ascii header
