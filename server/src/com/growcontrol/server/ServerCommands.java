@@ -1,7 +1,7 @@
 package com.growcontrol.server;
 
-import com.growcontrol.gccommon.listeners.CommandEvent;
 import com.poixson.commonapp.app.xApp;
+import com.poixson.commonapp.listeners.CommandEvent;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
 import com.poixson.commonjava.EventListener.xListener;
