@@ -19,13 +19,11 @@
     </scm>
     <build>
         <sourceDirectory>src</sourceDirectory>
-<!--
         <resources>
             <resource>
                 <directory>resources</directory>
             </resource>
         </resources>
--->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -43,7 +41,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.growcontrol.client.Main</mainClass>
+                            <mainClass>com.growcontrol.client.gcClient</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -93,6 +91,12 @@
             <groupId>org.xeustechnologies</groupId>
             <artifactId>jcl-core</artifactId>
             <version>2.5</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.9</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
