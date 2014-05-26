@@ -5,6 +5,7 @@ import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
 import com.poixson.commonjava.EventListener.xListener;
+import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -19,23 +20,16 @@ public final class ServerCommands implements xListener {
 		ignoreCancelled=true)
 	public void onCommand(final CommandEvent event) {
 		switch(event.arg(0)) {
-		// shutdown
-		//.setUsage("Stops and closes the server.");
 		case "shutdown":
 		case "stop":
 		case "exit":
 		case "quit":
 			_shutdown(event);
 			break;
-		// kill
-		//.setUsage("Emergency shutdown, no saves or power-downs. Don't use this unless you need to.");
 		case "kill":
 		case "end":
 			_kill(event);
-			System.exit(0);
 			break;
-		// clear
-//		.setUsage("Clears the console screen.");
 		case "clear":
 		case "cls":
 			_clear(event);
@@ -50,20 +44,14 @@ public final class ServerCommands implements xListener {
 			break;
 //		addCommand("get")
 //		addCommand("watch")
-
 //		addCommand("help")
 //			.addAlias("?");
-		// log
 		case "log":
 			_log(event);
 			break;
-		// log level
 		case "level":
 			_level(event);
 			break;
-//		addCommand("log")
-//			.addAlias("level")
-//			.setUsage("log level info - Sets or displays the log level.");
 //		addCommand("show")
 //			.setUsage("Displays additional information.");
 //		addCommand("version")
@@ -114,27 +102,55 @@ public final class ServerCommands implements xListener {
 
 	// shutdown command
 	private static void _shutdown(final CommandEvent event) {
+		if(event.isHelp()) {
+			log().publish();
+			log().publish("Properly shuts down and stops the server.");
+			log().publish();
+			event.setHandled();
+			return;
+		}
 		event.setHandled();
 		xApp.get().shutdown();
 	}
 	// kill command
 	private static void _kill(final CommandEvent event) {
-		event.setHandled();
+		if(event.isHelp()) {
+			log().publish();
+			log().publish("Emergency shutdown. No saving or power-downs. Don't use this unless you need to.");
+			log().publish();
+			event.setHandled();
+			return;
+		}
 		System.out.println("Killed by command..");
 		System.out.println();
+		event.setHandled();
 		System.exit(0);
 	}
 
 
 	// clear command
 	private static void _clear(final CommandEvent event) {
-		event.setHandled();
+		if(event.isHelp()) {
+			log().publish();
+			log().publish("Clears the console screen.");
+			log().publish();
+			event.setHandled();
+			return;
+		}
 		xLog.getConsole().clear();
+		event.setHandled();
 	}
 
 
 	// trigger event manually
 	private void _set(final CommandEvent event) {
+//		if(event.isHelp()) {
+//			log().publish();
+//			log().publish("");
+//			log().publish();
+//			event.setHandled();
+//			return;
+//		}
 String str = "";
 int i = 0;
 for(final String a : event.arg)
@@ -173,29 +189,68 @@ event.setHandled();
 			_level(event);
 			return;
 		}
-//		event.setHandled();
+//		if(event.isHelp()) {
+//			log().publish();
+//			log().publish("");
+//			log().publish();
+//			event.setHandled();
+//			return;
+//		}
 //TODO:
+//		event.setHandled();
 	}
 	private static void _level(final CommandEvent event) {
-		event.setHandled();
+		if(event.isHelp()) {
+			log().publish();
+			log().publish("level         - Display the current log level.");
+			log().publish("level <level> - Sets the root log level.");
+			log().publish();
+			for(final xLevel level : xLevel.getKnownLevels())
+				log().publish(level, "This is "+level.toString()+" level.");
+			log().publish();
+			event.setHandled();
+			return;
+		}
 		final xLog log = xLog.getRoot();
-		log.publish("Current log level: "+log.getLevel().toString());
+		log().publish("Current log level: "+log.getLevel().toString());
+		event.setHandled();
 	}
 
 
 	// say command
 	private static void _say(final CommandEvent event) {
-		event.setHandled();
+//		if(event.isHelp()) {
+//			log().publish();
+//			log().publish("");
+//			log().publish();
+//			event.setHandled();
+//			return;
+//		}
 		final StringBuilder msg = new StringBuilder();
 		msg.append(" (console) ");
 		msg.append(event.commandStr.substring(event.arg(0).length() + 1));
-		xLog.getRoot().publish(msg.toString());
+		log().publish(msg.toString());
+		event.setHandled();
 	}
 
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
+	}
+
+
+	// logger
+	private static volatile xLog _log = null;
+	private static final Object logLock = new Object();
+	public static xLog log() {
+		if(_log == null) {
+			synchronized(logLock) {
+				if(_log == null)
+					_log = xApp.log();
+			}
+		}
+		return _log;
 	}
 
 
