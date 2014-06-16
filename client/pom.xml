@@ -30,6 +30,14 @@
             <resource>
                 <directory>resources</directory>
             </resource>
+            <resource>
+                <directory>images</directory>
+                <targetPath>${project.build.outputDirectory}/images</targetPath>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/icon-loading-animated.gif</include>
+                </includes>
+            </resource>
         </resources>
         <plugins>
             <plugin>
