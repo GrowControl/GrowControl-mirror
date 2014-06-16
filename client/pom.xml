@@ -2,6 +2,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/maven-v4_0_0.xsd">
+<!-- http://maven-repository.com/ -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.growcontrol</groupId>
     <artifactId>gcClient</artifactId>
@@ -11,6 +12,12 @@
     <url>http://growcontrol.com</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jline-version>2.11</jline-version>
+        <org.yaml-version>1.13</org.yaml-version>
+        <org.xeustechnologies-version>2.5</org.xeustechnologies-version>
+        <commons-codec-version>1.9</commons-codec-version>
+        <com.miglayout-version>4.2</com.miglayout-version>
+        <junit-version>4.8.2</junit-version>
     </properties>
     <scm>
         <url>https://github.com/PoiXson/GrowControl</url>
@@ -78,31 +85,37 @@
         <dependency>
             <groupId>jline</groupId>
             <artifactId>jline</artifactId>
-            <version>2.11</version>
+            <version>${jline-version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>1.13</version>
+            <version>${org.yaml-version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.xeustechnologies</groupId>
             <artifactId>jcl-core</artifactId>
-            <version>2.5</version>
+            <version>${org.xeustechnologies-version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.9</version>
+            <version>${commons-codec-version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-swing</artifactId>
+            <version>${com.miglayout-version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <version>${junit-version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
