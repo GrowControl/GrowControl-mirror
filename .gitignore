@@ -4,7 +4,6 @@ build
 target
 
 .git
-.settings
 
 *.class
 *.jar
