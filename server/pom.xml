@@ -28,6 +28,7 @@
         <resources>
             <resource>
                 <directory>resources</directory>
+                <filtering>true</filtering>
             </resource>
         </resources>
         <plugins>

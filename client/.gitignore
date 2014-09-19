@@ -1,5 +1,4 @@
 plugins
-resources
 src/com/poixson/commonjava
 src/com/poixson/commonapp
 src/com/poixson/xsocket
