@@ -7,8 +7,8 @@
     <groupId>com.growcontrol</groupId>
     <artifactId>gcClient</artifactId>
     <packaging>jar</packaging>
-    <version>3.1.0-SNAPSHOT</version>
-    <name>Grow Control Client</name>
+    <version>3.3.0-SNAPSHOT</version>
+    <name>GrowControl Client</name>
     <url>http://growcontrol.com</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,6 +29,7 @@
         <resources>
             <resource>
                 <directory>resources</directory>
+                <filtering>true</filtering>
             </resource>
             <resource>
                 <directory>images</directory>
