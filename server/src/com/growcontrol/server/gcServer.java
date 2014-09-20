@@ -13,6 +13,7 @@ import com.poixson.commonapp.listeners.CommandEvent;
 import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
+import com.poixson.commonjava.Utils.mvnProps;
 import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.xLogger.xLevel;
@@ -21,8 +22,6 @@ import com.poixson.commonjava.xLogger.handlers.CommandHandler;
 
 
 public class gcServer extends xApp {
-	public static final String APPNAME = "gcServer";
-	public static final String VERSION = "3.1.0";
 
 	// server socket pool
 //	private volatile pxnSocketServer socket = null;
@@ -349,7 +348,8 @@ xVars.get().debug(true);
 
 	// ascii header
 	public static void displayStartupVars() {
-		AnsiConsole.out.println(" Grow Control Server "+gcServer.VERSION);
+		AnsiConsole.out.println();
+		AnsiConsole.out.println(" "+mvnProps.get(gcServer.class).full_title);
 		AnsiConsole.out.println(" Running as:  "+System.getProperty("user.name"));
 		AnsiConsole.out.println(" Current dir: "+System.getProperty("user.dir"));
 		AnsiConsole.out.println(" java home:   "+System.getProperty("java.home"));

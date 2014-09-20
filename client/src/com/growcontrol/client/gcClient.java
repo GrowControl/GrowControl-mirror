@@ -11,14 +11,13 @@ import com.poixson.commonapp.listeners.CommandEvent;
 import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
+import com.poixson.commonjava.Utils.mvnProps;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.handlers.CommandHandler;
 
 
 public class gcClient extends xApp {
-	public static final String APPNAME = "gcClient";
-	public static final String VERSION = "3.1.0";
 
 	private volatile ClientConfig config = null;
 
@@ -222,15 +221,6 @@ public class gcClient extends xApp {
 	}
 
 
-	@Override
-	public String getAppName() {
-		return APPNAME;
-	}
-	@Override
-	public String getVersion() {
-		return VERSION;
-	}
-
 
 //	// connect to server
 //	public void Connect(String host, int port, String user, String pass) {
@@ -315,7 +305,7 @@ public class gcClient extends xApp {
 
 	// ascii header
 	public static void displayStartupVars() {
-		AnsiConsole.out.println(" Grow Control Client "+gcClient.VERSION);
+		AnsiConsole.out.println(" "+mvnProps.get(gcClient.class).full_title);
 		AnsiConsole.out.println(" Running as:  "+System.getProperty("user.name"));
 		AnsiConsole.out.println(" Current dir: "+System.getProperty("user.dir"));
 		AnsiConsole.out.println(" java home:   "+System.getProperty("java.home"));
