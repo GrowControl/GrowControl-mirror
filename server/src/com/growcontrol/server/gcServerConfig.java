@@ -5,14 +5,14 @@ import java.util.Map;
 
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.Utils.utilsMath;
+import com.poixson.commonjava.Utils.utilsNumbers;
 import com.poixson.commonjava.Utils.xThreadPool;
 import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.Utils.xTimeU;
 import com.poixson.commonjava.xLogger.xLevel;
 
 
-public final class ServerConfig extends xConfig {
+public final class gcServerConfig extends xConfig {
 
 	public static final String CONFIG_FILE = "config.yml";
 
@@ -31,7 +31,7 @@ public final class ServerConfig extends xConfig {
 	public static final int default_LOGIC_THREADS   = 0;
 
 
-	public ServerConfig(Map<String, Object> data) {
+	public gcServerConfig(Map<String, Object> data) {
 		super(data);
 	}
 
@@ -82,7 +82,7 @@ public final class ServerConfig extends xConfig {
 	public int getListenPort() {
 		final Integer value = getInteger(LISTEN_PORT);
 		if(value != null)
-			return utilsMath.MinMax(value.intValue(), 1, 65536);
+			return utilsNumbers.MinMax(value.intValue(), 1, 65536);
 		return default_LISTEN_PORT;
 	}
 
@@ -92,7 +92,7 @@ public final class ServerConfig extends xConfig {
 		if(!exists(LOGIC_THREADS))
 			return default_LOGIC_THREADS;
 		final Integer value = getInteger(LOGIC_THREADS);
-		return utilsMath.MinMax(value.intValue(), 0, xThreadPool.HARD_LIMIT);
+		return utilsNumbers.MinMax(value.intValue(), 0, xThreadPool.HARD_LIMIT);
 	}
 
 

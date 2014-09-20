@@ -6,6 +6,7 @@ import java.util.List;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
+import com.growcontrol.server.commands.gcServerCommands;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.listeners.CommandEvent;
@@ -27,10 +28,11 @@ public class gcServer extends xApp {
 //	private volatile pxnSocketServer socket = null;
 
 	// config
-	private volatile ServerConfig config = null;
+	private volatile gcServerConfig config = null;
 
 	// zones
 	private final List<String> zones = new ArrayList<String>();
+
 
 
 	/**
@@ -40,6 +42,7 @@ public class gcServer extends xApp {
 	public static gcServer get() {
 		return (gcServer) xApp.get();
 	}
+
 
 
 	/**
@@ -61,13 +64,14 @@ xVars.get().debug(true);
 	}
 
 
+
 	// init config
 	@Override
 	protected void initConfig() {
 		log().fine("Loading server config..");
-		this.config = (ServerConfig) xConfigLoader.Load(
-			ServerConfig.CONFIG_FILE,
-			ServerConfig.class
+		this.config = (gcServerConfig) xConfigLoader.Load(
+			gcServerConfig.CONFIG_FILE,
+			gcServerConfig.class
 		);
 		if(this.config == null) {
 			Failure.fail("Failed to load "+gcServerConfig.CONFIG_FILE);
@@ -92,7 +96,7 @@ xVars.get().debug(true);
 		{
 			final Boolean debug = this.config.getDebug();
 			if(debug != null)
-				gcServerVars.get().debug(debug.booleanValue());
+				xVars.get().debug(debug.booleanValue());
 		}
 		// tick interval
 		{
@@ -118,9 +122,11 @@ xVars.get().debug(true);
 	}
 
 
+
 	@Override
 	protected void processArgs(final String[] args) {
 	}
+
 
 
 	/**
@@ -136,13 +142,15 @@ xVars.get().debug(true);
 	@Override
 	protected boolean startup(final int step) {
 		switch(step) {
+		case 1:
+			return true;
 		// listeners
 		case 2:
 			// init listeners
 			final gcServerVars vars = gcServerVars.get();
 			// server command listener
 			vars.commands().register(
-				new ServerCommands()
+				new gcServerCommands()
 			);
 			// io event listener
 			//getLogicQueue();
@@ -268,6 +276,8 @@ xVars.get().debug(true);
 			return true;
 		case 2:
 			return true;
+		case 1:
+			return true;
 		}
 		return false;
 	}
@@ -336,6 +346,7 @@ xVars.get().debug(true);
 //	}
 
 
+
 	// ascii header
 	public static void displayStartupVars() {
 		AnsiConsole.out.println(" Grow Control Server "+gcServer.VERSION);
@@ -353,7 +364,7 @@ xVars.get().debug(true);
 	protected static void displayColors() {
 		AnsiConsole.out.println(Ansi.ansi().reset());
 		for(final Ansi.Color color : Ansi.Color.values()) {
-			final String name = utilsString.center(color.name(), 7);
+			final String name = utilsString.padCenter(7, color.name(), ' ');
 			AnsiConsole.out.println(Ansi.ansi()
 				.a("   ")
 				.fg(color).a(name)
@@ -524,6 +535,7 @@ xVars.get().debug(true);
 //System.out.println("                            PoiXson           I7?~~,=7I");
 //System.out.println("                          ©GROWCONTROL         I7?,:III");
 //System.out.println("                                                ~III+.");
+
 
 
 }

@@ -8,7 +8,7 @@ import com.poixson.commonjava.EventListener.xListener;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public final class ClientCommands implements xListener {
+public final class gcClientCommands implements xListener {
 
 
 	@xEvent(

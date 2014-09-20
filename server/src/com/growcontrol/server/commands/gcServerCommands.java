@@ -1,4 +1,4 @@
-package com.growcontrol.server;
+package com.growcontrol.server.commands;
 
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.listeners.CommandEvent;
@@ -9,7 +9,7 @@ import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public final class ServerCommands implements xListener {
+public final class gcServerCommands implements xListener {
 
 
 	@xEvent(
@@ -110,7 +110,7 @@ public final class ServerCommands implements xListener {
 			return;
 		}
 		event.setHandled();
-		xApp.get().shutdown();
+		xApp.get().Stop();
 	}
 	// kill command
 	private static void _kill(final CommandEvent event) {

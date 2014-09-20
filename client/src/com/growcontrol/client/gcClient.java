@@ -10,6 +10,7 @@ import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.listeners.CommandEvent;
 import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.Failure;
+import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.handlers.CommandHandler;
@@ -31,6 +32,7 @@ public class gcClient extends xApp {
 	private final List<String> zones = new ArrayList<String>();
 
 
+
 	/**
 	 * Get the client class instance.
 	 * @return client instance object.
@@ -38,6 +40,7 @@ public class gcClient extends xApp {
 	public static gcClient get() {
 		return (gcClient) xApp.get();
 	}
+
 
 
 	/**
@@ -52,6 +55,7 @@ public class gcClient extends xApp {
 	protected gcClient() {
 		super();
 	}
+
 
 
 	// init config
@@ -72,7 +76,7 @@ public class gcClient extends xApp {
 		// version
 		{
 @SuppressWarnings("unused")
-			final String version = this.config.getVersion();
+			final String configVersion = this.config.getVersion();
 		}
 		// log level
 		{
@@ -84,14 +88,16 @@ public class gcClient extends xApp {
 		{
 			final Boolean debug = this.config.getDebug();
 			if(debug != null)
-				gcClientVars.get().debug(debug.booleanValue());
+				xVars.get().debug(debug.booleanValue());
 		}
 	}
+
 
 
 	@Override
 	protected void processArgs(final String[] args) {
 	}
+
 
 
 	/**
@@ -113,7 +119,7 @@ public class gcClient extends xApp {
 			final gcClientVars vars = gcClientVars.get();
 			// client command listener
 			vars.commands().register(
-				new ClientCommands()
+				new gcClientCommands()
 			);
 			// io event listener
 			//getLogicQueue();
@@ -292,6 +298,7 @@ public class gcClient extends xApp {
 //	}
 
 
+
 //	// get zones
 //	public List<String> getZones() {
 //		synchronized(zones) {
@@ -303,6 +310,7 @@ public class gcClient extends xApp {
 //			return (String[]) zones.toArray();
 //		}
 //	}
+
 
 
 	// ascii header
@@ -321,6 +329,7 @@ public class gcClient extends xApp {
 	}
 	protected static void displayLogoHeader() {
 	}
+
 
 
 }
