@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client.clientSocket;
 
 import com.growcontrol.gcCommon.pxnLogger.pxnLog;
@@ -66,3 +67,4 @@ System.out.println("Got PLUGIN packet! "+line.getRest());
 
 
 }
+*/

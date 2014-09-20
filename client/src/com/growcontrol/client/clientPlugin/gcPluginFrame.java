@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client.clientPlugin;
 
 import javax.swing.JInternalFrame;
@@ -23,3 +24,4 @@ public class gcPluginFrame extends JInternalFrame {
 
 
 }
+*/

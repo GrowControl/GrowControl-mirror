@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client.clientPlugin;
 
 import com.growcontrol.gcCommon.pxnPlugin.pxnPlugin;
@@ -39,3 +40,4 @@ public abstract class gcClientPlugin  extends pxnPlugin {
 
 
 }
+*/
