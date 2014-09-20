@@ -9,6 +9,7 @@ import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.listeners.CommandEvent;
 import com.poixson.commonapp.plugin.xPluginManager;
+import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.handlers.CommandHandler;
@@ -61,10 +62,11 @@ public class gcClient extends xApp {
 			ClientConfig.CONFIG_FILE,
 			ClientConfig.class
 		);
-		if(this.config == null)
-			fail("Failed to load "+ClientConfig.CONFIG_FILE);
-		else
-			updateConfig();
+		if(this.config == null) {
+			Failure.fail("Failed to load "+ClientConfig.CONFIG_FILE);
+			return;
+		}
+		updateConfig();
 	}
 	protected void updateConfig() {
 		// version

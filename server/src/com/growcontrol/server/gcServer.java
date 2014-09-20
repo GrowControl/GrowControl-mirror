@@ -10,6 +10,7 @@ import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.listeners.CommandEvent;
 import com.poixson.commonapp.plugin.xPluginManager;
+import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.Utils.xTime;
@@ -68,10 +69,11 @@ xVars.get().debug(true);
 			ServerConfig.CONFIG_FILE,
 			ServerConfig.class
 		);
-		if(this.config == null)
-			fail("Failed to load "+ServerConfig.CONFIG_FILE);
-		else
-			updateConfig();
+		if(this.config == null) {
+			Failure.fail("Failed to load "+gcServerConfig.CONFIG_FILE);
+			return;
+		}
+		updateConfig();
 	}
 	protected void updateConfig() {
 		// version
