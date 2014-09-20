@@ -1,8 +1,5 @@
 package com.growcontrol.server;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
@@ -23,14 +20,13 @@ import com.poixson.commonjava.xLogger.handlers.CommandHandler;
 
 public class gcServer extends xApp {
 
-	// server socket pool
-//	private volatile pxnSocketServer socket = null;
-
 	// config
 	private volatile gcServerConfig config = null;
-
 	// zones
-	private final List<String> zones = new ArrayList<String>();
+//	private final List<String> zones = new ArrayList<String>();
+
+	// server socket pool
+//	private volatile pxnSocketServer socket = null;
 
 
 
@@ -67,7 +63,6 @@ xVars.get().debug(true);
 	// init config
 	@Override
 	protected void initConfig() {
-		log().fine("Loading server config..");
 		this.config = (gcServerConfig) xConfigLoader.Load(
 			gcServerConfig.CONFIG_FILE,
 			gcServerConfig.class
@@ -78,46 +73,33 @@ xVars.get().debug(true);
 		}
 		updateConfig();
 	}
-	protected void updateConfig() {
+	private void updateConfig() {
 		// version
-		{
-@SuppressWarnings("unused")
-			final String version = this.config.getVersion();
-//TODO: compare to running version
-		}
+		@SuppressWarnings("unused")
+		final String configVersion = this.config.getVersion();
+		//TODO: compare to running version
 		// log level
-		{
-			final xLevel level = this.config.getLogLevel();
-			if(level != null)
-				xLog.getRoot().setLevel(level);
-		}
+		final xLevel level = this.config.getLogLevel();
+		if(level != null)
+			xLog.getRoot().setLevel(level);
 		// debug
-		{
-			final Boolean debug = this.config.getDebug();
-			if(debug != null)
-				xVars.get().debug(debug.booleanValue());
-		}
+		final Boolean debug = this.config.getDebug();
+		if(debug != null)
+			xVars.get().debug(debug.booleanValue());
 		// tick interval
-		{
-@SuppressWarnings("unused")
-			final xTime tick = this.config.getTickInterval();
-//TODO: apply this to scheduler
-		}
+		@SuppressWarnings("unused")
+		final xTime tick = this.config.getTickInterval();
+		//TODO: apply this to scheduler
 		// listen port
-		{
-@SuppressWarnings("unused")
-			final int port = this.config.getListenPort();
-
-//TODO: apply this to socket server
-		}
+		@SuppressWarnings("unused")
+		final int port = this.config.getListenPort();
+		//TODO: apply this to socket server
 		// logic threads (0 uses main thread)
-		{
-@SuppressWarnings("unused")
-			final int logic = this.config.getLogicThreads();
-//TODO: apply this to logic thread pool
-		}
+		@SuppressWarnings("unused")
+		final int logic = this.config.getLogicThreads();
+		//TODO: apply this to logic thread pool
 		// zones
-		this.config.populateZones(this.zones);
+//		this.config.populateZones(this.zones);
 	}
 
 
@@ -141,10 +123,11 @@ xVars.get().debug(true);
 	@Override
 	protected boolean startup(final int step) {
 		switch(step) {
-		case 1:
+		case 1: {
 			return true;
+		}
 		// listeners
-		case 2:
+		case 2: {
 			// init listeners
 			final gcServerVars vars = gcServerVars.get();
 			// server command listener
@@ -154,8 +137,9 @@ xVars.get().debug(true);
 			// io event listener
 			//getLogicQueue();
 			return true;
+		}
 		// command prompt
-		case 3:
+		case 3: {
 			// command processor
 			xLog.setCommandHandler(new CommandHandler() {
 				@Override
@@ -172,7 +156,10 @@ xVars.get().debug(true);
 			// start console input thread
 			initConsole();
 			return true;
-		case 4:
+		}
+		case 4: {
+			return true;
+		}
 // load zones
 // load scheduler
 // load plugins
@@ -195,15 +182,14 @@ xVars.get().debug(true);
 //			}
 			// start logic thread queue
 //			getLogicQueue();
-			return true;
 		// load plugins and sockets
-		case 5:
-			{
-				final xPluginManager manager = xPluginManager.get();
-				manager.setClassField("Server Main");
-				manager.loadAll();
-				manager.initAll();
-			}
+		case 5: {
+			final xPluginManager manager = xPluginManager.get();
+			manager.setClassField("Server Main");
+			manager.loadAll();
+			manager.initAll();
+			return true;
+		}
 //			// start socket listener
 //			if(socket == null)
 //				socket = new pxnSocketServer();
@@ -217,16 +203,15 @@ xVars.get().debug(true);
 //				}
 //			});
 //			socket.Start();
-			return true;
 		// start plugins and sockets
-		case 6:
-			{
-				final xPluginManager manager = xPluginManager.get();
-				manager.enableAll();
-			}
+		case 6: {
+			final xPluginManager manager = xPluginManager.get();
+			manager.enableAll();
 			return true;
-		case 7:
+		}
+		case 7: {
 			return true;
+		}
 		}
 		return false;
 	}
@@ -243,53 +228,48 @@ xVars.get().debug(true);
 	@Override
 	protected boolean shutdown(final int step) {
 		switch(step) {
-		case 7:
+		case 7: {
 			return true;
+		}
 		// stop plugins and sockets
-		case 6:
+		case 6: {
 //			// close socket listener
 //			if(socket != null)
 //				socket.Close();
 //			// pause scheduler
 //			pxnScheduler.PauseAll();
-			{
-				final xPluginManager manager = xPluginManager.get();
-				manager.disableAll();
-			}
+			final xPluginManager manager = xPluginManager.get();
+			manager.disableAll();
 			return true;
+		}
 		// unload plugins and sockets
-		case 5:
+		case 5: {
 //			// end schedulers
 //			pxnScheduler.ShutdownAll();
-			{
-				final xPluginManager manager = xPluginManager.get();
-				manager.unloadAll();
-			}
+			final xPluginManager manager = xPluginManager.get();
+			manager.unloadAll();
 //			// close sockets
 //			if(socket != null)
 //				socket.ForceClose();
 			return true;
-		case 4:
+		}
+		case 4: {
 			return true;
-		case 3:
+		}
+		case 3: {
 			return true;
-		case 2:
+		}
+		case 2: {
 			return true;
-		case 1:
+		}
+		case 1: {
 			return true;
+		}
 		}
 		return false;
 	}
 
 
-	@Override
-	public String getAppName() {
-		return APPNAME;
-	}
-	@Override
-	public String getVersion() {
-		return VERSION;
-	}
 
 
 
@@ -484,6 +464,7 @@ xVars.get().debug(true);
 		AnsiConsole.out.println();
 
 		AnsiConsole.out.println(" Copyright (C) 2007-2014 PoiXson, Mattsoft");
+		AnsiConsole.out.println(" - Brainchild of the one known as lorenzo -");
 		AnsiConsole.out.println(" This program comes with absolutely no warranty. This is free software");
 		AnsiConsole.out.println(" and you are welcome to modify it or redistribute it under certain");
 		AnsiConsole.out.println(" conditions. Type 'show license' for license details.");

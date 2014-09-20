@@ -1,8 +1,5 @@
 package com.growcontrol.client;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.fusesource.jansi.AnsiConsole;
 
 import com.poixson.commonapp.app.xApp;
@@ -19,16 +16,16 @@ import com.poixson.commonjava.xLogger.handlers.CommandHandler;
 
 public class gcClient extends xApp {
 
-	private volatile ClientConfig config = null;
+	// config
+	private volatile gcClientConfig config = null;
+	// zones
+//	private final List<String> zones = new ArrayList<String>();
 
 //	// client socket
 //	private volatile pxnSocketClient socket = null;
 //	// client connection state
 //	private final gcConnectState state = new gcConnectState();
 
-	// zones
-@SuppressWarnings("unused")
-	private final List<String> zones = new ArrayList<String>();
 
 
 
@@ -60,35 +57,29 @@ public class gcClient extends xApp {
 	// init config
 	@Override
 	protected void initConfig() {
-		log().fine("Loading client config..");
-		this.config = (ClientConfig) xConfigLoader.Load(
-			ClientConfig.CONFIG_FILE,
-			ClientConfig.class
+		this.config = (gcClientConfig) xConfigLoader.Load(
+			gcClientConfig.CONFIG_FILE,
+			gcClientConfig.class
 		);
 		if(this.config == null) {
-			Failure.fail("Failed to load "+ClientConfig.CONFIG_FILE);
+			Failure.fail("Failed to load "+gcClientConfig.CONFIG_FILE);
 			return;
 		}
 		updateConfig();
 	}
 	protected void updateConfig() {
 		// version
-		{
-@SuppressWarnings("unused")
-			final String configVersion = this.config.getVersion();
-		}
+		@SuppressWarnings("unused")
+		final String configVersion = this.config.getVersion();
+		//TODO: compare to running version
 		// log level
-		{
-			final xLevel level = this.config.getLogLevel();
-			if(level != null)
-				xLog.getRoot().setLevel(level);
-		}
+		final xLevel level = this.config.getLogLevel();
+		if(level != null)
+			xLog.getRoot().setLevel(level);
 		// debug
-		{
-			final Boolean debug = this.config.getDebug();
-			if(debug != null)
-				xVars.get().debug(debug.booleanValue());
-		}
+		final Boolean debug = this.config.getDebug();
+		if(debug != null)
+			xVars.get().debug(debug.booleanValue());
 	}
 
 
@@ -112,8 +103,11 @@ public class gcClient extends xApp {
 	@Override
 	protected boolean startup(final int step) {
 		switch(step) {
+		case 1: {
+			return true;
+		}
 		// listeners
-		case 2:
+		case 2: {
 			// init listeners
 			final gcClientVars vars = gcClientVars.get();
 			// client command listener
@@ -123,8 +117,9 @@ public class gcClient extends xApp {
 			// io event listener
 			//getLogicQueue();
 			return true;
+		}
 		// command prompt
-		case 3:
+		case 3: {
 			// command processor
 			xLog.setCommandHandler(new CommandHandler() {
 				@Override
@@ -141,26 +136,28 @@ public class gcClient extends xApp {
 			// start console input thread
 			initConsole();
 			return true;
-		case 4:
+		}
+		case 4: {
 			return true;
+		}
 		// load plugins and sockets
-		case 5:
-			{
-				final xPluginManager manager = xPluginManager.get();
-				manager.setClassField("Client Main");
-				manager.loadAll();
-				manager.initAll();
-			}
+		case 5: {
+			final xPluginManager manager = xPluginManager.get();
+			manager.setClassField("Client Main");
+			manager.loadAll();
+			manager.initAll();
 			return true;
+		}
 		// start plugins and sockets
-		case 6:
-			{
-				final xPluginManager manager = xPluginManager.get();
-				manager.enableAll();
-			}
+		case 6: {
+			final xPluginManager manager = xPluginManager.get();
+			manager.enableAll();
 			return true;
+		}
 		// start gui manager
-		case 7:
+		case 7: {
+			return true;
+		}
 ///////			guiManager.get();
 //			// show connect window
 //			state.setStateClosed();
@@ -184,38 +181,43 @@ public class gcClient extends xApp {
 	protected boolean shutdown(final int step) {
 		switch(step) {
 		// stop gui
-		case 7:
+		case 7: {
 			// close windows
 ///////			guiManager.Shutdown();
 			return true;
+		}
 		// stop plugins and sockets
-		case 6:
+		case 6: {
 //			// close socket listener
 //			if(socket != null)
 //				socket.Close();
 //			// pause scheduler
 //			pxnScheduler.PauseAll();
-			{
-				final xPluginManager manager = xPluginManager.get();
-				manager.disableAll();
-			}
+			final xPluginManager manager = xPluginManager.get();
+			manager.disableAll();
 			return true;
+		}
 		// unload plugins and sockets
-		case 5:
+		case 5: {
 //			// end schedulers
 //			pxnScheduler.ShutdownAll();
-			{
-				final xPluginManager manager = xPluginManager.get();
-				manager.unloadAll();
-			}
+			final xPluginManager manager = xPluginManager.get();
+			manager.unloadAll();
 //			// close sockets
 			return true;
-		case 4:
+		}
+		case 4: {
 			return true;
-		case 3:
+		}
+		case 3: {
 			return true;
-		case 2:
+		}
+		case 2: {
 			return true;
+		}
+		case 1: {
+			return true;
+		}
 		}
 		return false;
 	}
