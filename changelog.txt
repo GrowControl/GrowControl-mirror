@@ -1,0 +1,9 @@
+gcServer 3.3 - Change Log
+
+
+2013-09-21 gcServer 3.3.0 alpha r1
+==============================
+* first fully-automated build process with jenkins
+* client and server compile and run, although most functionality is disabled
+note: only base functional
+

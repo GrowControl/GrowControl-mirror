@@ -20,6 +20,14 @@
 				<include>uber-gcClient-*.jar</include>
 			</includes>
 		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>changelog.txt</include>
+				<include>readme.txt</include>
+			</includes>
+		</fileSet>
 	</fileSets>
 </assembly>
 
