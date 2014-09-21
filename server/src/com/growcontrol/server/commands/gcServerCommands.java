@@ -1,24 +1,26 @@
 package com.growcontrol.server.commands;
 
 import com.poixson.commonapp.app.xApp;
-import com.poixson.commonapp.listeners.CommandEvent;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
-import com.poixson.commonjava.EventListener.xListener;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
+import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
+import com.poixson.commonjava.xLogger.handlers.xCommandListener;
 
 
-public final class gcServerCommands implements xListener {
+public final class gcServerCommands implements xCommandListener {
 
 
+
+	@Override
 	@xEvent(
 		priority=Priority.NORMAL,
 		filtered=false,
 		threaded=false,
 		ignoreHandled=true,
 		ignoreCancelled=true)
-	public void onCommand(final CommandEvent event) {
+	public void onCommand(final xCommandEvent event) {
 		switch(event.arg(0)) {
 		case "shutdown":
 		case "stop":
@@ -84,7 +86,8 @@ public final class gcServerCommands implements xListener {
 	}
 
 
-	private static void _test(final CommandEvent event) {
+
+	private static void _test(final xCommandEvent event) {
 		event.setHandled();
 //final long tim = System.nanoTime();
 //xThreadPool.get().runNow(
@@ -100,8 +103,9 @@ public final class gcServerCommands implements xListener {
 	}
 
 
+
 	// shutdown command
-	private static void _shutdown(final CommandEvent event) {
+	private static void _shutdown(final xCommandEvent event) {
 		if(event.isHelp()) {
 			log().publish();
 			log().publish("Properly shuts down and stops the server.");
@@ -113,7 +117,7 @@ public final class gcServerCommands implements xListener {
 		xApp.get().Stop();
 	}
 	// kill command
-	private static void _kill(final CommandEvent event) {
+	private static void _kill(final xCommandEvent event) {
 		if(event.isHelp()) {
 			log().publish();
 			log().publish("Emergency shutdown. No saving or power-downs. Don't use this unless you need to.");
@@ -128,8 +132,9 @@ public final class gcServerCommands implements xListener {
 	}
 
 
+
 	// clear command
-	private static void _clear(final CommandEvent event) {
+	private static void _clear(final xCommandEvent event) {
 		if(event.isHelp()) {
 			log().publish();
 			log().publish("Clears the console screen.");
@@ -142,8 +147,9 @@ public final class gcServerCommands implements xListener {
 	}
 
 
+
 	// trigger event manually
-	private void _set(final CommandEvent event) {
+	private void _set(final xCommandEvent event) {
 //		if(event.isHelp()) {
 //			log().publish();
 //			log().publish("");
@@ -184,7 +190,8 @@ event.setHandled();
 	}
 
 
-	private static void _log(final CommandEvent event) {
+
+	private static void _log(final xCommandEvent event) {
 		if(event.arg(1) == null) {
 			_level(event);
 			return;
@@ -199,7 +206,7 @@ event.setHandled();
 //TODO:
 //		event.setHandled();
 	}
-	private static void _level(final CommandEvent event) {
+	private static void _level(final xCommandEvent event) {
 		if(event.isHelp()) {
 			log().publish();
 			log().publish("level         - Display the current log level.");
@@ -217,8 +224,9 @@ event.setHandled();
 	}
 
 
+
 	// say command
-	private static void _say(final CommandEvent event) {
+	private static void _say(final xCommandEvent event) {
 //		if(event.isHelp()) {
 //			log().publish();
 //			log().publish("");
@@ -234,11 +242,6 @@ event.setHandled();
 	}
 
 
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		throw new CloneNotSupportedException();
-	}
-
 
 	// logger
 	private static volatile xLog _log = null;
@@ -252,6 +255,7 @@ event.setHandled();
 		}
 		return _log;
 	}
+
 
 
 //		// help
@@ -336,6 +340,7 @@ event.setHandled();
 //	    	visitThread(groups[i], level+1);
 //	    }
 //	}
+
 
 
 }

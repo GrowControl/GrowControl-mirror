@@ -6,7 +6,6 @@ import org.fusesource.jansi.AnsiConsole;
 import com.growcontrol.server.commands.gcServerCommands;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
-import com.poixson.commonapp.listeners.CommandEvent;
 import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
@@ -15,7 +14,6 @@ import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
-import com.poixson.commonjava.xLogger.handlers.CommandHandler;
 
 
 public class gcServer extends xApp {
@@ -141,18 +139,10 @@ xVars.get().debug(true);
 		// command prompt
 		case 3: {
 			// command processor
-			xLog.setCommandHandler(new CommandHandler() {
-				@Override
-				public void processCommand(String line) {
-					final CommandEvent event = new CommandEvent(line);
-					gcServerVars.get()
-						.commands().triggerNow(
-							event
-						);
-					if(!event.isHandled())
-						log().publish("Unknown command: "+event.arg(0));
-				}
-			});
+			xLog.setCommandHandler(
+				gcServerVars.get()
+					.commands()
+			);
 			// start console input thread
 			initConsole();
 			return true;

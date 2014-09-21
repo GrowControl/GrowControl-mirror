@@ -1,23 +1,25 @@
 package com.growcontrol.client;
 
 import com.poixson.commonapp.app.xApp;
-import com.poixson.commonapp.listeners.CommandEvent;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
-import com.poixson.commonjava.EventListener.xListener;
 import com.poixson.commonjava.xLogger.xLog;
+import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
+import com.poixson.commonjava.xLogger.handlers.xCommandListener;
 
 
-public final class gcClientCommands implements xListener {
+public final class gcClientCommands implements xCommandListener {
 
 
+
+	@Override
 	@xEvent(
 		priority=Priority.NORMAL,
 		filtered=false,
 		threaded=false,
 		ignoreHandled=true,
 		ignoreCancelled=true)
-	public void onCommand(final CommandEvent event) {
+	public void onCommand(final xCommandEvent event) {
 		switch(event.arg(0)) {
 		// shutdown
 		case "shutdown":
@@ -47,18 +49,20 @@ public final class gcClientCommands implements xListener {
 	}
 
 
-	private static void _test(final CommandEvent event) {
+
+	private static void _test(final xCommandEvent event) {
 		event.setHandled();
 	}
 
 
+
 	// shutdown command
-	private static void _shutdown(final CommandEvent event) {
+	private static void _shutdown(final xCommandEvent event) {
 		event.setHandled();
 		xApp.get().Stop();
 	}
 	// kill command
-	private static void _kill(final CommandEvent event) {
+	private static void _kill(final xCommandEvent event) {
 		event.setHandled();
 		System.out.println("Killed by command.");
 		System.out.println();
@@ -66,23 +70,20 @@ public final class gcClientCommands implements xListener {
 	}
 
 
+
 	// clear command
-	private static void _clear(final CommandEvent event) {
+	private static void _clear(final xCommandEvent event) {
 		event.setHandled();
 		xLog.getConsole().clear();
 	}
 
 
+
 	// trigger event manually
-	private void _set(final CommandEvent event) {
+	private void _set(final xCommandEvent event) {
 		event.setHandled();
 	}
 
-
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		throw new CloneNotSupportedException();
-	}
 
 
 }

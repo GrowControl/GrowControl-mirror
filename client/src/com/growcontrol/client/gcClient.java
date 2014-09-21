@@ -5,14 +5,12 @@ import org.fusesource.jansi.AnsiConsole;
 import com.growcontrol.client.configs.gcClientConfig;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
-import com.poixson.commonapp.listeners.CommandEvent;
 import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.Utils.mvnProps;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
-import com.poixson.commonjava.xLogger.handlers.CommandHandler;
 
 
 public class gcClient extends xApp {
@@ -122,18 +120,10 @@ public class gcClient extends xApp {
 		// command prompt
 		case 3: {
 			// command processor
-			xLog.setCommandHandler(new CommandHandler() {
-				@Override
-				public void processCommand(String line) {
-					final CommandEvent event = new CommandEvent(line);
-					gcClientVars.get()
-						.commands().triggerNow(
-							event
-						);
-					if(!event.isHandled())
-						log().warning("Unknown command: "+event.arg(0));
-				}
-			});
+			xLog.setCommandHandler(
+				gcClientVars.get()
+					.commands()
+			);
 			// start console input thread
 			initConsole();
 			return true;
