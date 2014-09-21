@@ -11,18 +11,12 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
 	<modules>
 		<module>server</module>
 		<module>client</module>
 	</modules>
-
 	<build>
 		<finalName>GrowControl-${project.version}</finalName>
-<!--
-		<directory>target</directory>
-		<outputDirectory>target</outputDirectory>
--->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
