@@ -55,7 +55,7 @@ public final class gcClientCommands implements xListener {
 	// shutdown command
 	private static void _shutdown(final CommandEvent event) {
 		event.setHandled();
-		xApp.get().shutdown();
+		xApp.get().Stop();
 	}
 	// kill command
 	private static void _kill(final CommandEvent event) {
