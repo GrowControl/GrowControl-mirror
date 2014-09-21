@@ -1,4 +1,4 @@
-package com.growcontrol.client;
+package com.growcontrol.client.commands;
 
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.EventListener.xEvent;

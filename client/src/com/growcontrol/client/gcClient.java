@@ -2,6 +2,7 @@ package com.growcontrol.client;
 
 import org.fusesource.jansi.AnsiConsole;
 
+import com.growcontrol.client.commands.gcClientCommands;
 import com.growcontrol.client.configs.gcClientConfig;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
