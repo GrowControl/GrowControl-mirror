@@ -10,14 +10,14 @@
 			<directory>${project.basedir}/server/target/</directory>
 			<outputDirectory>/</outputDirectory>
 			<includes>
-				<include>uber-gcServer-*.jar</include>
+				<include>gcServer-*.jar</include>
 			</includes>
 		</fileSet>
 		<fileSet>
 			<directory>${project.basedir}/client/target/</directory>
 			<outputDirectory>/</outputDirectory>
 			<includes>
-				<include>uber-gcClient-*.jar</include>
+				<include>gcClient-*.jar</include>
 			</includes>
 		</fileSet>
 		<fileSet>

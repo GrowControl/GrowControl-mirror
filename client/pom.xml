@@ -26,6 +26,7 @@
     </scm>
     <build>
         <sourceDirectory>src</sourceDirectory>
+        <finalName>original-${project.artifactId}-${project.version}</finalName>
         <resources>
             <resource>
                 <directory>resources</directory>
@@ -85,7 +86,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <finalName>uber-${project.artifactId}-${project.version}</finalName>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
                 </configuration>
             </plugin>
         </plugins>
