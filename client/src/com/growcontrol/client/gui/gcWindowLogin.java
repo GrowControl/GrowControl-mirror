@@ -25,9 +25,9 @@ import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
 
-import com.growcontrol.client.configs.ClientConfig;
 import com.growcontrol.client.configs.SavedServerProfile;
 import com.growcontrol.client.configs.SavedServersConfig;
+import com.growcontrol.client.configs.gcClientConfig;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.gui.guiUtils;
 import com.poixson.commonapp.gui.xFont;
@@ -384,7 +384,7 @@ public class gcWindowLogin extends xWindow {
 				if("- Internal -".equals(this.txtboxHost.getText()))
 					this.txtboxHost.setText("localhost");
 				if(utils.isEmpty(this.txtboxPort.getText()))
-					this.txtboxPort.setText(Integer.toString(ClientConfig.DEFAULT_LISTEN_PORT));
+					this.txtboxPort.setText(Integer.toString(gcClientConfig.DEFAULT_LISTEN_PORT));
 				xLog.getRoot().fine("Selected -unsaved- profile");
 			} else if(SAVEDSERVERS_InternalServer.equals(selected)) {
 				isinternal = true;

@@ -52,7 +52,7 @@ public class SavedServerProfile extends xConfig {
 			str.append("localhost");
 		else
 			str.append(this.host);
-		if(this.port != ClientConfig.DEFAULT_LISTEN_PORT)
+		if(this.port != gcClientConfig.DEFAULT_LISTEN_PORT)
 			str.append(":").append(this.port);
 		str.append(" )");
 		return str.toString();

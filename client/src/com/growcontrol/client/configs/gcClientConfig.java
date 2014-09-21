@@ -9,7 +9,7 @@ import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.xLogger.xLevel;
 
 
-public final class ClientConfig extends xConfig {
+public final class gcClientConfig extends xConfig {
 
 	public static final String CONFIG_FILE = "config.yml";
 
@@ -29,7 +29,7 @@ public final class ClientConfig extends xConfig {
 
 
 
-	public ClientConfig(final Map<String, Object> data) {
+	public gcClientConfig(final Map<String, Object> data) {
 		super(data);
 	}
 
