@@ -91,12 +91,14 @@ public class gcClient extends xApp {
 
 	/**
 	 * Client startup sequence.
+	 *   1.
 	 *   2. Listeners
 	 *   3.
 	 *   4.
 	 *   5. Load plugins and sockets
 	 *   6. Start plugins and sockets
 	 *   7. Start GUI
+	 *   8.
 	 * @return true if success, false if problem.
 	 */
 	@Override
@@ -147,6 +149,9 @@ public class gcClient extends xApp {
 		}
 		// start gui manager
 		case 7: {
+			return true;
+		}
+		case 8: {
 			return true;
 		}
 ///////			guiManager.get();

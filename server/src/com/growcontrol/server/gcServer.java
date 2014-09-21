@@ -110,12 +110,14 @@ xVars.get().debug(true);
 
 	/**
 	 * Server startup sequence.
+	 *   1.
 	 *   2. Listeners
 	 *   3. Command prompt
 	 *   4.
 	 *   5. Load plugins and sockets
 	 *   6. Start plugins and sockets
 	 *   7.
+	 *   8.
 	 * @return true if success, false if problem.
 	 */
 	@Override
@@ -202,22 +204,30 @@ xVars.get().debug(true);
 		case 7: {
 			return true;
 		}
+		case 8: {
+			return true;
+		}
 		}
 		return false;
 	}
 	/**
 	 * Server shutdown sequence.
+	 *   8.
 	 *   7. Stop plugins and sockets
 	 *   6. Unload plugins and sockets
 	 *   5.
 	 *   4.
 	 *   3.
 	 *   2.
+	 *   1.
 	 * @return true if success, false if problem.
 	 */
 	@Override
 	protected boolean shutdown(final int step) {
 		switch(step) {
+		case 8: {
+			return true;
+		}
 		case 7: {
 			return true;
 		}
