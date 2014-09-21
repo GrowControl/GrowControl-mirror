@@ -31,9 +31,11 @@ public final class gcServerConfig extends xConfig {
 	public static final int default_LOGIC_THREADS   = 0;
 
 
+
 	public gcServerConfig(Map<String, Object> data) {
 		super(data);
 	}
+
 
 
 	// version
@@ -45,6 +47,7 @@ public final class gcServerConfig extends xConfig {
 	}
 
 
+
 	// log level
 	public xLevel getLogLevel() {
 		final String value = getString(LOG_LEVEL);
@@ -54,10 +57,12 @@ public final class gcServerConfig extends xConfig {
 	}
 
 
+
 	// debug
 	public Boolean getDebug() {
 		return getBoolean(DEBUG);
 	}
+
 
 
 	// tick interval
@@ -78,6 +83,7 @@ public final class gcServerConfig extends xConfig {
 	}
 
 
+
 	// listen port
 	public int getListenPort() {
 		final Integer value = getInteger(LISTEN_PORT);
@@ -85,6 +91,7 @@ public final class gcServerConfig extends xConfig {
 			return utilsNumbers.MinMax(value.intValue(), 1, 65536);
 		return default_LISTEN_PORT;
 	}
+
 
 
 	// logic threads (0 uses main thread)
@@ -96,12 +103,14 @@ public final class gcServerConfig extends xConfig {
 	}
 
 
+
 	// zones (rooms)
 	public void populateZones(final Collection<String> zones) {
 		if(zones == null) throw new NullPointerException();
 		if(exists(ZONES))
 			zones.addAll(getStringList(ZONES));
 	}
+
 
 
 }
