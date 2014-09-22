@@ -333,136 +333,163 @@ xVars.get().debug(true);
 		final Ansi.Color bgcolor = Ansi.Color.BLACK;
 		out.println();
 		// line 1
-		AnsiConsole.out.println(Ansi.ansi()
-			.a(" ").bg(Ansi.Color.BLACK)
-			.bold().a("      ")
+		out.println(Ansi.ansi()
+			.a(" ").bg(bgcolor).bold().a("      ")
 			.fg(Ansi.Color.GREEN).a("P")
 			.fg(Ansi.Color.WHITE).a("oi")
 			.fg(Ansi.Color.GREEN).a("X")
 			.fg(Ansi.Color.WHITE).a("son")
-			.a("                                                    ")
+			.a("                          ")
+			.a("                          ")
 			.reset() );
 		// line 2
-		AnsiConsole.out.println(Ansi.ansi()
-			.a(" ").bg(Ansi.Color.BLACK)
-			.bold().a("    ")
+		out.println(Ansi.ansi()
+			.a(" ").bg(bgcolor).bold().a("   ")
+			.fg(Ansi.Color.BLACK).a("©")
 			.fg(Ansi.Color.GREEN).a("GROW")
 			.fg(Ansi.Color.WHITE).a("CONTROL")
-			.fg(Ansi.Color.YELLOW).a("     _")
-			.a("                                            ")
+			.boldOff().a("     ")
+			/* C */.fg(Ansi.Color.YELLOW).bold().a("_")
+			.a("                      ")
+			.a("                      ")
 			.reset() );
 		// line 3
-		AnsiConsole.out.println(Ansi.ansi()
-			.a(" ").bg(Ansi.Color.BLACK)
-			.a("                  ")
-			.fg(Ansi.Color.YELLOW).bold().a("_(_)_                          ").boldOff()
-			.fg(Ansi.Color.MAGENTA).a("wWWWw   ")
-			.fg(Ansi.Color.YELLOW).bold().a("_")
+		out.println(Ansi.ansi()
+			.a(" ").bg(bgcolor).a("      ")
+			.fg(Ansi.Color.CYAN).a("Server      ")
+			/* C */.fg(Ansi.Color.YELLOW).bold()
+					.a("_(_)_").boldOff()
+					.a("                          ")
+			/* G */.fg(Ansi.Color.MAGENTA).a("wWWWw   ")
+			/* H */.fg(Ansi.Color.YELLOW).bold().a("_")
 			.a("       ")
 			.reset() );
 		// line 4
-		AnsiConsole.out.println(Ansi.ansi()
-			.a(" ").bg(Ansi.Color.BLACK)
-			.a("      ")
-			.fg(Ansi.Color.RED).a("@@@@").a("       ")
-			.fg(Ansi.Color.YELLOW).bold().a("(_)@(_)   ").boldOff()
-			.fg(Ansi.Color.MAGENTA).a("vVVVv     ")
-			.fg(Ansi.Color.YELLOW).bold().a("_     ").boldOff()
-			.fg(Ansi.Color.BLUE).a("@@@@  ")
-			.fg(Ansi.Color.MAGENTA).a("(___) ")
-			.fg(Ansi.Color.YELLOW).bold().a("_(_)_")
+		out.println(Ansi.ansi()
+			.a(" ").bg(bgcolor).a("                 ")
+			/* C */.fg(Ansi.Color.YELLOW).bold()
+					.a("(_)@(_)   ").boldOff()
+			/* D */.fg(Ansi.Color.MAGENTA).a("vVVVv     ")
+			/* E */.fg(Ansi.Color.YELLOW).bold()
+					.a("_     ").boldOff()
+			/* F */.fg(Ansi.Color.BLUE).a("@@@@  ")
+			/* G */.fg(Ansi.Color.MAGENTA).a("(___) ")
+			/* H */.fg(Ansi.Color.YELLOW).bold().a("_(_)_")
 			.a("     ")
 			.reset() );
 		// line 5
-		AnsiConsole.out.println(Ansi.ansi()
-			.a(" ").bg(Ansi.Color.BLACK)
-			.a("     ")
-			.fg(Ansi.Color.RED).a("@@()@@ ")
-			.fg(Ansi.Color.MAGENTA).bold().a("wWWWw  ")
-			.fg(Ansi.Color.YELLOW).a("(_)").boldOff()
-			.fg(Ansi.Color.GREEN).a("\\    ")
-			.fg(Ansi.Color.MAGENTA).a("(___)   ")
-			.fg(Ansi.Color.YELLOW).bold().a("_(_)_  ").boldOff()
-			.fg(Ansi.Color.BLUE).a("@@()@@   ")
-			.fg(Ansi.Color.MAGENTA).a("Y  ")
-			.fg(Ansi.Color.YELLOW).bold().a("(_)@(_)")
+		out.println(Ansi.ansi()
+			.a(" ").bg(bgcolor).a("      ")
+			/* A */.fg(Ansi.Color.RED).a("@@@@  ")
+			/* B */.fg(Ansi.Color.MAGENTA).bold()
+					.a("wWWWw  ").boldOff()
+			/* C */.fg(Ansi.Color.YELLOW).bold()
+					.a("(_)").boldOff()
+					.fg(Ansi.Color.GREEN).a("\\    ")
+			/* D */.fg(Ansi.Color.MAGENTA).a("(___)   ")
+			/* E */.fg(Ansi.Color.YELLOW).bold()
+					.a("_(_)_  ").boldOff()
+			/* F */.fg(Ansi.Color.BLUE).a("@@()@@   ")
+			/* F */.fg(Ansi.Color.MAGENTA).a("Y  ")
+			/* H */.fg(Ansi.Color.YELLOW)
+					.bold().a("(_)@(_)")
 			.a("    ")
 			.reset() );
 		// line 6
-		AnsiConsole.out.println(Ansi.ansi()
-			.a(" ").bg(Ansi.Color.BLACK)
-			.a("      ")
-			.fg(Ansi.Color.RED).a("@@@@  ")
-			.fg(Ansi.Color.MAGENTA).bold().a("(___)     ").boldOff()
-			.fg(Ansi.Color.GREEN).a("`|/    ")
-			.fg(Ansi.Color.MAGENTA).a("Y    ")
-			.fg(Ansi.Color.YELLOW).bold().a("(_)@(_)  ").boldOff()
-			.fg(Ansi.Color.BLUE).a("@@@@   ")
-			.fg(Ansi.Color.GREEN).a("\\|/   ")
-			.fg(Ansi.Color.YELLOW).bold().a("(_)").boldOff()
-			.fg(Ansi.Color.GREEN).a("\\")
+		out.println(Ansi.ansi()
+			.a(" ").bg(bgcolor).a("     ")
+			/* A */.fg(Ansi.Color.RED).a("@@()@@ ")
+			/* B */.fg(Ansi.Color.MAGENTA).bold()
+					.a("(___)     ").boldOff()
+			/* C */.fg(Ansi.Color.GREEN).a("`|/    ")
+			/* D */.fg(Ansi.Color.MAGENTA).a("Y    ")
+			/* E */.fg(Ansi.Color.YELLOW).bold()
+					.a("(_)@(_)  ").boldOff()
+			/* F */.fg(Ansi.Color.BLUE).a("@@@@   ")
+			/* G */.fg(Ansi.Color.GREEN).a("\\|/   ")
+			/* H */.fg(Ansi.Color.YELLOW).bold()
+					.a("(_)").boldOff()
+					.fg(Ansi.Color.GREEN).a("\\")
 			.a("     ")
 			.reset() );
 		// line 7
-		AnsiConsole.out.println(Ansi.ansi()
-			.a(" ").bg(Ansi.Color.BLACK)
-			.fg(Ansi.Color.GREEN).a("       /      ")
-			.fg(Ansi.Color.MAGENTA).a("Y       ")
-			.fg(Ansi.Color.GREEN).a("\\|    \\|/    /")
-			.fg(Ansi.Color.YELLOW).bold().a("(_)    ").boldOff()
-			.fg(Ansi.Color.GREEN).a("\\|      |/      |     ")
+		out.println(Ansi.ansi()
+			.a(" ").bg(bgcolor).a("      ")
+			/* A */.fg(Ansi.Color.RED).a("@@@@    ")
+			/* B */.fg(Ansi.Color.MAGENTA).a("Y       ")
+			/* C */.fg(Ansi.Color.GREEN).a("\\|    ")
+			/* D */.fg(Ansi.Color.GREEN).a("\\|/    ")
+			/* E */.fg(Ansi.Color.GREEN).a("/")
+					.fg(Ansi.Color.YELLOW).bold()
+					.a("(_)    ").boldOff()
+			/* F */.fg(Ansi.Color.GREEN).a("\\|      ")
+			/* G */.fg(Ansi.Color.GREEN).a("|/      ")
+			/* H */.fg(Ansi.Color.GREEN).a("|     ")
 			.reset() );
 		// line 8
-		AnsiConsole.out.println(Ansi.ansi()
-			.a(" ").bg(Ansi.Color.BLACK)
-			.fg(Ansi.Color.GREEN).a("    \\ |     \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/    ")
+		out.println(Ansi.ansi()
+			.a(" ").bg(bgcolor).a("    ")
+			.fg(Ansi.Color.GREEN)
+			/* A */.a("\\  /    ")
+			/* B */.a("\\ |/       ")
+			/* C */.a("| / ")
+			/* D */.a("\\ | /  ")
+			/* E */.a("\\|/       ")
+			/* F */.a("|/    ")
+			/* G */.a("\\|      ")
+			/* H */.a("\\|/    ")
 			.reset() );
 		// line 9
-		AnsiConsole.out.println(Ansi.ansi()
-			.a(" ").bg(Ansi.Color.BLACK)
-			.fg(Ansi.Color.GREEN).a("    \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|//   ")
+		out.println(Ansi.ansi()
+			.a(" ").bg(bgcolor).a("    ")
+			.fg(Ansi.Color.GREEN)
+			/* A */.a("\\\\|//   ")
+			/* B */.a("\\\\|///  ")
+			/* C */.a("\\\\\\|//")
+			/* D */.a("\\\\\\|/// ")
+			/* E */.a("\\|///  ")
+			/* F */.a("\\\\\\|//  ")
+			/* G */.a("\\\\|//  ")
+			/* H */.a("\\\\\\|//   ")
 			.reset() );
 		// line 10
-		AnsiConsole.out.println(Ansi.ansi()
-			.a(" ").bg(Ansi.Color.BLACK)
-			.fg(Ansi.Color.GREEN).a("^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^")
+		out.println(Ansi.ansi()
+			.a(" ").bg(bgcolor)
+			.fg(Ansi.Color.GREEN)
+			.a("^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/")
+			.a("^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^")
 			.reset() );
 		// line 11
-		AnsiConsole.out.println(Ansi.ansi()
-			.a(" ").bg(Ansi.Color.BLACK)
-			.fg(Ansi.Color.GREEN).a("/////////////////////////////////////////////////////////////////")
+		out.println(Ansi.ansi()
+			.a(" ").bg(bgcolor)
+			.fg(Ansi.Color.GREEN)
+			.a("////////////////////////////////")
+			.a("/////////////////////////////////")
 			.reset() );
 		out.println();
-
-		AnsiConsole.out.println(" Copyright (C) 2007-2014 PoiXson, Mattsoft");
-		AnsiConsole.out.println(" - Brainchild of the one known as lorenzo -");
-		AnsiConsole.out.println(" This program comes with absolutely no warranty. This is free software");
-		AnsiConsole.out.println(" and you are welcome to modify it or redistribute it under certain");
-		AnsiConsole.out.println(" conditions. Type 'show license' for license details.");
+		out.println(" Copyright (C) 2007-2014 PoiXson, Mattsoft");
+		out.println(" - Brainchild of the one known as lorenzo -");
+		out.println(" This program comes with absolutely no warranty. This is free software");
+		out.println(" and you are welcome to modify it or redistribute it under certain");
+		out.println(" conditions. Type 'show license' for license details.");
 		out.println();
 		out.flush();
 	}
-// 1 |      PoiXson
-// 2 |    ©GROWCONTROL    _
-// 3 |                  _(_)_                          wWWWw   _
-// 4 |      @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_
-// 5 |     @@()@@ wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_)
-// 6 |      @@@@  (___)     `|/    Y    (_)@(_)  @@@@   \|/   (_)\
-// 7 |       /      Y       \|    \|/    /(_)    \|      |/      |
-// 8 |    \ |     \ |/       | / \ | /  \|/       |/    \|      \|/
-// 9 |    \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|//
-//10 |^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-//System.out.println("      "+Ansi.Color.MAGENTA+"PoiXson");
-//System.out.println("    ©GROWCONTROL    _");
-//System.out.println("                  _(_)_                          wWWWw   _");
-//System.out.println("      @@@@       (_)@(_)   vVVVv     _     @@@@  (___) _(_)_");
-//System.out.println("     @@()@@ wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)");
-//System.out.println("      @@@@  (___)     `|/    Y    (_)@(_)  @@@@   \\|/   (_)\\");
-//System.out.println("       /      Y       \\|    \\|/    /(_)    \\|      |/      |");
-//System.out.println("    \\ |     \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/");
-//System.out.println("    \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|//");
-//System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+//            A      B      C       D      E       F      G      H
+// 1 |       PoiXson                                                     |
+// 2 |    ©GROWCONTROL     _                                             |
+// 3 |       Server      _(_)_                          wWWWw   _        |
+// 4 |                  (_)@(_)   vVVVv     _     @@@@  (___) _(_)_      |
+// 5 |       @@@@  wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_)     |
+// 6 |      @@()@@ (___)     `|/    Y    (_)@(_)  @@@@   \|/   (_)\      |
+// 7 |       @@@@    Y       \|    \|/    /(_)    \|      |/      |      |
+// 8 |     \  /    \ |/       | / \ | /  \|/       |/    \|      \|/     |
+// 9 |     \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|//    |
+//10 | ^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^ |
+//11 | ///////////////////////////////////////////////////////////////// |
+//   0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8
+//   0         1         2         3         4         5         6
 
 //System.out.println("                     .==IIIIIIIIIIII=:.");
 //System.out.println("               .7IIII777777II7I7I77777III.");
