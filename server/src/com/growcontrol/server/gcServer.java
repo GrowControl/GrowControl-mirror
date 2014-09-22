@@ -69,7 +69,7 @@ xVars.get().debug(true);
 			Failure.fail("Failed to load "+gcServerConfig.CONFIG_FILE);
 			return;
 		}
-		updateConfig();
+		this.updateConfig();
 	}
 	private void updateConfig() {
 		// version
@@ -146,7 +146,7 @@ xVars.get().debug(true);
 					.commands()
 			);
 			// start console input thread
-			initConsole();
+			this.startConsole();
 			return true;
 		}
 		case 4: {

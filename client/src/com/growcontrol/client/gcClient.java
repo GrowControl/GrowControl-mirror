@@ -50,10 +50,10 @@ public class gcClient extends xApp {
 	}
 	protected gcClient() {
 		super();
-		displayStartupVars();
+		this.displayStartupVars();
 		if(xVars.get().debug())
-			displayColors();
-		displayLogo();
+			this.displayColors();
+		this.displayLogo();
 	}
 
 
@@ -69,7 +69,7 @@ public class gcClient extends xApp {
 			Failure.fail("Failed to load "+gcClientConfig.CONFIG_FILE);
 			return;
 		}
-		updateConfig();
+		this.updateConfig();
 	}
 	protected void updateConfig() {
 		// version
@@ -132,7 +132,7 @@ public class gcClient extends xApp {
 					.commands()
 			);
 			// start console input thread
-			initConsole();
+			this.startConsole();
 			return true;
 		}
 		case 4: {
