@@ -1,5 +1,7 @@
 package com.growcontrol.server;
 
+import java.io.PrintStream;
+
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
@@ -9,8 +11,6 @@ import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
-import com.poixson.commonjava.Utils.mvnProps;
-import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
@@ -46,14 +46,14 @@ public class gcServer extends xApp {
 
 xVars.get().debug(true);
 
-		displayStartupVars();
-		if(xVars.get().debug())
-			displayColors();
-		displayLogoHeader();
 		initMain(args, new gcServer());
 	}
 	protected gcServer() {
 		super();
+		this.displayStartupVars();
+		if(xVars.get().debug())
+			this.displayColors();
+		this.displayLogo();
 	}
 
 
@@ -327,40 +327,11 @@ xVars.get().debug(true);
 
 
 	// ascii header
-	public static void displayStartupVars() {
-		AnsiConsole.out.println();
-		AnsiConsole.out.println(" "+mvnProps.get(gcServer.class).full_title);
-		AnsiConsole.out.println(" Running as:  "+System.getProperty("user.name"));
-		AnsiConsole.out.println(" Current dir: "+System.getProperty("user.dir"));
-		AnsiConsole.out.println(" java home:   "+System.getProperty("java.home"));
-//		if(gcServer.get().forceDebug())
-//			AnsiConsole.out.println(" Force Debug: true");
-//		String argsMsg = getArgsMsg();
-//		if(argsMsg != null && !argsMsg.isEmpty())
-//			AnsiConsole.out.println(" args: [ "+argsMsg+" ]");
-		AnsiConsole.out.println();
-		AnsiConsole.out.flush();
-	}
-	protected static void displayColors() {
-		AnsiConsole.out.println(Ansi.ansi().reset());
-		for(final Ansi.Color color : Ansi.Color.values()) {
-			final String name = utilsString.padCenter(7, color.name(), ' ');
-			AnsiConsole.out.println(Ansi.ansi()
-				.a("   ")
-				.fg(color).a(name)
-				.a("   ")
-				.bold().a("BOLD-"+name)
-				.a("   ")
-				.boldOff().fg(Ansi.Color.WHITE).bg(color).a(name)
-				.reset()
-			);
-		}
-		AnsiConsole.out.println(Ansi.ansi().reset());
-		AnsiConsole.out.println();
-		AnsiConsole.out.flush();
-	}
-	protected static void displayLogoHeader() {
-		AnsiConsole.out.println();
+	@Override
+	protected void displayLogo() {
+		final PrintStream out = AnsiConsole.out;
+		final Ansi.Color bgcolor = Ansi.Color.BLACK;
+		out.println();
 		// line 1
 		AnsiConsole.out.println(Ansi.ansi()
 			.a(" ").bg(Ansi.Color.BLACK)
@@ -461,15 +432,15 @@ xVars.get().debug(true);
 			.a(" ").bg(Ansi.Color.BLACK)
 			.fg(Ansi.Color.GREEN).a("/////////////////////////////////////////////////////////////////")
 			.reset() );
-		AnsiConsole.out.println();
+		out.println();
 
 		AnsiConsole.out.println(" Copyright (C) 2007-2014 PoiXson, Mattsoft");
 		AnsiConsole.out.println(" - Brainchild of the one known as lorenzo -");
 		AnsiConsole.out.println(" This program comes with absolutely no warranty. This is free software");
 		AnsiConsole.out.println(" and you are welcome to modify it or redistribute it under certain");
 		AnsiConsole.out.println(" conditions. Type 'show license' for license details.");
-		AnsiConsole.out.println();
-		AnsiConsole.out.flush();
+		out.println();
+		out.flush();
 	}
 // 1 |      PoiXson
 // 2 |    ©GROWCONTROL    _

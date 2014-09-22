@@ -1,5 +1,8 @@
 package com.growcontrol.client;
 
+import java.io.PrintStream;
+
+import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
 import com.growcontrol.client.commands.gcClientCommands;
@@ -9,7 +12,6 @@ import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
-import com.poixson.commonjava.Utils.mvnProps;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
 
@@ -44,12 +46,14 @@ public class gcClient extends xApp {
 	 * @param args Command line arguments.
 	 */
 	public static void main(final String[] args) {
-		displayStartupVars();
-		displayLogoHeader();
 		initMain(args, new gcClient());
 	}
 	protected gcClient() {
 		super();
+		displayStartupVars();
+		if(xVars.get().debug())
+			displayColors();
+		displayLogo();
 	}
 
 
@@ -303,20 +307,12 @@ public class gcClient extends xApp {
 
 
 	// ascii header
-	public static void displayStartupVars() {
-		AnsiConsole.out.println(" "+mvnProps.get(gcClient.class).full_title);
-		AnsiConsole.out.println(" Running as:  "+System.getProperty("user.name"));
-		AnsiConsole.out.println(" Current dir: "+System.getProperty("user.dir"));
-		AnsiConsole.out.println(" java home:   "+System.getProperty("java.home"));
-//		if(gcServer.get().forceDebug())
-//			AnsiConsole.out.println(" Force Debug: true");
-//		String argsMsg = getArgsMsg();
-//		if(argsMsg != null && !argsMsg.isEmpty())
-//			AnsiConsole.out.println(" args: [ "+argsMsg+" ]");
-		AnsiConsole.out.println();
-		AnsiConsole.out.flush();
-	}
-	protected static void displayLogoHeader() {
+	@Override
+	protected void displayLogo() {
+		final PrintStream out = AnsiConsole.out;
+		final Ansi.Color bgcolor = Ansi.Color.BLACK;
+		out.println();
+		out.println();
 	}
 
 
