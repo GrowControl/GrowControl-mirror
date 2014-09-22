@@ -121,7 +121,7 @@ xVars.get().debug(true);
 	 * @return true if success, false if problem.
 	 */
 	@Override
-	protected boolean startup(final int step) {
+	protected boolean StartupStep(final int step) {
 		switch(step) {
 		case 1: {
 			return true;
@@ -223,7 +223,7 @@ xVars.get().debug(true);
 	 * @return true if success, false if problem.
 	 */
 	@Override
-	protected boolean shutdown(final int step) {
+	protected boolean ShutdownStep(final int step) {
 		switch(step) {
 		case 8: {
 			return true;
