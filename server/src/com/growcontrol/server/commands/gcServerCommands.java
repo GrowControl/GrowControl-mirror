@@ -8,6 +8,8 @@ import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
 
 public final class gcServerCommands extends gcCommands {
 
+	protected volatile gcServerCommands_config inconfig = null;
+
 
 
 	// server commands
@@ -18,8 +20,20 @@ public final class gcServerCommands extends gcCommands {
 			filterHandled=true,
 			filterCancelled=true)
 	public void onCommand(final xCommandEvent event) {
+		if(this.inconfig != null) {
+			this.inconfig.onCommand(event);
+			return;
+		}
 		super.onCommand(event);
 		switch(event.arg(0)) {
+		// config mode
+		case "config":
+			if(event.isHelp()) {
+				this._config_help(event);
+				return;
+			}
+			this.inconfig = gcServerCommands_config.get(this, event);
+			break;
 		// say a message
 		case "say":
 		case "wall":
@@ -88,6 +102,15 @@ public final class gcServerCommands extends gcCommands {
 //}
 //);
 //	}
+
+
+
+	protected void _config_help(final xCommandEvent event) {
+		handled(event);
+		this.publish();
+		this.publish("Enters config command mode. Use the exit command to return.");
+		this.publish();
+	}
 
 
 
