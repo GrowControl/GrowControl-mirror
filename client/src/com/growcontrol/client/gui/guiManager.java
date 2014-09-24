@@ -1,25 +1,33 @@
 package com.growcontrol.client.gui;
 
-import javax.swing.SwingUtilities;
-
-import com.growcontrol.gcClient.frames.Dashboard.DashboardHandler;
-import com.growcontrol.gcClient.frames.Login.LoginHandler;
+import com.growcontrol.client.gui.dash.gcWindowDash;
+import com.growcontrol.client.gui.login.gcWindowLogin;
+import com.poixson.commonapp.app.xApp;
+import com.poixson.commonapp.gui.guiUtils;
+import com.poixson.commonjava.Utils.Keeper;
+import com.poixson.commonjava.Utils.utils;
 
 
 public class guiManager {
-	private static volatile guiManager manager = null;
-	private static final Object lock = new Object();
 
 	// display mode
-	public enum GUI {LOGIN, DASH};
-	private static volatile GUI startupMode      = null;
-	private static volatile GUI startupMode_Last = null;
-//	private final Object modeLock = new Object();
+	public enum GUI_MODE {
+		LOGIN,
+		DASH
+	}
+	protected volatile GUI_MODE currentMode = null;
+	protected volatile GUI_MODE lastMode    = null;
+//	protected final Object modeLock = new Object();
 
-	// frames
-	protected volatile LoginHandler     loginHandler = null;
-	protected volatile DashboardHandler dashHandler  = null;
+	// windows
+	protected volatile gcWindowLogin windowLogin = null;
+	protected volatile gcWindowDash  windowDash  = null;
 
+
+
+	// single manager instance
+	private static volatile guiManager manager = null;
+	private static final Object lock = new Object();
 
 	public static guiManager get() {
 		if(manager == null) {
@@ -30,101 +38,58 @@ public class guiManager {
 		}
 		return manager;
 	}
+	public static guiManager peak() {
+		return manager;
+	}
+
+
+
+	// new instance
 	private guiManager() {
-		Update();
-	}
-	public static void Shutdown() {
-		synchronized(lock) {
-			if(manager != null)
-				get().doShutdown();
-		}
-	}
-	private void doShutdown() {
-		if(loginHandler != null)
-			loginHandler.Close();
-		if(dashHandler != null)
-			dashHandler.Close();
+		// just to prevent gc
+		Keeper.add(this);
 	}
 
 
-	// update display mode
-	public void Update() {
-		Update(null);
-	}
-	public void Update(GUI mode) {
-		if(mode != null) startupMode = mode;
-		if(SwingUtilities.isEventDispatchThread()) {
-			doUpdate();
-			return;
-		}
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				doUpdate();
-			}
-		});
-	}
-	private void doUpdate() {
-		getStartupMode();
-		synchronized(startupMode) {
-			boolean hasChanged = !getStartupMode().equals(startupMode_Last);
-			// close old frames
-			if(hasChanged && startupMode_Last != null) {
-				switch(startupMode_Last) {
-				case LOGIN:
-					if(loginHandler != null)
-						loginHandler.Close();
-					break;
-				case DASH:
-					if(dashHandler != null)
-						dashHandler.Close();
-					break;
-				}
-			}
-			// load new frames
-			switch(getStartupMode()) {
-			case LOGIN:
-				if(hasChanged)
-					getLoginHandler().Show();
-				break;
-			case DASH:
-				if(hasChanged)
-					getDashboardHandler().Show();
-				break;
-			}
-			startupMode_Last = startupMode;
-		}
-	}
-	// get/set gui mode
-	public synchronized GUI getStartupMode() {
-		if(startupMode == null)
-			startupMode = GUI.LOGIN;
-		return startupMode;
-	}
 
-
-	public synchronized LoginHandler getLoginHandler() {
-		if(loginHandler == null)
-			loginHandler = LoginHandler.get();
-		return loginHandler;
-	}
-	public synchronized DashboardHandler getDashboardHandler() {
-		if(dashHandler == null)
-			dashHandler = DashboardHandler.get();
-		return dashHandler;
-	}
-
-
-	// gui mode to string
-	public static String modeToString(GUI mode) {
+	// show window
+	public void Show(final GUI_MODE mode) {
+		if(mode == null) throw new NullPointerException();
+		// run in event dispatch thread
+		if(guiUtils.forceDispatchThread(this, "Show", mode)) return;
 		switch(mode) {
-		case LOGIN:
-			return "LOGIN";
-		case DASH:
-			return "DASH";
-		default:
+		// login window
+		case LOGIN: {
+			if(this.windowLogin == null)
+				this.windowLogin = new gcWindowLogin();
+			this.windowLogin.Show();
+			break;
 		}
-		return "UNKNOWN";
+		// dashboard window
+		case DASH: {
+			if(this.windowDash == null)
+				this.windowDash = new gcWindowDash();
+			break;
+		}
+		}
+		// mode has changed
+		if(!mode.equals(this.currentMode)) {
+			xApp.log().info("Displaying mode: "+mode.toString());
+			this.lastMode = this.currentMode;
+			this.currentMode = mode;
+		}
+	}
+
+
+
+	// close windows
+	public void shutdown() {
+		// run in event dispatch thread
+		if(guiUtils.forceDispatchThread(this, "shutdown")) return;
+		utils.safeClose(this.windowLogin);
+		utils.safeClose(this.windowDash);
+		this.windowLogin = null;
+		this.windowDash  = null;
 	}
 
 

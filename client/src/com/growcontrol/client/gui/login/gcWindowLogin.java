@@ -101,7 +101,7 @@ public class gcWindowLogin extends xWindow {
 		// load savedservers.yml
 		this.loadSavedServersConfig();
 		// show window
-		this.setVisible(true);
+		this.Show();
 	}
 
 
