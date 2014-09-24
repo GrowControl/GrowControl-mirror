@@ -1,4 +1,4 @@
-package com.growcontrol.server;
+package com.growcontrol.server.configs;
 
 import java.util.Collection;
 import java.util.Map;
