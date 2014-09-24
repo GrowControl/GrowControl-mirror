@@ -170,14 +170,9 @@ public abstract class gcCommands implements xCommandListener {
 
 	// logger
 	private volatile xLog _log = null;
-	private final Object logLock = new Object();
 	public xLog log() {
-		if(this._log == null) {
-			synchronized(this.logLock) {
-				if(this._log == null)
-					this._log = xApp.log();
-			}
-		}
+		if(this._log == null)
+			this._log = xApp.log();
 		return this._log;
 	}
 	public void publish(final String msg) {
