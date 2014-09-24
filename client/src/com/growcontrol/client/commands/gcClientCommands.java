@@ -15,10 +15,9 @@ public final class gcClientCommands implements xCommandListener {
 	@Override
 	@xEvent(
 		priority=Priority.NORMAL,
-		filtered=false,
 		threaded=false,
-		ignoreHandled=true,
-		ignoreCancelled=true)
+		filterHandled=true,
+		filterCancelled=true)
 	public void onCommand(final xCommandEvent event) {
 		switch(event.arg(0)) {
 		// shutdown
