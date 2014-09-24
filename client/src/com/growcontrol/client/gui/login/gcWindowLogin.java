@@ -29,6 +29,7 @@ import com.growcontrol.client.configs.SavedServerProfile;
 import com.growcontrol.client.configs.SavedServersConfig;
 import com.growcontrol.client.configs.gcClientConfig;
 import com.growcontrol.client.gui.guiManager;
+import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.gui.guiUtils;
 import com.poixson.commonapp.gui.xFont;
@@ -37,7 +38,6 @@ import com.poixson.commonapp.gui.annotations.xWindowProperties;
 import com.poixson.commonapp.gui.remapped.RemappedActionListener;
 import com.poixson.commonapp.gui.remapped.RemappedItemListener;
 import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.xLogger.xLog;
 
 
 @xWindowProperties(
@@ -367,21 +367,21 @@ public class gcWindowLogin extends xWindow {
 					this.txtboxHost.setText("localhost");
 				if(utils.isEmpty(this.txtboxPort.getText()))
 					this.txtboxPort.setText(Integer.toString(gcClientConfig.DEFAULT_LISTEN_PORT));
-				xLog.getRoot().fine("Selected -unsaved- profile");
+				xApp.log().fine("Selected -unsaved- profile");
 			} else if(SAVEDSERVERS_InternalServer.equals(selected)) {
 				isinternal = true;
 				this.txtboxHost.setText("- Internal -");
 				this.txtboxPort.setText("");
 				this.txtboxUser.setText("");
 				this.txtboxPass.setText("");
-				xLog.getRoot().fine("Selected -internal- profile");
+				xApp.log().fine("Selected -internal- profile");
 			} else {
 				final SavedServerProfile profile = this.profiles.get(selected);
 				this.txtboxHost.setText(profile.host);
 				this.txtboxPort.setText(Integer.toString(profile.port));
 				this.txtboxUser.setText(profile.user);
 				this.txtboxPass.setText(profile.pass);
-				xLog.getRoot().fine("Selected server profile: "+selected);
+				xApp.log().fine("Selected server profile: "+selected);
 			}
 			this.txtboxHost.setEnabled(!isinternal);
 			this.txtboxPort.setEnabled(!isinternal);
@@ -395,14 +395,14 @@ public class gcWindowLogin extends xWindow {
 	// button click event
 	public void onClickConnectButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
-		xLog.getRoot().fine("Clicked '"+buttonName+"' button");
+		xApp.log().fine("Clicked '"+buttonName+"' button");
 		// show connecting card
 		this.Update(CARD_CONNECTING);
 		this.txtStatus.setText("Connecting..");
 	}
 	public void onClickCancelButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
-		xLog.getRoot().fine("Clicked '"+buttonName+"' button");
+		xApp.log().fine("Clicked '"+buttonName+"' button");
 		// show login card
 		this.Update(CARD_LOGIN);
 	}
