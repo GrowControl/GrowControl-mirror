@@ -1,4 +1,4 @@
-package com.growcontrol.client.gui;
+package com.growcontrol.client.gui.login;
 
 import java.awt.CardLayout;
 import java.awt.Component;
