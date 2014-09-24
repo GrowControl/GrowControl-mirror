@@ -7,6 +7,7 @@ import org.fusesource.jansi.AnsiConsole;
 
 import com.growcontrol.client.commands.gcClientCommands;
 import com.growcontrol.client.configs.gcClientConfig;
+import com.growcontrol.client.gui.guiManager;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.plugin.xPluginManager;
@@ -154,9 +155,14 @@ public class gcClient extends xApp {
 		}
 		// start gui manager
 		case 7: {
+			guiManager.get();
 			return true;
 		}
 		case 8: {
+			// show login/connect window
+			guiManager.get().Show(
+				guiManager.GUI_MODE.LOGIN
+			);
 			return true;
 		}
 ///////			guiManager.get();
@@ -181,7 +187,12 @@ public class gcClient extends xApp {
 	@Override
 	protected boolean ShutdownStep(final int step) {
 		switch(step) {
+		// stop gui
 		case 8: {
+			// start closing windows
+			final guiManager man = guiManager.peak();
+			if(man != null)
+				man.shutdown();
 			return true;
 		}
 		// stop gui
