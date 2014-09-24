@@ -72,8 +72,9 @@ public class gcWindowLogin extends xWindow {
 	protected volatile JButton           btnConnect  = null;
 
 	// connecting animation
-	protected volatile JLabel  txtStatus = null;
-	protected volatile JButton btnCancel = null;
+	protected volatile JLabel       txtStatus = null;
+	protected volatile JProgressBar progress  = null;
+	protected volatile JButton      btnCancel = null;
 
 
 
@@ -271,11 +272,11 @@ public class gcWindowLogin extends xWindow {
 		panel.add(Box.createVerticalStrut(20));
 		// progress bar
 		{
-			final JProgressBar progress = new JProgressBar();
-			progress.setMaximumSize(new Dimension(240, 20));
-			progress.setMaximum(100);
-			progress.setValue(30);
-			panel.add(progress);
+			this.progress = new JProgressBar();
+			this.progress.setMaximumSize(new Dimension(240, 20));
+			this.progress.setMaximum(100);
+			this.progress.setValue(30);
+			panel.add(this.progress);
 		}
 		// spacer
 		panel.add(Box.createVerticalStrut(25));
