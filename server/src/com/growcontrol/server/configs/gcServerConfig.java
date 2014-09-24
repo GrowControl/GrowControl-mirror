@@ -33,9 +33,9 @@ public final class gcServerConfig extends xConfig {
 	// version
 	public String getVersion() {
 		final String value = getString(gcServerDefines.CONFIG_VERSION);
-		if(utils.notEmpty(value))
-			return value;
-		return null;
+		if(utils.isEmpty(value))
+			return null;
+		return value;
 	}
 
 
@@ -43,9 +43,9 @@ public final class gcServerConfig extends xConfig {
 	// log level
 	public xLevel getLogLevel() {
 		final String value = getString(gcServerDefines.CONFIG_LOG_LEVEL);
-		if(utils.notEmpty(value))
-			return xLevel.parse(value);
-		return null;
+		if(utils.isEmpty(value))
+			return null;
+		return xLevel.parse(value);
 	}
 
 
@@ -79,9 +79,9 @@ public final class gcServerConfig extends xConfig {
 	// listen port
 	public int getListenPort() {
 		final Integer value = getInteger(gcServerDefines.CONFIG_LISTEN_PORT);
-		if(value != null)
-			return utilsNumbers.MinMax(value.intValue(), 1, 65536);
-		return default_LISTEN_PORT;
+		if(value == null)
+			return default_LISTEN_PORT;
+		return utilsNumbers.MinMax(value.intValue(), 1, 65536);
 	}
 
 
