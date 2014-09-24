@@ -18,7 +18,6 @@ public class guiManager {
 	}
 	protected volatile GUI_MODE currentMode = null;
 	protected volatile GUI_MODE lastMode    = null;
-//	protected final Object modeLock = new Object();
 
 	// windows
 	protected volatile gcWindowLogin windowLogin = null;

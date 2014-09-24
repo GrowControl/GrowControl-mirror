@@ -317,29 +317,36 @@ public class gcWindowLogin extends xWindow {
 	 * @thread-safe
 	 */
 	public void Update(final String state) {
-		xLog.getRoot().fine("Showing card: "+card);
 		if(utils.isEmpty(state)) throw new NullPointerException();
 		// run in event dispatch thread
 		if(guiUtils.forceDispatchThread(this, "ShowCard", state)) return;
 		switch(state.toLowerCase()) {
 		case "login":
-			if(!this.currentCard.equals(CARD_LOGIN))
+			if(this.socket != null) {
+				utils.safeClose(this.socket);
+				this.socket = null;
+			}
+			if(!this.currentCard.equals(CARD_LOGIN)) {
+				xApp.log().fine("Showing card: "+CARD_LOGIN);
 				this.cardLayout.show(this.getContentPane(), CARD_LOGIN);
-			this.currentCard = CARD_LOGIN;
+				this.currentCard = CARD_LOGIN;
+			}
 			return;
 		case "connecting":
 		case "connect":
 		case "conn":
 		case "auth":
-			if(!this.currentCard.equals(CARD_CONNECTING))
+			if(!this.currentCard.equals(CARD_CONNECTING)) {
+				xApp.log().fine("Showing card: "+CARD_CONNECTING);
 				this.cardLayout.show(this.getContentPane(), CARD_CONNECTING);
-			this.currentCard = CARD_CONNECTING;
+				this.currentCard = CARD_CONNECTING;
+			}
 			return;
-		case "ready":
+		case "success":
 			this.close();
 			return;
 		}
-		throw new IllegalArgumentException("Unknown card: "+card);
+		throw new IllegalArgumentException("Unknown card: "+state);
 	}
 
 
