@@ -3,6 +3,7 @@ package com.growcontrol.client.configs;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.growcontrol.client.gcClientDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.xTime;
@@ -11,16 +12,8 @@ import com.poixson.commonjava.xLogger.xLevel;
 
 public final class gcClientConfig extends xConfig {
 
-	public static final String CONFIG_FILE = "config.yml";
-
-	// key names
-	public static final String VERSION       = "Version";
-	public static final String LOG_LEVEL     = "Log Level";
-	public static final String DEBUG         = "Debug";
-	public static final String TICK_INTERVAL = "Tick Interval";
-	public static final String LISTEN_PORT   = "Listen Port";
-	public static final String LOGIC_THREADS = "Logic Threads";
-	public static final String ZONES         = "Zones";
+	// client config
+	public static final String CONFIG_FILE = gcClientDefines.CONFIG_FILE;
 
 	// default values
 	public static final xTime DEFAULT_TICK_INTERVAL = xTime.get("1s");
@@ -37,7 +30,7 @@ public final class gcClientConfig extends xConfig {
 
 	// version
 	public String getVersion() {
-		final String value = getString(VERSION);
+		final String value = getString(gcClientDefines.CONFIG_VERSION);
 		if(utils.notEmpty(value))
 			return value;
 		return null;
@@ -47,7 +40,7 @@ public final class gcClientConfig extends xConfig {
 
 	// log level
 	public xLevel getLogLevel() {
-		final String value = getString(LOG_LEVEL);
+		final String value = getString(gcClientDefines.CONFIG_LOG_LEVEL);
 		if(utils.notEmpty(value))
 			return xLevel.parse(value);
 		return null;
