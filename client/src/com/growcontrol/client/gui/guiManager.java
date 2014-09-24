@@ -1,5 +1,4 @@
-/*
-package com.growcontrol.client;
+package com.growcontrol.client.gui;
 
 import javax.swing.SwingUtilities;
 
@@ -129,5 +128,5 @@ public class guiManager {
 	}
 
 
+
 }
-*/
