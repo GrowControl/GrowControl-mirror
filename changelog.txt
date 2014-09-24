@@ -1,8 +1,14 @@
 gcServer 3.3 - Change Log
 
 
-2014- GrowControl 3.3.1 alpha r#
-==============================
+2014-09-24 GrowControl 3.3.1 alpha build 9
+==========================================
+0892a3838d0e62b555747937fe8a9e6a9b831b7d
+* added new console logo for client
+* few small fixes to startup/shutdown sequences
+  and command processing
+* cleaned up and finished a few internal classes
+* console colors now start immediately
 
 
 2014-09-21 GrowControl 3.3.0 alpha build 1
