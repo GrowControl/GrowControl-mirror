@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
@@ -410,6 +411,13 @@ public class gcWindowLogin extends xWindow {
 		final Integer portInt = utilsNumbers.toInteger(this.txtboxPort.getText());
 		if(portInt == null || !utilsNumbers.isMinMax(portInt.intValue(), 1, xSocket.MAX_PORT_NUMBER)) {
 			xApp.log().warning("Invalid port: "+this.txtboxPort.getText());
+			JOptionPane.showMessageDialog(this, "Invalid port number provided: "+
+					this.txtboxPort.getText()+"\n\n"+
+					"Valid port numbers are between: 1 and "+
+					Integer.toString(xSocket.MAX_PORT_NUMBER)+"  \n"+
+					"Default: "+Integer.toString(gcClientConfig.DEFAULT_LISTEN_PORT),
+					"Invalid port..",
+					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 //TODO: this will be changed
