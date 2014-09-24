@@ -455,6 +455,13 @@ public class gcClient extends xApp {
 			.a("/////////////////////////////////")
 			.reset() );
 		out.println();
+		out.println(" Copyright (C) 2007-2014 PoiXson, Mattsoft");
+		out.println(" - Brainchild of the one known as lorenzo -");
+		out.println(" This program comes with absolutely no warranty. This is free software");
+		out.println(" and you are welcome to modify it or redistribute it under certain");
+		out.println(" conditions. Type 'show license' for license details.");
+		out.println();
+		out.flush();
 	}
 
 //         A       B      C     D     E         F      G         H
