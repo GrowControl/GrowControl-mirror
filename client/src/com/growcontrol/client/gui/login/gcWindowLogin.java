@@ -309,12 +309,12 @@ public class gcWindowLogin extends xWindow {
 	 * @param card Card name to display.
 	 * @thread-safe
 	 */
-	public void ShowCard(final String card) {
+	public void Update(final String state) {
 		xLog.getRoot().fine("Showing card: "+card);
-		if(utils.isEmpty(card)) throw new NullPointerException();
+		if(utils.isEmpty(state)) throw new NullPointerException();
 		// run in event dispatch thread
-		if(guiUtils.forceDispatchThread(this, "ShowCard", card)) return;
-		switch(card.toLowerCase()) {
+		if(guiUtils.forceDispatchThread(this, "ShowCard", state)) return;
+		switch(state.toLowerCase()) {
 		case "login":
 			if(!this.currentCard.equals(CARD_LOGIN))
 				this.cardLayout.show(this.getContentPane(), CARD_LOGIN);
@@ -397,14 +397,14 @@ public class gcWindowLogin extends xWindow {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
 		xLog.getRoot().fine("Clicked '"+buttonName+"' button");
 		// show connecting card
-		this.ShowCard(CARD_CONNECTING);
+		this.Update(CARD_CONNECTING);
 		this.txtStatus.setText("Connecting..");
 	}
 	public void onClickCancelButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
 		xLog.getRoot().fine("Clicked '"+buttonName+"' button");
 		// show login card
-		this.ShowCard(CARD_LOGIN);
+		this.Update(CARD_LOGIN);
 	}
 
 
