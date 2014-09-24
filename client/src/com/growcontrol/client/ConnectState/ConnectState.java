@@ -8,7 +8,7 @@ public abstract class ConnectState {
 		CONNECTING,
 		CONNECTED,
 		READY
-	};
+	}
 	protected volatile State state = null;
 
 
@@ -23,9 +23,9 @@ public abstract class ConnectState {
 
 	// connection state
 	public State getConnectionState() {
-		if(state == null)
+		if(this.state == null)
 			return State.CLOSED;
-		return state;
+		return this.state;
 	}
 	public void setConnectState(State state) {
 		if(state == null) throw new NullPointerException("state can't be null!");

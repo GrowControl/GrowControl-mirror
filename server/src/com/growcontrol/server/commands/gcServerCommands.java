@@ -40,6 +40,8 @@ public final class gcServerCommands extends gcCommands {
 		case "broadcast":
 			this._say(event);
 			break;
+//		case "io":
+//			break;
 //		// get current value
 //		case "get":
 //			this._get(event);
