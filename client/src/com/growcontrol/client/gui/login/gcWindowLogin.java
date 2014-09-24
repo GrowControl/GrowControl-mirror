@@ -38,6 +38,9 @@ import com.poixson.commonapp.gui.annotations.xWindowProperties;
 import com.poixson.commonapp.gui.remapped.RemappedActionListener;
 import com.poixson.commonapp.gui.remapped.RemappedItemListener;
 import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.Utils.utilsNumbers;
+import com.poixson.xsocket.xSocket;
+import com.poixson.xsocket.protocols.xSocketTCP;
 
 
 @xWindowProperties(
@@ -76,6 +79,9 @@ public class gcWindowLogin extends xWindow {
 	protected volatile JLabel       txtStatus = null;
 	protected volatile JProgressBar progress  = null;
 	protected volatile JButton      btnCancel = null;
+
+	// socket
+	protected volatile xSocket socket = null;
 
 
 
@@ -399,6 +405,18 @@ public class gcWindowLogin extends xWindow {
 		// show connecting card
 		this.Update(CARD_CONNECTING);
 		this.txtStatus.setText("Connecting..");
+		// connect to server
+		final String hostStr = this.txtboxHost.getText();
+		final Integer portInt = utilsNumbers.toInteger(this.txtboxPort.getText());
+		if(portInt == null || !utilsNumbers.isMinMax(portInt.intValue(), 1, xSocket.MAX_PORT_NUMBER)) {
+			xApp.log().warning("Invalid port: "+this.txtboxPort.getText());
+			return;
+		}
+//TODO: this will be changed
+		this.socket = new xSocketTCP();
+		this.socket.setHost(hostStr);
+		this.socket.setPort(portInt.intValue());
+		this.socket.connect();
 	}
 	public void onClickCancelButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
