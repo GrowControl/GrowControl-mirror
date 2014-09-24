@@ -272,6 +272,9 @@ xVars.get().debug(true);
 
 
 
+	public gcServerConfig getConfig() {
+		return this.config;
+	}
 
 
 

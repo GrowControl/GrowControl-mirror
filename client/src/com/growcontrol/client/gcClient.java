@@ -228,6 +228,12 @@ public class gcClient extends xApp {
 
 
 
+	public gcClientConfig getConfig() {
+		return this.config;
+	}
+
+
+
 //	// connect to server
 //	public void Connect(String host, int port, String user, String pass) {
 //		pxnThreadQueue.addToMain("SocketConnect",
