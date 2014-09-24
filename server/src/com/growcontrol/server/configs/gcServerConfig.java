@@ -18,7 +18,7 @@ public final class gcServerConfig extends xConfig {
 	public static final String CONFIG_FILE = gcServerDefines.CONFIG_FILE;
 
 	// defaults
-	public static final xTime default_TICK_INTERVAL = xTime.get("1s");
+	public static final xTime default_TICK_INTERVAL = xTime.get("5s");
 	public static final int default_LISTEN_PORT     = 1142;
 	public static final int default_LOGIC_THREADS   = 0;
 
