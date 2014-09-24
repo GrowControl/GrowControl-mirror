@@ -1,6 +1,6 @@
 package com.growcontrol.gccommon.meta.metaTypes;
 
 
-public class ntcCalc {
+public class calcEC implements calc {
 
 }
