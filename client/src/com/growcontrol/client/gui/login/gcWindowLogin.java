@@ -77,26 +77,6 @@ public class gcWindowLogin extends xWindow {
 
 
 
-	// single instance
-	private static volatile gcWindowLogin instance = null;
-	private static final Object instanceLock = new Object();
-	public static void Show() throws HeadlessException {
-		// get window instance
-		if(instance == null) {
-			synchronized(instanceLock) {
-				if(instance == null)
-					instance = new gcWindowLogin();
-			}
-		}
-		// show window
-		if(!instance.isFocused()) {
-			instance.setVisible(true);
-			instance.requestFocus();
-		}
-	}
-
-
-
 	// new window instance
 	public gcWindowLogin() throws HeadlessException {
 		super();
