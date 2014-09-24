@@ -1,6 +1,5 @@
 package com.growcontrol.client.configs;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import com.growcontrol.client.gcClientDefines;
@@ -50,45 +49,7 @@ public final class gcClientConfig extends xConfig {
 
 	// debug
 	public Boolean getDebug() {
-		return getBoolean(DEBUG);
-	}
-
-
-
-	// tick interval
-	public xTime getTickInterval() {
-		final String str = this.getString(TICK_INTERVAL);
-		if(utils.isEmpty(str))
-			return DEFAULT_TICK_INTERVAL;
-		return xTime.get(str);
-	}
-
-
-
-	// listen port
-	public int getListenPort() {
-		final Integer i = this.getInteger(LISTEN_PORT);
-		if(i == null)
-			return DEFAULT_LISTEN_PORT;
-		return i.intValue();
-	}
-
-
-
-	// logic threads
-	public int getLogicThreads() {
-		final Integer i = this.getInteger(LOGIC_THREADS);
-		if(i == null)
-			return DEFAULT_LOGIC_THREADS;
-		return i.intValue();
-	}
-
-
-
-	// zones
-	@SuppressWarnings("unchecked")
-	public String[] getZones() {
-		return ((ArrayList<String>) this.data.get(ZONES)).toArray(new String[0]);
+		return getBoolean(gcClientDefines.CONFIG_DEBUG);
 	}
 
 
