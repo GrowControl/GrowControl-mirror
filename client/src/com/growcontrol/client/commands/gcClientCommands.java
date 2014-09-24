@@ -1,5 +1,6 @@
 package com.growcontrol.client.commands;
 
+import com.growcontrol.gccommon.commands.gcCommands;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
@@ -8,7 +9,7 @@ import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
 import com.poixson.commonjava.xLogger.handlers.xCommandListener;
 
 
-public final class gcClientCommands implements xCommandListener {
+public final class gcClientCommands extends gcCommands {
 
 
 
@@ -20,6 +21,7 @@ public final class gcClientCommands implements xCommandListener {
 		filterHandled=true,
 		filterCancelled=true)
 	public void onCommand(final xCommandEvent event) {
+		super.onCommand(event);
 		switch(event.arg(0)) {
 		// help
 		case "help":
@@ -243,35 +245,6 @@ public final class gcClientCommands implements xCommandListener {
 		this.publish();
 		this.publish("Broadcasts a message.");
 		this.publish();
-	}
-
-
-
-	// set event handled
-	public static void handled(final xCommandEvent event) {
-		if(event == null) throw new NullPointerException();
-		event.setHandled();
-	}
-
-
-
-	// logger
-	private volatile xLog _log = null;
-	private final Object logLock = new Object();
-	public xLog log() {
-		if(this._log == null) {
-			synchronized(this.logLock) {
-				if(this._log == null)
-					this._log = xApp.log();
-			}
-		}
-		return this._log;
-	}
-	public void publish(final String msg) {
-		this.log().publish(msg);
-	}
-	public void publish() {
-		this.log().publish();
 	}
 
 
