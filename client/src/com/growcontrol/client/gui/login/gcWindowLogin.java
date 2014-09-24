@@ -28,6 +28,7 @@ import net.miginfocom.swing.MigLayout;
 import com.growcontrol.client.configs.SavedServerProfile;
 import com.growcontrol.client.configs.SavedServersConfig;
 import com.growcontrol.client.configs.gcClientConfig;
+import com.growcontrol.client.gui.guiManager;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.gui.guiUtils;
 import com.poixson.commonapp.gui.xFont;
@@ -404,6 +405,17 @@ public class gcWindowLogin extends xWindow {
 		xLog.getRoot().fine("Clicked '"+buttonName+"' button");
 		// show login card
 		this.ShowCard(CARD_LOGIN);
+	}
+
+
+
+	// close window
+	@Override
+	public void close() {
+		// disconnect if attempting
+		this.Update(CARD_LOGIN);
+		super.close();
+		guiManager.get().doLoginWindowClosed();
 	}
 
 

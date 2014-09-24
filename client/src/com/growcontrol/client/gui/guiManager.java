@@ -1,5 +1,6 @@
 package com.growcontrol.client.gui;
 
+import com.growcontrol.client.gcClient;
 import com.growcontrol.client.gui.dash.gcWindowDash;
 import com.growcontrol.client.gui.login.gcWindowLogin;
 import com.poixson.commonapp.app.xApp;
@@ -90,6 +91,15 @@ public class guiManager {
 		utils.safeClose(this.windowDash);
 		this.windowLogin = null;
 		this.windowDash  = null;
+	}
+
+
+
+	// hook login window close event
+	public void doLoginWindowClosed() {
+		// exit if dash not loaded
+		if(this.windowDash == null)
+			gcClient.get().Stop();
 	}
 
 
