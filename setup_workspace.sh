@@ -23,6 +23,16 @@ clear
 
 
 
+if [[ `pwd` == */GrowControl.git ]]; then
+	echo
+	echo "Cannot run this script within the repo!"
+	echo "Move up to the parent directory and run from there."
+	echo
+	exit 1
+fi
+
+
+
 # load workspace_utils.sh script
 if [ -e workspace_utils.sh ]; then
 	source ./workspace_utils.sh
