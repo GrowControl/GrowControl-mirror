@@ -46,17 +46,12 @@ fi
 
 
 
-# ask use https/ssh with git
-AskHttpsSsh ${*}
-
-
-
 # CHECKOUT
 title "Checking-out Repos"
-CheckoutRepo CommonJava.git     "${REPO_PREFIX}PoiXson/CommonJava.git"
-CheckoutRepo xSocket.git        "${REPO_PREFIX}PoiXson/xSocket.git"
-CheckoutRepo GrowControl.git    "${REPO_PREFIX}PoiXson/GrowControl.git"
-CheckoutRepo gcPlugins.git      "${REPO_PREFIX}PoiXson/gcPlugins.git"
+CheckoutRepo  CommonJava.git   "${REPO_PREFIX}PoiXson/CommonJava.git"   || exit 1
+CheckoutRepo  xSocket.git      "${REPO_PREFIX}PoiXson/xSocket.git"      || exit 1
+CheckoutRepo  GrowControl.git  "${REPO_PREFIX}PoiXson/GrowControl.git"  || exit 1
+CheckoutRepo  gcPlugins.git    "${REPO_PREFIX}PoiXson/gcPlugins.git"    || exit 1
 newline
 newline
 
@@ -64,27 +59,27 @@ newline
 
 # SYMLINKS
 echo "Creating Symbolic Links"
-mkdir -p -v GrowControl.git/server/src/com/poixson
-mkdir -p -v GrowControl.git/client/src/com/poixson
+mkdir -pv GrowControl.git/server/src/com/poixson
+mkdir -pv GrowControl.git/client/src/com/poixson
 
 # server in client
-mkRelLink GrowControl.git/server/src/com/growcontrol/server  GrowControl.git/client/src/com/growcontrol  server
+mklinkrel.sh  GrowControl.git/server/src/com/growcontrol/server  GrowControl.git/client/src/com/growcontrol  server      || exit 1
 
 # common java
-mkRelLink  CommonJava.git/src/com/poixson/commonjava  GrowControl.git/server/src/com/poixson      commonjava
-mkRelLink  CommonJava.git/src/com/poixson/commonjava  GrowControl.git/client/src/com/poixson      commonjava
+mklinkrel.sh  CommonJava.git/src/com/poixson/commonjava          GrowControl.git/server/src/com/poixson      commonjava  || exit 1
+mklinkrel.sh  CommonJava.git/src/com/poixson/commonjava          GrowControl.git/client/src/com/poixson      commonjava  || exit 1
 
 # common app
-mkRelLink  CommonJava.git/src/com/poixson/commonapp   GrowControl.git/server/src/com/poixson      commonapp
-mkRelLink  CommonJava.git/src/com/poixson/commonapp   GrowControl.git/client/src/com/poixson      commonapp
+mklinkrel.sh  CommonJava.git/src/com/poixson/commonapp           GrowControl.git/server/src/com/poixson      commonapp   || exit 1
+mklinkrel.sh  CommonJava.git/src/com/poixson/commonapp           GrowControl.git/client/src/com/poixson      commonapp   || exit 1
 
 # gc common
-mkRelLink  GrowControl.git/gccommon                   GrowControl.git/server/src/com/growcontrol  gccommon
-mkRelLink  GrowControl.git/gccommon                   GrowControl.git/client/src/com/growcontrol  gccommon
+mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/server/src/com/growcontrol  gccommon    || exit 1
+mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/client/src/com/growcontrol  gccommon    || exit 1
 
 # sockets library
-mkRelLink  xSocket.git/src/com/poixson/xsocket        GrowControl.git/server/src/com/poixson      xsocket
-mkRelLink  xSocket.git/src/com/poixson/xsocket        GrowControl.git/client/src/com/poixson      xsocket
+mklinkrel.sh  xSocket.git/src/com/poixson/xsocket                GrowControl.git/server/src/com/poixson      xsocket     || exit 1
+mklinkrel.sh  xSocket.git/src/com/poixson/xsocket                GrowControl.git/client/src/com/poixson      xsocket     || exit 1
 
 newline
 newline
