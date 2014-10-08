@@ -47,7 +47,7 @@ fi
 
 
 # CHECKOUT
-title "Checking-out Repos"
+title "Cloning Repos"
 CheckoutRepo  CommonJava.git   "${REPO_PREFIX}PoiXson/CommonJava.git"   || exit 1
 CheckoutRepo  xSocket.git      "${REPO_PREFIX}PoiXson/xSocket.git"      || exit 1
 CheckoutRepo  GrowControl.git  "${REPO_PREFIX}PoiXson/GrowControl.git"  || exit 1
@@ -58,9 +58,11 @@ newline
 
 
 # SYMLINKS
-echo "Creating Symbolic Links"
+title "Creating Symbolic Links"
+
 mkdir -pv GrowControl.git/server/src/com/poixson
 mkdir -pv GrowControl.git/client/src/com/poixson
+newline
 
 # server in client
 mklinkrel.sh  GrowControl.git/server/src/com/growcontrol/server  GrowControl.git/client/src/com/growcontrol  server      || exit 1
@@ -88,7 +90,11 @@ newline
 
 Cleanup
 newline
-echo "Finished building workspace!"
+echo "Finished workspace setup!"
+newline
+newline
+ls -lh
+newline
 newline
 
 
