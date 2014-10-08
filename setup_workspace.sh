@@ -48,10 +48,10 @@ fi
 
 # CHECKOUT
 title "Cloning Repos"
-CheckoutRepo  CommonJava.git   "${REPO_PREFIX}PoiXson/CommonJava.git"   || exit 1
-CheckoutRepo  xSocket.git      "${REPO_PREFIX}PoiXson/xSocket.git"      || exit 1
-CheckoutRepo  GrowControl.git  "${REPO_PREFIX}PoiXson/GrowControl.git"  || exit 1
-CheckoutRepo  gcPlugins.git    "${REPO_PREFIX}PoiXson/gcPlugins.git"    || exit 1
+CheckoutRepo  CommonJava.git   "${REPO_PREFIX}/CommonJava.git"   || exit 1
+CheckoutRepo  xSocket.git      "${REPO_PREFIX}/xSocket.git"      || exit 1
+CheckoutRepo  GrowControl.git  "${REPO_PREFIX}/GrowControl.git"  || exit 1
+CheckoutRepo  gcPlugins.git    "${REPO_PREFIX}/gcPlugins.git"    || exit 1
 newline
 newline
 
