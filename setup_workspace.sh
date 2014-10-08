@@ -39,7 +39,8 @@ if [ -e workspace_utils.sh ]; then
 elif [ -e /usr/local/bin/pxn/workspace_utils.sh ]; then
 	source /usr/local/bin/pxn/workspace_utils.sh
 else
-	wget http://dl.poixson.com/scripts/pxn/workspace_utils.sh
+	wget https://raw.githubusercontent.com/PoiXson/shellscripts/master/pxn/workspace_utils.sh \
+		|| exit 1
 	source ./workspace_utils.sh
 fi
 
