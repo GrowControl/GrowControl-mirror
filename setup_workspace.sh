@@ -1,3 +1,23 @@
+# ==================================================
+# GrowControl - Workspace setup script
+#
+# This script downloads and prepares the GrowControl
+# source code. The project uses multiple repositories
+# with symlinks between them. Once this script has
+# completed, the project will be ready to compile.
+# The script can be used safely on an existing
+# workspace without damage, but will rather update
+# the existing files. This is useful for recompiling.
+#
+# http://GrowControl.com
+# https://github.com/PoiXson/GrowControl
+# ==================================================
+# setup_workspace.sh
+
+# may be useful when writing a bat version
+# http://tldp.org/LDP/abs/html/dosbatch.html
+
+
 
 clear
 
