@@ -16,8 +16,8 @@ GrowControl is a computer automation system for your home and garden, or hobby p
 
 
 
-%define serverjar "%{SOURCE_ROOT}/server/target/gcServer-%{version}-SNAPSHOT.jar"
-%define clientjar "%{SOURCE_ROOT}/client/target/gcClient-%{version}-SNAPSHOT.jar"
+%define serverjar "%{SOURCE_ROOT_SERVER}/gcServer-%{version}-SNAPSHOT.jar"
+%define clientjar "%{SOURCE_ROOT_CLIENT}/gcClient-%{version}-SNAPSHOT.jar"
 
 
 
