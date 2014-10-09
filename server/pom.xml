@@ -7,10 +7,11 @@
     <groupId>com.growcontrol</groupId>
     <artifactId>gcServer</artifactId>
     <packaging>jar</packaging>
-    <version>3.3.2-SNAPSHOT</version>
+    <version>3.4.${build.number}-SNAPSHOT</version>
     <name>GrowControl Server</name>
     <url>http://growcontrol.com</url>
     <properties>
+        <build.number>x</build.number>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jline-version>2.11</jline-version>
         <org.yaml-version>1.13</org.yaml-version>
