@@ -2,10 +2,6 @@ clear
 
 
 
-VERSION="3.4"
-
-
-
 PWD=`pwd`
 SOURCE_ROOT="${PWD}"
 BUILD_ROOT="${PWD}/rpmbuild-root"
@@ -49,7 +45,7 @@ rpmbuild -bb \
 	--define "_topdir ${BUILD_ROOT}" \
 	--define "_tmppath ${BUILD_ROOT}/tmp" \
 	--define "SOURCE_ROOT ${SOURCE_ROOT}" \
-	--define "VERSION ${VERSION}" \
+	--define "_rpmdir ${OUTPUT_DIR}" \
 	--define "BUILD_NUMBER ${BUILD_NUMBER}" \
 	"${BUILD_ROOT}/SPECS/${SPEC_FILE}" \
 		|| exit 1
