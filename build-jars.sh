@@ -1,4 +1,6 @@
 
+PWD=`pwd`
+
 
 
 if [ "${1}" == "--build-number" ]; then
@@ -12,9 +14,9 @@ fi
 
 # replace version in pom files
 sedresult=0
-sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" pom.xml        || sedresult=1
-sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" server/pom.xml || sedresult=1
-sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" client/pom.xml || sedresult=1
+sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" "${PWD}/pom.xml"        || sedresult=1
+sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" "${PWD}/server/pom.xml" || sedresult=1
+sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" "${PWD}/client/pom.xml" || sedresult=1
 
 
 
@@ -30,9 +32,9 @@ fi
 
 # return the pom files
 mvresult=0
-mv -fv pom.xml.original        pom.xml        || mvresult=1
-mv -fv server/pom.xml.original server/pom.xml || mvresult=1
-mv -fv client/pom.xml.original client/pom.xml || mvresult=1
+mv -fv "${PWD}/pom.xml.original"        "${PWD}/pom.xml"        || mvresult=1
+mv -fv "${PWD}/server/pom.xml.original" "${PWD}/server/pom.xml" || mvresult=1
+mv -fv "${PWD}/client/pom.xml.original" "${PWD}/client/pom.xml" || mvresult=1
 
 
 
