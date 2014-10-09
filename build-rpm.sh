@@ -1,6 +1,3 @@
-clear
-
-
 
 PWD=`pwd`
 SOURCE_ROOT="${PWD}"

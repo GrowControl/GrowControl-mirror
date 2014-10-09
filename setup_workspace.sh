@@ -19,10 +19,6 @@
 
 
 
-clear
-
-
-
 if [[ `pwd` == */GrowControl.git ]]; then
 	echo
 	echo "Cannot run this script within the repo!"
