@@ -53,10 +53,16 @@ GrowControl is a computer automation system for your home and garden, or hobby p
 echo
 echo "Prep.."
 # check for existing workspace
-if [ -d "%{SOURCE_ROOT}" ]; then
-	echo "Found source workspace: %{SOURCE_ROOT}"
+if [ -d "%{SOURCE_ROOT_SERVER}" ]; then
+	echo "Found source workspace: %{SOURCE_ROOT_SERVER}"
 else
-	echo "Source workspace not found: %{SOURCE_ROOT}"
+	echo "Source workspace not found: %{SOURCE_ROOT_SERVER}"
+	exit 1
+fi
+if [ -d "%{SOURCE_ROOT_CLIENT}" ]; then
+	echo "Found source workspace: %{SOURCE_ROOT_CLIENT}"
+else
+	echo "Source workspace not found: %{SOURCE_ROOT_CLIENT}"
 	exit 1
 fi
 # check for pre-built jar files
