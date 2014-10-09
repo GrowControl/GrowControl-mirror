@@ -12,15 +12,20 @@ fi
 
 
 # replace version in pom files
-sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" pom.xml        || exit 1
-sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" server/pom.xml || exit 1
-sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" client/pom.xml || exit 1
+sedresult=0
+sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" pom.xml        || sedresult=1
+sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" server/pom.xml || sedresult=1
+sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" client/pom.xml || sedresult=1
 
 
 
-# build
-mvn clean install
-buildresult=$?
+if [ $sedresult != 0 ]; then
+	echo "Failed to sed the pom files!"
+else
+	# build
+	mvn clean install
+	buildresult=$?
+fi
 
 
 
@@ -33,6 +38,9 @@ mv -fv client/pom.xml.original client/pom.xml || mvresult=1
 
 
 # results
+if [ $sedresult != 0 ]; then
+	exit 1
+fi
 if [ $buildresult != 0 ]; then
 	echo "Build has failed!"
 	exit 1
