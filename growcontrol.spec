@@ -128,11 +128,11 @@ touch "${RPM_BUILD_ROOT}/var/log/gc/client.log"
 
 ### Files ###
 
-%files gcServer
+%files -n gcServer
 %defattr(644,-,-,755)
 %{prefix}/gcServer-%{version}_%{release}.jar
 
-%files gcClient
+%files -n gcClient
 %defattr(644,-,-,755)
 %{prefix}/gcClient-%{version}_%{release}.jar
 
@@ -147,16 +147,16 @@ touch "${RPM_BUILD_ROOT}/var/log/gc/client.log"
 
 
 ### Install ###
-# %pre gcServer
+# %pre -n gcServer
 # echo "Pre-install server.."
-# %pre gcClient
+# %pre -n gcClient
 # echo "Pre-install client.."
 
 
 
 ### Uninstall ###
-%preun gcServer
+%preun -n gcServer
 echo "Pre-uninstall.."
-service gcserver stop
+service -n gcserver stop
 
 
