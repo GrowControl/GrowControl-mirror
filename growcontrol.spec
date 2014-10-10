@@ -9,6 +9,7 @@ Requires        : java >= 7
 
 Group           : Development/Electronic Lab
 License         : (c) PoiXson
+Packager        : PoiXson <support@poixson.com>
 URL             : http://growcontrol.com/
 
 %description
