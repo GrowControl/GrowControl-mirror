@@ -7,8 +7,8 @@ Prefix          : %{_javadir}/gc
 Requires        : java >= 7
 %define  _rpmfilename  %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
 
-Group		: Development/Electronic Lab
-License		: (c) PoiXson
+Group           : Development/Electronic Lab
+License         : (c) PoiXson
 URL             : http://growcontrol.com/
 
 %description
