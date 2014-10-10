@@ -6,19 +6,37 @@ BuildArch       : noarch
 Prefix          : %{_javadir}/gc
 Requires        : java >= 7
 %define  _rpmfilename  %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
+%define  serverjar     "%{SOURCE_ROOT_SERVER}/gcServer-%{version}-SNAPSHOT.jar"
+%define  clientjar     "%{SOURCE_ROOT_CLIENT}/gcClient-%{version}-SNAPSHOT.jar"
 
 Group           : Development/Electronic Lab
 License         : (c) PoiXson
 Packager        : PoiXson <support@poixson.com>
 URL             : http://growcontrol.com/
 
+
+
+### Packages ###
+%package -n gcServer
+Summary         : Automation server software for home and garden, or hobby projects
+Provides        : gcServer = %{version}
+Group           : Development/Electronic Lab
+
+%package -n gcClient
+Summary         : Client GUI tool to access the GrowControl server
+Provides        : gcClient = %{version}
+Group           : Development/Electronic Lab
+
+
+
 %description
 GrowControl is a computer automation system for your home and garden, or hobby projects. It's expandable with plugins, fully multi-threaded makes it fast, and your ideas make it powerful.
 
+%description -n gcServer
+GrowControl is a computer automation system for your home and garden, or hobby projects. It's expandable with plugins, fully multi-threaded makes it fast, and your ideas make it powerful.
 
-
-%define serverjar "%{SOURCE_ROOT_SERVER}/gcServer-%{version}-SNAPSHOT.jar"
-%define clientjar "%{SOURCE_ROOT_CLIENT}/gcClient-%{version}-SNAPSHOT.jar"
+%description -n gcClient
+GrowControl is a computer automation system for your home and garden, or hobby projects. It's expandable with plugins, fully multi-threaded makes it fast, and your ideas make it powerful.
 
 
 
@@ -29,23 +47,6 @@ GrowControl is a computer automation system for your home and garden, or hobby p
 
 # disable debug info
 # % define debug_package %{nil}
-
-
-
-### Packages ###
-%package gcServer
-Summary         : Automation server software for home and garden, or hobby projects
-Provides        : gcServer = %{version}
-Group           : Development/Electronic Lab
-%description gcServer
-GrowControl is a computer automation system for your home and garden, or hobby projects. It's expandable with plugins, fully multi-threaded makes it fast, and your ideas make it powerful.
-
-%package gcClient
-Summary         : Client GUI tool to access the GrowControl server
-Provides        : gcClient = %{version}
-Group           : Development/Electronic Lab
-%description gcClient
-GrowControl is a computer automation system for your home and garden, or hobby projects. It's expandable with plugins, fully multi-threaded makes it fast, and your ideas make it powerful.
 
 
 
