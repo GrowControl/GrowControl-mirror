@@ -103,11 +103,11 @@ fi
 	"${RPM_BUILD_ROOT}/var/log/gc" \
 		|| exit 1
 # copy jar files
-%{__install} -m 0777 \
+%{__install} -m 0555 \
 	"%{serverjar}" \
 	"${RPM_BUILD_ROOT}%{prefix}/gcServer-%{version}_%{release}.jar" \
 		|| exit 1
-%{__install} -m 0777 \
+%{__install} -m 0555 \
 	"%{clientjar}" \
 	"${RPM_BUILD_ROOT}%{prefix}/gcClient-%{version}_%{release}.jar" \
 		|| exit 1
@@ -131,11 +131,11 @@ touch "${RPM_BUILD_ROOT}/var/log/gc/client.log"
 ### Files ###
 
 %files -n gcServer
-%defattr(644,-,-,755)
+%defattr(-,root,root,-)
 %{prefix}/gcServer-%{version}_%{release}.jar
 
 %files -n gcClient
-%defattr(644,-,-,755)
+%defattr(-,root,root,-)
 %{prefix}/gcClient-%{version}_%{release}.jar
 
 
