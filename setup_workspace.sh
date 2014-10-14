@@ -56,8 +56,8 @@ newline
 # SYMLINKS
 title "Creating Symbolic Links"
 
-mkdir -pv GrowControl.git/server/src/com/poixson
-mkdir -pv GrowControl.git/client/src/com/poixson
+mkdir -pv GrowControl.git/server/src/com/poixson || exit 1
+mkdir -pv GrowControl.git/client/src/com/poixson || exit 1
 newline
 
 # server in client
@@ -84,7 +84,6 @@ newline
 
 
 
-Cleanup
 newline
 echo "Finished workspace setup!"
 newline
@@ -92,5 +91,4 @@ newline
 ls -lh
 newline
 newline
-
 
