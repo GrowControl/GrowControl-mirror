@@ -5,7 +5,6 @@ Release         : 1
 BuildArch       : noarch
 Prefix          : %{_javadir}/gc
 Requires        : java >= 7
-BuildRequires   : maven
 %define  _rpmfilename  %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
 %define  serverjar     "%{SOURCE_ROOT_SERVER}/gcServer-%{version}-SNAPSHOT.jar"
 %define  clientjar     "%{SOURCE_ROOT_CLIENT}/gcClient-%{version}-SNAPSHOT.jar"
