@@ -40,8 +40,8 @@ sh "${PWD}/setup_workspace.sh" --https --user \
 
 echo "Building jars.."
 (
-	cd "${PWD}/GrowControl.git/"                    || exit 1
-	sh build-jars.sh --build-number ${BUILD_NUMBER} || exit 1
+	cd "${PWD}/GrowControl.git/"                   || exit 1
+	sh build-mvn.sh --build-number ${BUILD_NUMBER} || exit 1
 )
 
 
