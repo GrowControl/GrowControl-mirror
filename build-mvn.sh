@@ -1,22 +1,24 @@
 
-PWD=`pwd`
 
 
-
-if [ "${1}" == "--build-number" ]; then
-	BUILD_NUMBER="${2}"
-fi
-if [ -z ${BUILD_NUMBER} ]; then
-	BUILD_NUMBER="x"
+# load build_utils.sh script
+if [ -e build_utils.sh ]; then
+	source ./build_utils.sh
+elif [ -e /usr/local/bin/pxn/build_utils.sh ]; then
+	source /usr/local/bin/pxn/build_utils.sh
+else
+	wget https://raw.githubusercontent.com/PoiXson/shellscripts/master/pxn/build_utils.sh \
+		|| exit 1
+	source ./build_utils.sh
 fi
 
 
 
 # replace version in pom files
 sedresult=0
-sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" "${PWD}/pom.xml"        || sedresult=1
-sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" "${PWD}/server/pom.xml" || sedresult=1
-sed -i.original "s/x-SNAPSHOT/${BUILD_NUMBER}-SNAPSHOT/" "${PWD}/client/pom.xml" || sedresult=1
+sedVersion "${PWD}/pom.xml"        || sedresult=1
+sedVersion "${PWD}/server/pom.xml" || sedresult=1
+sedVersion "${PWD}/client/pom.xml" || sedresult=1
 
 
 
@@ -32,9 +34,9 @@ fi
 
 # return the pom files
 mvresult=0
-mv -fv "${PWD}/pom.xml.original"        "${PWD}/pom.xml"        || mvresult=1
-mv -fv "${PWD}/server/pom.xml.original" "${PWD}/server/pom.xml" || mvresult=1
-mv -fv "${PWD}/client/pom.xml.original" "${PWD}/client/pom.xml" || mvresult=1
+restorePom "${PWD}/pom.xml"        || mvresult=1
+restorePom "${PWD}/server/pom.xml" || mvresult=1
+restorePom "${PWD}/client/pom.xml" || mvresult=1
 
 
 
@@ -50,4 +52,18 @@ if [ $mvresult != 0 ]; then
 	echo "Failed to return an original pom.xml file!"
 	exit 1
 fi
+
+
+
+cp -fv "${PWD}/target/GrowControl-"*.zip     "${PWD}"
+cp -fv "${PWD}/server/target/gcServer-"*.jar "${PWD}"
+cp -fv "${PWD}/client/target/gcClient-"*.jar "${PWD}"
+
+
+
+newline
+ls -lh "${PWD}/GrowControl-"*.zip
+ls -lh "${PWD}/gcServer-"*.jar
+ls -lh "${PWD}/gcClient-"*.jar
+newline
 

@@ -1,39 +1,21 @@
 
-PWD=`pwd`
-SOURCE_ROOT="${PWD}"
-BUILD_ROOT="${PWD}/rpmbuild-root"
-OUTPUT_DIR="${PWD}"
+
+
+SOURCE_ROOT=`pwd`
 SPEC_FILE="growcontrol.spec"
 
 
 
-BUILD_NUMBER="x"
-if [ "$1" == "--build-number" ]; then
-	BUILD_NUMBER=${2}
-fi
-
-
-
-# ensure rpmbuild tool is available
-which rpmbuild >/dev/null || { echo "rpmbuild not installed - yum install rpmdevtools"; exit 1; }
-# ensure .spec file exists
-[[ -f "${SPEC_FILE}" ]] || { echo "Spec file ${SPEC_FILE} not found!"; exit 1; }
-
-
-
-# build space
-for dir in BUILD RPMS SOURCE SPECS SRPMS tmp ; do
-	if [ -d "${BUILD_ROOT}/${dir}" ]; then
-		rm -rf --preserve-root "${BUILD_ROOT}/${dir}" \
-			|| exit 1
-	fi
-	mkdir -p "${BUILD_ROOT}/${dir}" \
+# load build_utils.sh script
+if [ -e build_utils.sh ]; then
+	source ./build_utils.sh
+elif [ -e /usr/local/bin/pxn/build_utils.sh ]; then
+	source /usr/local/bin/pxn/build_utils.sh
+else
+	wget https://raw.githubusercontent.com/PoiXson/shellscripts/master/pxn/build_utils.sh \
 		|| exit 1
-done
-
-# copy .spec file
-cp "${SPEC_FILE}" "${BUILD_ROOT}/SPECS/" \
-	|| exit 1
+	source ./build_utils.sh
+fi
 
 
 
