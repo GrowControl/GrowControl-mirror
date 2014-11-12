@@ -8,14 +8,14 @@
 	<artifactId>gcServer</artifactId>
 	<packaging>jar</packaging>
 	<version>3.4.x-SNAPSHOT</version>
-	<name>GrowControl Server</name>
+	<name>GrowControl-Server</name>
 	<url>http://growcontrol.com</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jline-version>2.11</jline-version>
-		<org.yaml-version>1.13</org.yaml-version>
+		<jline-version>2.12</jline-version>
+		<org.yaml-version>1.14</org.yaml-version>
 		<org.xeustechnologies-version>2.5</org.xeustechnologies-version>
-		<commons-codec-version>1.9</commons-codec-version>
+		<commons-codec-version>1.10</commons-codec-version>
 		<junit-version>4.8.2</junit-version>
 	</properties>
 	<scm>
@@ -101,6 +101,7 @@
 			<version>${org.xeustechnologies-version}</version>
 			<scope>compile</scope>
 		</dependency>
+<!--
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
@@ -113,6 +114,7 @@
 			<version>${junit-version}</version>
 			<scope>test</scope>
 		</dependency>
+-->
 	</dependencies>
 <!--
 	<repositories>
