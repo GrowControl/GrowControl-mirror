@@ -14,10 +14,6 @@ public class gcServerCommands_config implements xCommandListener {
 
 
 
-	public static gcServerCommands_config get(final gcServerCommands parent, final xCommandEvent event) {
-		handled(event);
-		return new gcServerCommands_config(parent);
-	}
 	protected gcServerCommands_config(final gcServerCommands parent) {
 		this.parent = parent;
 		xLog.getConsole().setPrompt(" config> ");

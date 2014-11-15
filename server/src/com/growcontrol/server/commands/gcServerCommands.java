@@ -33,7 +33,8 @@ public final class gcServerCommands implements xCommandListener {
 				this._config_help(event);
 				return;
 			}
-			this.inconfig = gcServerCommands_config.get(this, event);
+			this.inconfig = new gcServerCommands_config(this);
+			event.setHandled();
 			break;
 		// say a message
 		case "say":
