@@ -14,6 +14,7 @@
 	<modules>
 		<module>server</module>
 		<module>client</module>
+		<module>plugins</module>
 	</modules>
 	<build>
 		<finalName>GrowControl-${project.version}</finalName>

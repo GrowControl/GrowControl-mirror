@@ -21,6 +21,13 @@
 			</includes>
 		</fileSet>
 		<fileSet>
+			<directory>${project.basedir}/plugins/target/</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>gcPlugins-*.zip</include>
+			</includes>
+		</fileSet>
+		<fileSet>
 			<directory>${project.basedir}/</directory>
 			<outputDirectory>/</outputDirectory>
 			<includes>

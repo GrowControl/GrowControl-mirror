@@ -3,6 +3,7 @@ bin/
 target/
 out/
 build/
+plugins
 
 .classpath
 .project

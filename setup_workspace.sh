@@ -62,6 +62,8 @@ newline
 
 # server in client
 mklinkrel.sh  GrowControl.git/server/src/com/growcontrol/server  GrowControl.git/client/src/com/growcontrol  server      || exit 1
+# plugins
+mklinkrel.sh  gcPlugins.git                                      GrowControl.git                             plugins     || exit 1
 
 # common java
 mklinkrel.sh  CommonJava.git/src/com/poixson/commonjava          GrowControl.git/server/src/com/poixson      commonjava  || exit 1
