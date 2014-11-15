@@ -4,6 +4,8 @@ target/
 out/
 build/
 
+.classpath
+.project
 .git/
 .settings/
 
