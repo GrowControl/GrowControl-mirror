@@ -45,12 +45,12 @@ public class gcServerCommands_config implements xCommandListener {
 			this._list_help(event);
 			return;
 		}
-		handled(event);
+		event.setHandled();
 		this.parent.inconfig = null;
 		xLog.getConsole().setPrompt(" #>");
 	}
 	protected void _exit_help(final xCommandEvent event) {
-		handled(event);
+		event.setHandled();
 		this.publish();
 		this.publish("Exit config mode and return to the main command prompt.");
 		this.publish();
@@ -63,7 +63,7 @@ public class gcServerCommands_config implements xCommandListener {
 			this._list_help(event);
 			return;
 		}
-		handled(event);
+		event.setHandled();
 		final gcServer server = gcServer.get();
 		final gcServerConfig config = server.getConfig();
 //		final String[] zones = config.getZones().toArray(new String[0]);
@@ -81,18 +81,10 @@ public class gcServerCommands_config implements xCommandListener {
 		this.publish();
 	}
 	protected void _list_help(final xCommandEvent event) {
-		handled(event);
+		event.setHandled();
 		this.publish();
 		this.publish("Lists current config values.");
 		this.publish();
-	}
-
-
-
-	// set event handled
-	public static void handled(final xCommandEvent event) {
-		if(event == null) throw new NullPointerException();
-		event.setHandled();
 	}
 
 

@@ -50,7 +50,7 @@ public class gcCommonCommands implements xCommandListener {
 
 
 	protected void _help(final xCommandEvent event) {
-//		handled(event);
+//		event.setHandled();
 //		// help
 //		this.publish("[ Basic Commands ]");
 //		this.publish("version - Displays the current running version.");
@@ -76,11 +76,11 @@ public class gcCommonCommands implements xCommandListener {
 			this._shutdown_help(event);
 			return;
 		}
-		handled(event);
+		event.setHandled();
 		xApp.get().Stop();
 	}
 	protected void _shutdown_help(final xCommandEvent event) {
-		handled(event);
+		event.setHandled();
 		this.publish();
 		this.publish("Properly shuts down and stops the server.");
 		this.publish();
@@ -100,7 +100,7 @@ public class gcCommonCommands implements xCommandListener {
 		System.exit(0);
 	}
 	protected void _kill_help(final xCommandEvent event) {
-		handled(event);
+		event.setHandled();
 		this.publish();
 		this.publish("Emergency shutdown. No saving or power-downs. Don't use this unless you need to.");
 		this.publish();
@@ -114,11 +114,11 @@ public class gcCommonCommands implements xCommandListener {
 			this._clear_help(event);
 			return;
 		}
-		handled(event);
+		event.setHandled();
 		xLog.getConsole().clear();
 	}
 	protected void _clear_help(final xCommandEvent event) {
-		handled(event);
+		event.setHandled();
 		this.publish();
 		this.publish("Clears the console screen.");
 		this.publish();
@@ -132,18 +132,18 @@ public class gcCommonCommands implements xCommandListener {
 //		return;
 //	}
 //	if(event.isHelp()) {
-//		handled(event);
+//		event.setHandled();
 //		log().publish();
 //		log().publish("");
 //		log().publish();
 //		return;
 //	}
-//	handled(event);
+//	event.setHandled();
 //TODO:
 //}
 //private void _level(final xCommandEvent event) {
 //	if(event.isHelp()) {
-//		handled(event);
+//		event.setHandled();
 //		this.publish();
 //		this.publish("level         - Display the current log level.");
 //		this.publish("level <level> - Sets the root log level.");
@@ -153,18 +153,10 @@ public class gcCommonCommands implements xCommandListener {
 //		this.publish();
 //		return;
 //	}
-//	handled(event);
+//	event.setHandled();
 //	final xLog log = xLog.getRoot();
 //	this.publish("Current log level: "+log.getLevel().toString());
 //}
-
-
-
-	// set event handled
-	public static void handled(final xCommandEvent event) {
-		if(event == null) throw new NullPointerException();
-		event.setHandled();
-	}
 
 
 

@@ -92,7 +92,7 @@ public final class gcServerCommands implements xCommandListener {
 
 //	@Override
 //	protected void _test(final xCommandEvent event) {
-//		handled(event);
+//		event.setHandled();
 //final long tim = System.nanoTime();
 //xThreadPool.get().runNow(
 //new Runnable() {
@@ -109,7 +109,7 @@ public final class gcServerCommands implements xCommandListener {
 
 
 	protected void _config_help(final xCommandEvent event) {
-		handled(event);
+		event.setHandled();
 		this.publish();
 		this.publish("Enters config command mode. Use the exit command to return.");
 		this.publish();
@@ -123,14 +123,14 @@ public final class gcServerCommands implements xCommandListener {
 			this._say_help(event);
 			return;
 		}
-		handled(event);
+		event.setHandled();
 		final StringBuilder msg = new StringBuilder();
 		msg.append(" (console) ");
 		msg.append(event.commandStr.substring(event.arg(0).length() + 1));
 		this.publish(msg.toString());
 	}
 	protected void _say_help(final xCommandEvent event) {
-		handled(event);
+		event.setHandled();
 		this.publish();
 		this.publish("Broadcasts a message.");
 		this.publish();
@@ -144,10 +144,10 @@ public final class gcServerCommands implements xCommandListener {
 //			this._get_help(event);
 //			return;
 //		}
-//		handled(event);
+//		event.setHandled();
 //	}
 //	protected void _get_help(final xCommandEvent event) {
-//		handled(event);
+//		event.setHandled();
 //		this.publish();
 //		this.publish("Gets a current value.");
 //		this.publish();
@@ -161,7 +161,7 @@ public final class gcServerCommands implements xCommandListener {
 //			this._set_help(event);
 //			return;
 //		}
-//		handled(event);
+//		event.setHandled();
 //String str = "";
 //int i = 0;
 //for(final String a : event.args)
@@ -193,7 +193,7 @@ public final class gcServerCommands implements xCommandListener {
 //		}
 //	}
 //	protected void _set_help(final xCommandEvent event) {
-//		handled(event);
+//		event.setHandled();
 //		this.publish();
 //		this.publish("Manually triggers an event.");
 //		this.publish();
@@ -207,10 +207,10 @@ public final class gcServerCommands implements xCommandListener {
 //			this._start_help(event);
 //			return;
 //		}
-//		handled(event);
+//		event.setHandled();
 //	}
 //	protected void _start_help(final xCommandEvent event) {
-//		handled(event);
+//		event.setHandled();
 //		this.publish();
 //		this.publish("Starts or resumes server tasks and schedulers.");
 //		this.publish();
@@ -224,10 +224,10 @@ public final class gcServerCommands implements xCommandListener {
 //			this._pause_help(event);
 //			return;
 //		}
-//		handled(event);
+//		event.setHandled();
 //	}
 //	protected void _pause_help(final xCommandEvent event) {
-//		handled(event);
+//		event.setHandled();
 //		this.publish();
 //		this.publish("Pauses or resumes the scheduler and some plugin tasks.");
 //		this.publish("Optional argument: [on/off/true/false/1/0]");
