@@ -1,6 +1,8 @@
 package com.growcontrol.gccommon.commands;
 
 import com.poixson.commonapp.app.xApp;
+import com.poixson.commonjava.EventListener.xEvent;
+import com.poixson.commonjava.EventListener.xEvent.Priority;
 import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
 import com.poixson.commonjava.xLogger.handlers.xCommandListener;
@@ -10,8 +12,13 @@ public class gcCommonCommands implements xCommandListener {
 
 
 
-	// commands
+	// common commands
 	@Override
+	@xEvent(
+			priority=Priority.LOW,
+			threaded=false,
+			filterHandled=true,
+			filterCancelled=true)
 	public void onCommand(final xCommandEvent event) {
 		switch(event.arg(0)) {
 		case "test":
