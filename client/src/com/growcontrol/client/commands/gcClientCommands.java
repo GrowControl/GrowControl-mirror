@@ -1,12 +1,14 @@
 package com.growcontrol.client.commands;
 
-import com.growcontrol.gccommon.commands.gcCommands;
+import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
+import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
+import com.poixson.commonjava.xLogger.handlers.xCommandListener;
 
 
-public final class gcClientCommands extends gcCommands {
+public final class gcClientCommands implements xCommandListener {
 
 
 
@@ -18,7 +20,6 @@ public final class gcClientCommands extends gcCommands {
 			filterHandled=true,
 			filterCancelled=true)
 	public void onCommand(final xCommandEvent event) {
-		super.onCommand(event);
 		switch(event.arg(0)) {
 		// say a message
 		case "say":

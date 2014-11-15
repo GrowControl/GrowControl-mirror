@@ -1,12 +1,14 @@
 package com.growcontrol.server.commands;
 
-import com.growcontrol.gccommon.commands.gcCommands;
+import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
+import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
+import com.poixson.commonjava.xLogger.handlers.xCommandListener;
 
 
-public final class gcServerCommands extends gcCommands {
+public final class gcServerCommands implements xCommandListener {
 
 	protected volatile gcServerCommands_config inconfig = null;
 
@@ -24,7 +26,6 @@ public final class gcServerCommands extends gcCommands {
 			this.inconfig.onCommand(event);
 			return;
 		}
-		super.onCommand(event);
 		switch(event.arg(0)) {
 		// config mode
 		case "config":

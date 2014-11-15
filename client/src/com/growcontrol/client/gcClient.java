@@ -8,6 +8,7 @@ import org.fusesource.jansi.AnsiConsole;
 import com.growcontrol.client.commands.gcClientCommands;
 import com.growcontrol.client.configs.gcClientConfig;
 import com.growcontrol.client.gui.guiManager;
+import com.growcontrol.gccommon.commands.gcCommonCommands;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.plugin.xPluginManager;
@@ -120,6 +121,9 @@ public class gcClient extends xApp {
 			// client command listener
 			vars.commands().register(
 				new gcClientCommands()
+			);
+			vars.commands().register(
+				new gcCommonCommands()
 			);
 			// io event listener
 			//getLogicQueue();

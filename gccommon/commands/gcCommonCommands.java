@@ -6,7 +6,7 @@ import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
 import com.poixson.commonjava.xLogger.handlers.xCommandListener;
 
 
-public abstract class gcCommands implements xCommandListener {
+public class gcCommonCommands implements xCommandListener {
 
 
 
