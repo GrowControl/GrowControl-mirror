@@ -183,4 +183,20 @@ public final class gcClientCommands implements xCommandListener {
 
 
 
+	// logger
+	private volatile xLog _log = null;
+	public xLog log() {
+		if(this._log == null)
+			this._log = xApp.log();
+		return this._log;
+	}
+	public void publish(final String msg) {
+		this.log().publish(msg);
+	}
+	public void publish() {
+		this.log().publish();
+	}
+
+
+
 }
