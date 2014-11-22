@@ -12,10 +12,7 @@
 	<url>http://growcontrol.com</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jline-version>2.12</jline-version>
-		<org.yaml-version>1.14</org.yaml-version>
-		<org.xeustechnologies-version>2.5</org.xeustechnologies-version>
-		<commons-codec-version>1.10</commons-codec-version>
+		<pxnCommon-version>[3.5,3.6)</pxnCommon-version>
 		<com.miglayout-version>4.2</com.miglayout-version>
 		<junit-version>4.8.2</junit-version>
 	</properties>
@@ -105,31 +102,11 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>jline</groupId>
-			<artifactId>jline</artifactId>
-			<version>${jline-version}</version>
+			<groupId>com.poixson</groupId>
+			<artifactId>pxnCommon</artifactId>
+			<version>${pxnCommon-version}</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>${org.yaml-version}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.xeustechnologies</groupId>
-			<artifactId>jcl-core</artifactId>
-			<version>${org.xeustechnologies-version}</version>
-			<scope>compile</scope>
-		</dependency>
-<!--
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>${commons-codec-version}</version>
-			<scope>compile</scope>
-		</dependency>
--->
 		<dependency>
 			<groupId>com.miglayout</groupId>
 			<artifactId>miglayout-swing</artifactId>
@@ -147,27 +124,6 @@
 	</dependencies>
 <!--
 	<repositories>
-		<repository>
-			<id>jline</id>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<url>http://repo1.maven.org/maven2/</url>
-		</repository>
-		<repository>
-			<id>snakeyaml</id>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<url>http://repo1.maven.org/maven2/</url>
-		</repository>
-		<repository>
-			<id>jcl-core</id>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<url>http://repo1.maven.org/maven2/</url>
-		</repository>
 		<repository>
 			<id>gclibs</id>
 			<name>gc libraries</name>
