@@ -44,10 +44,10 @@ fi
 
 # CHECKOUT
 title "Cloning Repos"
-CheckoutRepo  CommonJava.git   "${REPO_PREFIX}/CommonJava.git"   || exit 1
-CheckoutRepo  xSocket.git      "${REPO_PREFIX}/xSocket.git"      || exit 1
-CheckoutRepo  GrowControl.git  "${REPO_PREFIX}/GrowControl.git"  || exit 1
-CheckoutRepo  gcPlugins.git    "${REPO_PREFIX}/gcPlugins.git"    || exit 1
+CheckoutRepo  GrowControl.git "${REPO_PREFIX}/GrowControl.git"  || exit 1
+CheckoutRepo  pxnCommon.git   "${REPO_PREFIX}/CommonJava.git"   || exit 1
+# CheckoutRepo  xSocket.git     "${REPO_PREFIX}/xSocket.git"      || exit 1
+CheckoutRepo  gcPlugins.git   "${REPO_PREFIX}/gcPlugins.git"    || exit 1
 newline
 newline
 
@@ -65,21 +65,13 @@ mklinkrel.sh  GrowControl.git/server/src/com/growcontrol/server  GrowControl.git
 # plugins
 mklinkrel.sh  gcPlugins.git                                      GrowControl.git                             plugins     || exit 1
 
-# common java
-mklinkrel.sh  CommonJava.git/src/com/poixson/commonjava          GrowControl.git/server/src/com/poixson      commonjava  || exit 1
-mklinkrel.sh  CommonJava.git/src/com/poixson/commonjava          GrowControl.git/client/src/com/poixson      commonjava  || exit 1
-
-# common app
-mklinkrel.sh  CommonJava.git/src/com/poixson/commonapp           GrowControl.git/server/src/com/poixson      commonapp   || exit 1
-mklinkrel.sh  CommonJava.git/src/com/poixson/commonapp           GrowControl.git/client/src/com/poixson      commonapp   || exit 1
-
 # gc common
 mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/server/src/com/growcontrol  gccommon    || exit 1
 mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/client/src/com/growcontrol  gccommon    || exit 1
 
 # sockets library
-mklinkrel.sh  xSocket.git/src/com/poixson/xsocket                GrowControl.git/server/src/com/poixson      xsocket     || exit 1
-mklinkrel.sh  xSocket.git/src/com/poixson/xsocket                GrowControl.git/client/src/com/poixson      xsocket     || exit 1
+# mklinkrel.sh  xSocket.git/src/com/poixson/xsocket                GrowControl.git/server/src/com/poixson      xsocket     || exit 1
+# mklinkrel.sh  xSocket.git/src/com/poixson/xsocket                GrowControl.git/client/src/com/poixson      xsocket     || exit 1
 
 newline
 newline
