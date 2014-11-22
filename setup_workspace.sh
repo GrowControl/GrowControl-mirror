@@ -56,10 +56,6 @@ newline
 # SYMLINKS
 title "Creating Symbolic Links"
 
-mkdir -pv GrowControl.git/server/src/com/poixson || exit 1
-mkdir -pv GrowControl.git/client/src/com/poixson || exit 1
-newline
-
 # server in client
 mklinkrel.sh  GrowControl.git/server/src/com/growcontrol/server  GrowControl.git/client/src/com/growcontrol  server      || exit 1
 # plugins
