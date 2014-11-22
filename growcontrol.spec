@@ -1,6 +1,6 @@
 Name            : GrowControl
 Summary         : Automation software for home and garden, or hobby projects
-Version         : 3.4.%{BUILD_NUMBER}
+Version         : 3.5.%{BUILD_NUMBER}
 Release         : 1
 BuildArch       : noarch
 Prefix          : %{_javadir}/gc
@@ -18,7 +18,7 @@ URL             : http://growcontrol.com/
 
 ### Packages ###
 %package -n gcServer
-Summary         : Automation server software for home and garden, or hobby projects
+Summary         : GrowControl automation server software for home and garden, or hobby projects
 Provides        : gcServer = %{version}
 Group           : Development/Electronic Lab
 
