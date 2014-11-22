@@ -7,7 +7,7 @@
 	<groupId>com.growcontrol</groupId>
 	<artifactId>gcClient</artifactId>
 	<packaging>jar</packaging>
-	<version>3.4.x-SNAPSHOT</version>
+	<version>3.5.x-SNAPSHOT</version>
 	<name>GrowControl-Client</name>
 	<url>http://growcontrol.com</url>
 	<properties>
