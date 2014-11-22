@@ -24,6 +24,18 @@
 		<connection>scm:git:https://github.com/PoiXson/GrowControl.git</connection>
 		<developerConnection>scm:git:https://github.com/PoiXson/GrowControl.git</developerConnection>
 	</scm>
+	<organization>
+		<name>PoiXson</name>
+		<url>http://poixson.com</url>
+	</organization>
+	<issueManagement>
+		<url>https://github.com/PoiXson/GrowControl/issues</url>
+		<system>github</system>
+	</issueManagement>
+	<ciManagement>
+		<url>ci.poixson.com</url>
+		<system>pxnci</system>
+	</ciManagement>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<finalName>scant-${project.artifactId}-${project.version}</finalName>
@@ -164,16 +176,4 @@
 		</repository>
 	</repositories>
 -->
-	<organization>
-		<name>PoiXson</name>
-		<url>http://poixson.com</url>
-	</organization>
-	<issueManagement>
-		<url>https://github.com/PoiXson/GrowControl/issues</url>
-		<system>github</system>
-	</issueManagement>
-	<ciManagement>
-		<url>ci.poixson.com</url>
-		<system>pxnci</system>
-	</ciManagement>
 </project>
