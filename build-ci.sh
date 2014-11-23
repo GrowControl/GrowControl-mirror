@@ -1,4 +1,4 @@
-# (cd ${WORKSPACE}; sh build-ci.sh)
+# (cd ${WORKSPACE}/GrowControl.git/; sh build-ci.sh)
 
 
 
