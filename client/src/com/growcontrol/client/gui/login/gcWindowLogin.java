@@ -40,8 +40,6 @@ import com.poixson.commonapp.gui.remapped.RemappedActionListener;
 import com.poixson.commonapp.gui.remapped.RemappedItemListener;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
-import com.poixson.xsocket.xSocket;
-import com.poixson.xsocket.protocols.xSocketTCP;
 
 
 @xWindowProperties(
@@ -82,7 +80,7 @@ public class gcWindowLogin extends xWindow {
 	protected volatile JButton      btnCancel = null;
 
 	// socket
-	protected volatile xSocket socket = null;
+//	protected volatile xSocket socket = null;
 
 
 
@@ -322,10 +320,10 @@ public class gcWindowLogin extends xWindow {
 		if(guiUtils.forceDispatchThread(this, "ShowCard", state)) return;
 		switch(state.toLowerCase()) {
 		case "login":
-			if(this.socket != null) {
-				utils.safeClose(this.socket);
-				this.socket = null;
-			}
+//			if(this.socket != null) {
+//				utils.safeClose(this.socket);
+//				this.socket = null;
+//			}
 			if(!this.currentCard.equals(CARD_LOGIN)) {
 				xApp.log().fine("Showing card: "+CARD_LOGIN);
 				this.cardLayout.show(this.getContentPane(), CARD_LOGIN);
@@ -416,22 +414,22 @@ public class gcWindowLogin extends xWindow {
 		// connect to server
 		final String hostStr = this.txtboxHost.getText();
 		final Integer portInt = utilsNumbers.toInteger(this.txtboxPort.getText());
-		if(portInt == null || !utilsNumbers.isMinMax(portInt.intValue(), 1, xSocket.MAX_PORT_NUMBER)) {
-			xApp.log().warning("Invalid port: "+this.txtboxPort.getText());
-			JOptionPane.showMessageDialog(this, "Invalid port number provided: "+
-					this.txtboxPort.getText()+"\n\n"+
-					"Valid port numbers are between: 1 and "+
-					Integer.toString(xSocket.MAX_PORT_NUMBER)+"  \n"+
-					"Default: "+Integer.toString(gcClientConfig.DEFAULT_LISTEN_PORT),
-					"Invalid port..",
-					JOptionPane.ERROR_MESSAGE);
-			return;
-		}
+//		if(portInt == null || !utilsNumbers.isMinMax(portInt.intValue(), 1, xSocket.MAX_PORT_NUMBER)) {
+//			xApp.log().warning("Invalid port: "+this.txtboxPort.getText());
+//			JOptionPane.showMessageDialog(this, "Invalid port number provided: "+
+//					this.txtboxPort.getText()+"\n\n"+
+//					"Valid port numbers are between: 1 and "+
+//					Integer.toString(xSocket.MAX_PORT_NUMBER)+"  \n"+
+//					"Default: "+Integer.toString(gcClientConfig.DEFAULT_LISTEN_PORT),
+//					"Invalid port..",
+//					JOptionPane.ERROR_MESSAGE);
+//			return;
+//		}
 //TODO: this will be changed
-		this.socket = new xSocketTCP();
-		this.socket.setHost(hostStr);
-		this.socket.setPort(portInt.intValue());
-		this.socket.connect();
+//		this.socket = new xSocketTCP();
+//		this.socket.setHost(hostStr);
+//		this.socket.setPort(portInt.intValue());
+//		this.socket.connect();
 	}
 	public void onClickCancelButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
