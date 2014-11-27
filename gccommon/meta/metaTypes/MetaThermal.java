@@ -9,8 +9,6 @@ public class MetaThermal extends Meta {
 	protected volatile Double value = null;
 
 
-	protected MetaThermal(final String typeStr) {
-		super(typeStr);
 	}
 
 

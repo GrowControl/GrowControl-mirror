@@ -7,8 +7,6 @@ public class MetaTrigger extends Meta {
 	private static final long serialVersionUID = 11L;
 
 
-	protected MetaTrigger(final String typeStr) {
-		super(typeStr);
 	}
 
 

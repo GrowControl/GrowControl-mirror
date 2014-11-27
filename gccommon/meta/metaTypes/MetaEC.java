@@ -9,8 +9,6 @@ public class MetaEC extends Meta {
 	protected volatile Integer value = null;
 
 
-	protected MetaEC(final String typeStr) {
-		super(typeStr);
 	}
 
 

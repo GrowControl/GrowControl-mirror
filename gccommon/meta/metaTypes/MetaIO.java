@@ -9,8 +9,6 @@ public class MetaIO extends Meta {
 	protected volatile Boolean value = null;
 
 
-	protected MetaIO(final String typeStr) {
-		super(typeStr);
 	}
 
 

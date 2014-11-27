@@ -9,8 +9,6 @@ public class MetaPH extends Meta {
 	private volatile Integer value = null;
 
 
-	protected MetaPH(final String typeStr) {
-		super(typeStr);
 	}
 
 

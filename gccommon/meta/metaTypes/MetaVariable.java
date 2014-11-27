@@ -9,8 +9,6 @@ public class MetaVariable extends Meta {
 	protected volatile Integer value = null;
 
 
-	protected MetaVariable(final String typeStr) {
-		super(typeStr);
 	}
 
 
