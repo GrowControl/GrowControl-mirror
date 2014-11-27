@@ -9,7 +9,20 @@ public class MetaEC extends Meta {
 	protected volatile Integer value = null;
 
 
+
+	public static MetaEC get(final String str) {
+		final MetaEC meta = new MetaEC();
+		meta.set(str);
+		return meta;
 	}
+	@Override
+	public MetaEC clone() {
+		final MetaEC meta = new MetaEC();
+		if(this.value != null)
+			meta.set(this.getValueStr());
+		return meta;
+	}
+
 
 
 	@Override
@@ -18,10 +31,7 @@ public class MetaEC extends Meta {
 			return null;
 		return this.value.toString();
 	}
-	@Override
-	public MetaEC clone() {
-		return new MetaEC(typeStr());
-	}
+
 
 
 }

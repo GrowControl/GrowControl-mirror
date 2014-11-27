@@ -9,7 +9,20 @@ public class MetaIO extends Meta {
 	protected volatile Boolean value = null;
 
 
+
+	public static MetaIO get(final String str) {
+		final MetaIO meta = new MetaIO();
+		meta.set(str);
+		return meta;
 	}
+	@Override
+	public MetaIO clone() {
+		final MetaIO meta = new MetaIO();
+		if(this.value != null)
+			meta.set(this.getValueStr());
+		return meta;
+	}
+
 
 
 	@Override
@@ -18,10 +31,7 @@ public class MetaIO extends Meta {
 			return null;
 		return this.value.toString();
 	}
-	@Override
-	public MetaIO clone() {
-		return new MetaIO(typeStr());
-	}
+
 
 
 }

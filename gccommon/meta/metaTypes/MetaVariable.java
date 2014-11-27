@@ -9,7 +9,20 @@ public class MetaVariable extends Meta {
 	protected volatile Integer value = null;
 
 
+
+	public static MetaVariable get(final String str) {
+		final MetaVariable meta = new MetaVariable();
+		meta.set(str);
+		return meta;
 	}
+	@Override
+	public MetaVariable clone() {
+		final MetaVariable meta = new MetaVariable();
+		if(this.value != null)
+			meta.set(this.getValueStr());
+		return meta;
+	}
+
 
 
 	@Override
@@ -18,10 +31,7 @@ public class MetaVariable extends Meta {
 			return null;
 		return this.value.toString();
 	}
-	@Override
-	public MetaVariable clone() {
-		return new MetaVariable(typeStr());
-	}
+
 
 
 }

@@ -9,7 +9,20 @@ public class MetaThermal extends Meta {
 	protected volatile Double value = null;
 
 
+
+	public static MetaThermal get(final String str) {
+		final MetaThermal meta = new MetaThermal();
+		meta.set(str);
+		return meta;
 	}
+	@Override
+	public MetaThermal clone() {
+		final MetaThermal meta = new MetaThermal();
+		if(this.value != null)
+			meta.set(this.getValueStr());
+		return meta;
+	}
+
 
 
 	@Override
@@ -18,10 +31,7 @@ public class MetaThermal extends Meta {
 			return null;
 		return this.value.toString();
 	}
-	@Override
-	public MetaThermal clone() {
-		return new MetaThermal(typeStr());
-	}
+
 
 
 }

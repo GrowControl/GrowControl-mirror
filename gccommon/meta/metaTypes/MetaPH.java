@@ -9,7 +9,20 @@ public class MetaPH extends Meta {
 	private volatile Integer value = null;
 
 
+
+	public static MetaPH get(final String str) {
+		final MetaPH meta = new MetaPH();
+		meta.set(str);
+		return meta;
 	}
+	@Override
+	public MetaPH clone() {
+		final MetaPH meta = new MetaPH();
+		if(this.value != null)
+			meta.set(this.getValueStr());
+		return meta;
+	}
+
 
 
 	@Override
@@ -18,10 +31,7 @@ public class MetaPH extends Meta {
 			return null;
 		return this.value.toString();
 	}
-	@Override
-	public MetaPH clone() {
-		return new MetaPH(typeStr());
-	}
+
 
 
 }
