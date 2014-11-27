@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 
 public abstract class Meta implements Serializable {
-	private static final long serialVersionUID = 11L;
+	private static final long serialVersionUID = 31L;
 
 
 

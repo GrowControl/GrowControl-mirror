@@ -4,7 +4,7 @@ import com.growcontrol.gccommon.meta.Meta;
 
 
 public class MetaTrigger extends Meta {
-	private static final long serialVersionUID = 11L;
+	private static final long serialVersionUID = 31L;
 
 
 	}
