@@ -5,3 +5,6 @@ src/com/poixson/xsocket
 src/com/growcontrol/gccommon
 src/com/growcontrol/server
 
+.externalToolBuilders/
+maven-eclipse.xml
+
