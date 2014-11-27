@@ -3,13 +3,13 @@ package com.growcontrol.gccommon.meta.metaTypes;
 import com.growcontrol.gccommon.meta.Meta;
 
 
-public class metaThermal extends Meta {
+public class MetaIO extends Meta {
 	private static final long serialVersionUID = 11L;
 
-	protected volatile Double value = null;
+	protected volatile Boolean value = null;
 
 
-	protected metaThermal(final String typeStr) {
+	protected MetaIO(final String typeStr) {
 		super(typeStr);
 	}
 
@@ -21,8 +21,8 @@ public class metaThermal extends Meta {
 		return this.value.toString();
 	}
 	@Override
-	public metaThermal clone() {
-		return new metaThermal(typeStr());
+	public MetaIO clone() {
+		return new MetaIO(typeStr());
 	}
 
 

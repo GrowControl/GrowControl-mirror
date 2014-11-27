@@ -3,11 +3,11 @@ package com.growcontrol.gccommon.meta.metaTypes;
 import com.growcontrol.gccommon.meta.Meta;
 
 
-public class metaTrigger extends Meta {
+public class MetaTrigger extends Meta {
 	private static final long serialVersionUID = 11L;
 
 
-	protected metaTrigger(final String typeStr) {
+	protected MetaTrigger(final String typeStr) {
 		super(typeStr);
 	}
 
@@ -17,8 +17,8 @@ public class metaTrigger extends Meta {
 		return null;
 	}
 	@Override
-	public metaTrigger clone() {
-		return new metaTrigger(typeStr());
+	public MetaTrigger clone() {
+		return new MetaTrigger(typeStr());
 	}
 
 

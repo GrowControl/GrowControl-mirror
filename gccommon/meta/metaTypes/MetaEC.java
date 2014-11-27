@@ -3,13 +3,13 @@ package com.growcontrol.gccommon.meta.metaTypes;
 import com.growcontrol.gccommon.meta.Meta;
 
 
-public class metaPH extends Meta {
+public class MetaEC extends Meta {
 	private static final long serialVersionUID = 11L;
 
-	private volatile Integer value = null;
+	protected volatile Integer value = null;
 
 
-	protected metaPH(final String typeStr) {
+	protected MetaEC(final String typeStr) {
 		super(typeStr);
 	}
 
@@ -21,8 +21,8 @@ public class metaPH extends Meta {
 		return this.value.toString();
 	}
 	@Override
-	public metaPH clone() {
-		return new metaPH(typeStr());
+	public MetaEC clone() {
+		return new MetaEC(typeStr());
 	}
 
 
