@@ -1,6 +1,8 @@
 package com.growcontrol.gccommon.meta.metaTypes;
 
+import com.growcontrol.gccommon.meta.InvalidMetaFormatException;
 import com.growcontrol.gccommon.meta.Meta;
+import com.poixson.commonjava.Utils.utilsNumbers;
 
 
 public class MetaThermal extends Meta {
@@ -25,6 +27,30 @@ public class MetaThermal extends Meta {
 
 
 
+	// set value
+	public void set(final double value) {
+		this.value = new Double(value);
+	}
+	public void set(final Double value) {
+		if(value == null)
+			this.value = null;
+		else
+			this.value = new Double(value.doubleValue());
+	}
+	@Override
+	public void set(final String str) {
+		if(str == null) {
+			this.value = null;
+			return;
+		}
+		final Double d = utilsNumbers.toDouble(str);
+		if(d == null) throw new InvalidMetaFormatException("'"+str+"'");
+		this.value = d;
+	}
+
+
+
+	// get value
 	@Override
 	public String getValueStr() {
 		if(this.value == null)

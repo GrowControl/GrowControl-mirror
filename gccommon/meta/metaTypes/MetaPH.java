@@ -1,12 +1,14 @@
 package com.growcontrol.gccommon.meta.metaTypes;
 
+import com.growcontrol.gccommon.meta.InvalidMetaFormatException;
 import com.growcontrol.gccommon.meta.Meta;
+import com.poixson.commonjava.Utils.utilsNumbers;
 
 
 public class MetaPH extends Meta {
 	private static final long serialVersionUID = 31L;
 
-	private volatile Integer value = null;
+	protected volatile Integer value = null;
 
 
 
@@ -25,6 +27,30 @@ public class MetaPH extends Meta {
 
 
 
+	// set value
+	public void set(final int value) {
+		this.value = new Integer(value);
+	}
+	public void set(final Integer value) {
+		if(value == null)
+			this.value = null;
+		else
+			this.value = new Integer(value.intValue());
+	}
+	@Override
+	public void set(final String str) {
+		if(str == null) {
+			this.value = null;
+			return;
+		}
+		final Integer i = utilsNumbers.toInteger(str);
+		if(i == null) throw new InvalidMetaFormatException("'"+str+"'");
+		this.value = i;
+	}
+
+
+
+	// get value
 	@Override
 	public String getValueStr() {
 		if(this.value == null)

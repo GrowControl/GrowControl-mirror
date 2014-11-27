@@ -1,6 +1,8 @@
 package com.growcontrol.gccommon.meta.metaTypes;
 
+import com.growcontrol.gccommon.meta.InvalidMetaFormatException;
 import com.growcontrol.gccommon.meta.Meta;
+import com.poixson.commonjava.Utils.utilsNumbers;
 
 
 public class MetaIO extends Meta {
@@ -25,6 +27,30 @@ public class MetaIO extends Meta {
 
 
 
+	// set value
+	public void set(final boolean value) {
+		this.value = new Boolean(value);
+	}
+	public void set(final Boolean value) {
+		if(value == null)
+			this.value = null;
+		else
+			this.value = new Boolean(value.booleanValue());
+	}
+	@Override
+	public void set(final String str) {
+		if(str == null) {
+			this.value = null;
+			return;
+		}
+		final Boolean b = utilsNumbers.toBoolean(str);
+		if(b == null) throw new InvalidMetaFormatException("'"+str+"'");
+		this.value = b;
+	}
+
+
+
+	// get value
 	@Override
 	public String getValueStr() {
 		if(this.value == null)

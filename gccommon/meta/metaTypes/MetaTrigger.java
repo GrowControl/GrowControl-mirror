@@ -20,12 +20,22 @@ public class MetaTrigger extends Meta {
 	}
 
 
+
+	// set value
+	public void set() {
+	}
+	@Override
+	public void set(String str) {
+	}
+
+
+
+	// get value
 	@Override
 	public String getValueStr() {
 		return null;
 	}
-	@Override
-	}
+
 
 
 }

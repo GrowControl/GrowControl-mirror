@@ -14,13 +14,19 @@ public abstract class Meta implements Serializable {
 	public abstract Meta clone();
 
 
-	public String getString() {
-		return "["+this.typeStr+":"+getValueStr()+"]";
+
+	// set value
+	public void set(final Meta meta) {
+		this.set(meta.getValueStr());
 	}
+	public abstract void set(final String str);
 
 
-	public String typeStr() {
-		return this.typeStr;
+
+	// get value
+	public String getString() {
+//		return "["+this.typeStr+":"+getValueStr()+"]";
+		return null;
 	}
 	public abstract String getValueStr();
 
