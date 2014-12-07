@@ -34,9 +34,9 @@ fi
 
 # return the pom files
 mvresult=0
-restorePom "${PWD}/pom.xml"        || mvresult=1
-restorePom "${PWD}/server/pom.xml" || mvresult=1
-restorePom "${PWD}/client/pom.xml" || mvresult=1
+restoreSed "${PWD}/pom.xml"        || mvresult=1
+restoreSed "${PWD}/server/pom.xml" || mvresult=1
+restoreSed "${PWD}/client/pom.xml" || mvresult=1
 
 
 
