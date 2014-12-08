@@ -1,5 +1,6 @@
 package com.growcontrol.server;
 
+import com.growcontrol.gccommon.meta.MetaRouter;
 import com.poixson.commonjava.EventListener.xHandler;
 
 
@@ -26,7 +27,7 @@ public class gcServerVars {
 		this.system   = new xHandler();
 		this.commands = new xHandler();
 		this.plugins  = new xHandler();
-		this.router   = new xHandler();
+		this.router   = MetaRouter.get();
 	}
 	@Override
 	public Object clone() throws CloneNotSupportedException {
@@ -60,8 +61,8 @@ public class gcServerVars {
 
 
 	// meta router handler
-	private final xHandler router;
-	public xHandler router() {
+	private final MetaRouter router;
+	public MetaRouter router() {
 		return this.router;
 	}
 
