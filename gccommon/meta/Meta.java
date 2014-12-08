@@ -15,6 +15,19 @@ public abstract class Meta implements Serializable {
 
 
 
+	public static Meta convert(final Class<? extends Meta> clss, final Meta meta)
+			throws ReflectiveOperationException {
+		if(meta.getClass().equals(clss))
+			return meta;
+		final Meta m = clss.newInstance();
+		m.set(
+			meta.getStringValue()
+		);
+		return m;
+	}
+
+
+
 	// set value
 	public void set(final Meta meta) {
 		this.set(meta.getValueStr());
