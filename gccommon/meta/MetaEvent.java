@@ -19,4 +19,15 @@ public class MetaEvent extends xEventData {
 
 
 
+	@Override
+	public String toString() {
+		final StringBuilder str = new StringBuilder();
+		str.append(this.destination.toString())
+			.append("|")
+			.append(this.meta.toString());
+		return str.toString();
+	}
+
+
+
 }
