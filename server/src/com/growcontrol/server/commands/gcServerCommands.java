@@ -1,5 +1,8 @@
 package com.growcontrol.server.commands;
 
+import com.growcontrol.gccommon.meta.Meta;
+import com.growcontrol.gccommon.meta.MetaAddress;
+import com.growcontrol.gccommon.meta.MetaRouter;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
@@ -48,10 +51,13 @@ public final class gcServerCommands implements xCommandListener {
 //		case "get":
 //			this._get(event);
 //			break;
-//		// manually trigger an event
-//		case "set":
-//			this._set(event);
-//			break;
+		// manually trigger an event
+		case "set":
+			this._set(event);
+			break;
+		case "list":
+			this._list(event);
+			break;
 //		// start/resume schedulers
 //		case "start":
 //		case "resume":
@@ -74,7 +80,6 @@ public final class gcServerCommands implements xCommandListener {
 //			.setUsage("Displays additional information.");
 //		addCommand("version")
 //			.setUsage("Displays the current running version, and the latest available (if enabled)");
-//		addCommand("list")
 //		// input / output
 //		// tools
 //		addCommand("ping")
@@ -153,6 +158,59 @@ public final class gcServerCommands implements xCommandListener {
 //		this.publish("Gets a current value.");
 //		this.publish();
 //	}
+
+
+
+	// set command (trigger event manually)
+	protected void _set(final xCommandEvent event) {
+		if(event.isHelp()) {
+			this._set_help(event);
+			return;
+		}
+		event.setHandled();
+		final MetaAddress addr = MetaAddress.get(event.arg(1));
+		final Meta meta = Meta.get(event.arg(2));
+		this.log().stats("Setting [ "+addr.toString()+" ] to [ "+meta.toString()+" ]");
+		MetaRouter.get().route(addr, meta);
+	}
+	protected void _set_help(final xCommandEvent event) {
+		event.setHandled();
+		this.publish();
+		this.publish("Manually triggers an event.");
+		this.publish("  set <address> <value>");
+		this.publish();
+	}
+
+
+
+	protected void _list(final xCommandEvent event) {
+		if(event.isHelp()) {
+			this._list_help(event);
+			return;
+		}
+		event.setHandled();
+		switch(event.arg(1)) {
+		case "threads":
+			this.publish("THREADS... (sorry, this is unfinished)");
+			break;
+		case "addresses":
+			this.publish("Addresses");
+			this.publish("=========");
+			final MetaRouter router = MetaRouter.get();
+			for(final MetaAddress addr : router.getAddresses())
+				this.publish("  "+addr.toString());
+			this.publish();
+			break;
+		}
+	}
+	protected void _list_help(final xCommandEvent event) {
+		event.setHandled();
+		this.publish();
+		this.publish("List something:");
+		this.publish("  threads");
+		this.publish("  addresses");
+		this.publish();
+	}
 
 
 
