@@ -51,6 +51,11 @@ public class MetaVariable extends Meta {
 
 
 	// get value
+	public Integer value() {
+		if(this.value == null)
+			return null;
+		return new Integer(this.value.intValue());
+	}
 	@Override
 	public String getStringValue() {
 		if(this.value == null)

@@ -51,6 +51,11 @@ public class MetaThermal extends Meta {
 
 
 	// get value
+	public Double value() {
+		if(this.value == null)
+			return null;
+		return new Double(this.value.doubleValue());
+	}
 	@Override
 	public String getStringValue() {
 		if(this.value == null)

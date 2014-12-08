@@ -51,6 +51,11 @@ public class MetaIO extends Meta {
 
 
 	// get value
+	public Boolean value() {
+		if(this.value == null)
+			return null;
+		return new Boolean(this.value.booleanValue());
+	}
 	@Override
 	public String getStringValue() {
 		if(this.value == null)
