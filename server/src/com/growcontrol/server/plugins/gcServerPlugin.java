@@ -1,5 +1,8 @@
 package com.growcontrol.server.plugins;
 
+import com.growcontrol.gccommon.meta.MetaAddress;
+import com.growcontrol.gccommon.meta.MetaListener;
+import com.growcontrol.gccommon.meta.MetaRouter;
 import com.growcontrol.server.gcServerVars;
 import com.poixson.commonapp.plugin.xJavaPlugin;
 import com.poixson.commonjava.EventListener.xListener;
@@ -22,6 +25,12 @@ public abstract class gcServerPlugin extends xJavaPlugin {
 			throw new RuntimeException("Cannot register unknown listener type: "
 					+listener.getClass().getName());
 		}
+	}
+	public void register(final MetaAddress address, final MetaListener listener) {
+		MetaRouter.get().register(
+			address,
+			listener
+		);
 	}
 
 
