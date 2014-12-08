@@ -30,7 +30,7 @@ public abstract class Meta implements Serializable {
 
 	// set value
 	public void set(final Meta meta) {
-		this.set(meta.getValueStr());
+		this.set(meta.getStringValue());
 	}
 	public abstract void set(final String str);
 
@@ -41,7 +41,7 @@ public abstract class Meta implements Serializable {
 //		return "["+this.typeStr+":"+getValueStr()+"]";
 		return null;
 	}
-	public abstract String getValueStr();
+	public abstract String getStringValue();
 
 
 

@@ -21,7 +21,7 @@ public class MetaPH extends Meta {
 	public MetaPH clone() {
 		final MetaPH meta = new MetaPH();
 		if(this.value != null)
-			meta.set(this.getValueStr());
+			meta.set(this.getStringValue());
 		return meta;
 	}
 
@@ -52,7 +52,7 @@ public class MetaPH extends Meta {
 
 	// get value
 	@Override
-	public String getValueStr() {
+	public String getStringValue() {
 		if(this.value == null)
 			return null;
 		return this.value.toString();

@@ -21,7 +21,7 @@ public class MetaEC extends Meta {
 	public MetaEC clone() {
 		final MetaEC meta = new MetaEC();
 		if(this.value != null)
-			meta.set(this.getValueStr());
+			meta.set(this.getStringValue());
 		return meta;
 	}
 
@@ -52,7 +52,7 @@ public class MetaEC extends Meta {
 
 	// get value
 	@Override
-	public String getValueStr() {
+	public String getStringValue() {
 		if(this.value == null)
 			return null;
 		return this.value.toString();

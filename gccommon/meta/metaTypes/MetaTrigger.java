@@ -32,7 +32,7 @@ public class MetaTrigger extends Meta {
 
 	// get value
 	@Override
-	public String getValueStr() {
+	public String getStringValue() {
 		return null;
 	}
 

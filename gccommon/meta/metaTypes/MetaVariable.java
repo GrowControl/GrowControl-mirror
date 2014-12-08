@@ -21,7 +21,7 @@ public class MetaVariable extends Meta {
 	public MetaVariable clone() {
 		final MetaVariable meta = new MetaVariable();
 		if(this.value != null)
-			meta.set(this.getValueStr());
+			meta.set(this.getStringValue());
 		return meta;
 	}
 
@@ -52,7 +52,7 @@ public class MetaVariable extends Meta {
 
 	// get value
 	@Override
-	public String getValueStr() {
+	public String getStringValue() {
 		if(this.value == null)
 			return null;
 		return this.value.toString();
