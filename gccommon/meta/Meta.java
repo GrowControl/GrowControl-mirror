@@ -2,12 +2,17 @@ package com.growcontrol.gccommon.meta;
 
 import java.io.Serializable;
 
+import com.growcontrol.gccommon.meta.metaTypes.MetaString;
+
 
 public abstract class Meta implements Serializable {
 	private static final long serialVersionUID = 31L;
 
 
 
+	public static Meta get(final String data) {
+		return MetaString.get(data);
+	}
 	protected Meta() {
 	}
 	@Override
