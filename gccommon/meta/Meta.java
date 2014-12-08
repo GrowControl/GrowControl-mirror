@@ -42,9 +42,9 @@ public abstract class Meta implements Serializable {
 
 
 	// get value
-	public String getString() {
-//		return "["+this.typeStr+":"+getValueStr()+"]";
-		return null;
+	@Override
+	public String toString() {
+		return this.getTypeName() + "@" + this.getStringValue();
 	}
 	public abstract String getStringValue();
 
