@@ -45,8 +45,6 @@ public final class gcServerCommands implements xCommandListener {
 		case "broadcast":
 			this._say(event);
 			break;
-//		case "io":
-//			break;
 //		// get current value
 //		case "get":
 //			this._get(event);
@@ -87,9 +85,6 @@ public final class gcServerCommands implements xCommandListener {
 //		addCommand("threads")
 //			.setUsage("Displays number of loaded threads, and optional details.");
 //		setAllPriority(EventPriority.LOWEST);
-//		addCommand("route")
-//			.addAlias("send")
-//			.setUsage("Sends an event to the meta data router, which passes to plugins.\nUsage: route <ReceiverName> [MetaType] <Value>");
 
 		}
 	}
@@ -214,49 +209,6 @@ public final class gcServerCommands implements xCommandListener {
 
 
 
-//	// say command (trigger event manually)
-//	protected void _set(final xCommandEvent event) {
-//		if(event.isHelp()) {
-//			this._set_help(event);
-//			return;
-//		}
-//		event.setHandled();
-//String str = "";
-//int i = 0;
-//for(final String a : event.args)
-//	str += Integer.toString(++i)+")"+a+" ";
-//
-//this.publish("ROUTE: "+str);
-
-//		// route an action
-//		public void processMeta(final String destStr, final Meta value) {
-//			getThreadPool().runLater(new Runnable() {
-//				private volatile String destStr2 = null;;
-//				private volatile Meta value2 = null;
-//				protected Runnable init(final String destStr1, final Meta value1) {
-//					this.destStr2 = destStr1;
-//					this.value2 = value1;
-//					return this;
-//				}
-//				@Override
-//				public void run() {
-//					ServerListeners.get()
-//						.router().trigger(
-//							new MetaEvent(
-//								this.destStr2,
-//								this.value2
-//							)
-//						);
-//				}
-//			}.init(destStr, value));
-//		}
-//	}
-//	protected void _set_help(final xCommandEvent event) {
-//		event.setHandled();
-//		this.publish();
-//		this.publish("Manually triggers an event.");
-//		this.publish();
-//	}
 
 
 
