@@ -21,7 +21,7 @@ public class MetaRouter extends xHandler {
 	private static final Object lock = new Object();
 
 	// listener addresses
-	protected static final Map<MetaAddress, MetaListener> listenerAddresses =
+	protected static final Map<MetaAddress, MetaListener> known =
 			new ConcurrentHashMap<MetaAddress, MetaListener>();
 
 
@@ -52,25 +52,23 @@ public class MetaRouter extends xHandler {
 			address == null
 				? MetaAddress.getRandom()
 				: address;
-		synchronized(listenerAddresses) {
-			if(listenerAddresses.containsKey(addr))
-				log().fine("Replacing meta event listener: "+addr.hash);
-			else
-				log().finer("Registered meta address: "+addr.hash);
-			listenerAddresses.put(addr, listener);
-		}
+		if(known.containsKey(addr))
+			log().fine("Replacing meta event listener: "+addr.hash);
+		else
+			log().finer("Registered meta address: "+addr.hash);
+		known.put(addr, listener);
 		return addr.hash;
 	}
 
 
 
-	public MetaAddress[] getAddresses() {
+	public MetaAddress[] getKnown() {
 		final MetaAddress[] addresses;
-		synchronized(listenerAddresses) {
+		synchronized(known) {
 			addresses =
-				listenerAddresses.isEmpty()
+				known.isEmpty()
 				? new MetaAddress[0]
-				: listenerAddresses.keySet().toArray(new MetaAddress[0]);
+				: known.keySet().toArray(new MetaAddress[0]);
 		}
 		return addresses;
 	}
@@ -110,8 +108,8 @@ public class MetaRouter extends xHandler {
 		// trigger the event
 		final xThreadPool p =
 			pool == null
-				? xThreadPool.get()
-				: pool;
+			? xThreadPool.get()
+			: pool;
 		p.runLater(
 			this.getRunnable(listener, event)
 		);
@@ -123,7 +121,7 @@ public class MetaRouter extends xHandler {
 	// get listener by address
 	public MetaListener getAddressListener(final MetaAddress address) {
 		if(address == null) throw new NullPointerException();
-		return listenerAddresses.get(address);
+		return known.get(address);
 	}
 
 

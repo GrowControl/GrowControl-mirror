@@ -192,7 +192,7 @@ public final class gcServerCommands implements xCommandListener {
 			this.publish("Addresses");
 			this.publish("=========");
 			final MetaRouter router = MetaRouter.get();
-			for(final MetaAddress addr : router.getAddresses())
+			for(final MetaAddress addr : router.getKnown())
 				this.publish("  "+addr.toString());
 			this.publish();
 			break;
