@@ -156,8 +156,8 @@ touch "${RPM_BUILD_ROOT}/var/log/gc/client.log"
 
 
 ### Uninstall ###
-%preun -n gcServer
-echo "Pre-uninstall.."
-service -n gcserver stop
+# %preun -n gcServer
+# echo "Pre-uninstall.."
+# service -n gcserver stop
 
 
