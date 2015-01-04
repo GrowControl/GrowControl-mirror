@@ -3,17 +3,18 @@ bin/
 target/
 out/
 build/
-plugins
 
 .classpath
 .project
 .git/
 .settings/
+/plugins
 
 *.class
 *.iml
 *.idea
 *.jar
+*.rpm
 *.war
 *.ear
 *.zip
