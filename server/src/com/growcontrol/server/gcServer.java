@@ -93,26 +93,38 @@ xVars.get().debug(true);
 				log().warning("config.yml for this server may need updates");
 		}
 		// log level
-		final xLevel level = this.config.getLogLevel();
-		if(level != null)
-			xLog.getRoot().setLevel(level);
+		{
+			final xLevel level = this.config.getLogLevel();
+			if(level != null)
+				xLog.getRoot().setLevel(level);
+		}
 		// debug
-		final Boolean debug = this.config.getDebug();
-		if(debug != null)
-			xVars.get().debug(debug.booleanValue());
-		// tick interval
-//		final xTime tick = this.config.getTickInterval();
-		//TODO: apply this to scheduler
-		// listen port
-		@SuppressWarnings("unused")
-		final int port = this.config.getListenPort();
-		//TODO: apply this to socket server
-		// logic threads (0 uses main thread)
-		@SuppressWarnings("unused")
-		final int logic = this.config.getLogicThreads();
-		//TODO: apply this to logic thread pool
-		// zones
-//		this.config.populateZones(this.zones);
+		{
+			final Boolean debug = this.config.getDebug();
+			if(debug != null)
+				xVars.get().debug(debug.booleanValue());
+		}
+//		// tick interval
+//		{
+//			final xTime tick = this.config.getTickInterval();
+//			//TODO: apply this to scheduler
+//		}
+//		// listen port
+//		{
+//			@SuppressWarnings("unused")
+//			final int port = this.config.getListenPort();
+//			//TODO: apply this to socket server
+//		}
+//		// logic threads (0 uses main thread)
+//		{
+//			@SuppressWarnings("unused")
+//			final int logic = this.config.getLogicThreads();
+//			//TODO: apply this to logic thread pool
+//		}
+//		// zones
+//		{
+//			this.config.populateZones(this.zones);
+//		}
 	}
 
 
