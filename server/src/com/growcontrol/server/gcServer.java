@@ -74,10 +74,24 @@ xVars.get().debug(true);
 		this.updateConfig();
 	}
 	private void updateConfig() {
-		// version
-		@SuppressWarnings("unused")
-		final String configVersion = this.config.getVersion();
-		//TODO: compare to running version
+		// config version
+		{
+			boolean configVersionDifferent = false;
+			final String configVersion = this.config.getVersion();
+			final String serverVersion = this.getVersion();
+			if(utils.notEmpty(configVersion) && utils.notEmpty(serverVersion)) {
+				if(configVersion.endsWith("x") || configVersion.endsWith("*")) {
+					final String vers = utilsString.trims(configVersion, "x", "*");
+					if(!serverVersion.startsWith(vers))
+						configVersionDifferent = true;
+				} else {
+					if(!configVersion.equals(serverVersion))
+						configVersionDifferent = true;
+				}
+			}
+			if(configVersionDifferent)
+				log().warning("config.yml for this server may need updates");
+		}
 		// log level
 		final xLevel level = this.config.getLogLevel();
 		if(level != null)
