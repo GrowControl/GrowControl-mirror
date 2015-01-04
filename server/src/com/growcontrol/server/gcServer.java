@@ -15,6 +15,7 @@ import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsString;
+import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.scheduler.ticker.xTicker;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
@@ -106,11 +107,12 @@ xVars.get().debug(true);
 			if(debug != null)
 				xVars.get().debug(debug.booleanValue());
 		}
-//		// tick interval
-//		{
-//			final xTime tick = this.config.getTickInterval();
-//			//TODO: apply this to scheduler
-//		}
+		// tick interval
+		{
+			final xTime tick = this.config.getTickInterval();
+			final xTicker ticker = gcServerVars.get().ticker();
+			ticker.setInterval(tick);
+		}
 //		// listen port
 //		{
 //			@SuppressWarnings("unused")
@@ -184,7 +186,6 @@ xVars.get().debug(true);
 		case 4: {
 			// tick scheduler
 			final xTicker ticker = gcServerVars.get().ticker();
-			ticker.setInterval(this.config.getTickInterval());
 			ticker.Start();
 			return true;
 		}
