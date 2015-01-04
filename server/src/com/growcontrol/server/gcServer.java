@@ -250,9 +250,9 @@ xVars.get().debug(true);
 	/**
 	 * Server shutdown sequence.
 	 *   8.
-	 *   7. Stop plugins and sockets
-	 *   6. Unload plugins and sockets
-	 *   5.
+	 *   7.
+	 *   6. Stop plugins and sockets
+	 *   5. Unload plugins and sockets
 	 *   4.
 	 *   3.
 	 *   2.
