@@ -1,3 +1,4 @@
+#!/bin/bash
 # ==================================================
 # GrowControl - Workspace setup script
 #
@@ -19,7 +20,8 @@
 
 
 
-if [[ `pwd` == */GrowControl.git ]]; then
+PWD=`pwd`
+if [ "$PWD" == *"/GrowControl.git" ]; then
 	echo
 	echo "Cannot run this script within the repo!"
 	echo "Move up to the parent directory and run from there."
@@ -30,14 +32,14 @@ fi
 
 
 # load workspace_utils.sh script
-if [ -e workspace_utils.sh ]; then
-	source ./workspace_utils.sh
-elif [ -e /usr/local/bin/pxn/workspace_utils.sh ]; then
-	source /usr/local/bin/pxn/workspace_utils.sh
+if [ -e "${PWD}/workspace_utils.sh" ]; then
+	source "${PWD}/workspace_utils.sh"
+elif [ -e "/usr/local/bin/pxn/workspace_utils.sh" ]; then
+	source "/usr/local/bin/pxn/workspace_utils.sh"
 else
-	wget https://raw.githubusercontent.com/PoiXson/shellscripts/master/pxn/workspace_utils.sh \
+	wget "https://raw.githubusercontent.com/PoiXson/shellscripts/master/pxn/workspace_utils.sh" \
 		|| exit 1
-	source ./workspace_utils.sh
+	source "${PWD}/workspace_utils.sh"
 fi
 
 
@@ -57,17 +59,17 @@ newline
 title "Creating Symbolic Links"
 
 # server in client
-mklinkrel.sh  GrowControl.git/server/src/com/growcontrol/server  GrowControl.git/client/src/com/growcontrol  server      || exit 1
+. mklinkrel.sh  GrowControl.git/server/src/com/growcontrol/server  GrowControl.git/client/src/com/growcontrol  server      || exit 1
 # plugins
-mklinkrel.sh  gcPlugins.git                                      GrowControl.git                             plugins     || exit 1
+. mklinkrel.sh  gcPlugins.git                                      GrowControl.git                             plugins     || exit 1
 
 # gc common
-mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/server/src/com/growcontrol  gccommon    || exit 1
-mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/client/src/com/growcontrol  gccommon    || exit 1
+. mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/server/src/com/growcontrol  gccommon    || exit 1
+. mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/client/src/com/growcontrol  gccommon    || exit 1
 
 # sockets library
-# mklinkrel.sh  xSocket.git/src/com/poixson/xsocket                GrowControl.git/server/src/com/poixson      xsocket     || exit 1
-# mklinkrel.sh  xSocket.git/src/com/poixson/xsocket                GrowControl.git/client/src/com/poixson      xsocket     || exit 1
+# . mklinkrel.sh  xSocket.git/src/com/poixson/xsocket                GrowControl.git/server/src/com/poixson      xsocket     || exit 1
+# . mklinkrel.sh  xSocket.git/src/com/poixson/xsocket                GrowControl.git/client/src/com/poixson      xsocket     || exit 1
 
 newline
 newline
