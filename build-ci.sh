@@ -1,4 +1,6 @@
+#!/bin/bash
 # sh GrowControl.git/build-ci.sh  --dl-path=/home/pxn/www/dl/GrowControl  --yum-path=/home/pxn/www/yum/extras-testing/noarch
+
 
 
 PWD=`pwd`
