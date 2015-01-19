@@ -1,15 +1,16 @@
 
 
 
+PWD=`pwd`
 # load build_utils.sh script
-if [ -e build_utils.sh ]; then
-	source ./build_utils.sh
-elif [ -e /usr/local/bin/pxn/build_utils.sh ]; then
-	source /usr/local/bin/pxn/build_utils.sh
+if [ -e "${PWD}/build_utils.sh" ]; then
+	source "${PWD}/build_utils.sh"
+elif [ -e "/usr/local/bin/pxn/build_utils.sh" ]; then
+	source "/usr/local/bin/pxn/build_utils.sh"
 else
-	wget https://raw.githubusercontent.com/PoiXson/shellscripts/master/pxn/build_utils.sh \
+	wget "https://raw.githubusercontent.com/PoiXson/shellscripts/master/pxn/build_utils.sh" \
 		|| exit 1
-	source ./build_utils.sh
+	source "${PWD}/build_utils.sh"
 fi
 
 
