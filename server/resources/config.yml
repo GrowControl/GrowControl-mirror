@@ -1,0 +1,7 @@
+Version: 3.5
+Log Level: info
+Debug: false
+Tick Interval: 10s
+Listen Port: 1142
+Logic Threads: 0
+Zones: [ExampleZone]
