@@ -56,16 +56,16 @@ newline
 
 
 # SYMLINKS
-title "Creating Symbolic Links"
+# title "Creating Symbolic Links"
 
 # server in client
-. mklinkrel.sh  GrowControl.git/server/src/com/growcontrol/server  GrowControl.git/client/src/com/growcontrol  server      || exit 1
+# . mklinkrel.sh  GrowControl.git/server/src/com/growcontrol/server  GrowControl.git/client/src/com/growcontrol  server      || exit 1
 # plugins
-. mklinkrel.sh  gcPlugins.git                                      GrowControl.git                             plugins     || exit 1
+# . mklinkrel.sh  gcPlugins.git                                      GrowControl.git                             plugins     || exit 1
 
 # gc common
-. mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/server/src/com/growcontrol  gccommon    || exit 1
-. mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/client/src/com/growcontrol  gccommon    || exit 1
+# . mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/server/src/com/growcontrol  gccommon    || exit 1
+# . mklinkrel.sh  GrowControl.git/gccommon                           GrowControl.git/client/src/com/growcontrol  gccommon    || exit 1
 
 # sockets library
 # . mklinkrel.sh  xSocket.git/src/com/poixson/xsocket                GrowControl.git/server/src/com/poixson      xsocket     || exit 1
