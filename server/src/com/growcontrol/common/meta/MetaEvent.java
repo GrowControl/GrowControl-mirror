@@ -1,4 +1,4 @@
-package com.growcontrol.gccommon.meta;
+package com.growcontrol.common.meta;
 
 import com.poixson.commonjava.EventListener.xEventData;
 

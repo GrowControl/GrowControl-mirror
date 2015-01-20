@@ -1,8 +1,8 @@
-package com.growcontrol.gccommon.meta;
+package com.growcontrol.common.meta;
 
 import java.io.Serializable;
 
-import com.growcontrol.gccommon.meta.metaTypes.MetaString;
+import com.growcontrol.common.meta.metaTypes.MetaString;
 
 
 public abstract class Meta implements Serializable {

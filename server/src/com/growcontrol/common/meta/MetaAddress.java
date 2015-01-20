@@ -1,4 +1,4 @@
-package com.growcontrol.gccommon.meta;
+package com.growcontrol.common.meta;
 
 import java.util.HashMap;
 import java.util.Map;

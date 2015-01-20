@@ -1,6 +1,6 @@
-package com.growcontrol.gccommon.meta.metaTypes;
+package com.growcontrol.common.meta.metaTypes;
 
-import com.growcontrol.gccommon.meta.Meta;
+import com.growcontrol.common.meta.Meta;
 
 
 public class MetaTrigger extends Meta {

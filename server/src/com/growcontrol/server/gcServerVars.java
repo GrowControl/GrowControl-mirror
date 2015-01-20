@@ -1,6 +1,6 @@
 package com.growcontrol.server;
 
-import com.growcontrol.gccommon.meta.MetaRouter;
+import com.growcontrol.common.meta.MetaRouter;
 import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.scheduler.ticker.xTicker;
 

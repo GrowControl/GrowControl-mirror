@@ -1,7 +1,7 @@
-package com.growcontrol.gccommon.meta.metaTypes;
+package com.growcontrol.common.meta.metaTypes;
 
-import com.growcontrol.gccommon.meta.InvalidMetaFormatException;
-import com.growcontrol.gccommon.meta.Meta;
+import com.growcontrol.common.meta.InvalidMetaFormatException;
+import com.growcontrol.common.meta.Meta;
 import com.poixson.commonjava.Utils.utilsNumbers;
 
 

@@ -1,8 +1,8 @@
 package com.growcontrol.server.commands;
 
-import com.growcontrol.gccommon.meta.Meta;
-import com.growcontrol.gccommon.meta.MetaAddress;
-import com.growcontrol.gccommon.meta.MetaRouter;
+import com.growcontrol.common.meta.Meta;
+import com.growcontrol.common.meta.MetaAddress;
+import com.growcontrol.common.meta.MetaRouter;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
