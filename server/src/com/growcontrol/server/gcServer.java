@@ -70,6 +70,8 @@ public class gcServer extends xApp {
 			Failure.fail("Failed to load "+gcServerConfig.CONFIG_FILE);
 			return;
 		}
+		if(this.config.isFromResource())
+			log().warning("Created default config.yml");
 		this.updateConfig();
 	}
 	private void updateConfig() {
