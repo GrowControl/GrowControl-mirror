@@ -95,15 +95,15 @@ public class gcServer extends xApp {
 		}
 		// log level
 		{
-			final xLevel level = this.config.getLogLevel();
-			if(level != null)
-				xLog.getRoot().setLevel(level);
-		}
-		// debug
-		{
 			final Boolean debug = this.config.getDebug();
-			if(debug != null)
+			if(debug != null && debug.booleanValue())
 				xVars.get().debug(debug.booleanValue());
+			if(!xVars.get().debug()) {
+				// set log level
+				final xLevel level = this.config.getLogLevel();
+				if(level != null)
+					xLog.getRoot().setLevel(level);
+			}
 		}
 		// tick interval
 		{
@@ -131,8 +131,23 @@ public class gcServer extends xApp {
 
 
 
+	/**
+	 * Handle command-line arguments.
+	 */
 	@Override
 	protected void processArgs(final String[] args) {
+		if(utils.isEmpty(args)) return;
+		for(final String arg : args) {
+			switch(arg) {
+			case "--debug":
+				xVars.get().debug(true);
+				break;
+			default:
+				System.out.println("Unknown argument: "+arg);
+				System.exit(1);
+				break;
+			}
+		}
 	}
 
 
