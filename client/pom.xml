@@ -12,7 +12,7 @@
 	<url>http://growcontrol.com</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<pxnCommon-version>[3.5,3.6)</pxnCommon-version>
+<!--		<pxnCommon-version>[3.5,3.6)</pxnCommon-version> -->
 		<com.miglayout-version>4.2</com.miglayout-version>
 		<junit-version>4.8.2</junit-version>
 	</properties>
@@ -101,10 +101,18 @@
 		</plugins>
 	</build>
 	<dependencies>
+<!--
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>pxnCommon</artifactId>
 			<version>${pxnCommon-version}</version>
+			<scope>compile</scope>
+		</dependency>
+-->
+		<dependency>
+			<groupId>com.growcontrol</groupId>
+			<artifactId>gcServer</artifactId>
+			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
