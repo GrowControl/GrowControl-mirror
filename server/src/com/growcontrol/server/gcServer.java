@@ -48,14 +48,10 @@ public class gcServer extends xApp {
 	 * @param args Command line arguments.
 	 */
 	public static void main(final String[] args) {
-
-xVars.get().debug(true);
-
-		initMain(args, new gcServer());
+		initMain(args, gcServer.class);
 	}
-	protected gcServer() {
+	public gcServer() {
 		super();
-		this.displayStartupVars();
 		if(xVars.get().debug())
 			this.displayColors();
 		this.displayLogo();

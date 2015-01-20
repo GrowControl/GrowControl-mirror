@@ -48,9 +48,9 @@ public class gcClient extends xApp {
 	 * @param args Command line arguments.
 	 */
 	public static void main(final String[] args) {
-		initMain(args, new gcClient());
+		initMain(args, gcClient.class);
 	}
-	protected gcClient() {
+	public gcClient() {
 		super();
 		this.displayStartupVars();
 		if(xVars.get().debug())
