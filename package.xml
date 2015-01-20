@@ -20,6 +20,7 @@
 				<include>gcClient-*.jar</include>
 			</includes>
 		</fileSet>
+<!--
 		<fileSet>
 			<directory>${project.basedir}/plugins/target/</directory>
 			<outputDirectory>/</outputDirectory>
@@ -27,6 +28,7 @@
 				<include>gcPlugins-*.zip</include>
 			</includes>
 		</fileSet>
+-->
 		<fileSet>
 			<directory>${project.basedir}/</directory>
 			<outputDirectory>/</outputDirectory>
