@@ -7,3 +7,65 @@ The basic system comes in 4 parts, all of which are optional and can be customiz
 * The plugins are what give the system its functional power. Without plugins, the client and server do very little. Officially supported plugins, as well as 3rd party contributed plugins are available on growcontrol.com
 * The hardware is the last piece you'll need to make it all work. It too is optional, as there are many plugins which can be used without extra hardware. The Arduino and its variations are commonly used, and can easily read sensors, control 120v outlets using relays, or any number of other devices.
 
+
+
+Requirements
+------------
+
+To use the GrowControl server/client software, you'll first need to install the latest Java Runtime. On linux, either the OpenJDK or the official JRE/JDK will work. Most libraries which are needed are already included in the jar package. The GrowControl Server has minimal system requirements, and will run happily on almost any system, new or old.
+
+In order to flash the Arduino devices with the sketches provided by GrowControl, you'll need the Arduino IDE which can be found here http://www.arduino.cc/ Most sketches will run on the ATMega328 based Arduino's, such as the Arduino Uno. Sketches which require more resources are noted at the top of the sketch file, and will run on any SAM3X8E based Arduino, such as the Arduino Due, or the Udoo.
+
+
+
+Installing
+----------
+
+Installing on a Redhat derived distro such as Fedora or CentOS is simple. RPM's can be found on the http://growcontrol.com/ website, or you may receive automatic updates using the yum repo which can be installed using http://yum.poixson.com/latest.rpm . This yum repo may be discontinued once the project is submitted to a mainstream repo, in which case only the testing repo will be provided at this location.
+
+Download Links:
+http://dl.poixson.com/  - All build versions can be found here, in both rpm and jar formats.
+http://yum.poixson.com/ - Only the most recent rpm builds are provided here.
+
+
+
+Development
+-----------
+
+Compiling GrowControl from source is relatively easy. There are a few tools you'll need, namely git and maven.
+
+Fedora/Redhat:
+sudo yum install git maven
+
+Ubuntu:
+sudo apt-get update
+sudo apt-get install git maven
+
+From the locaton you'd like to set up your workspace, the following commands will clone the github repo's.
+
+git clone https://github.com/PoiXson/GrowControl.git
+git clone https://github.com/PoiXson/pxnCommon.git
+
+First, compile the pxnCommon package:
+(cd pxnCommon; mvn clean install)
+
+Then finally compile GrowControl:
+(cd GrowControl; mvn clean install)
+
+You'll then find the compiled jar's in the following locations:
+GrowControl/target/
+GrowControl/server/target/
+GrowControl/client/target/
+
+Note: the files beginning with scant- contain only project specific classes. Required libraries aren't included in these jar's.
+
+In order to create the project files to import into Eclipse:
+(cd pxnCommon; mvn eclipse:eclipse)
+(cd GrowControl; mvn eclipse:eclipse)
+
+
+
+Visit us on irc:
+
+irc.esper.net #growcontrol
+
