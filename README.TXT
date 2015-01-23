@@ -35,11 +35,11 @@ Development
 Compiling GrowControl from source is relatively easy. There are a few tools you'll need, namely git and maven.
 
 Fedora/Redhat:
-sudo yum install git maven
+sudo yum install git maven java-1.8.0-openjdk-devel
 
 Ubuntu:
 sudo apt-get update
-sudo apt-get install git maven
+sudo apt-get install git maven openjdk-7-jdk
 
 From the locaton you'd like to set up your workspace, the following commands will clone the github repo's.
 
