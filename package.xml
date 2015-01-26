@@ -20,6 +20,13 @@
 				<include>gcClient-*.jar</include>
 			</includes>
 		</fileSet>
+		<fileSet>
+			<directory>${project.basedir}/client/target/</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>GrowControl-*.exe</include>
+			</includes>
+		</fileSet>
 <!--
 		<fileSet>
 			<directory>${project.basedir}/plugins/target/</directory>
