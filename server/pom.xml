@@ -107,14 +107,4 @@
 		</dependency>
 -->
 	</dependencies>
-<!--
-	<repositories>
-		<repository>
-			<id>gclibs</id>
-			<name>gc libraries</name>
-			<layout>default</layout>
-			<url>file://${project.basedir}/lib/</url>
-		</repository>
-	</repositories>
--->
 </project>
