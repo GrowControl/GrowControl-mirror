@@ -24,7 +24,7 @@ public final class gcServerConfig extends xConfig {
 
 
 
-	public gcServerConfig(Map<String, Object> data) {
+	public gcServerConfig(final Map<String, Object> data) {
 		super(data);
 	}
 
@@ -72,16 +72,6 @@ public final class gcServerConfig extends xConfig {
 				return xTime.parse(value);
 		}
 		return default_TICK_INTERVAL;
-	}
-
-
-
-	// listen port
-	public int getListenPort() {
-		final Integer value = getInteger(gcServerDefines.CONFIG_LISTEN_PORT);
-		if(value == null)
-			return default_LISTEN_PORT;
-		return utilsNumbers.MinMax(value.intValue(), 1, 65536);
 	}
 
 

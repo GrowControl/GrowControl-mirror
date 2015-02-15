@@ -69,7 +69,7 @@ public class gcServerCommands_config implements xCommandListener {
 		this.publish(" Log Level:      "+config.getLogLevel().toString());
 		this.publish(" Debug:          "+config.getDebug().toString());
 		this.publish(" Tick Interval:  "+config.getTickInterval().toString());
-		this.publish(" Listen Port:    "+Integer.toString(config.getListenPort()));
+//		this.publish(" Listen Port:    "+Integer.toString(config.getListenPort()));
 		this.publish(" Logic Threads:  "+Integer.toString(config.getLogicThreads()));
 //		this.publish(" Zones:  [ "+Integer.toString(zones.length)+" ]");
 //		for(final String zone : zones)
