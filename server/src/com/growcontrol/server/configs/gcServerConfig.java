@@ -105,4 +105,11 @@ public final class gcServerConfig extends xConfig {
 
 
 
+	// socket
+	public gcSocketServerConfig getSocketConfig(final boolean ssl) {
+		return gcSocketServerConfig.get(this, ssl);
+	}
+
+
+
 }
