@@ -60,8 +60,8 @@ GrowControl/client/target/
 Note: the files beginning with scant- contain only project specific classes. Required libraries aren't included in these jar's.
 
 In order to create the project files to import into Eclipse:
-(cd pxnCommon; mvn eclipse:eclipse)
-(cd GrowControl; mvn eclipse:eclipse)
+(cd pxnCommon; mvn eclipse:eclipse dependency:sources)
+(cd GrowControl; mvn eclipse:eclipse dependency:sources)
 
 
 
