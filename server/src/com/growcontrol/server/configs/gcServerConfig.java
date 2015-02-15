@@ -3,6 +3,7 @@ package com.growcontrol.server.configs;
 import java.util.Map;
 
 import com.growcontrol.server.gcServerDefines;
+import com.growcontrol.server.configs.gcSocketServerConfig.gcSocketDAO;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
@@ -96,8 +97,11 @@ public final class gcServerConfig extends xConfig {
 
 
 	// socket
-	public gcSocketServerConfig getSocketConfig(final boolean ssl) {
-		return gcSocketServerConfig.get(this, ssl);
+	public gcSocketDAO getSocketConfig() {
+		return gcSocketServerConfig.get(this, false);
+	}
+	public gcSocketDAO getSocketSSLConfig() {
+		return gcSocketServerConfig.get(this, true);
 	}
 
 

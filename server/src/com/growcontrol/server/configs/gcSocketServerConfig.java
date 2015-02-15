@@ -12,19 +12,58 @@ public class gcSocketServerConfig extends xConfig {
 //	public static final int    default_PORT     = 1142;
 //	public static final int    default_PORT_SSL = 1143;
 
+	protected final boolean ssl;
 
 
-	public static gcSocketServerConfig get(final xConfig config, final boolean ssl) {
+
+	public static gcSocketDAO get(final xConfig config, final boolean ssl) {
 		if(config == null) throw new NullPointerException();
 		final Map<String, Object> map = config.getStringObjectMap(
 				ssl ? gcServerDefines.CONFIG_SOCKETSSL : gcServerDefines.CONFIG_SOCKET
 		);
 		if(map == null)
 			return null;
-		return new gcSocketServerConfig(map);
+		final gcSocketServerConfig cfg = new gcSocketServerConfig(map, ssl);
+		return cfg.getDAO();
+	}
+	protected gcSocketServerConfig(final Map<String, Object> data, final boolean ssl) {
+		super(data);
+		this.ssl = ssl;
 	}
 	protected gcSocketServerConfig(final Map<String, Object> data) {
 		super(data);
+		throw new UnsupportedOperationException();
+	}
+
+
+
+	public static class gcSocketDAO {
+
+		public final boolean enabled;
+		public final boolean ssl;
+		public final String  host;
+		public final int     port;
+
+		public gcSocketDAO(final boolean enabled, final boolean ssl,
+				final String host, final int port) {
+			this.enabled = enabled;
+			this.ssl     = ssl;
+			this.host    = host;
+			this.port    = port;
+		}
+
+	}
+
+
+
+	// get config holder
+	public gcSocketDAO getDAO() {
+		return new gcSocketDAO(
+				this.getEnabled(),
+				this.ssl,
+				this.getHost(),
+				this.getPort()
+		);
 	}
 
 

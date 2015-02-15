@@ -8,6 +8,7 @@ import org.fusesource.jansi.AnsiConsole;
 import com.growcontrol.common.commands.gcCommonCommands;
 import com.growcontrol.server.commands.gcServerCommands;
 import com.growcontrol.server.configs.gcServerConfig;
+import com.growcontrol.server.configs.gcSocketServerConfig.gcSocketDAO;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.plugin.xPluginManager;
@@ -30,6 +31,10 @@ public class gcServer extends xApp {
 
 	// server socket pool
 //	private volatile pxnSocketServer socket = null;
+
+	// sockets
+	private volatile gcSocketDAO cfgSocket    = null;
+	private volatile gcSocketDAO cfgSocketSSL = null;
 
 
 
@@ -111,12 +116,6 @@ public class gcServer extends xApp {
 			final xTicker ticker = gcServerVars.get().ticker();
 			ticker.setInterval(tick);
 		}
-//		// listen port
-//		{
-//			@SuppressWarnings("unused")
-//			final int port = this.config.getListenPort();
-//			//TODO: apply this to socket server
-//		}
 //		// logic threads (0 uses main thread)
 //		{
 //			@SuppressWarnings("unused")
@@ -127,6 +126,11 @@ public class gcServer extends xApp {
 //		{
 //			this.config.populateZones(this.zones);
 //		}
+		// sockets
+		{
+			this.cfgSocket    = this.config.getSocketConfig();
+			this.cfgSocketSSL = this.config.getSocketSSLConfig();
+		}
 	}
 
 
