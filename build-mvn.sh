@@ -28,7 +28,7 @@ if [ $sedresult != 0 ]; then
 	echo "Failed to sed the pom files!"
 else
 	# build
-	mvn clean install
+	mvn clean install source:jar
 	buildresult=$?
 fi
 
