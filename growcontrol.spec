@@ -6,8 +6,8 @@ BuildArch       : noarch
 Prefix          : %{_javadir}/gc
 Requires        : java >= 7
 %define  _rpmfilename  %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
-%define  serverjar     "%{SOURCE_ROOT_SERVER}/gcServer-%{version}-SNAPSHOT.jar"
-%define  clientjar     "%{SOURCE_ROOT_CLIENT}/gcClient-%{version}-SNAPSHOT.jar"
+%define  serverjar     "%{SOURCE_ROOT_SERVER}/gcServer-%{version}.jar"
+%define  clientjar     "%{SOURCE_ROOT_CLIENT}/gcClient-%{version}.jar"
 
 Group           : Development/Electronic Lab
 License         : (c) PoiXson
