@@ -13,6 +13,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<pxnCommon-version>[3.5,3.6)</pxnCommon-version>
+		<io.netty-version>4.0.25.Final</io.netty-version>
 		<junit-version>4.8.2</junit-version>
 	</properties>
 	<scm>
@@ -106,6 +107,11 @@
 			<artifactId>pxnCommon</artifactId>
 			<version>${pxnCommon-version}</version>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>${io.netty-version}</version>
 		</dependency>
 <!--
 		<dependency>
