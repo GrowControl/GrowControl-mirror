@@ -8,8 +8,8 @@ Requires        : java >= 7
 Provides        : gcServer = %{version}
 Provides        : gcClient = %{version}
 %define  _rpmfilename  %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
-%define  serverjar     "%{SOURCE_ROOT_SERVER}/gcServer-%{version}.jar"
-%define  clientjar     "%{SOURCE_ROOT_CLIENT}/gcClient-%{version}.jar"
+%define  serverjar     "%{SOURCE_ROOT}/server/target/gcServer-%{version}.jar"
+%define  clientjar     "%{SOURCE_ROOT}/client/target/gcClient-%{version}.jar"
 
 Group           : Development/Electronic Lab
 License         : (c) PoiXson
@@ -38,16 +38,16 @@ GrowControl is a computer automation system for your home and garden, or hobby p
 echo
 echo "Prep.."
 # check for existing workspace
-if [ -d "%{SOURCE_ROOT_SERVER}" ]; then
-	echo "Found source workspace: %{SOURCE_ROOT_SERVER}"
+if [ -d "%{SOURCE_ROOT}/server/target/" ]; then
+	echo "Found source workspace: %{SOURCE_ROOT}/server/target/"
 else
-	echo "Source workspace not found: %{SOURCE_ROOT_SERVER}"
+	echo "Source workspace not found: %{SOURCE_ROOT}/server/target/"
 	exit 1
 fi
-if [ -d "%{SOURCE_ROOT_CLIENT}" ]; then
-	echo "Found source workspace: %{SOURCE_ROOT_CLIENT}"
+if [ -d "%{SOURCE_ROOT}/client/target/" ]; then
+	echo "Found source workspace: %{SOURCE_ROOT}/client/target/"
 else
-	echo "Source workspace not found: %{SOURCE_ROOT_CLIENT}"
+	echo "Source workspace not found: %{SOURCE_ROOT}/client/target/"
 	exit 1
 fi
 # check for pre-built jar files
