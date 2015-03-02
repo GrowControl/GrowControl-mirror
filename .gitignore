@@ -1,6 +1,7 @@
 # resources/
 bin/
 target/
+rpmbuild-root/
 out/
 build/
 
