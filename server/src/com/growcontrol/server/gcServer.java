@@ -8,7 +8,7 @@ import org.fusesource.jansi.AnsiConsole;
 import com.growcontrol.common.commands.gcCommonCommands;
 import com.growcontrol.server.commands.gcServerCommands;
 import com.growcontrol.server.configs.gcServerConfig;
-import com.growcontrol.server.configs.gcSocketServerConfig.gcSocketDAO;
+import com.growcontrol.server.net.NetManager;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.plugin.xPluginManager;
@@ -32,9 +32,6 @@ public class gcServer extends xApp {
 	// server socket pool
 //	private volatile pxnSocketServer socket = null;
 
-	// sockets
-	private volatile gcSocketDAO cfgSocket    = null;
-	private volatile gcSocketDAO cfgSocketSSL = null;
 
 
 
@@ -128,8 +125,8 @@ public class gcServer extends xApp {
 //		}
 		// sockets
 		{
-			this.cfgSocket    = this.config.getSocketConfig();
-			this.cfgSocketSSL = this.config.getSocketSSLConfig();
+			final NetManager manager = NetManager.get();
+			manager.setConfigs(this.config.getSocketConfigs());
 		}
 	}
 
