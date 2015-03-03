@@ -1,16 +1,20 @@
 package com.growcontrol.server.configs;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
+import com.growcontrol.server.gcServer;
 import com.growcontrol.server.gcServerDefines;
-import com.growcontrol.server.configs.gcSocketServerConfig.gcSocketDAO;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
+import com.poixson.commonjava.Utils.utilsObject;
 import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.Utils.xTimeU;
 import com.poixson.commonjava.Utils.threads.xThreadPool;
 import com.poixson.commonjava.xLogger.xLevel;
+import com.poixson.commonjava.xLogger.xLog;
 
 
 public final class gcServerConfig extends xConfig {
@@ -96,12 +100,45 @@ public final class gcServerConfig extends xConfig {
 
 
 
-	// socket
-	public gcSocketDAO getSocketConfig() {
-		return gcSocketServerConfig.get(this, false);
+	public Set<gcSocketDAO> getSocketConfigs() {
+		final Set<Object> list = this.getSet(
+				Object.class,
+				gcServerDefines.CONFIG_SOCKETS
+		);
+		final Set<gcSocketDAO> configs = new HashSet<gcSocketDAO>();
+		if(utils.notEmpty(list)) {
+			for(final Object o : list) {
+				try {
+					final gcSocketDAO cfg = gcSocketDAO.get(
+							utilsObject.castMap(String.class, Object.class, o)
+					);
+					if(cfg == null)
+						this.log().severe("Failed to load socket config");
+					else
+						configs.add(cfg);
+				} catch (Exception e) {
+					this.log().trace(e);
+				}
+			}
+		}
+		for(gcSocketDAO dao : configs) {
+			this.log().getWeak("sockets").finer(
+					(dao.enabled ? "Enabled  " : "Disabled ")+
+					dao.host+":"+Integer.toString(dao.port)+
+					(dao.ssl ? " (SSL)" : "")
+			);
+		}
+		return configs;
 	}
-	public gcSocketDAO getSocketSSLConfig() {
-		return gcSocketServerConfig.get(this, true);
+
+
+
+	// logger
+	private volatile xLog _log = null;
+	public xLog log() {
+		if(_log == null)
+			_log = gcServer.log().get("config");
+		return _log;
 	}
 
 
