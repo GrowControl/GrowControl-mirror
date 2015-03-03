@@ -4,7 +4,7 @@ Version         : 3.5.%{BUILD_NUMBER}
 Release         : 1
 BuildArch       : noarch
 Prefix          : %{_javadir}/gc
-Requires        : java >= 7
+Requires        : java >= 1.8
 Provides        : gcServer = %{version}
 Provides        : gcClient = %{version}
 %define  _rpmfilename  %%{NAME}-%%{VERSION}-%%{RELEASE}.%%{ARCH}.rpm
