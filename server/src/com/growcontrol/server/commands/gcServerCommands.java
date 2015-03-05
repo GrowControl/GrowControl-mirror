@@ -6,6 +6,7 @@ import com.growcontrol.common.meta.MetaRouter;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
+import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
 import com.poixson.commonjava.xLogger.handlers.xCommandListener;
@@ -44,6 +45,10 @@ public final class gcServerCommands implements xCommandListener {
 		case "wall":
 		case "broadcast":
 			this._say(event);
+			break;
+		case "memory":
+		case "mem":
+			this._mem(event);
 			break;
 //		// get current value
 //		case "get":
@@ -134,6 +139,30 @@ public final class gcServerCommands implements xCommandListener {
 		event.setHandled();
 		this.publish();
 		this.publish("Broadcasts a message.");
+		this.publish();
+	}
+
+
+
+	protected void _mem(final xCommandEvent event) {
+		if(event.isHelp()) {
+			this._mem_help(event);
+			return;
+		}
+		event.setHandled();
+		this.publish();
+		if("gc".equals(event.arg(1))) {
+			this.publish("Performing garbage collection..");
+			System.gc();
+		}
+		utils.MemoryStats();
+		this.publish();
+	}
+	protected void _mem_help(final xCommandEvent event) {
+		event.setHandled();
+		this.publish();
+		this.publish("Displays current memory stats.");
+		this.publish("  <gc> optional argument to perform garbage collection");
 		this.publish();
 	}
 
