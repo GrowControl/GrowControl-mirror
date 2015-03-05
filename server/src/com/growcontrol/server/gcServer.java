@@ -29,10 +29,6 @@ public class gcServer extends xApp {
 	// zones
 //	private final List<String> zones = new ArrayList<String>();
 
-	// server socket pool
-//	private volatile pxnSocketServer socket = null;
-
-
 
 
 	/**
@@ -159,9 +155,9 @@ public class gcServer extends xApp {
 	 *   2. Listeners
 	 *   3. Command prompt
 	 *   4. Start ticking
-	 *   5. Load plugins and sockets
-	 *   6. Start plugins and sockets
-	 *   7.
+	 *   5. Load plugins
+	 *   6. Start plugins
+	 *   7. Start sockets
 	 *   8.
 	 * @return true if success, false if problem.
 	 */
@@ -225,7 +221,7 @@ public class gcServer extends xApp {
 //			}
 			// start logic thread queue
 //			getLogicQueue();
-		// load plugins and sockets
+		// load plugins
 		case 5: {
 			final xPluginManager manager = xPluginManager.get();
 			manager.setClassField("Server Main");
@@ -246,13 +242,16 @@ public class gcServer extends xApp {
 //				}
 //			});
 //			socket.Start();
-		// start plugins and sockets
+		// start plugins
 		case 6: {
 			final xPluginManager manager = xPluginManager.get();
 			manager.enableAll();
 			return true;
 		}
+		// start sockets
 		case 7: {
+			final NetManager manager = NetManager.get();
+			manager.Start();
 			return true;
 		}
 		case 8: {
@@ -264,9 +263,9 @@ public class gcServer extends xApp {
 	/**
 	 * Server shutdown sequence.
 	 *   8.
-	 *   7.
-	 *   6. Stop plugins and sockets
-	 *   5. Unload plugins and sockets
+	 *   7. Stop sockets
+	 *   6. Stop plugins
+	 *   5. Unload plugins
 	 *   4.
 	 *   3.
 	 *   2.
@@ -279,29 +278,27 @@ public class gcServer extends xApp {
 		case 8: {
 			return true;
 		}
+		// stop sockets
 		case 7: {
+			final NetManager manager = NetManager.get();
+			manager.Stop();
+			manager.CloseAll();
 			return true;
 		}
-		// stop plugins and sockets
+		// stop plugins
 		case 6: {
-//			// close socket listener
-//			if(socket != null)
-//				socket.Close();
 //			// pause scheduler
 //			pxnScheduler.PauseAll();
 			final xPluginManager manager = xPluginManager.get();
 			manager.disableAll();
 			return true;
 		}
-		// unload plugins and sockets
+		// unload plugins
 		case 5: {
 //			// end schedulers
 //			pxnScheduler.ShutdownAll();
 			final xPluginManager manager = xPluginManager.get();
 			manager.unloadAll();
-//			// close sockets
-//			if(socket != null)
-//				socket.ForceClose();
 			return true;
 		}
 		case 4: {
