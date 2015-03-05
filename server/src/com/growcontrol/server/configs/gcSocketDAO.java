@@ -50,9 +50,10 @@ public class gcSocketDAO {
 
 	public gcSocketDAO(final boolean enabled, final boolean ssl,
 			final String host, final int port) {
+		if(port < 1 || port > 65535) throw new IllegalArgumentException("Invalid port number: "+Integer.toString(port));
 		this.enabled = enabled;
 		this.ssl    = ssl;
-		this.host   = host;
+		this.host   = utils.isEmpty(host) ? null : host;
 		this.port   = port;
 	}
 
