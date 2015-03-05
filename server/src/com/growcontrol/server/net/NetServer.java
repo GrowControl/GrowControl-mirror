@@ -2,6 +2,7 @@ package com.growcontrol.server.net;
 
 import io.netty.channel.Channel;
 
+import java.net.SocketException;
 import java.net.UnknownHostException;
 
 import com.growcontrol.server.configs.gcSocketDAO;
@@ -20,7 +21,7 @@ public class NetServer implements xCloseable {
 
 
 	public NetServer(final NetManager manager, final gcSocketDAO config)
-			throws UnknownHostException, InterruptedException {
+			throws UnknownHostException, InterruptedException, SocketException {
 		if(manager == null) throw new NullPointerException();
 		if(config  == null) throw new NullPointerException();
 		if(!config.enabled) throw new UnsupportedOperationException("This socket server is disabled");

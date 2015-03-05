@@ -2,6 +2,7 @@ package com.growcontrol.server.net;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -21,6 +22,7 @@ import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.HttpVersion;
 import io.netty.handler.ssl.SslContext;
 
+import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.HashSet;
@@ -81,7 +83,7 @@ public class NetManager implements xStartable {
 //		this.bootstrap.handler(new LoggingHandler(LogLevel.INFO));
 		final SslContext sslContext = null;
 		this.bootstrap.childHandler(
-				new ServerSocketChannelInitializer(sslContext)
+				new ServerSocketChannelInitializer(this.log(), sslContext)
 		);
 //		// this method is bad for servers
 //		this.bossGroup = Executors.newCachedThreadPool();
@@ -99,10 +101,12 @@ public class NetManager implements xStartable {
 
 
 	protected static class ServerSocketChannelInitializer extends ChannelInitializer<SocketChannel> {
+		private final xLog log;
 
 		private final SslContext sslContext;
 
-		public ServerSocketChannelInitializer(final SslContext sslContext) {
+		public ServerSocketChannelInitializer(final xLog log, final SslContext sslContext) {
+			this.log = log;
 			this.sslContext = sslContext;
 		}
 
@@ -113,7 +117,7 @@ public class NetManager implements xStartable {
 				pipe.addLast(this.sslContext.newHandler(ch.alloc()));
 			pipe.addLast(new HttpServerCodec());
 			pipe.addLast(
-					new ServerSocketChannelHandler()
+					new ServerSocketChannelHandler(this.log)
 			);
 		}
 
@@ -122,8 +126,13 @@ public class NetManager implements xStartable {
 
 
 	protected static class ServerSocketChannelHandler extends ChannelInboundHandlerAdapter {
+		private final xLog log;
 
 		private static final byte[] CONTENT = "Hello World!!!".getBytes();
+
+		public ServerSocketChannelHandler(final xLog log) {
+			this.log = log;
+		}
 
 		@Override
 		public void channelReadComplete(final ChannelHandlerContext context) {
@@ -170,7 +179,18 @@ public class NetManager implements xStartable {
 
 		@Override
 		public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-			cause.printStackTrace();
+			// IOException
+			if("Connection reset by peer".equals(cause.getMessage())) {
+				String msg = "";
+				try {
+					final Channel ch = ctx.channel();
+					msg += " - " +ch.localAddress().toString();
+					msg += " <= "+ch.remoteAddress().toString();
+				} catch (Exception ignore) {}
+				this.log.warning(cause.getMessage()+msg);
+			} else {
+				this.log.trace((Exception) cause);
+			}
 			ctx.close();
 		}
 
@@ -201,8 +221,6 @@ public class NetManager implements xStartable {
 		// only start once
 		if(!this.running.compareAndSet(false, true))
 			return;
-
-
 		// start socket servers
 		synchronized(this.servers) {
 			for(final gcSocketDAO cfg : cfgs) {
@@ -213,6 +231,10 @@ public class NetManager implements xStartable {
 				} catch (UnknownHostException e) {
 					this.log().severe("Failed to start socket server "+cfg.toString());
 					this.log().trace(e);
+				} catch (SocketException e) {
+					if("Permission denied".equals(e.getMessage()))
+						this.log().severe("Valid port numbers are >= 1024");
+					this.log().trace(e);
 				} catch (InterruptedException e) {
 					this.log().trace(e);
 					this.Stop();
@@ -220,10 +242,6 @@ public class NetManager implements xStartable {
 				}
 			}
 		}
-
-
-
-
 		// unexpected shutdown
 		if(!this.running.get())
 			this.Stop();
