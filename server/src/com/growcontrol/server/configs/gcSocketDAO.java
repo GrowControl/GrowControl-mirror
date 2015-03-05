@@ -1,5 +1,7 @@
 package com.growcontrol.server.configs;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Map;
 
 import com.growcontrol.server.gcServerDefines;
@@ -55,6 +57,33 @@ public class gcSocketDAO {
 		this.ssl    = ssl;
 		this.host   = utils.isEmpty(host) ? null : host;
 		this.port   = port;
+	}
+
+
+
+	public String getHost() {
+		final String host = this.host;
+		if(utils.isEmpty(host) || "*".equals(host) || "any".equalsIgnoreCase(host))
+			return null;
+		return host;
+	}
+	public InetAddress getInetAddress() throws UnknownHostException {
+		final String host = this.getHost();
+		if(host == null)
+			return null;
+		if("127.0.0.1".equals(host) || "localhost".equalsIgnoreCase(host))
+			return InetAddress.getLoopbackAddress();
+		return InetAddress.getByName(host);
+	}
+
+
+
+	@Override
+	public String toString() {
+		final String host = this.getHost();
+		return (host == null ? "*" : this.host)+
+				":"+Integer.toString(this.port)+
+				(this.ssl ? "(ssl)" : "(raw)");
 	}
 
 
