@@ -20,6 +20,8 @@ import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.HttpVersion;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 
 import java.net.SocketException;
@@ -32,6 +34,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.growcontrol.server.configs.gcSocketDAO;
+import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.xStartable;
@@ -70,6 +73,8 @@ public class NetManager implements xStartable {
 
 	public NetManager() {
 		Keeper.add(this);
+		//if(xVars.get().debug())
+		CustomNettyLogger.Install(this.log());
 		// thread groups
 		final int cores = Runtime.getRuntime().availableProcessors();
 		this.bossGroup = new NioEventLoopGroup(1,     new xThreadFactory("netty-boss", true));
@@ -80,7 +85,11 @@ public class NetManager implements xStartable {
 		this.bootstrap.option(ChannelOption.SO_BACKLOG, BACKLOG);
 		this.bootstrap.channel(NioServerSocketChannel.class);
 		// handlers
-//		this.bootstrap.handler(new LoggingHandler(LogLevel.INFO));
+		if(xVars.get().debug()) {
+			final LoggingHandler logHandler = new LoggingHandler(LogLevel.INFO);
+			this.bootstrap.handler(     logHandler);
+			this.bootstrap.childHandler(logHandler);
+		}
 		final SslContext sslContext = null;
 		this.bootstrap.childHandler(
 				new ServerSocketChannelInitializer(this.log(), sslContext)
