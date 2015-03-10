@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.growcontrol.server.gcServer;
 import com.growcontrol.server.gcServerDefines;
+import com.growcontrol.server.net.NetConfig;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
@@ -100,16 +101,16 @@ public final class gcServerConfig extends xConfig {
 
 
 
-	public Set<gcSocketDAO> getSocketConfigs() {
+	public Set<NetConfig> getSocketConfigs() {
 		final Set<Object> list = this.getSet(
 				Object.class,
 				gcServerDefines.CONFIG_SOCKETS
 		);
-		final Set<gcSocketDAO> configs = new HashSet<gcSocketDAO>();
+		final Set<NetConfig> configs = new HashSet<NetConfig>();
 		if(utils.notEmpty(list)) {
 			for(final Object o : list) {
 				try {
-					final gcSocketDAO cfg = gcSocketDAO.get(
+					final NetConfig cfg = NetConfig.get(
 							utilsObject.castMap(String.class, Object.class, o)
 					);
 					if(cfg == null)
@@ -121,7 +122,7 @@ public final class gcServerConfig extends xConfig {
 				}
 			}
 		}
-		for(gcSocketDAO dao : configs) {
+		for(NetConfig dao : configs) {
 			this.log().getWeak("sockets").finer(
 					(dao.enabled ? "Enabled  " : "Disabled ")+
 					dao.host+":"+Integer.toString(dao.port)+
