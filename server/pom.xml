@@ -14,7 +14,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<pxnCommon-version>[3.5,3.6)</pxnCommon-version>
 		<io.netty-version>4.0.26.Final</io.netty-version>
-		<junit-version>4.8.2</junit-version>
+		<junit-version>4.12</junit-version>
+		<maven-compiler-plugin-version>3.2</maven-compiler-plugin-version>
+		<maven-jar-plugin-version>2.5</maven-jar-plugin-version>
+		<maven-assembly-plugin-version>2.5.3</maven-assembly-plugin-version>
+		<maven-shade-plugin-version>2.3</maven-shade-plugin-version>
+		<maven-source-plugin-version>2.4</maven-source-plugin-version>
 	</properties>
 	<scm>
 		<url>https://github.com/PoiXson/GrowControl</url>
@@ -46,7 +51,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>${maven-compiler-plugin-version}</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -55,7 +60,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.1</version>
+				<version>${maven-jar-plugin-version}</version>
 				<configuration>
 					<archive>
 						<manifest>
@@ -67,7 +72,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4</version>
+				<version>${maven-assembly-plugin-version}</version>
 				<configuration>
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
@@ -77,7 +82,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.2</version>
+				<version>${maven-shade-plugin-version}</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -93,7 +98,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
+				<version>${maven-source-plugin-version}</version>
 				<configuration>
 					<finalName>${project.artifactId}-${project.version}</finalName>
 					<attach>false</attach>
