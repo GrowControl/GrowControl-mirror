@@ -6,6 +6,7 @@ import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
 import com.growcontrol.common.commands.gcCommonCommands;
+import com.growcontrol.common.scripting.gcScriptManager;
 import com.growcontrol.server.commands.gcServerCommands;
 import com.growcontrol.server.configs.gcServerConfig;
 import com.growcontrol.server.net.NetManager;
@@ -158,7 +159,7 @@ public class gcServer extends xApp {
 	 *   5. Load plugins
 	 *   6. Start plugins
 	 *   7. Start sockets
-	 *   8.
+	 *   8. Start scripting
 	 * @return true if success, false if problem.
 	 */
 	@Override
@@ -254,7 +255,12 @@ public class gcServer extends xApp {
 			manager.Start();
 			return true;
 		}
+		// start scripting
 		case 8: {
+			final gcScriptManager manager = gcScriptManager.get();
+			// load scripts
+			manager.loadAll(new File("scripts/"));
+			manager.StartAll();
 			return true;
 		}
 		}
@@ -262,7 +268,7 @@ public class gcServer extends xApp {
 	}
 	/**
 	 * Server shutdown sequence.
-	 *   8.
+	 *   8. Stop scripting
 	 *   7. Stop sockets
 	 *   6. Stop plugins
 	 *   5. Unload plugins
@@ -275,7 +281,10 @@ public class gcServer extends xApp {
 	@Override
 	protected boolean ShutdownStep(final int step) {
 		switch(step) {
+		// stop scripting
 		case 8: {
+			final gcScriptManager manager = gcScriptManager.get();
+			manager.StopAll();
 			return true;
 		}
 		// stop sockets
