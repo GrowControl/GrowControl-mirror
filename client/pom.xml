@@ -21,6 +21,7 @@
 		<maven-shade-plugin-version>2.3</maven-shade-plugin-version>
 		<maven-source-plugin-version>2.4</maven-source-plugin-version>
 		<launch4j-maven-plugin-version>1.7.4</launch4j-maven-plugin-version>
+		<maven-eclipse-plugin-version>2.9</maven-eclipse-plugin-version>
 	</properties>
 	<scm>
 		<url>https://github.com/PoiXson/GrowControl</url>
@@ -155,6 +156,15 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${maven-eclipse-plugin-version}</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
