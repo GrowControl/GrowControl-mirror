@@ -52,8 +52,9 @@ public class gcClient extends xApp {
 	}
 	public gcClient() {
 		super();
+		gcClientVars.init();
 		this.displayStartupVars();
-		if(xVars.get().debug())
+		if(xVars.debug())
 			this.displayColors();
 		this.displayLogo();
 	}
@@ -85,7 +86,7 @@ public class gcClient extends xApp {
 		// debug
 		final Boolean debug = this.config.getDebug();
 		if(debug != null)
-			xVars.get().debug(debug.booleanValue());
+			xVars.debug(debug.booleanValue());
 	}
 
 
@@ -116,13 +117,11 @@ public class gcClient extends xApp {
 		}
 		// listeners
 		case 2: {
-			// init listeners
-			final gcClientVars vars = gcClientVars.get();
 			// client command listener
-			vars.commands().register(
+			gcClientVars.commands().register(
 				new gcClientCommands()
 			);
-			vars.commands().register(
+			gcClientVars.commands().register(
 				new gcCommonCommands()
 			);
 			// io event listener
@@ -133,8 +132,7 @@ public class gcClient extends xApp {
 		case 3: {
 			// command processor
 			xLog.setCommandHandler(
-				gcClientVars.get()
-					.commands()
+				gcClientVars.commands()
 			);
 			// start console input thread
 			this.startConsole();

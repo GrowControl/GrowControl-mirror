@@ -1,68 +1,51 @@
 package com.growcontrol.client;
 
 import com.poixson.commonjava.EventListener.xHandler;
+import com.poixson.commonjava.Utils.Keeper;
 
 
 public class gcClientVars {
 
 
 
-	// singleton instance
-	protected static volatile gcClientVars instance = null;
-	protected static final Object instanceLock = new Object();
-
-	// get instance
-	public static gcClientVars get() {
-		if(instance == null) {
-			synchronized(instanceLock) {
-				if(instance == null)
-					instance = new gcClientVars();
-			}
-		}
-		return instance;
+	private static volatile boolean inited = false;
+	public static void init() {
+		if(!inited)
+			Keeper.add(new gcClientVars());
 	}
-	// new instance
-	protected gcClientVars() {
-		this.system   = new xHandler();
-		this.commands = new xHandler();
-		this.plugins  = new xHandler();
-//		this.router   = new xHandler();
-	}
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		throw new CloneNotSupportedException();
+	private gcClientVars() {
 	}
 
 
 
 	// system event handler
-	private final xHandler system;
-	public xHandler system() {
-		return this.system;
+	private static final xHandler system = new xHandler();
+	public static xHandler system() {
+		return system;
 	}
 
 
 
 	// command event handler
-	private final xHandler commands;
-	public xHandler commands() {
-		return this.commands;
+	private static final xHandler commands = new xHandler();
+	public static xHandler commands() {
+		return commands;
 	}
 
 
 
 	// plugin event handler
-	private final xHandler plugins;
-	public xHandler plugins() {
-		return this.plugins;
+	private static final xHandler plugins = new xHandler();
+	public static xHandler plugins() {
+		return plugins;
 	}
 
 
 
 //	// meta router handler
-//	private final xHandler router;
-//	public xHandler router() {
-//		return this.router;
+//	private static final xHandler router;
+//	public static xHandler router() {
+//		return router;
 //	}
 
 

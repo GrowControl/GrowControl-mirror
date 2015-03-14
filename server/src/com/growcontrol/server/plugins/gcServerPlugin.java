@@ -16,10 +16,10 @@ public abstract class gcServerPlugin extends xJavaPlugin {
 	@Override
 	public void register(final xListener listener) {
 		if(listener == null) throw new NullPointerException("Cannot register null listener");
-		final gcServerVars vars = gcServerVars.get();
 		// command listener
 		if(listener instanceof xCommandListener) {
-			vars.commands().register(listener);
+			gcServerVars.commands()
+				.register(listener);
 		// unknown
 		} else {
 			throw new RuntimeException("Cannot register unknown listener type: "

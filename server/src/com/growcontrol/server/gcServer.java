@@ -50,7 +50,8 @@ public class gcServer extends xApp {
 	}
 	public gcServer() {
 		super();
-		if(xVars.get().debug())
+		gcServerVars.init();
+		if(xVars.debug())
 			this.displayColors();
 		this.displayLogo();
 	}
@@ -95,8 +96,8 @@ public class gcServer extends xApp {
 		{
 			final Boolean debug = this.config.getDebug();
 			if(debug != null && debug.booleanValue())
-				xVars.get().debug(debug.booleanValue());
-			if(!xVars.get().debug()) {
+				xVars.debug(debug.booleanValue());
+			if(!xVars.debug()) {
 				// set log level
 				final xLevel level = this.config.getLogLevel();
 				if(level != null)
@@ -106,7 +107,7 @@ public class gcServer extends xApp {
 		// tick interval
 		{
 			final xTime tick = this.config.getTickInterval();
-			final xTicker ticker = gcServerVars.get().ticker();
+			final xTicker ticker = gcServerVars.ticker();
 			ticker.setInterval(tick);
 		}
 //		// logic threads (0 uses main thread)
@@ -137,7 +138,7 @@ public class gcServer extends xApp {
 		for(final String arg : args) {
 			switch(arg) {
 			case "--debug":
-				xVars.get().debug(true);
+				xVars.debug(true);
 				break;
 			default:
 				System.out.println("Unknown argument: "+arg);
@@ -169,13 +170,11 @@ public class gcServer extends xApp {
 		}
 		// listeners
 		case 2: {
-			// init listeners
-			final gcServerVars vars = gcServerVars.get();
 			// server command listener
-			vars.commands().register(
+			gcServerVars.commands().register(
 				new gcServerCommands()
 			);
-			vars.commands().register(
+			gcServerVars.commands().register(
 				new gcCommonCommands()
 			);
 			// io event listener
@@ -186,8 +185,7 @@ public class gcServer extends xApp {
 		case 3: {
 			// command processor
 			xLog.setCommandHandler(
-				gcServerVars.get()
-					.commands()
+				gcServerVars.commands()
 			);
 			// start console input thread
 			this.startConsole();
@@ -195,7 +193,7 @@ public class gcServer extends xApp {
 		}
 		case 4: {
 			// tick scheduler
-			final xTicker ticker = gcServerVars.get().ticker();
+			final xTicker ticker = gcServerVars.ticker();
 			ticker.Start();
 			return true;
 		}

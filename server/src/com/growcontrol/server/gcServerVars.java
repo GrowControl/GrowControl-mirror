@@ -2,6 +2,7 @@ package com.growcontrol.server;
 
 import com.growcontrol.common.meta.MetaRouter;
 import com.poixson.commonjava.EventListener.xHandler;
+import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.scheduler.ticker.xTicker;
 
 
@@ -9,71 +10,52 @@ public class gcServerVars {
 
 
 
-	// single instance
-	protected static volatile gcServerVars instance = null;
-	protected static final Object instanceLock = new Object();
-
-	// get instance
-	public static gcServerVars get() {
-		if(instance == null) {
-			synchronized(instanceLock) {
-				if(instance == null)
-					instance = new gcServerVars();
-			}
-		}
-		return instance;
+	private static volatile boolean inited = false;
+	public static void init() {
+		if(!inited)
+			Keeper.add(new gcServerVars());
 	}
-	// new instance
-	protected gcServerVars() {
-		this.system   = new xHandler();
-		this.commands = new xHandler();
-		this.plugins  = new xHandler();
-		this.ticker   = new xTicker();
-		this.router   = MetaRouter.get();
-	}
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		throw new CloneNotSupportedException();
+	private gcServerVars() {
 	}
 
 
 
 	// system event handler
-	private final xHandler system;
-	public xHandler system() {
-		return this.system;
+	private static final xHandler system = new xHandler();
+	public static xHandler system() {
+		return system;
 	}
 
 
 
 	// command event handler
-	private final xHandler commands;
-	public xHandler commands() {
-		return this.commands;
+	private static final xHandler commands = new xHandler();
+	public static xHandler commands() {
+		return commands;
 	}
 
 
 
 	// plugin event handler
-	private final xHandler plugins;
-	public xHandler plugins() {
-		return this.plugins;
+	private static final xHandler plugins = new xHandler();
+	public static xHandler plugins() {
+		return plugins;
 	}
 
 
 
 	// tick events
-	private final xTicker ticker;
-	public xTicker ticker() {
-		return this.ticker;
+	private static final xTicker ticker = new xTicker();
+	public static xTicker ticker() {
+		return ticker;
 	}
 
 
 
 	// meta router handler
-	private final MetaRouter router;
-	public MetaRouter router() {
-		return this.router;
+	private static final MetaRouter router = MetaRouter.get();
+	public static MetaRouter router() {
+		return router;
 	}
 
 
