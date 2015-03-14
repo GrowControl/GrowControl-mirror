@@ -207,7 +207,7 @@ public class gcScript implements xStartable {
 	public String getName() {
 		final String name = this.name;
 		if(utils.isEmpty(name))
-			return "script-"+Integer.toString(id);
+			return "script-"+Integer.toString(this.id);
 		return name;
 	}
 

@@ -137,9 +137,9 @@ public final class gcServerConfig extends xConfig {
 	// logger
 	private volatile xLog _log = null;
 	public xLog log() {
-		if(_log == null)
-			_log = gcServer.log().get("config");
-		return _log;
+		if(this._log == null)
+			this._log = gcServer.log().get("config");
+		return this._log;
 	}
 
 

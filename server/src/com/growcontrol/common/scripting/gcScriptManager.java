@@ -44,7 +44,7 @@ public class gcScriptManager {
 	private gcScriptManager() {
 		Keeper.add(this);
 		this.factory = new ScriptEngineManager();
-		factory.put("ServerVersion", gcServer.get().getVersion());
+		this.factory.put("ServerVersion", gcServer.get().getVersion());
 	}
 
 
