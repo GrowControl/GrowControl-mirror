@@ -20,201 +20,180 @@ import javax.swing.tree.TreePath;
  * Alterations of a node state may propagate to descendants/ancestors, according
  * to the behaviour of the checking model. See CheckingMode for the available
  * behaviours.
- * 
+ *
  * @author bigagli
  * @author boldrini
  */
 public interface TreeCheckingModel {
 
-    /**
-     * The checking behaviors supported by this class.
-     */
-    public enum CheckingMode {
-	/*
-	 * TODO: this should be moved to DefaultTreeCheckingModel, together with
-	 * TreeCheckingMode
+	/**
+	 * The checking behaviors supported by this class.
 	 */
+	public enum CheckingMode {
+		/*
+		 * TODO: this should be moved to DefaultTreeCheckingModel, together with
+		 * TreeCheckingMode
+		 */
+
+		/**
+		 * Toggles the clicked checkbox and propagates the change down. In other
+		 * words, if the clicked checkbox becomes checked, all the descendants
+		 * will be checked; otherwise, all the descendants will be unchecked.
+		 */
+		PROPAGATE,
+
+		/**
+		 * Propagates the change not only to descendants but also to ancestors.
+		 * With regard to descendants this mode behaves exactly like the
+		 * Propagate mode. With regard to ancestors it checks/unchecks them as
+		 * needed so that a node is checked if and only if all of its children
+		 * are checked.
+		 */
+		PROPAGATE_PRESERVING_CHECK,
+
+		/**
+		 * Propagates the change not only to descendants but also to ancestors.
+		 * With regard to descendants this mode behaves exactly like the
+		 * Propagate mode. With regard to ancestors it checks/unchecks them as
+		 * needed so that a node is unchecked if and only if all of its children
+		 * are unchecked.
+		 */
+		PROPAGATE_PRESERVING_UNCHECK,
+
+		/**
+		 * The change is propagated to descendants like in the PROPAGATE mode.
+		 * Moreover, if the checkbox becomes unchecked, all the ancestors will
+		 * be unchecked.
+		 */
+		PROPAGATE_UP_UNCHECK,
+
+		/**
+		 * The check is not propagated at all, toggles the clicked checkbox
+		 * only.
+		 */
+		SIMPLE,
+
+		/**
+		 * The check is not propagated at all, toggles the clicked checkbox
+		 * only. Only one checkbox is allowed to be checked at any given time.
+		 */
+		SINGLE
+
+	}
 
 	/**
-	 * Toggles the clicked checkbox and propagates the change down. In other
-	 * words, if the clicked checkbox becomes checked, all the descendants
-	 * will be checked; otherwise, all the descendants will be unchecked.
+	 * add a path to the checking set.
+	 * @param path the path to be added.
 	 */
-	PROPAGATE,
+	public void addCheckingPath(TreePath path);
 
 	/**
-	 * Propagates the change not only to descendants but also to ancestors.
-	 * With regard to descendants this mode behaves exactly like the
-	 * Propagate mode. With regard to ancestors it checks/unchecks them as
-	 * needed so that a node is checked if and only if all of its children
-	 * are checked.
+	 * add paths to the checking set.
+	 * @param paths the paths to be added.
 	 */
-	PROPAGATE_PRESERVING_CHECK,
+	public void addCheckingPaths(TreePath[] paths);
 
 	/**
-	 * Propagates the change not only to descendants but also to ancestors.
-	 * With regard to descendants this mode behaves exactly like the
-	 * Propagate mode. With regard to ancestors it checks/unchecks them as
-	 * needed so that a node is unchecked if and only if all of its children
-	 * are unchecked.
+	 * Adds the specified listener to the list of those being notified upon
+	 * changes in the the checking set.
+	 * @param tcl the new listener to be added.
 	 */
-	PROPAGATE_PRESERVING_UNCHECK,
+	public void addTreeCheckingListener(TreeCheckingListener tcl);
 
 	/**
-	 * The change is propagated to descendants like in the PROPAGATE mode.
-	 * Moreover, if the checkbox becomes unchecked, all the ancestors will
-	 * be unchecked.
+	 * Clears the checking.
 	 */
-	PROPAGATE_UP_UNCHECK,
+	public void clearChecking();
 
 	/**
-	 * The check is not propagated at all, toggles the clicked checkbox
-	 * only.
+	 * @return Returns the CheckingMode.
 	 */
-	SIMPLE,
+	public CheckingMode getCheckingMode();
 
 	/**
-	 * The check is not propagated at all, toggles the clicked checkbox
-	 * only. Only one checkbox is allowed to be checked at any given time.
+	 * @return Returns the paths that are in the checking set.
 	 */
-	SINGLE
+	public TreePath[] getCheckingPaths();
 
-    }
+	/**
+	 * @return Returns the paths that are in the checking set and are the
+	 *         (upper) roots of checked trees.
+	 */
+	public TreePath[] getCheckingRoots();
 
-    /**
-     * add a path to the checking set.
-     * 
-     * @param path
-     *            the path to be added.
-     */
-    public void addCheckingPath(TreePath path);
+	/**
+	 * @return Returns the paths that are in the greying set.
+	 */
+	public TreePath[] getGreyingPaths();
 
-    /**
-     * add paths to the checking set.
-     * 
-     * @param paths
-     *            the paths to be added.
-     */
-    public void addCheckingPaths(TreePath[] paths);
+	/**
+	 * Returns true if the item identified by the path is currently checked.
+	 * @param path a <code>TreePath</code> identifying a node
+	 * @return true if the node is checked
+	 */
+	public boolean isPathChecked(TreePath path);
 
-    /**
-     * Adds the specified listener to the list of those being notified upon
-     * changes in the the checking set.
-     * 
-     * @param tcl
-     *            the new listener to be added.
-     */
-    public void addTreeCheckingListener(TreeCheckingListener tcl);
+	/**
+	 * Returns whether the specified path checking state can be toggled.
+	 */
+	public boolean isPathEnabled(TreePath path);
 
-    /**
-     * Clears the checking.
-     */
-    public void clearChecking();
+	/**
+	 * Returns whether the specified path is greyed.
+	 */
+	public boolean isPathGreyed(TreePath path);
 
-    /**
-     * @return Returns the CheckingMode.
-     */
-    public CheckingMode getCheckingMode();
+	/**
+	 * Removes a path from the checking set.
+	 * @param path the path to be removed.
+	 */
+	public void removeCheckingPath(TreePath path);
 
-    /**
-     * @return Returns the paths that are in the checking set.
-     */
-    public TreePath[] getCheckingPaths();
+	/**
+	 * Remove the specified paths from the checking set.
+	 * @param paths the paths to be added.
+	 */
+	public void removeCheckingPaths(TreePath[] paths);
 
-    /**
-     * @return Returns the paths that are in the checking set and are the
-     *         (upper) roots of checked trees.
-     */
-    public TreePath[] getCheckingRoots();
+	/**
+	 * Removes the specified listener from the list of those being notified upon
+	 * changes in the checking set.
+	 * @param tcl the listener to remove.
+	 */
+	public void removeTreeCheckingListener(TreeCheckingListener tcl);
 
-    /**
-     * @return Returns the paths that are in the greying set.
-     */
-    public TreePath[] getGreyingPaths();
+	/**
+	 * Sets the specified checking mode.
+	 * @param mode the checking mode to set.
+	 */
+	public void setCheckingMode(CheckingMode mode);
 
-    /**
-     * Returns true if the item identified by the path is currently checked.
-     * 
-     * @param path
-     *            a <code>TreePath</code> identifying a node
-     * @return true if the node is checked
-     */
-    public boolean isPathChecked(TreePath path);
+	/**
+	 * (Re)sets the checking to the specified path.
+	 */
+	public void setCheckingPath(TreePath path);
 
-    /**
-     * Returns whether the specified path checking state can be toggled.
-     */
-    public boolean isPathEnabled(TreePath path);
+	/**
+	 * (Re)sets the checking to the specified paths.
+	 */
+	public void setCheckingPaths(TreePath[] paths);
 
-    /**
-     * Returns whether the specified path is greyed.
-     */
-    public boolean isPathGreyed(TreePath path);
+	/**
+	 * Sets whether or not the specified path can be toggled.
+	 * @param path the path to enable/disable
+	 */
+	public void setPathEnabled(TreePath path, boolean enable);
 
-    /**
-     * Removes a path from the checking set.
-     * 
-     * @param path
-     *            the path to be removed.
-     */
-    public void removeCheckingPath(TreePath path);
+	/**
+	 * Sets whether or not the specified paths can be toggled.
+	 * @param paths the paths to enable/disable
+	 */
+	public void setPathsEnabled(TreePath[] paths, boolean enable);
 
-    /**
-     * Remove the specified paths from the checking set.
-     * 
-     * @param paths
-     *            the paths to be added.
-     */
-    public void removeCheckingPaths(TreePath[] paths);
-
-    /**
-     * Removes the specified listener from the list of those being notified upon
-     * changes in the checking set.
-     * 
-     * @param tcl
-     *            the listener to remove.
-     */
-    public void removeTreeCheckingListener(TreeCheckingListener tcl);
-
-    /**
-     * Sets the specified checking mode.
-     * 
-     * @param mode
-     *            the checking mode to set.
-     */
-    public void setCheckingMode(CheckingMode mode);
-
-    /**
-     * (Re)sets the checking to the specified path.
-     */
-    public void setCheckingPath(TreePath path);
-
-    /**
-     * (Re)sets the checking to the specified paths.
-     */
-    public void setCheckingPaths(TreePath[] paths);
-
-    /**
-     * Sets whether or not the specified path can be toggled.
-     * 
-     * @param path
-     *            the path to enable/disable
-     */
-    public void setPathEnabled(TreePath path, boolean enable);
-
-    /**
-     * Sets whether or not the specified paths can be toggled.
-     * 
-     * @param paths
-     *            the paths to enable/disable
-     */
-    public void setPathsEnabled(TreePath[] paths, boolean enable);
-
-    /**
-     * Toggles (check/uncheck) the checking state of the specified path, if this
-     * is enabled, and possibly propagate the change, according to the checking
-     * mode.
-     */
-    public void toggleCheckingPath(TreePath pathForRow);
+	/**
+	 * Toggles (check/uncheck) the checking state of the specified path, if this
+	 * is enabled, and possibly propagate the change, according to the checking mode.
+	 */
+	public void toggleCheckingPath(TreePath pathForRow);
 
 }
