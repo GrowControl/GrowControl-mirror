@@ -65,7 +65,7 @@ public class TreeCheckingEvent extends EventObject {
      *         of false means that the path has been removed from the checking.
      */
     public boolean isCheckedPath() {
-	return checked;
+	return this.checked;
     }
 
 }

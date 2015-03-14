@@ -211,8 +211,8 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
     public void clearChecking() {
 	this.checkedPathsSet.clear();
 	this.greyedPathsSet.clear();
-	if (model != null && model.getRoot() != null) {
-	    fireValueChanged(new TreeCheckingEvent(this, new TreePath(model.getRoot()), false));
+	if (this.model != null && this.model.getRoot() != null) {
+	    fireValueChanged(new TreeCheckingEvent(this, new TreePath(this.model.getRoot()), false));
 	}
     }
 
@@ -261,7 +261,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
      * @return Returns the paths that are in the checking.
      */
     public TreePath[] getCheckingPaths() {
-	return checkedPathsSet.toArray(new TreePath[checkedPathsSet.size()]);
+	return this.checkedPathsSet.toArray(new TreePath[this.checkedPathsSet.size()]);
     }
 
     /**
@@ -269,7 +269,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
      */
     public TreePath[] getCheckingRoots() {
 	TreePath[] retVal = new TreePath[] {};
-	if (model.getRoot() != null) {
+	if (this.model.getRoot() != null) {
 	    Vector<TreePath> roots = getCheckingRoots(new TreePath(this.model.getRoot()));
 	    retVal = roots.toArray(retVal);
 	}
@@ -352,7 +352,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
      * @return The paths that are in the greying.
      */
     public TreePath[] getGreyingPaths() {
-	return greyedPathsSet.toArray(new TreePath[greyedPathsSet.size()]);
+	return this.greyedPathsSet.toArray(new TreePath[this.greyedPathsSet.size()]);
     }
 
     /*
@@ -605,7 +605,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
      */
     @Override
     public String toString() {
-	if (model.getRoot() != null) {
+	if (this.model.getRoot() != null) {
 	    return toString(new TreePath(this.model.getRoot()));
 	} else
 	    return null;
@@ -696,8 +696,8 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
      * updateSubTreeCheckingConsistency on the root node.
      */
     public void updateCheckingConsistency() {
-	if (model.getRoot() != null) {
-	    updateSubTreeCheckingConsistency(new TreePath(model.getRoot()));
+	if (this.model.getRoot() != null) {
+	    updateSubTreeCheckingConsistency(new TreePath(this.model.getRoot()));
 	}
     }
 
@@ -779,7 +779,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
      * Updates the greyness state of the entire tree.
      */
     public void updateTreeGreyness() {
-	if (model.getRoot() != null) {
+	if (this.model.getRoot() != null) {
 	    updateSubTreeGreyness(new TreePath(this.model.getRoot()));
 	}
     }

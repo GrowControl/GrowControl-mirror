@@ -139,7 +139,7 @@ public class LookAndFeelExample extends JFrame implements ActionListener {
 	    }
 	    ((DefaultTreeModel) this.checkboxTree.getModel()).nodeStructureChanged(root);
 	    this.checkboxTree.addCheckingPath(new TreePath(ravioli.getPath()));
-	    checkboxTree.expandAll();
+	    this.checkboxTree.expandAll();
 	}
 	return new JScrollPane(this.checkboxTree);
     }

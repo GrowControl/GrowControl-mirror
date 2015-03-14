@@ -93,7 +93,7 @@ public class DefaultCheckboxTreeCellRenderer extends JPanel implements CheckboxT
 	/*
 	 * label.setOpaque(false); seems not work...
 	 */
-	label.setBackgroundNonSelectionColor(new Color(0, 0, 0, 0));
+	this.label.setBackgroundNonSelectionColor(new Color(0, 0, 0, 0));
     }
 
     @Override

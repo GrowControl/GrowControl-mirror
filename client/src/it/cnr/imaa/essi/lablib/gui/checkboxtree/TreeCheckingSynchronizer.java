@@ -24,7 +24,7 @@ public class TreeCheckingSynchronizer implements TreeCheckingListener {
 
 	boolean checked = e.isCheckedPath();
 
-	TreeCheckingModel dest = source.equals(model1) ? model2 : model1;
+	TreeCheckingModel dest = source.equals(this.model1) ? this.model2 : this.model1;
 
 	if (checked) {
 	    if (!dest.isPathChecked(leadingPath)) {

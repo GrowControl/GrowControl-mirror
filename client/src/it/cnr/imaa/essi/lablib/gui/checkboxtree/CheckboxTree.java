@@ -274,8 +274,8 @@ public class CheckboxTree extends JTree {
      * @return the TreeCheckingModel of this CheckboxTree.
      */
     public TreeCheckingModel getCheckingModel() {
-	if (checkingModel == null) {
-	    checkingModel = NullTreeCheckingModel.getInstance();
+	if (this.checkingModel == null) {
+	    this.checkingModel = NullTreeCheckingModel.getInstance();
 	}
 	return this.checkingModel;
     }
@@ -341,7 +341,7 @@ public class CheckboxTree extends JTree {
      * @return the intended behavior of checking with respect to selection.
      */
     public boolean isSelectsByChecking() {
-	return selectsByChecking;
+	return this.selectsByChecking;
     }
 
     /*
@@ -426,10 +426,10 @@ public class CheckboxTree extends JTree {
      */
     @Override
     public CheckboxTreeCellRenderer getCellRenderer() {
-	if (cellRenderer == null) {
-	    cellRenderer = new DefaultCheckboxTreeCellRenderer();
+	if (this.cellRenderer == null) {
+	    this.cellRenderer = new DefaultCheckboxTreeCellRenderer();
 	}
-	return (CheckboxTreeCellRenderer) cellRenderer;
+	return (CheckboxTreeCellRenderer) this.cellRenderer;
     }
 
     /**
@@ -485,8 +485,8 @@ public class CheckboxTree extends JTree {
     @Override
     public void setModel(TreeModel newModel) {
 	super.setModel(newModel);
-	if (checkingModel instanceof DefaultTreeCheckingModel) {
-	    ((DefaultTreeCheckingModel) checkingModel).setTreeModel(newModel);
+	if (this.checkingModel instanceof DefaultTreeCheckingModel) {
+	    ((DefaultTreeCheckingModel) this.checkingModel).setTreeModel(newModel);
 	}
     }
 
