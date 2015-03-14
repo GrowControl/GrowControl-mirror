@@ -1,16 +1,12 @@
 package com.growcontrol.server.configs;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import com.growcontrol.server.gcServer;
 import com.growcontrol.server.gcServerDefines;
-import com.growcontrol.server.net.NetConfig;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
-import com.poixson.commonjava.Utils.utilsObject;
 import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.Utils.xTimeU;
 import com.poixson.commonjava.Utils.threads.xThreadPool;
@@ -101,6 +97,7 @@ public final class gcServerConfig extends xConfig {
 
 
 
+/*
 	public Set<NetConfig> getSocketConfigs() {
 		final Set<Object> list = this.getSet(
 				Object.class,
@@ -131,6 +128,7 @@ public final class gcServerConfig extends xConfig {
 		}
 		return configs;
 	}
+*/
 
 
 

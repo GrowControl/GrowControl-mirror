@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server.net;
 
 import java.net.InetAddress;
@@ -89,3 +90,4 @@ public class NetConfig {
 
 
 }
+*/

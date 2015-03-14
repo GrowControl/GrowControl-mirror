@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server.net;
 
 import io.netty.channel.socket.SocketChannel;
@@ -25,3 +26,4 @@ public class NetState {
 
 
 }
+*/
