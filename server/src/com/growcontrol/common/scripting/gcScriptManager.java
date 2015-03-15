@@ -52,7 +52,7 @@ public class gcScriptManager {
 	public xThreadPool getThreadPool() {
 		final xThreadPool pool = this.pool;
 		if(pool == null)
-			return xThreadPool.get();
+			return xThreadPool.getMainPool();
 		return pool;
 	}
 	public ScriptEngine getEngine() {

@@ -108,7 +108,7 @@ public class MetaRouter extends xHandler {
 		// trigger the event
 		final xThreadPool p =
 			pool == null
-			? xThreadPool.get()
+			? xThreadPool.getMainPool()
 			: pool;
 		p.runLater(
 			this.getRunnable(listener, event)
