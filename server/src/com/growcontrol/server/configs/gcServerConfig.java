@@ -83,7 +83,7 @@ public final class gcServerConfig extends xConfig {
 		if(!exists(gcServerDefines.CONFIG_LOGIC_THREADS))
 			return default_LOGIC_THREADS;
 		final Integer value = getInteger(gcServerDefines.CONFIG_LOGIC_THREADS);
-		return utilsNumbers.MinMax(value.intValue(), 0, xThreadPool.HARD_LIMIT);
+		return utilsNumbers.MinMax(value.intValue(), 0, xThreadPool.POOL_LIMIT);
 	}
 
 

@@ -17,7 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
@@ -412,7 +411,9 @@ public class gcWindowLogin extends xWindow {
 		this.Update(CARD_CONNECTING);
 		this.txtStatus.setText("Connecting..");
 		// connect to server
+@SuppressWarnings("unused")
 		final String hostStr = this.txtboxHost.getText();
+@SuppressWarnings("unused")
 		final Integer portInt = utilsNumbers.toInteger(this.txtboxPort.getText());
 //		if(portInt == null || !utilsNumbers.isMinMax(portInt.intValue(), 1, xSocket.MAX_PORT_NUMBER)) {
 //			xApp.log().warning("Invalid port: "+this.txtboxPort.getText());

@@ -256,7 +256,7 @@ public class gcServer extends xApp {
 		case 8: {
 			final gcScriptManager manager = gcScriptManager.get();
 			// load scripts
-			manager.loadAll(new File("scripts/"));
+			manager.loadAll();
 			manager.StartAll();
 			return true;
 		}
