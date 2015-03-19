@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Growcontrol
+Name[en_US]=Growcontrol
+GenericName=GrowControl
+GenericName[en_US]=
+Comment=Management tool for GrowControl
+Comment[en_US]=Management tool for GrowControl
+Exec=java -jar /usr/share/java/gc/gcClient-3.5.47_1.jar
+Path=
+Icon=/usr/share/java/gc/treeicon.ico
+Type=Application
+Categories=System;
+StartupNotify=true
+Type=Application
+Terminal=true

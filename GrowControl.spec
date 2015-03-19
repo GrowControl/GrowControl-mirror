@@ -93,6 +93,13 @@ fi
 	"%{clientjar}" \
 	"${RPM_BUILD_ROOT}%{prefix}/gcClient-%{version}_%{release}.jar" \
 		|| exit 1
+%{__install} -m 0644 \
+	"growcontrol.desktop" \
+	"${RPM_BUILD_ROOT}/usr/share/applications/growcontrol.desktop" \
+		|| exit 1
+
+
+
 # default config file
 touch "${RPM_BUILD_ROOT}%{_sysconfdir}/gc/config.yml"
 # create empty log files
@@ -116,6 +123,7 @@ touch "${RPM_BUILD_ROOT}/var/log/gc/client.log"
 %defattr(-,root,root,-)
 %{prefix}/gcServer-%{version}_%{release}.jar
 %{prefix}/gcClient-%{version}_%{release}.jar
+/usr/share/applications/growcontrol.desktop
 
 
 
