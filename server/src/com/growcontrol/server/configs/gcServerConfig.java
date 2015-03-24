@@ -1,12 +1,16 @@
 package com.growcontrol.server.configs;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
+import com.growcontrol.common.netty.NetConfig;
 import com.growcontrol.server.gcServer;
 import com.growcontrol.server.gcServerDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
+import com.poixson.commonjava.Utils.utilsObject;
 import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.Utils.xTimeU;
 import com.poixson.commonjava.Utils.threads.xThreadPool;
@@ -97,38 +101,36 @@ public final class gcServerConfig extends xConfig {
 
 
 
-/*
 	public Set<NetConfig> getSocketConfigs() {
-		final Set<Object> list = this.getSet(
+		final Set<Object> dataset = this.getSet(
 				Object.class,
 				gcServerDefines.CONFIG_SOCKETS
 		);
 		final Set<NetConfig> configs = new HashSet<NetConfig>();
-		if(utils.notEmpty(list)) {
-			for(final Object o : list) {
+		if(utils.notEmpty(dataset)) {
+			for(final Object o : dataset) {
 				try {
-					final NetConfig cfg = NetConfig.get(
-							utilsObject.castMap(String.class, Object.class, o)
-					);
-					if(cfg == null)
-						this.log().severe("Failed to load socket config");
-					else
-						configs.add(cfg);
+					final Map<String, Object> datamap = utilsObject.castMap(String.class, Object.class, o);
+					if(datamap == null) throw new RuntimeException("Failed to load socket config");
+					final gcServerSocketConfig gcCfg = new gcServerSocketConfig(datamap);
+					final NetConfig cfg = gcCfg.get();
+					if(cfg == null) throw new RuntimeException("Failed to load socket config");
+					configs.add(cfg);
 				} catch (Exception e) {
 					this.log().trace(e);
 				}
 			}
-		}
-		for(NetConfig dao : configs) {
-			this.log().getWeak("sockets").finer(
-					(dao.enabled ? "Enabled  " : "Disabled ")+
-					dao.host+":"+Integer.toString(dao.port)+
-					(dao.ssl ? " (SSL)" : "")
-			);
+			// log configs
+			for(final NetConfig dao : configs) {
+				this.log().getWeak("sockets").finer(
+						(dao.enabled ? "Enabled  " : "Disabled ")+
+						dao.host+":"+Integer.toString(dao.port)+
+						(dao.ssl ? " (ssl)" : " (raw)")
+				);
+			}
 		}
 		return configs;
 	}
-*/
 
 
 
