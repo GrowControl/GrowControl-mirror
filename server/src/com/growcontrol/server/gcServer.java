@@ -9,6 +9,7 @@ import com.growcontrol.common.commands.gcCommonCommands;
 import com.growcontrol.common.scripting.gcScriptManager;
 import com.growcontrol.server.commands.gcServerCommands;
 import com.growcontrol.server.configs.gcServerConfig;
+import com.growcontrol.server.net.NetServerManager;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.plugin.xPluginManager;
@@ -122,8 +123,8 @@ public class gcServer extends xApp {
 //		}
 		// sockets
 		{
-//			final NetManager manager = NetManager.get();
-//			manager.setConfigs(this.config.getSocketConfigs());
+			final NetServerManager manager = NetServerManager.get();
+			manager.setConfigs(this.config.getSocketConfigs());
 		}
 	}
 
@@ -248,8 +249,8 @@ public class gcServer extends xApp {
 		}
 		// start sockets
 		case 7: {
-//			final NetManager manager = NetManager.get();
-//			manager.Start();
+			final NetServerManager manager = NetServerManager.get();
+			manager.Start();
 			return true;
 		}
 		// start scripting
@@ -286,9 +287,9 @@ public class gcServer extends xApp {
 		}
 		// stop sockets
 		case 7: {
-//			final NetManager manager = NetManager.get();
-//			manager.Stop();
-//			manager.CloseAll();
+			final NetServerManager manager = NetServerManager.get();
+			manager.Stop();
+			manager.CloseAll();
 			return true;
 		}
 		// stop plugins
