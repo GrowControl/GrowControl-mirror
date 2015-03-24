@@ -1,5 +1,4 @@
-/*
-package com.growcontrol.server.net;
+package com.growcontrol.common.netty;
 
 import io.netty.util.internal.logging.AbstractInternalLogger;
 import io.netty.util.internal.logging.InternalLogger;
@@ -9,30 +8,32 @@ import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public class CustomNettyLogger extends AbstractInternalLogger {
+public class NettyDetailedLogger extends AbstractInternalLogger {
 	private static final long serialVersionUID = 1L;
 
 	protected final xLog log;
 
 
 
+	// install factory
 	public static void Install(final xLog log) {
+		if(log == null) throw new NullPointerException();
 		InternalLoggerFactory.setDefaultFactory(
-				new CustomNettyLoggerFactory(log)
+				new NettyDetailedLoggerFactory(log)
 		);
 	}
-	public static class CustomNettyLoggerFactory extends InternalLoggerFactory {
+	public static class NettyDetailedLoggerFactory extends InternalLoggerFactory {
 		private final xLog log;
-		public CustomNettyLoggerFactory(final xLog log) {
+		public NettyDetailedLoggerFactory(final xLog log) {
 			this.log = log;
 		}
 		@Override
 		protected InternalLogger newInstance(final String name) {
-			return new CustomNettyLogger(this.log);
+			return new NettyDetailedLogger(this.log);
 		}
 	}
-	protected CustomNettyLogger(final xLog log) {
-		super("CustomNettyLogger");
+	protected NettyDetailedLogger(final xLog log) {
+		super("NettyDetailedLogger");
 		this.log = log;
 	}
 
@@ -212,4 +213,3 @@ public class CustomNettyLogger extends AbstractInternalLogger {
 
 
 }
-*/
