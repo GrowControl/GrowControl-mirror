@@ -1,29 +1,38 @@
-/*
 package com.growcontrol.server.net;
 
 import io.netty.channel.socket.SocketChannel;
 
 
-public class NetState {
+public class NetStateDAO {
 
 	public static enum STATE { CLOSED, AUTHED }
 
 	protected volatile STATE state = STATE.CLOSED;
-	public final SocketChannel channel;
+
+	protected final NetServer server;
+	protected final SocketChannel channel;
+	protected final NetServerHandler handler;
 
 
 
-	public NetState(final SocketChannel channel) {
+	public NetStateDAO(final NetServer server, final SocketChannel channel) {
+		this.server  = server;
 		this.channel = channel;
+		this.handler = new NetServerHandler(this);
 	}
 
 
 
-	public STATE getState() {
-		return this.state;
-	}
+//	public NetServerHandler getHandler() {
+//		return this.handler;
+//	}
+//	public SocketChannel getChannel() {
+//		return this.channel;
+//	}
+//	public STATE getState() {
+//		return this.state;
+//	}
 
 
 
 }
-*/
