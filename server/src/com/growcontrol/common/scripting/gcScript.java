@@ -182,6 +182,8 @@ public class gcScript implements xStartable {
 				this.log().trace(e);
 			}
 			it.remove();
+// lets not hold up the thread pool
+break;
 		}
 		this.processing.set(false);
 		// just in case
