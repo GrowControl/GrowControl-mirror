@@ -56,6 +56,10 @@ public class gcScript implements xStartable {
 			if(this.engine != null) return;
 			final gcScriptManager manager = gcScriptManager.get();
 			this.engine  = manager.getEngine();
+			if(this.engine == null) {
+				this.log().severe("Failed to load "+gcScriptManager.LANGUAGE+" scripting engine!");
+				throw new RuntimeException();
+			}
 			this.engine.put("ScriptName", this.name);
 		}
 	}

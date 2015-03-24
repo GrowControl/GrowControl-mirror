@@ -21,6 +21,8 @@ import com.poixson.commonjava.xLogger.xLog;
 //https://docs.oracle.com/javase/6/docs/technotes/guides/scripting/programmer_guide/
 public class gcScriptManager {
 
+	public static final String LANGUAGE = "JavaScript";
+
 	private static volatile gcScriptManager instance = null;
 	private static final Object instanceLock = new Object();
 
@@ -56,7 +58,7 @@ public class gcScriptManager {
 		return pool;
 	}
 	public ScriptEngine getEngine() {
-		return this.factory.getEngineByName("JavaScript");
+		return this.factory.getEngineByName(LANGUAGE);
 	}
 
 
