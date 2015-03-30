@@ -46,6 +46,9 @@ public final class gcServerCommands implements xCommandListener {
 		case "broadcast":
 			this._say(event);
 			break;
+		case "uptime":
+			this._uptime(event);
+			break;
 		case "memory":
 		case "mem":
 			this._mem(event);
@@ -139,6 +142,25 @@ public final class gcServerCommands implements xCommandListener {
 		event.setHandled();
 		this.publish();
 		this.publish("Broadcasts a message.");
+		this.publish();
+	}
+
+
+
+	protected void _uptime(final xCommandEvent event) {
+		if(event.isHelp()) {
+			this._uptime_help(event);
+			return;
+		}
+		event.setHandled();
+		this.publish();
+		this.publish(xApp.get().getUptimeString());
+		this.publish();
+	}
+	protected void _uptime_help(final xCommandEvent event) {
+		event.setHandled();
+		this.publish();
+		this.publish("Displays current uptime for the server.");
 		this.publish();
 	}
 
