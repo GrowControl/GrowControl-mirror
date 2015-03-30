@@ -5,16 +5,18 @@ import java.io.PrintStream;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
-import com.growcontrol.common.commands.gcCommonCommands;
 import com.growcontrol.common.scripting.gcScriptManager;
 import com.growcontrol.server.commands.gcServerCommands;
 import com.growcontrol.server.configs.gcServerConfig;
 import com.growcontrol.server.net.NetServerManager;
 import com.poixson.commonapp.app.xApp;
+import com.poixson.commonapp.app.annotations.xAppStep;
+import com.poixson.commonapp.app.annotations.xAppStep.StepType;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
+import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.Utils.xTime;
@@ -27,8 +29,6 @@ public class gcServer extends xApp {
 
 	// config
 	private volatile gcServerConfig config = null;
-	// zones
-//	private final List<String> zones = new ArrayList<String>();
 
 
 
@@ -108,8 +108,8 @@ public class gcServer extends xApp {
 		// tick interval
 		{
 			final xTime tick = this.config.getTickInterval();
-			final xTicker ticker = gcServerVars.ticker();
-			ticker.setInterval(tick);
+			xTicker.get()
+				.setInterval(tick);
 		}
 //		// logic threads (0 uses main thread)
 //		{
@@ -151,190 +151,136 @@ public class gcServer extends xApp {
 
 
 
-	/**
-	 * Server startup sequence.
-	 *   1.
-	 *   2. Listeners
-	 *   3. Command prompt
-	 *   4. Start ticking
-	 *   5. Load plugins
-	 *   6. Start plugins
-	 *   7. Start sockets
-	 *   8. Start scripting
-	 * @return true if success, false if problem.
-	 */
-	@Override
-	protected boolean StartupStep(final int step) {
-		switch(step) {
-		case 1: {
-			return true;
-		}
-		// listeners
-		case 2: {
-			// server command listener
-			gcServerVars.commands().register(
+	// ------------------------------------------------------------------------------- //
+	// startup
+
+
+
+	// command prompt
+	@xAppStep(type=StepType.STARTUP, title="Commands", priority=30)
+	public void _startup_commands_() {
+		final xHandler handler = gcServerVars.commands();
+		handler.register(
 				new gcServerCommands()
-			);
-			gcServerVars.commands().register(
-				new gcCommonCommands()
-			);
-			// io event listener
-			//getLogicQueue();
-			return true;
-		}
-		// command prompt
-		case 3: {
-			// command processor
-			xLog.setCommandHandler(
-				gcServerVars.commands()
-			);
-			// start console input thread
-			this.startConsole();
-			return true;
-		}
-		case 4: {
-			// tick scheduler
-			final xTicker ticker = gcServerVars.ticker();
-			ticker.Start();
-			return true;
-		}
-// load zones
-// load scheduler
-// load plugins
-// start devices
-// start socket listener
-// server ready
-//			// load scheduler
-//			log.info("Starting schedulers..");
-//			pxnScheduler.get().Start();
-//			pxnTicker.get().setInterval(ServerConfig.TickInterval());
-//			pxnTicker.get().Start();
-//			// load devices
-//			deviceLoader.LoadDevices(Arrays.asList(new String[] {"Lamp"}));
-//			return true;
-//		case 4:
-			// load zones
-//			synchronized(zones) {
-//				config.PopulateZones(zones);
-//				log.info("Loaded [ "+Integer.toString(this.zones.size())+" ] zones.");
+		);
+		xLog.setCommandHandler(
+				handler
+		);
+	}
+
+	// console input
+	@xAppStep(type=StepType.STARTUP, title="Console", priority=32)
+	public void _startup_console_() {
+		xLog.getConsole()
+			.Start();
+	}
+
+//	// io event listener
+//	@xAppStep(type=StepType.STARTUP, title="ioEvents", priority=40)
+//	public void _startup_ioevents_() {
+//		getLogicQueue();
+//	}
+
+	// load plugins
+	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=50)
+	public void _startup_load_plugins_() {
+		final xPluginManager manager = xPluginManager.get();
+		manager.setClassField("Server Main");
+		manager.loadAll();
+		manager.initAll();
+	}
+
+	// enable plugins
+	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=55)
+	public void _startup_enable_plugins_() {
+		xPluginManager.get()
+			.enableAll();
+	}
+
+	// sockets
+	@xAppStep(type=StepType.STARTUP, title="Sockets", priority=90)
+	public void _startup_sockets_() {
+		NetServerManager.get()
+			.Start();
+	}
+
+	// scripts
+	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=95)
+	public void _startup_scripts_() {
+		final gcScriptManager manager = gcScriptManager.get();
+		manager.loadAll();
+		manager.StartAll();
+	}
+
+
+
+//		// load zones
+//		synchronized(zones) {
+//			config.PopulateZones(zones);
+//			log.info("Loaded [ "+Integer.toString(this.zones.size())+" ] zones.");
+//		}
+//		// start logic thread queue
+//		getLogicQueue();
+//
+//		// start socket listener
+//		if(socket == null)
+//			socket = new pxnSocketServer();
+//		socket.setHost();
+//		socket.setPort(ServerConfig.ListenPort());
+//		// create processor
+//		socket.setFactory(new pxnSocketProcessorFactory() {
+//			@Override
+//			public gcPacketReader newProcessor() {
+//				return new gcPacketReader();
 //			}
-			// start logic thread queue
-//			getLogicQueue();
-		// load plugins
-		case 5: {
-			final xPluginManager manager = xPluginManager.get();
-			manager.setClassField("Server Main");
-			manager.loadAll();
-			manager.initAll();
-			return true;
-		}
-//			// start socket listener
-//			if(socket == null)
-//				socket = new pxnSocketServer();
-//			socket.setHost();
-//			socket.setPort(ServerConfig.ListenPort());
-//			// create processor
-//			socket.setFactory(new pxnSocketProcessorFactory() {
-//				@Override
-//				public gcPacketReader newProcessor() {
-//					return new gcPacketReader();
-//				}
-//			});
-//			socket.Start();
-		// start plugins
-		case 6: {
-			final xPluginManager manager = xPluginManager.get();
-			manager.enableAll();
-			return true;
-		}
-		// start sockets
-		case 7: {
-			final NetServerManager manager = NetServerManager.get();
-			manager.Start();
-			return true;
-		}
-		// start scripting
-		case 8: {
-			final gcScriptManager manager = gcScriptManager.get();
-			// load scripts
-			manager.loadAll();
-			manager.StartAll();
-			return true;
-		}
-		}
-		return false;
+//		});
+//		socket.Start();
+
+
+
+	// ------------------------------------------------------------------------------- //
+	// shutdown
+
+
+
+	// scripts
+	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=95)
+	public void _shutdown_scripts_() {
+		gcScriptManager.get()
+			.StopAll();
 	}
-	/**
-	 * Server shutdown sequence.
-	 *   8. Stop scripting
-	 *   7. Stop sockets
-	 *   6. Stop plugins
-	 *   5. Unload plugins
-	 *   4.
-	 *   3.
-	 *   2.
-	 *   1.
-	 * @return true if success, false if problem.
-	 */
-	@Override
-	protected boolean ShutdownStep(final int step) {
-		switch(step) {
-		// stop scripting
-		case 8: {
-			final gcScriptManager manager = gcScriptManager.get();
-			manager.StopAll();
-			return true;
-		}
-		// stop sockets
-		case 7: {
-			final NetServerManager manager = NetServerManager.get();
-			manager.Stop();
-			manager.CloseAll();
-			return true;
-		}
-		// stop plugins
-		case 6: {
-//			// pause scheduler
-//			pxnScheduler.PauseAll();
-			final xPluginManager manager = xPluginManager.get();
-			manager.disableAll();
-			return true;
-		}
-		// unload plugins
-		case 5: {
-//			// end schedulers
-//			pxnScheduler.ShutdownAll();
-			final xPluginManager manager = xPluginManager.get();
-			manager.unloadAll();
-			return true;
-		}
-		case 4: {
-			return true;
-		}
-		case 3: {
-			return true;
-		}
-		case 2: {
-			return true;
-		}
-		case 1: {
-			return true;
-		}
-		}
-		return false;
+
+	// sockets
+	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=90)
+	public void _shutdown_sockets_() {
+		final NetServerManager manager = NetServerManager.get();
+		manager.Stop();
+		manager.CloseAll();
 	}
+
+	// disable plugins
+	@xAppStep(type=StepType.SHUTDOWN, title="DisablePlugins", priority=55)
+	public void _shutdown_disable_plugins_() {
+		xPluginManager.get()
+			.disableAll();
+	}
+
+	// unload plugins
+	@xAppStep(type=StepType.SHUTDOWN, title="UnloadPlugins", priority=50)
+	public void _shutdown_unload_plugins_() {
+		xPluginManager.get()
+			.unloadAll();
+	}
+
+
+
+	// ------------------------------------------------------------------------------- //
 
 
 
 	public gcServerConfig getConfig() {
 		return this.config;
 	}
-
-
-
-
-
-
 
 
 
