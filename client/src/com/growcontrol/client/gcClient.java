@@ -8,12 +8,17 @@ import org.fusesource.jansi.AnsiConsole;
 import com.growcontrol.client.commands.gcClientCommands;
 import com.growcontrol.client.configs.gcClientConfig;
 import com.growcontrol.client.gui.guiManager;
-import com.growcontrol.common.commands.gcCommonCommands;
+import com.growcontrol.client.gui.guiManager.GUI_MODE;
 import com.poixson.commonapp.app.xApp;
+import com.poixson.commonapp.app.annotations.xAppStep;
+import com.poixson.commonapp.app.annotations.xAppStep.StepType;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
+import com.poixson.commonjava.EventListener.xHandler;
+import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
 
@@ -22,14 +27,6 @@ public class gcClient extends xApp {
 
 	// config
 	private volatile gcClientConfig config = null;
-	// zones
-//	private final List<String> zones = new ArrayList<String>();
-
-//	// client socket
-//	private volatile pxnSocketClient socket = null;
-//	// client connection state
-//	private final gcConnectState state = new gcConnectState();
-
 
 
 
@@ -53,7 +50,6 @@ public class gcClient extends xApp {
 	public gcClient() {
 		super();
 		gcClientVars.init();
-		this.displayStartupVars();
 		if(xVars.debug())
 			this.displayColors();
 		this.displayLogo();
@@ -77,169 +73,163 @@ public class gcClient extends xApp {
 		this.updateConfig();
 	}
 	protected void updateConfig() {
-		// version
-		@SuppressWarnings("unused")
-		final String configVersion = this.config.getVersion();
-		//TODO: compare to running version
+		// config version
+		{
+			boolean configVersionDifferent = false;
+			final String configVersion = this.config.getVersion();
+			final String clientVersion = this.getVersion();
+			if(utils.notEmpty(configVersion) && utils.notEmpty(clientVersion)) {
+				if(configVersion.endsWith("x") || configVersion.endsWith("*")) {
+					final String vers = utilsString.trims(configVersion, "x", "*");
+					if(!clientVersion.startsWith(vers))
+						configVersionDifferent = true;
+				} else {
+					if(!configVersion.equals(clientVersion))
+						configVersionDifferent = true;
+				}
+			}
+			if(configVersionDifferent)
+				log().warning(gcClientDefines.CONFIG_FILE+" for this client may need updates");
+		}
 		// log level
-		final xLevel level = this.config.getLogLevel();
-		if(level != null)
-			xLog.getRoot().setLevel(level);
-		// debug
-		final Boolean debug = this.config.getDebug();
-		if(debug != null)
-			xVars.debug(debug.booleanValue());
-	}
-
-
-
-	@Override
-	protected void processArgs(final String[] args) {
+		{
+			final Boolean debug = this.config.getDebug();
+			if(debug != null && debug.booleanValue())
+				xVars.debug(debug.booleanValue());
+			if(!xVars.debug()) {
+				// set log level
+				final xLevel level = this.config.getLogLevel();
+				if(level != null)
+					xLog.getRoot()
+						.setLevel(level);
+			}
+		}
 	}
 
 
 
 	/**
-	 * Client startup sequence.
-	 *   1.
-	 *   2. Listeners
-	 *   3.
-	 *   4.
-	 *   5. Load plugins and sockets
-	 *   6. Start plugins and sockets
-	 *   7. Start GUI
-	 *   8.
-	 * @return true if success, false if problem.
+	 * Handle command-line arguments.
 	 */
 	@Override
-	protected boolean StartupStep(final int step) {
-		switch(step) {
-		case 1: {
-			return true;
+	protected void processArgs(final String[] args) {
+		if(utils.isEmpty(args)) return;
+		for(final String arg : args) {
+			switch(arg) {
+			case "--debug":
+				xVars.debug(true);
+				break;
+			default:
+				System.out.println("Unknown argument: "+arg);
+				System.exit(1);
+				break;
+			}
 		}
-		// listeners
-		case 2: {
-			// client command listener
-			gcClientVars.commands().register(
+	}
+
+
+
+	// ------------------------------------------------------------------------------- //
+	// startup
+
+
+
+	// command prompt
+	@xAppStep(type=StepType.STARTUP, title="Commands", priority=30)
+	public void _startup_commands_() {
+		final xHandler handler = gcClientVars.commands();
+		handler.register(
 				new gcClientCommands()
-			);
-			gcClientVars.commands().register(
-				new gcCommonCommands()
-			);
-			// io event listener
-			//getLogicQueue();
-			return true;
-		}
-		// command prompt
-		case 3: {
-			// command processor
-			xLog.setCommandHandler(
-				gcClientVars.commands()
-			);
-			// start console input thread
-			this.startConsole();
-			return true;
-		}
-		case 4: {
-			return true;
-		}
-		// load plugins and sockets
-		case 5: {
-			final xPluginManager manager = xPluginManager.get();
-			manager.setClassField("Client Main");
-			manager.loadAll();
-			manager.initAll();
-			return true;
-		}
-		// start plugins and sockets
-		case 6: {
-			final xPluginManager manager = xPluginManager.get();
-			manager.enableAll();
-			return true;
-		}
-		// start gui manager
-		case 7: {
-			guiManager.get();
-			return true;
-		}
-		case 8: {
-			// show login/connect window
-			guiManager.get().Show(
-				guiManager.GUI_MODE.LOGIN
-			);
-			return true;
-		}
-///////			guiManager.get();
-//			// show connect window
-//			state.setStateClosed();
+		);
+		xLog.setCommandHandler(
+				handler
+		);
+	}
+
+	// console input
+	@xAppStep(type=StepType.STARTUP, title="Console", priority=32)
+	public void _startup_console_() {
+		xLog.getConsole()
+			.Start();
+	}
+
+	// start gui
+	@xAppStep(type=StepType.STARTUP, title="GUI", priority=40)
+	public void _startup_gui_() {
+		guiManager.get();
+	}
+
+	// load plugins
+	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=50)
+	public void _startup_load_plugins_() {
+		final xPluginManager manager = xPluginManager.get();
+		manager.setClassField("Client Main");
+		manager.loadAll();
+		manager.initAll();
+	}
+
+	// enable plugins
+	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=55)
+	public void _startup_enable_plugins_() {
+		xPluginManager.get()
+			.enableAll();
+	}
+
+	// show login window
+	@xAppStep(type=StepType.STARTUP, title="LoginWindow", priority=95)
+	public void _startup_login_window_() {
+		guiManager.get()
+			.Show(GUI_MODE.LOGIN);
+	}
+
+
+
+//TODO: search for server in client class
+
 //			// connect to server
 //			conn = new connection("192.168.3.3", 1142);
 //			conn.sendPacket(clientPacket.sendHELLO(version, "lorenzo", "pass"));
-		}
-		return false;
+
+
+
+	// ------------------------------------------------------------------------------- //
+	// shutdown
+
+
+
+	// close windows
+	@xAppStep(type=StepType.SHUTDOWN, title="CloseWindows", priority=95)
+	public void _shutdown_close_windows_() {
+		final guiManager manager = guiManager.peak();
+		if(manager != null)
+			manager.shutdown();
+//TODO:
+//		guiManager.Shutdown();
 	}
-	/**
-	 * Server shutdown sequence.
-	 *   7.
-	 *   6. Stop plugins and sockets
-	 *   5. Unload plugins and sockets
-	 *   4.
-	 *   3.
-	 *   2.
-	 * @return true if success, false if problem.
-	 */
-	@Override
-	protected boolean ShutdownStep(final int step) {
-		switch(step) {
-		// stop gui
-		case 8: {
-			// start closing windows
-			final guiManager man = guiManager.peak();
-			if(man != null)
-				man.shutdown();
-			return true;
-		}
-		// stop gui
-		case 7: {
-			// close windows
-///////			guiManager.Shutdown();
-			return true;
-		}
-		// stop plugins and sockets
-		case 6: {
-//			// close socket listener
-//			if(socket != null)
-//				socket.Close();
-//			// pause scheduler
-//			pxnScheduler.PauseAll();
-			final xPluginManager manager = xPluginManager.get();
-			manager.disableAll();
-			return true;
-		}
-		// unload plugins and sockets
-		case 5: {
-//			// end schedulers
-//			pxnScheduler.ShutdownAll();
-			final xPluginManager manager = xPluginManager.get();
-			manager.unloadAll();
-//			// close sockets
-			return true;
-		}
-		case 4: {
-			return true;
-		}
-		case 3: {
-			return true;
-		}
-		case 2: {
-			return true;
-		}
-		case 1: {
-			return true;
-		}
-		}
-		return false;
+
+	// sockets
+	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=90)
+	public void _shutdown_sockets_() {
+//TODO:
 	}
+
+	// disable plugins
+	@xAppStep(type=StepType.SHUTDOWN, title="DisablePlugins", priority=55)
+	public void _shutdown_disable_plugins_() {
+		xPluginManager.get()
+			.disableAll();
+	}
+
+	// unload plugins
+	@xAppStep(type=StepType.SHUTDOWN, title="UnloadPlugins", priority=50)
+	public void _shutdown_unload_plugins_() {
+		xPluginManager.get()
+			.unloadAll();
+	}
+
+
+
+	// ------------------------------------------------------------------------------- //
 
 
 
