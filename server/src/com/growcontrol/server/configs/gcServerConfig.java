@@ -122,11 +122,12 @@ public final class gcServerConfig extends xConfig {
 			}
 			// log configs
 			for(final NetConfig dao : configs) {
-				this.log().getWeak("sockets").finer(
-						(dao.enabled ? "Enabled  " : "Disabled ")+
-						dao.host+":"+Integer.toString(dao.port)+
-						(dao.ssl ? " (ssl)" : " (raw)")
-				);
+				if(dao.enabled) {
+					this.log().getWeak("sockets").finer(
+							dao.host+":"+Integer.toString(dao.port)+
+							(dao.ssl ? " (ssl)" : " (raw)")
+					);
+				}
 			}
 		}
 		return configs;
@@ -138,7 +139,8 @@ public final class gcServerConfig extends xConfig {
 	private volatile xLog _log = null;
 	public xLog log() {
 		if(this._log == null)
-			this._log = gcServer.log().get("config");
+			this._log = gcServer.log()
+				.getWeak("config");
 		return this._log;
 	}
 

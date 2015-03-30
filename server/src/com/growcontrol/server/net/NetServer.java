@@ -47,7 +47,7 @@ public class NetServer implements xCloseableMany {
 		this.config = config;
 		this.configKey = config.toString();
 		this.manager = NetServerManager.get();
-		this.log().finer("Starting socket server.. "+this.configKey);
+		this.log().finer("Starting socket server..   "+this.configKey);
 		// bootstrap
 		this.bootstrap = new ServerBootstrap();
 		this.bootstrap.group(
