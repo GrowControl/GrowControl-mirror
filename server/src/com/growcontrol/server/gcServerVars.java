@@ -3,7 +3,6 @@ package com.growcontrol.server;
 import com.growcontrol.common.meta.MetaRouter;
 import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.Utils.Keeper;
-import com.poixson.commonjava.scheduler.ticker.xTicker;
 
 
 public class gcServerVars {
@@ -40,14 +39,6 @@ public class gcServerVars {
 	private static final xHandler plugins = new xHandler();
 	public static xHandler plugins() {
 		return plugins;
-	}
-
-
-
-	// tick events
-	private static final xTicker ticker = new xTicker();
-	public static xTicker ticker() {
-		return ticker;
 	}
 
 
