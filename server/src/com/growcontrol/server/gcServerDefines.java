@@ -5,7 +5,7 @@ public class gcServerDefines {
 
 
 	// server config
-	public static final String CONFIG_FILE = "config.yml";
+	public static final String CONFIG_FILE = "server.yml";
 	// config keys
 	public static final String CONFIG_VERSION       = "Version";
 	public static final String CONFIG_LOG_LEVEL     = "Log Level";
