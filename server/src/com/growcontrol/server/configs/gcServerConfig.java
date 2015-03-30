@@ -38,7 +38,7 @@ public final class gcServerConfig extends xConfig {
 
 	// version
 	public String getVersion() {
-		final String value = getString(gcServerDefines.CONFIG_VERSION);
+		final String value = this.getString(gcServerDefines.CONFIG_VERSION);
 		if(utils.isEmpty(value))
 			return null;
 		return value;
@@ -48,7 +48,7 @@ public final class gcServerConfig extends xConfig {
 
 	// log level
 	public xLevel getLogLevel() {
-		final String value = getString(gcServerDefines.CONFIG_LOG_LEVEL);
+		final String value = this.getString(gcServerDefines.CONFIG_LOG_LEVEL);
 		if(utils.isEmpty(value))
 			return null;
 		return xLevel.parse(value);
@@ -58,7 +58,7 @@ public final class gcServerConfig extends xConfig {
 
 	// debug
 	public Boolean getDebug() {
-		return getBoolean(gcServerDefines.CONFIG_DEBUG);
+		return this.getBoolean(gcServerDefines.CONFIG_DEBUG);
 	}
 
 
@@ -68,12 +68,12 @@ public final class gcServerConfig extends xConfig {
 		if(!exists(gcServerDefines.CONFIG_TICK_INTERVAL))
 			return default_TICK_INTERVAL;
 		{
-			final Long value = getLong(gcServerDefines.CONFIG_TICK_INTERVAL);
+			final Long value = this.getLong(gcServerDefines.CONFIG_TICK_INTERVAL);
 			if(value != null)
 				return xTime.get(value, xTimeU.MS);
 		}
 		{
-			final String value = getString(gcServerDefines.CONFIG_TICK_INTERVAL);
+			final String value = this.getString(gcServerDefines.CONFIG_TICK_INTERVAL);
 			if(utils.notEmpty(value))
 				return xTime.parse(value);
 		}
@@ -86,7 +86,7 @@ public final class gcServerConfig extends xConfig {
 	public int getLogicThreads() {
 		if(!exists(gcServerDefines.CONFIG_LOGIC_THREADS))
 			return default_LOGIC_THREADS;
-		final Integer value = getInteger(gcServerDefines.CONFIG_LOGIC_THREADS);
+		final Integer value = this.getInteger(gcServerDefines.CONFIG_LOGIC_THREADS);
 		return utilsNumbers.MinMax(value.intValue(), 0, xThreadPool.POOL_LIMIT);
 	}
 
@@ -96,7 +96,7 @@ public final class gcServerConfig extends xConfig {
 //	public void populateZones(final Collection<String> zones) {
 //		if(zones == null) throw new NullPointerException();
 //		if(exists(gcServerDefines.CONFIG_ZONES))
-//			zones.addAll(getStringList(gcServerDefines.CONFIG_ZONES));
+//			zones.addAll(this.getStringList(gcServerDefines.CONFIG_ZONES));
 //	}
 
 
