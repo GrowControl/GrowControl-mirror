@@ -72,6 +72,8 @@ public class gcClient extends xApp {
 			Failure.fail("Failed to load "+gcClientConfig.CONFIG_FILE);
 			return;
 		}
+		if(this.config.isFromResource())
+			log().warning("Created default "+gcClientDefines.CONFIG_FILE);
 		this.updateConfig();
 	}
 	protected void updateConfig() {

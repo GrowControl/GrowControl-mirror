@@ -71,7 +71,7 @@ public class gcServer extends xApp {
 			return;
 		}
 		if(this.config.isFromResource())
-			log().warning("Created default config.yml");
+			log().warning("Created default "+gcServerDefines.CONFIG_FILE);
 		this.updateConfig();
 	}
 	private void updateConfig() {
@@ -91,7 +91,7 @@ public class gcServer extends xApp {
 				}
 			}
 			if(configVersionDifferent)
-				log().warning("config.yml for this server may need updates");
+				log().warning(gcServerDefines.CONFIG_FILE+" for this server may need updates");
 		}
 		// log level
 		{
