@@ -1,4 +1,4 @@
-package com.growcontrol.server.net.firewall;
+package com.growcontrol.common.netty.firewall;
 
 import io.netty.channel.Channel;
 
