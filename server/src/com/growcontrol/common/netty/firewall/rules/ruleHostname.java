@@ -1,8 +1,8 @@
-package com.growcontrol.server.net.firewall.rules;
+package com.growcontrol.common.netty.firewall.rules;
 
 import io.netty.channel.Channel;
 
-import com.growcontrol.server.net.firewall.NetFirewallRule;
+import com.growcontrol.common.netty.firewall.NetFirewallRule;
 
 
 public class ruleHostname implements NetFirewallRule {

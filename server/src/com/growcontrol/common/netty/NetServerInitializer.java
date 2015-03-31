@@ -1,4 +1,4 @@
-package com.growcontrol.server.net;
+package com.growcontrol.common.netty;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -8,8 +8,6 @@ import io.netty.handler.codec.string.StringEncoder;
 
 import java.nio.charset.Charset;
 
-import com.growcontrol.common.netty.JsonObjectDecoder;
-import com.growcontrol.common.netty.NetConfig;
 import com.poixson.commonjava.xLogger.xLog;
 
 

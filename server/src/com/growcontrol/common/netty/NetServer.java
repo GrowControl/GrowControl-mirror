@@ -1,9 +1,8 @@
-package com.growcontrol.server.net;
+package com.growcontrol.common.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelOption;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
@@ -12,7 +11,6 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import com.growcontrol.common.netty.NetConfig;
 import com.poixson.commonjava.Utils.xCloseableMany;
 import com.poixson.commonjava.xLogger.xLog;
 

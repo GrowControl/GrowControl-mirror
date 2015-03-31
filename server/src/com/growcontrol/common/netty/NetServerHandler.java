@@ -1,4 +1,4 @@
-package com.growcontrol.server.net;
+package com.growcontrol.common.netty;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;

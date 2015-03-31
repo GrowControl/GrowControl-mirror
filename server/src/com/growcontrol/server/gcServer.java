@@ -5,10 +5,10 @@ import java.io.PrintStream;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
+import com.growcontrol.common.netty.NetServerManager;
 import com.growcontrol.common.scripting.gcScriptManager;
 import com.growcontrol.server.commands.gcServerCommands;
 import com.growcontrol.server.configs.gcServerConfig;
-import com.growcontrol.server.net.NetServerManager;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.app.annotations.xAppStep;
 import com.poixson.commonapp.app.annotations.xAppStep.StepType;

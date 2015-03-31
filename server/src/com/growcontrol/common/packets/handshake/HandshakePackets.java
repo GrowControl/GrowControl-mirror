@@ -1,9 +1,9 @@
 package com.growcontrol.common.packets.handshake;
 
-import com.growcontrol.common.packets.PacketHandler;
+import com.growcontrol.common.packets.PacketManager;
 
 
-public class Packets_Init {
+public class HandshakePackets {
 
 
 
