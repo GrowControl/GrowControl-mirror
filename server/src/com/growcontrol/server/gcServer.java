@@ -20,6 +20,7 @@ import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.Utils.xTime;
+import com.poixson.commonjava.scheduler.ticker.xTickPrompt;
 import com.poixson.commonjava.scheduler.ticker.xTicker;
 import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
@@ -173,6 +174,9 @@ public class gcServer extends xApp {
 	public void _startup_console_() {
 		xLog.getConsole()
 			.Start();
+		// prompt ticker
+		if(this.config.getPromptTickerEnabled())
+			new xTickPrompt();
 	}
 
 //	// io event listener
