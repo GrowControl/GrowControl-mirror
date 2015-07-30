@@ -93,8 +93,11 @@ fi
 	"%{clientjar}" \
 	"${RPM_BUILD_ROOT}%{prefix}/gcClient-%{version}_%{release}.jar" \
 		|| exit 1
+%{__install} -d -m 0755 \
+	"${RPM_BUILD_ROOT}/usr/share/applications/" \
+		|| exit 1
 %{__install} -m 0644 \
-	"growcontrol.desktop" \
+	"%{SOURCE_ROOT}/growcontrol.desktop" \
 	"${RPM_BUILD_ROOT}/usr/share/applications/growcontrol.desktop" \
 		|| exit 1
 
