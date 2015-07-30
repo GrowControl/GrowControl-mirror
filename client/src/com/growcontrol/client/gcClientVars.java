@@ -54,11 +54,11 @@ public class gcClientVars {
 
 
 
-	// command event handler
-	private static final xHandler commands = new xHandler();
-	public static xHandler commands() {
-		return commands;
-	}
+//	// command event handler
+//	private static final xHandler commands = new xHandler();
+//	public static xHandler commands() {
+//		return commands;
+//	}
 
 
 

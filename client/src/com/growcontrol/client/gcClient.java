@@ -78,24 +78,7 @@ public class gcClient extends xApp {
 		gcClientVars.getConfig();
 	}
 
-	// command prompt
-	@xAppStep(type=StepType.STARTUP, title="Commands", priority=30)
-	public void __STARTUP_commands() {
-		final xHandler handler = gcClientVars.commands();
-		handler.register(
-				new gcClientCommands()
-		);
-		xLog.setCommandHandler(
-				handler
-		);
-	}
 
-	// console input
-	@xAppStep(type=StepType.STARTUP, title="Console", priority=32)
-	public void __STARTUP_console() {
-		xLog.getConsole()
-			.Start();
-	}
 
 	// start gui
 	@xAppStep(type=StepType.STARTUP, title="GUI", priority=40)
