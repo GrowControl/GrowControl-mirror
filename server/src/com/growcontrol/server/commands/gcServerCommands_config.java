@@ -1,6 +1,6 @@
 package com.growcontrol.server.commands;
 
-import com.growcontrol.server.gcServer;
+import com.growcontrol.server.gcServerVars;
 import com.growcontrol.server.configs.gcServerConfig;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.xLogger.xLog;
@@ -60,8 +60,7 @@ public class gcServerCommands_config implements xCommandListener {
 			return;
 		}
 		event.setHandled();
-		final gcServer server = gcServer.get();
-		final gcServerConfig config = server.getConfig();
+		final gcServerConfig config = gcServerVars.getConfig();
 //		final String[] zones = config.getZones().toArray(new String[0]);
 		this.publish();
 		this.log().title("Server Config");
