@@ -7,22 +7,14 @@ import org.fusesource.jansi.AnsiConsole;
 
 import com.growcontrol.common.scripting.gcScriptManager;
 import com.growcontrol.server.commands.gcServerCommands;
-import com.growcontrol.server.configs.gcServerConfig;
 import com.growcontrol.server.net.NetServerManager;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.app.annotations.xAppStep;
 import com.poixson.commonapp.app.annotations.xAppStep.StepType;
-import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.plugin.xPluginManager;
-import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.Utils.utilsString;
-import com.poixson.commonjava.Utils.xTime;
-import com.poixson.commonjava.scheduler.ticker.xTickPrompt;
-import com.poixson.commonjava.scheduler.ticker.xTicker;
-import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -53,62 +45,6 @@ public class gcServer extends xApp {
 		if(xVars.debug())
 			this.displayColors();
 		this.displayLogo();
-	}
-
-
-
-	private void updateConfig() {
-		// config version
-		{
-			boolean configVersionDifferent = false;
-			final String configVersion = this.config.getVersion();
-			final String serverVersion = this.getVersion();
-			if(utils.notEmpty(configVersion) && utils.notEmpty(serverVersion)) {
-				if(configVersion.endsWith("x") || configVersion.endsWith("*")) {
-					final String vers = utilsString.trims(configVersion, "x", "*");
-					if(!serverVersion.startsWith(vers))
-						configVersionDifferent = true;
-				} else {
-					if(!configVersion.equals(serverVersion))
-						configVersionDifferent = true;
-				}
-			}
-			if(configVersionDifferent)
-				log().warning(gcServerDefines.CONFIG_FILE+" for this server may need updates");
-		}
-		// log level
-		{
-			final Boolean debug = this.config.getDebug();
-			if(debug != null && debug.booleanValue())
-				xVars.debug(debug.booleanValue());
-			if(!xVars.debug()) {
-				// set log level
-				final xLevel level = this.config.getLogLevel();
-				if(level != null)
-					xLog.getRoot().setLevel(level);
-			}
-		}
-		// tick interval
-		{
-			final xTime tick = this.config.getTickInterval();
-			xTicker.get()
-				.setInterval(tick);
-		}
-//		// logic threads (0 uses main thread)
-//		{
-//			@SuppressWarnings("unused")
-//			final int logic = this.config.getLogicThreads();
-//			//TODO: apply this to logic thread pool
-//		}
-//		// zones
-//		{
-//			this.config.populateZones(this.zones);
-//		}
-		// sockets
-		{
-			final NetServerManager manager = NetServerManager.get();
-			manager.setConfigs(this.config.getSocketConfigs());
-		}
 	}
 
 
@@ -145,6 +81,8 @@ public class gcServer extends xApp {
 		gcServerVars.getConfig();
 	}
 
+
+
 	// command prompt
 	@xAppStep(type=StepType.STARTUP, title="Commands", priority=30)
 	public void __STARTUP_commands() {
@@ -156,6 +94,8 @@ public class gcServer extends xApp {
 				handler
 		);
 	}
+
+
 
 	// console input
 	@xAppStep(type=StepType.STARTUP, title="Console", priority=32)
@@ -173,6 +113,8 @@ public class gcServer extends xApp {
 //		getLogicQueue();
 //	}
 
+
+
 	// load plugins
 	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=50)
 	public void __STARTUP_load_plugins() {
@@ -182,6 +124,8 @@ public class gcServer extends xApp {
 		manager.initAll();
 	}
 
+
+
 	// enable plugins
 	@xAppStep(type=StepType.STARTUP, title="EnablePlugins", priority=55)
 	public void __STARTUP_enable_plugins() {
@@ -189,12 +133,16 @@ public class gcServer extends xApp {
 			.enableAll();
 	}
 
+
+
 	// sockets
 	@xAppStep(type=StepType.STARTUP, title="Sockets", priority=90)
 	public void __STARTUP_sockets() {
 		NetServerManager.get()
 			.Start();
 	}
+
+
 
 	// scripts
 	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=95)
@@ -242,6 +190,8 @@ public class gcServer extends xApp {
 			.StopAll();
 	}
 
+
+
 	// sockets
 	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=90)
 	public void __SHUTDOWN_sockets() {
@@ -250,12 +200,16 @@ public class gcServer extends xApp {
 		manager.CloseAll();
 	}
 
+
+
 	// disable plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="DisablePlugins", priority=55)
 	public void __SHUTDOWN_disable_plugins() {
 		xPluginManager.get()
 			.disableAll();
 	}
+
+
 
 	// unload plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="UnloadPlugins", priority=50)
@@ -270,9 +224,61 @@ public class gcServer extends xApp {
 
 
 
-	public gcServerConfig getConfig() {
-		return this.config;
+/*
+	private void updateConfig() {
+	// config version
+	{
+		boolean configVersionDifferent = false;
+		final String configVersion = this.config.getVersion();
+		final String serverVersion = this.getVersion();
+		if(utils.notEmpty(configVersion) && utils.notEmpty(serverVersion)) {
+			if(configVersion.endsWith("x") || configVersion.endsWith("*")) {
+				final String vers = utilsString.trims(configVersion, "x", "*");
+				if(!serverVersion.startsWith(vers))
+					configVersionDifferent = true;
+			} else {
+				if(!configVersion.equals(serverVersion))
+					configVersionDifferent = true;
+			}
+		}
+		if(configVersionDifferent)
+			log().warning(gcServerDefines.CONFIG_FILE+" for this server may need updates");
 	}
+	// log level
+	{
+		final Boolean debug = this.config.getDebug();
+		if(debug != null && debug.booleanValue())
+			xVars.debug(debug.booleanValue());
+		if(!xVars.debug()) {
+			// set log level
+			final xLevel level = this.config.getLogLevel();
+			if(level != null)
+				xLog.getRoot().setLevel(level);
+		}
+	}
+	// tick interval
+	{
+		final xTime tick = this.config.getTickInterval();
+		xTicker.get()
+			.setInterval(tick);
+	}
+//	// logic threads (0 uses main thread)
+//	{
+//		@SuppressWarnings("unused")
+//		final int logic = this.config.getLogicThreads();
+//		//TODO: apply this to logic thread pool
+//	}
+//	// zones
+//	{
+//		this.config.populateZones(this.zones);
+//	}
+	// sockets
+	{
+		final NetServerManager manager = NetServerManager.get();
+		manager.setConfigs(this.config.getSocketConfigs());
+	}
+}
+*/
 
 
 

@@ -5,22 +5,14 @@ import java.io.PrintStream;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
-import com.growcontrol.client.commands.gcClientCommands;
-import com.growcontrol.client.configs.gcClientConfig;
 import com.growcontrol.client.gui.guiManager;
 import com.growcontrol.client.gui.guiManager.GUI_MODE;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.app.annotations.xAppStep;
 import com.poixson.commonapp.app.annotations.xAppStep.StepType;
-import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.plugin.xPluginManager;
-import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
-import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.Utils.utilsString;
-import com.poixson.commonjava.xLogger.xLevel;
-import com.poixson.commonjava.xLogger.xLog;
 
 
 public class gcClient extends xApp {
@@ -50,42 +42,6 @@ public class gcClient extends xApp {
 		if(xVars.debug())
 			this.displayColors();
 		this.displayLogo();
-	}
-
-
-
-	protected void updateConfig() {
-		// config version
-		{
-			boolean configVersionDifferent = false;
-			final String configVersion = this.config.getVersion();
-			final String clientVersion = this.getVersion();
-			if(utils.notEmpty(configVersion) && utils.notEmpty(clientVersion)) {
-				if(configVersion.endsWith("x") || configVersion.endsWith("*")) {
-					final String vers = utilsString.trims(configVersion, "x", "*");
-					if(!clientVersion.startsWith(vers))
-						configVersionDifferent = true;
-				} else {
-					if(!configVersion.equals(clientVersion))
-						configVersionDifferent = true;
-				}
-			}
-			if(configVersionDifferent)
-				log().warning(gcClientDefines.CONFIG_FILE+" for this client may need updates");
-		}
-		// log level
-		{
-			final Boolean debug = this.config.getDebug();
-			if(debug != null && debug.booleanValue())
-				xVars.debug(debug.booleanValue());
-			if(!xVars.debug()) {
-				// set log level
-				final xLevel level = this.config.getLogLevel();
-				if(level != null)
-					xLog.getRoot()
-						.setLevel(level);
-			}
-		}
 	}
 
 
@@ -147,6 +103,8 @@ public class gcClient extends xApp {
 		guiManager.get();
 	}
 
+
+
 	// load plugins
 	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=50)
 	public void __STARTUP_load_plugins() {
@@ -156,12 +114,17 @@ public class gcClient extends xApp {
 		manager.initAll();
 	}
 
+
+
 	// enable plugins
 	@xAppStep(type=StepType.STARTUP, title="EnablePlugins", priority=55)
 	public void __STARTUP_enable_plugins() {
 		xPluginManager.get()
 			.enableAll();
 	}
+
+
+
 
 	// show login window
 	@xAppStep(type=StepType.STARTUP, title="LoginWindow", priority=98)
@@ -195,11 +158,15 @@ public class gcClient extends xApp {
 //		guiManager.Shutdown();
 	}
 
+
+
 	// sockets
 	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=90)
 	public void __SHUTDOWN_sockets() {
 //TODO:
 	}
+
+
 
 	// disable plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="DisablePlugins", priority=55)
@@ -207,6 +174,8 @@ public class gcClient extends xApp {
 		xPluginManager.get()
 			.disableAll();
 	}
+
+
 
 	// unload plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="UnloadPlugins", priority=50)
@@ -221,9 +190,41 @@ public class gcClient extends xApp {
 
 
 
-	public gcClientConfig getConfig() {
-		return this.config;
+/*
+	protected void updateConfig() {
+		// config version
+		{
+			boolean configVersionDifferent = false;
+			final String configVersion = this.config.getVersion();
+			final String clientVersion = this.getVersion();
+			if(utils.notEmpty(configVersion) && utils.notEmpty(clientVersion)) {
+				if(configVersion.endsWith("x") || configVersion.endsWith("*")) {
+					final String vers = utilsString.trims(configVersion, "x", "*");
+					if(!clientVersion.startsWith(vers))
+						configVersionDifferent = true;
+				} else {
+					if(!configVersion.equals(clientVersion))
+						configVersionDifferent = true;
+				}
+			}
+			if(configVersionDifferent)
+				log().warning(gcClientDefines.CONFIG_FILE+" for this client may need updates");
+		}
+		// log level
+		{
+			final Boolean debug = this.config.getDebug();
+			if(debug != null && debug.booleanValue())
+				xVars.debug(debug.booleanValue());
+			if(!xVars.debug()) {
+				// set log level
+				final xLevel level = this.config.getLogLevel();
+				if(level != null)
+					xLog.getRoot()
+						.setLevel(level);
+			}
+		}
 	}
+*/
 
 
 
