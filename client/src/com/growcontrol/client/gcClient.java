@@ -108,6 +108,15 @@ public class gcClient extends xApp {
 
 
 
+//	// scripts
+//	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=95)
+//	public void __STARTUP_scripts() {
+//		final gcScriptManager manager = gcScriptManager.get();
+//		manager.loadAll();
+//		manager.StartAll();
+//	}
+
+
 
 	// show login window
 	@xAppStep(type=StepType.STARTUP, title="LoginWindow", priority=98)
@@ -140,6 +149,15 @@ public class gcClient extends xApp {
 //TODO:
 //		guiManager.Shutdown();
 	}
+
+
+
+//	// scripts
+//	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=95)
+//	public void __SHUTDOWN_scripts() {
+//		gcScriptManager.get()
+//			.StopAll();
+//	}
 
 
 

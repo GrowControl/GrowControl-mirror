@@ -20,9 +20,6 @@ import com.poixson.commonjava.xLogger.xLog;
 
 public final class gcServerConfig extends xConfig {
 
-	// server config
-	public static final String CONFIG_FILE = gcServerDefines.CONFIG_FILE;
-
 	// defaults
 	public static final boolean default_PROMPT_TICKER = false;
 	public static final xTime default_TICK_INTERVAL = xTime.get("5s");

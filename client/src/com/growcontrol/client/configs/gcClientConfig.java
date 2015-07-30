@@ -11,9 +11,6 @@ import com.poixson.commonjava.xLogger.xLevel;
 
 public final class gcClientConfig extends xConfig {
 
-	// client config
-	public static final String CONFIG_FILE = gcClientDefines.CONFIG_FILE;
-
 	// default values
 	public static final xTime DEFAULT_TICK_INTERVAL = xTime.get("1s");
 	public static final int   DEFAULT_LISTEN_PORT   = 1142;
