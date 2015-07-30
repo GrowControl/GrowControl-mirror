@@ -65,6 +65,54 @@ In order to create the project files to import into Eclipse:
 
 
 
+Startup Steps
+-------------
+
+Priority | Location | Description
+3  | PXN | lock file
+5  | PXN | ensure not root
+11 | PXN | load clock
+20 | S/C | load config
+30 | S   | load commands
+32 | S   | start console input
+40 |   C | start gui
+50 | S/C | load plugins
+55 | S/C | enable plugins
+75 | PXN | load scheduler
+80 | PXN | start ticker
+90 | S   | start sockets
+95 | S/C | start scripts
+98 |   C | display login window
+
+PXN = pxnCommon
+S   = gcServer
+  C = gcClient
+S/C = gcServer and gcClient
+
+
+
+Shutdown Steps
+--------------
+
+Priority | Location | Description
+100| PXN | display stats
+98 |   C | close windows
+95 | S/C | stop scripts
+90 | S/C | close sockets
+80 | PXN | stop ticker
+75 | PXN | stop scheduler
+70 | PXN | stop thread pools
+55 | S/C | disable plugins
+50 | S/C | unload plugins
+32 | PXN | stop console input
+
+PXN = pxnCommon
+S   = gcServer
+  C = gcClient
+S/C = gcServer and gcClient
+
+
+
 Visit us on irc:
 
 irc.esper.net #growcontrol
