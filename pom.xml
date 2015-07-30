@@ -4,13 +4,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<name>GrowControl-ZIP</name>
-	<groupId>com.growcontrol</groupId>
 	<artifactId>gc-zip</artifactId>
+	<groupId>com.growcontrol</groupId>
 	<version>3.5.x</version>
 	<packaging>pom</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven-assembly-plugin-version>2.5.3</maven-assembly-plugin-version>
+		<maven-assembly-plugin-version>2.5.5</maven-assembly-plugin-version>
 	</properties>
 	<modules>
 		<module>server</module>
