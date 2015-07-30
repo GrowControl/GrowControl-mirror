@@ -136,7 +136,7 @@ public class gcClient extends xApp {
 
 	// command prompt
 	@xAppStep(type=StepType.STARTUP, title="Commands", priority=30)
-	public void _startup_commands_() {
+	public void __STARTUP_commands() {
 		final xHandler handler = gcClientVars.commands();
 		handler.register(
 				new gcClientCommands()
@@ -148,20 +148,20 @@ public class gcClient extends xApp {
 
 	// console input
 	@xAppStep(type=StepType.STARTUP, title="Console", priority=32)
-	public void _startup_console_() {
+	public void __STARTUP_console() {
 		xLog.getConsole()
 			.Start();
 	}
 
 	// start gui
 	@xAppStep(type=StepType.STARTUP, title="GUI", priority=40)
-	public void _startup_gui_() {
+	public void __STARTUP_gui() {
 		guiManager.get();
 	}
 
 	// load plugins
 	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=50)
-	public void _startup_load_plugins_() {
+	public void __STARTUP_load_plugins() {
 		final xPluginManager manager = xPluginManager.get();
 		manager.setClassField("Client Main");
 		manager.loadAll();
@@ -170,14 +170,14 @@ public class gcClient extends xApp {
 
 	// enable plugins
 	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=55)
-	public void _startup_enable_plugins_() {
+	public void __STARTUP_enable_plugins() {
 		xPluginManager.get()
 			.enableAll();
 	}
 
 	// show login window
 	@xAppStep(type=StepType.STARTUP, title="LoginWindow", priority=95)
-	public void _startup_login_window_() {
+	public void __STARTUP_login_window() {
 		guiManager.get()
 			.Show(GUI_MODE.LOGIN);
 	}
@@ -199,7 +199,7 @@ public class gcClient extends xApp {
 
 	// close windows
 	@xAppStep(type=StepType.SHUTDOWN, title="CloseWindows", priority=95)
-	public void _shutdown_close_windows_() {
+	public void __SHUTDOWN_close_windows() {
 		final guiManager manager = guiManager.peak();
 		if(manager != null)
 			manager.shutdown();
@@ -209,20 +209,20 @@ public class gcClient extends xApp {
 
 	// sockets
 	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=90)
-	public void _shutdown_sockets_() {
+	public void __SHUTDOWN_sockets() {
 //TODO:
 	}
 
 	// disable plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="DisablePlugins", priority=55)
-	public void _shutdown_disable_plugins_() {
+	public void __SHUTDOWN_disable_plugins() {
 		xPluginManager.get()
 			.disableAll();
 	}
 
 	// unload plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="UnloadPlugins", priority=50)
-	public void _shutdown_unload_plugins_() {
+	public void __SHUTDOWN_unload_plugins() {
 		xPluginManager.get()
 			.unloadAll();
 	}

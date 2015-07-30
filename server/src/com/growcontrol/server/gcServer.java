@@ -159,7 +159,7 @@ public class gcServer extends xApp {
 
 	// command prompt
 	@xAppStep(type=StepType.STARTUP, title="Commands", priority=30)
-	public void _startup_commands_() {
+	public void __STARTUP_commands() {
 		final xHandler handler = gcServerVars.commands();
 		handler.register(
 				new gcServerCommands()
@@ -171,7 +171,7 @@ public class gcServer extends xApp {
 
 	// console input
 	@xAppStep(type=StepType.STARTUP, title="Console", priority=32)
-	public void _startup_console_() {
+	public void __STARTUP_console() {
 		xLog.getConsole()
 			.Start();
 		// prompt ticker
@@ -187,7 +187,7 @@ public class gcServer extends xApp {
 
 	// load plugins
 	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=50)
-	public void _startup_load_plugins_() {
+	public void __STARTUP_load_plugins() {
 		final xPluginManager manager = xPluginManager.get();
 		manager.setClassField("Server Main");
 		manager.loadAll();
@@ -196,21 +196,21 @@ public class gcServer extends xApp {
 
 	// enable plugins
 	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=55)
-	public void _startup_enable_plugins_() {
+	public void __STARTUP_enable_plugins() {
 		xPluginManager.get()
 			.enableAll();
 	}
 
 	// sockets
 	@xAppStep(type=StepType.STARTUP, title="Sockets", priority=90)
-	public void _startup_sockets_() {
+	public void __STARTUP_sockets() {
 		NetServerManager.get()
 			.Start();
 	}
 
 	// scripts
 	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=95)
-	public void _startup_scripts_() {
+	public void __STARTUP_scripts() {
 		final gcScriptManager manager = gcScriptManager.get();
 		manager.loadAll();
 		manager.StartAll();
@@ -249,14 +249,14 @@ public class gcServer extends xApp {
 
 	// scripts
 	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=95)
-	public void _shutdown_scripts_() {
+	public void __SHUTDOWN_scripts() {
 		gcScriptManager.get()
 			.StopAll();
 	}
 
 	// sockets
 	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=90)
-	public void _shutdown_sockets_() {
+	public void __SHUTDOWN_sockets() {
 		final NetServerManager manager = NetServerManager.get();
 		manager.Stop();
 		manager.CloseAll();
@@ -264,14 +264,14 @@ public class gcServer extends xApp {
 
 	// disable plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="DisablePlugins", priority=55)
-	public void _shutdown_disable_plugins_() {
+	public void __SHUTDOWN_disable_plugins() {
 		xPluginManager.get()
 			.disableAll();
 	}
 
 	// unload plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="UnloadPlugins", priority=50)
-	public void _shutdown_unload_plugins_() {
+	public void __SHUTDOWN_unload_plugins() {
 		xPluginManager.get()
 			.unloadAll();
 	}
