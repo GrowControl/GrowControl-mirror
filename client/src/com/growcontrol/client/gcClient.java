@@ -25,9 +25,6 @@ import com.poixson.commonjava.xLogger.xLog;
 
 public class gcClient extends xApp {
 
-	// config
-	private volatile gcClientConfig config = null;
-
 
 
 	/**
@@ -57,21 +54,6 @@ public class gcClient extends xApp {
 
 
 
-	// init config
-	@Override
-	protected void initConfig() {
-		this.config = (gcClientConfig) xConfigLoader.Load(
-			gcClientConfig.CONFIG_FILE,
-			gcClientConfig.class
-		);
-		if(this.config == null) {
-			Failure.fail("Failed to load "+gcClientConfig.CONFIG_FILE);
-			return;
-		}
-		if(this.config.isFromResource())
-			log().warning("Created default "+gcClientDefines.CONFIG_FILE);
-		this.updateConfig();
-	}
 	protected void updateConfig() {
 		// config version
 		{
@@ -133,6 +115,12 @@ public class gcClient extends xApp {
 	// startup
 
 
+
+	// load config
+	@xAppStep(type=StepType.STARTUP, title="Config", priority=20)
+	public void __STARTUP_config() {
+		gcClientVars.getConfig();
+	}
 
 	// command prompt
 	@xAppStep(type=StepType.STARTUP, title="Commands", priority=30)
