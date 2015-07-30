@@ -1,6 +1,9 @@
 package com.growcontrol.server;
 
 import com.growcontrol.common.meta.MetaRouter;
+import com.growcontrol.server.configs.gcServerConfig;
+import com.poixson.commonapp.config.xConfigLoader;
+import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.Utils.Keeper;
 
@@ -15,6 +18,31 @@ public class gcServerVars {
 			Keeper.add(new gcServerVars());
 	}
 	private gcServerVars() {
+	}
+
+
+
+	// server config
+	private static gcServerConfig config = null;
+	private static final Object configLock = new Object();
+	public static gcServerConfig getConfig() {
+		if(config == null) {
+			synchronized(configLock) {
+				if(config == null) {
+					config = (gcServerConfig) xConfigLoader.Load(
+							gcServerDefines.CONFIG_FILE,
+							gcServerConfig.class
+					);
+					if(config == null) {
+						Failure.fail("Failed to load "+gcServerDefines.CONFIG_FILE);
+						return null;
+					}
+					if(config.isFromResource())
+						gcServer.log().warning("Created default "+gcServerDefines.CONFIG_FILE);
+				}
+			}
+		}
+		return config;
 	}
 
 

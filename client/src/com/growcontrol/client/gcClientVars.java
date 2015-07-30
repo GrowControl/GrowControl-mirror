@@ -1,5 +1,8 @@
 package com.growcontrol.client;
 
+import com.growcontrol.client.configs.gcClientConfig;
+import com.poixson.commonapp.config.xConfigLoader;
+import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.Utils.Keeper;
 
@@ -14,6 +17,31 @@ public class gcClientVars {
 			Keeper.add(new gcClientVars());
 	}
 	private gcClientVars() {
+	}
+
+
+
+	// client config
+	private static gcClientConfig config = null;
+	private static final Object configLock = new Object();
+	public static gcClientConfig getConfig() {
+		if(config == null) {
+			synchronized(configLock) {
+				if(config == null) {
+					config = (gcClientConfig) xConfigLoader.Load(
+							gcClientDefines.CONFIG_FILE,
+							gcClientConfig.class
+					);
+					if(config == null) {
+						Failure.fail("Failed to load "+gcClientDefines.CONFIG_FILE);
+						return null;
+					}
+					if(config.isFromResource())
+						gcClient.log().warning("Created default "+gcClientDefines.CONFIG_FILE);
+				}
+			}
+		}
+		return config;
 	}
 
 
