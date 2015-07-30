@@ -183,7 +183,7 @@ public class gcServer extends xApp {
 	}
 
 	// enable plugins
-	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=55)
+	@xAppStep(type=StepType.STARTUP, title="EnablePlugins", priority=55)
 	public void __STARTUP_enable_plugins() {
 		xPluginManager.get()
 			.enableAll();

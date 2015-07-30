@@ -157,14 +157,14 @@ public class gcClient extends xApp {
 	}
 
 	// enable plugins
-	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=55)
+	@xAppStep(type=StepType.STARTUP, title="EnablePlugins", priority=55)
 	public void __STARTUP_enable_plugins() {
 		xPluginManager.get()
 			.enableAll();
 	}
 
 	// show login window
-	@xAppStep(type=StepType.STARTUP, title="LoginWindow", priority=95)
+	@xAppStep(type=StepType.STARTUP, title="LoginWindow", priority=98)
 	public void __STARTUP_login_window() {
 		guiManager.get()
 			.Show(GUI_MODE.LOGIN);
@@ -186,7 +186,7 @@ public class gcClient extends xApp {
 
 
 	// close windows
-	@xAppStep(type=StepType.SHUTDOWN, title="CloseWindows", priority=95)
+	@xAppStep(type=StepType.SHUTDOWN, title="CloseWindows", priority=98)
 	public void __SHUTDOWN_close_windows() {
 		final guiManager manager = guiManager.peak();
 		if(manager != null)
