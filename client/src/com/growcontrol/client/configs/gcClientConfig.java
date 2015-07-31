@@ -20,7 +20,7 @@ public final class gcClientConfig extends xConfig {
 
 	// version
 	public String getVersion() {
-		final String value = getString(gcClientDefines.CONFIG_VERSION);
+		final String value = this.getString(gcClientDefines.CONFIG_VERSION);
 		if(utils.isEmpty(value))
 			return null;
 		return value;
@@ -30,7 +30,7 @@ public final class gcClientConfig extends xConfig {
 
 	// log level
 	public xLevel getLogLevel() {
-		final String value = getString(gcClientDefines.CONFIG_LOG_LEVEL);
+		final String value = this.getString(gcClientDefines.CONFIG_LOG_LEVEL);
 		if(utils.isEmpty(value))
 			return null;
 		return xLevel.parse(value);
@@ -40,7 +40,7 @@ public final class gcClientConfig extends xConfig {
 
 	// debug
 	public Boolean getDebug() {
-		return getBoolean(gcClientDefines.CONFIG_DEBUG);
+		return this.getBoolean(gcClientDefines.CONFIG_DEBUG);
 	}
 
 
