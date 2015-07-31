@@ -7,12 +7,12 @@ import com.growcontrol.server.gcServerDefines;
 import com.poixson.commonapp.config.xConfig;
 
 
-public class gcServerSocketConfig extends xConfig {
+public class gcServerConfigSocket extends xConfig {
 
 
 
-	public gcServerSocketConfig(final Map<String, Object> data) {
-		super(data);
+	public gcServerConfigSocket(final Map<String, Object> datamap) {
+		super(datamap);
 	}
 
 

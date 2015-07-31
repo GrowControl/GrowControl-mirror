@@ -5,21 +5,15 @@ import java.util.Map;
 import com.growcontrol.client.gcClientDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.xLogger.xLevel;
 
 
 public final class gcClientConfig extends xConfig {
 
-	// default values
-	public static final xTime DEFAULT_TICK_INTERVAL = xTime.get("1s");
-	public static final int   DEFAULT_LISTEN_PORT   = 1142;
-	public static final int   DEFAULT_LOGIC_THREADS = 0;
 
 
-
-	public gcClientConfig(final Map<String, Object> data) {
-		super(data);
+	public gcClientConfig(final Map<String, Object> datamap) {
+		super(datamap);
 	}
 
 

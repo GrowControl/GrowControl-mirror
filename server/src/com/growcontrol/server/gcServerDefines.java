@@ -1,7 +1,15 @@
 package com.growcontrol.server;
 
+import com.poixson.commonjava.Utils.xTime;
+
 
 public class gcServerDefines {
+
+
+	// defaults
+	public static final boolean DEFAULT_PROMPT_TICKER = false;
+	public static final xTime DEFAULT_TICK_INTERVAL = xTime.get("5s");
+	public static final int DEFAULT_LOGIC_THREADS = 0;
 
 
 	// server config
