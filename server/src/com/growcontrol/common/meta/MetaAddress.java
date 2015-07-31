@@ -60,7 +60,7 @@ public class MetaAddress {
 
 
 	public MetaAddress setTag(final String key, final String value) {
-		if(utils.isEmpty(key)) throw new NullPointerException();
+		if(utils.isEmpty(key)) throw new NullPointerException("key argument is required!");
 		synchronized(this.tags) {
 			this.tags.put(key, value);
 		}

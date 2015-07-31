@@ -17,7 +17,7 @@ public class NettyDetailedLogger extends AbstractInternalLogger {
 
 	// install factory
 	public static void Install(final xLog log) {
-		if(log == null) throw new NullPointerException();
+		if(log == null) throw new NullPointerException("log argument is required!");
 		InternalLoggerFactory.setDefaultFactory(
 				new NettyDetailedLoggerFactory(log)
 		);

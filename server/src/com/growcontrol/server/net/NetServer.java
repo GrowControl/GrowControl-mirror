@@ -41,7 +41,7 @@ public class NetServer implements xCloseableMany {
 
 	public NetServer(final NetConfig config)
 			throws UnknownHostException, SocketException, InterruptedException {
-		if(config == null) throw new NullPointerException();
+		if(config == null)  throw new NullPointerException("config argument is required!");
 		if(!config.enabled) throw new UnsupportedOperationException("This socket server is disabled");
 		this.config = config;
 		this.configKey = config.toString();
@@ -95,7 +95,7 @@ public class NetServer implements xCloseableMany {
 	 *  @return true to accept the connection or false to deny.
 	 */
 	public boolean register(final NetStateDAO dao) {
-		if(dao == null) throw new NullPointerException();
+		if(dao == null) throw new NullPointerException("dao argument is required!");
 		this.states.add(dao);
 //		final SocketChannel channel = state.getChannel();
 //		// check firewall
@@ -107,7 +107,7 @@ public class NetServer implements xCloseableMany {
 	}
 	// socket disconnected
 	public void unregister(final NetStateDAO dao) {
-		if(dao == null) throw new NullPointerException();
+		if(dao == null) throw new NullPointerException("dao argument is required!");
 		this.states.remove(dao);
 //TODO:
 	}

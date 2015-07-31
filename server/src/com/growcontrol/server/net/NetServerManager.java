@@ -212,7 +212,7 @@ this.log().severe("SERVER COUNT: "+Integer.toString(this.servers.size()));
 
 
 	public void setConfigs(final Collection<NetConfig> configs) {
-		if(configs == null) throw new NullPointerException();
+		if(configs == null) throw new NullPointerException("configs argument is required!");
 this.log().severe("CONFIGS: "+Integer.toString(configs.size()));
 		synchronized(this.tempConfigs) {
 			this.tempConfigs.clear();

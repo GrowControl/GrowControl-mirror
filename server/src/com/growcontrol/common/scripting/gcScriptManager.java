@@ -79,13 +79,13 @@ public class gcScriptManager {
 	}
 	// load all scripts from dir
 	public void loadAll(final File dir) {
-		if(dir == null) throw new NullPointerException();
+		if(dir == null) throw new NullPointerException("dir argument is required!");
 		// create scripts dir if needed
 		if(!dir.isDirectory())
 			dir.mkdir();
 		// list dir contents
 		final File[] files = utilsDirFile.listContents(dir, ".script");
-		if(files == null) throw new NullPointerException();
+		if(files == null) throw new NullPointerException("files variable cannot be null!");
 		// no scripts found
 		if(files.length == 0) {
 			this.log().warning("No scripts found to load.");
@@ -103,7 +103,7 @@ public class gcScriptManager {
 		this.log().info("Found [ "+Integer.toString(count)+" ] scripts.");
 	}
 	public gcScript load(final File file) {
-		if(file == null) throw new NullPointerException();
+		if(file == null) throw new NullPointerException("file argument is required!");
 		if(!file.exists()) {
 			this.log().warning("Script file not found: "+file.toString());
 			return null;

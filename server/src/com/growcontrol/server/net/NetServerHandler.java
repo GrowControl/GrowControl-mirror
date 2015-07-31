@@ -21,7 +21,7 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 
 
 	public NetServerHandler(final NetStateDAO dao) {
-		if(dao == null) throw new NullPointerException();
+		if(dao == null) throw new NullPointerException("dao argument is required!");
 		this.dao = dao;
 		this.server = dao.server;
 		this.id = count.incrementAndGet();

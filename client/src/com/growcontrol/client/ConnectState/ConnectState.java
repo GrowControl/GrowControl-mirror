@@ -28,7 +28,7 @@ public abstract class ConnectState {
 		return this.state;
 	}
 	public void setConnectState(State state) {
-		if(state == null) throw new NullPointerException("state can't be null!");
+		if(state == null) throw new NullPointerException("state argument is required!");
 		synchronized(state) {
 			// no change
 			if(this.state != null && this.state.equals(state))

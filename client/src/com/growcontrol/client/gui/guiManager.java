@@ -54,7 +54,7 @@ public class guiManager {
 
 	// show window
 	public void Show(final GUI_MODE mode) {
-		if(mode == null) throw new NullPointerException();
+		if(mode == null) throw new NullPointerException("mode argument is required!");
 		// run in event dispatch thread
 		if(guiUtils.forceDispatchThread(this, "Show", mode)) return;
 		switch(mode) {

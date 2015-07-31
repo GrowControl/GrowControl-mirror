@@ -19,7 +19,7 @@ public class NetFirewall {
 
 
 	public void addRule(final NetFirewallRule rule) {
-		if(rule == null) throw new NullPointerException();
+		if(rule == null) throw new NullPointerException("rule argument is required!");
 		this.rules.add(rule);
 	}
 

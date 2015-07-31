@@ -314,7 +314,7 @@ public class gcWindowLogin extends xWindow {
 	 * @thread-safe
 	 */
 	public void Update(final String state) {
-		if(utils.isEmpty(state)) throw new NullPointerException();
+		if(utils.isEmpty(state)) throw new NullPointerException("state argument is required!");
 		// run in event dispatch thread
 		if(guiUtils.forceDispatchThread(this, "ShowCard", state)) return;
 		switch(state.toLowerCase()) {

@@ -76,16 +76,16 @@ public class MetaRouter extends xHandler {
 
 
 	public void route(final String address, final String value) {
-		if(utils.isEmpty(address)) throw new NullPointerException();
-		if(utils.isEmpty(value))   throw new NullPointerException();
+		if(utils.isEmpty(address)) throw new NullPointerException("address argument is required!");
+		if(utils.isEmpty(value))   throw new NullPointerException("value argument is required!");
 		this.route(
 			MetaAddress.get(address),
 			Meta.get(value)
 		);
 	}
 	public void route(final MetaAddress address, final Meta meta) {
-		if(address == null) throw new NullPointerException();
-		if(meta    == null) throw new NullPointerException();
+		if(address == null) throw new NullPointerException("address argument is required!");
+		if(meta    == null) throw new NullPointerException("meta argument is required!");
 		this.route(
 			new MetaEvent(
 				address,
@@ -94,11 +94,11 @@ public class MetaRouter extends xHandler {
 		);
 	}
 	public boolean route(final MetaEvent event) {
-		if(event == null) throw new NullPointerException();
+		if(event == null) throw new NullPointerException("event argument is required!");
 		return this.route( (xThreadPool) null, event );
 	}
 	public boolean route(final xThreadPool pool, final MetaEvent event) {
-		if(event == null) throw new NullPointerException();
+		if(event == null) throw new NullPointerException("event argument is required!");
 		// get address listener
 		final MetaListener listener = this.getAddressListener(event.destination);
 		if(listener == null) {
@@ -120,7 +120,7 @@ public class MetaRouter extends xHandler {
 
 	// get listener by address
 	public MetaListener getAddressListener(final MetaAddress address) {
-		if(address == null) throw new NullPointerException();
+		if(address == null) throw new NullPointerException("address argument is required!");
 		return known.get(address);
 	}
 
@@ -138,7 +138,7 @@ public class MetaRouter extends xHandler {
 			}
 			@Override
 			public void run() {
-				if(this.event == null) throw new NullPointerException();
+				if(this.event == null) throw new NullPointerException("event variable cannot be null!");
 				doRoute(this.listener, this.event);
 			}
 		}.init(listener, event);
@@ -147,8 +147,8 @@ public class MetaRouter extends xHandler {
 
 
 	public void doRoute(final MetaListener listener, final MetaEvent event) {
-		if(listener == null) throw new NullPointerException();
-		if(event == null)    throw new NullPointerException();
+		if(listener == null) throw new NullPointerException("listener argument is required!");
+		if(event == null)    throw new NullPointerException("event argument is required!");
 		listener.onMetaEvent(event);
 	}
 
