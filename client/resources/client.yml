@@ -1,0 +1,14 @@
+Version: 3.5.48
+Log Level: info
+Debug: false
+Windows:
+    - Name: login
+      x: 400
+      y: 400
+      w: 200
+      h: 200
+    - Name: dash
+      x: 300
+      y: 300
+      w: 500
+      h: 500
