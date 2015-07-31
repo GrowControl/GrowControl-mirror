@@ -3,7 +3,7 @@ package com.growcontrol.common.packets.handshake;
 import com.growcontrol.common.packets.PacketHandler;
 
 
-public class Packets_Init {
+public class HandshakeInit  {
 
 
 
