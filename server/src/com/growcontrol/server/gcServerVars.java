@@ -31,7 +31,8 @@ public class gcServerVars {
 				if(config == null) {
 					config = (gcServerConfig) xConfigLoader.Load(
 							gcServerDefines.CONFIG_FILE,
-							gcServerConfig.class
+							gcServerConfig.class,
+							true
 					);
 					if(config == null) {
 						Failure.fail("Failed to load "+gcServerDefines.CONFIG_FILE);

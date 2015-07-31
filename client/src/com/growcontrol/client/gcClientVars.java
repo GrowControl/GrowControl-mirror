@@ -30,7 +30,8 @@ public class gcClientVars {
 				if(config == null) {
 					config = (gcClientConfig) xConfigLoader.Load(
 							gcClientDefines.CONFIG_FILE,
-							gcClientConfig.class
+							gcClientConfig.class,
+							true
 					);
 					if(config == null) {
 						Failure.fail("Failed to load "+gcClientDefines.CONFIG_FILE);
