@@ -46,12 +46,23 @@ xLog.getRoot("config").trace(e);
 		if(utils.isEmpty(datamap))
 			return null;
 		final xConfig config = new xConfig(datamap);
+		final String name = config.getString(gcClientDefines.PROFILE_NAME);
+		final boolean ssl = config.getBool(gcClientDefines.PROFILE_SSL, false);
+		final String host = config.getString(gcClientDefines.PROFILE_HOST);
+		final int    port = config.getInt   (
+				gcClientDefines.PROFILE_PORT,
+				ssl
+				? gcClientDefines.DEFAULT_SOCKET_PORT
+				: gcClientDefines.DEFAULT_SOCKET_PORT_SSL
+		);
+		final String user = config.getString(gcClientDefines.PROFILE_USER);
+		final String pass = config.getString(gcClientDefines.PROFILE_PASS);
 		return new SavedProfileConfig(
-				config.getString(gcClientDefines.PROFILE_NAME),
-				config.getString(gcClientDefines.PROFILE_HOST),
-				config.getInt(gcClientDefines.PROFILE_PORT, gcClientDefines.DEFAULT_SOCKET_PORT),
-				config.getString(gcClientDefines.PROFILE_USER),
-				config.getString(gcClientDefines.PROFILE_PASS)
+				name,
+				host,
+				port,
+				user,
+				pass
 		);
 	}
 

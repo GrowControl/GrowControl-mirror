@@ -46,11 +46,24 @@ xLog.getRoot("config").trace(e);
 		if(utils.isEmpty(datamap))
 			return null;
 		final xConfig config = new xConfig(datamap);
+		// default to enable if key doesn't exist
+		final boolean enabled =
+				config.exists(gcServerDefines.CONFIG_SOCKET_ENABLE)
+				? config.getBool(gcServerDefines.CONFIG_SOCKET_ENABLE, false)
+				: true;
+		final boolean ssl = config.getBool  (gcServerDefines.CONFIG_SOCKET_SSL, false);
+		final String host = config.getString(gcServerDefines.CONFIG_SOCKET_HOST);
+		final int    port = config.getInt   (
+				gcServerDefines.CONFIG_SOCKET_PORT,
+				ssl
+				? gcServerDefines.DEFAULT_SOCKET_PORT_SSL
+				: gcServerDefines.DEFAULT_SOCKET_PORT
+		);
 		return new NetConfig(
-				config.getBool(gcServerDefines.CONFIG_SOCKET_ENABLE, false),
-				config.getBool(gcServerDefines.CONFIG_SOCKET_SSL, false),
-				config.getString(gcServerDefines.CONFIG_SOCKET_HOST),
-				config.getInt   (gcServerDefines.CONFIG_SOCKET_PORT, gcServerDefines.DEFAULT_SOCKET_PORT)
+				enabled,
+				ssl,
+				host,
+				port
 		);
 	}
 

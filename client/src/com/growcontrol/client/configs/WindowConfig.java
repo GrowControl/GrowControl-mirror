@@ -45,12 +45,17 @@ xLog.getRoot("config").trace(e);
 		if(utils.isEmpty(datamap))
 			return null;
 		final xConfig config = new xConfig(datamap);
+		final String name = config.getString (gcClientDefines.CONFIG_WINDOW_NAME);
+		final int    x    = config.getInteger(gcClientDefines.CONFIG_WINDOW_X);
+		final int    y    = config.getInteger(gcClientDefines.CONFIG_WINDOW_Y);
+		final int    w    = config.getInteger(gcClientDefines.CONFIG_WINDOW_W);
+		final int    h    = config.getInteger(gcClientDefines.CONFIG_WINDOW_H);
 		return new WindowConfig(
-				config.getString (gcClientDefines.CONFIG_WINDOW_NAME),
-				config.getInteger(gcClientDefines.CONFIG_WINDOW_X),
-				config.getInteger(gcClientDefines.CONFIG_WINDOW_Y),
-				config.getInteger(gcClientDefines.CONFIG_WINDOW_W),
-				config.getInteger(gcClientDefines.CONFIG_WINDOW_H)
+				name,
+				x,
+				y,
+				w,
+				h
 		);
 	}
 

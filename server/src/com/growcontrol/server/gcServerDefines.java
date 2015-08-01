@@ -10,7 +10,9 @@ public class gcServerDefines {
 	public static final boolean DEFAULT_PROMPT_TICKER = false;
 	public static final xTime   DEFAULT_TICK_INTERVAL = xTime.get("5s");
 	public static final int     DEFAULT_LOGIC_THREADS = 0;
-	public static final int     DEFAULT_SOCKET_PORT   = 1142;
+
+	public static final int DEFAULT_SOCKET_PORT     = 1142;
+	public static final int DEFAULT_SOCKET_PORT_SSL = 1143;
 
 
 	// server config
