@@ -1,6 +1,7 @@
 package com.growcontrol.client.gui.dash;
 
 import com.growcontrol.client.gui.guiManager;
+import com.poixson.commonapp.gui.guiUtils;
 import com.poixson.commonapp.gui.xWindow;
 import com.poixson.commonapp.gui.annotations.xWindowProperties;
 
@@ -23,7 +24,8 @@ public class gcWindowDash extends xWindow {
 		// resize and prepare
 
 		// show window
-		this.setVisible(true);
+		this.Show();
+		this.registerCloseHook();
 	}
 
 
@@ -31,8 +33,8 @@ public class gcWindowDash extends xWindow {
 	// close window
 	@Override
 	public void close() {
-		if(!this.closing.compareAndSet(false, true))
-			return;
+		if(guiUtils.forceDispatchThread(this, "close")) return;
+		if(!this.closing.compareAndSet(false, true)) return;
 		this.closing.set(false);
 		super.close();
 		guiManager.get().doDashWindowClosed();

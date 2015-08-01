@@ -105,9 +105,10 @@ public class gcWindowLogin extends xWindow {
 		this.autoHeight(WINDOW_WIDTH);
 		this.setLocationRelativeTo(null);
 		// load savedservers.yml
-		this.loadSavedServersConfig();
+		this.loadProfilesConfig();
 		// show window
 		this.Show();
+		this.registerCloseHook();
 	}
 
 
@@ -132,16 +133,12 @@ public class gcWindowLogin extends xWindow {
 			this.lstProfiles = new JComboBox<String>();
 			panel.add(this.lstProfiles, "span, growx, gapleft 10px, gapright 10px, wrap");
 			// event listener
-			try {
-				this.lstProfiles.addItemListener(
-					new RemappedItemListener(
-						this,
-						"onSavedListEvent"
+			this.lstProfiles.addItemListener(
+					RemappedItemListener.get(
+							this,
+							"onSavedListEvent"
 					)
-				);
-			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
-			}
+			);
 		}
 		// Server Location ----------
 		{
@@ -231,16 +228,12 @@ public class gcWindowLogin extends xWindow {
 			this.btnConnect.setDefaultCapable(true);
 			panel.add(this.btnConnect, "span, growx, gapleft 10px, gapright 10px, tag ok, wrap");
 			// event listener
-			try {
-				this.btnConnect.addActionListener(
-					new RemappedActionListener(
-						this,
-						"onClickConnectButton"
+			this.btnConnect.addActionListener(
+					RemappedActionListener.get(
+							this,
+							"onClickConnectButton"
 					)
-				);
-			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
-			}
+			);
 		}
 		return panel;
 	}
@@ -292,16 +285,12 @@ public class gcWindowLogin extends xWindow {
 			this.btnCancel.setAlignmentX(Component.CENTER_ALIGNMENT);
 			panel.add(this.btnCancel);
 			// event listener
-			try {
-				this.btnCancel.addActionListener(
-					new RemappedActionListener(
-						this,
-						"onClickCancelButton"
-					)
-				);
-			} catch (NoSuchMethodException e) {
-				e.printStackTrace();
-			}
+			this.btnCancel.addActionListener(
+				RemappedActionListener.get(
+					this,
+					"onClickCancelButton"
+				)
+			);
 		}
 		return panel;
 	}
@@ -315,7 +304,6 @@ public class gcWindowLogin extends xWindow {
 	 */
 	public void Update(final String state) {
 		if(utils.isEmpty(state)) throw new NullPointerException("state argument is required!");
-		// run in event dispatch thread
 		if(guiUtils.forceDispatchThread(this, "ShowCard", state)) return;
 		switch(state.toLowerCase()) {
 		case "login":
@@ -349,7 +337,8 @@ public class gcWindowLogin extends xWindow {
 
 
 	// populate saved servers
-	public void loadSavedServersConfig() {
+	public void loadProfilesConfig() {
+		if(guiUtils.forceDispatchThread(this, "loadProfilesConfig")) return;
 		final ProfilesConfig profilesConfig = gcClientVars.getProfilesConfig();
 		final Map<String, SavedProfileConfig> profiles = profilesConfig.getProfiles();
 		// populate dropdown list
@@ -465,8 +454,8 @@ public class gcWindowLogin extends xWindow {
 	// close window
 	@Override
 	public void close() {
-		if(!this.closing.compareAndSet(false, true))
-			return;
+		if(guiUtils.forceDispatchThread(this, "close")) return;
+		if(!this.closing.compareAndSet(false, true)) return;
 		// disconnect if attempting
 		this.Update(CARD_LOGIN);
 		this.closing.set(false);
