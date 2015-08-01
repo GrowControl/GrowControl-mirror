@@ -26,13 +26,11 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 import com.growcontrol.client.gcClientDefines;
-import com.growcontrol.client.configs.SavedServerProfile;
-import com.growcontrol.client.configs.SavedServersConfig;
-import com.growcontrol.client.configs.gcClientConfig;
+import com.growcontrol.client.gcClientVars;
+import com.growcontrol.client.configs.ProfilesConfig;
 import com.growcontrol.client.configs.SavedProfileConfig;
 import com.growcontrol.client.gui.guiManager;
 import com.poixson.commonapp.app.xApp;
-import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonapp.gui.guiUtils;
 import com.poixson.commonapp.gui.xFont;
 import com.poixson.commonapp.gui.xWindow;
@@ -59,7 +57,7 @@ public class gcWindowLogin extends xWindow {
 	private static final String IMAGE_LOADING = "images/icon-loading-animated.gif";
 
 	// saved profiles
-	protected final Map<String, SavedServerProfile> profiles = new LinkedHashMap<String, SavedServerProfile>();
+	protected final Map<String, SavedProfileConfig> profiles = new LinkedHashMap<String, SavedProfileConfig>();
 
 	// card panels
 	protected final CardLayout cardLayout;
@@ -352,20 +350,18 @@ public class gcWindowLogin extends xWindow {
 
 	// populate saved servers
 	public void loadSavedServersConfig() {
-		final SavedServersConfig config = (SavedServersConfig) xConfigLoader.Load(
-			SavedServersConfig.CONFIG_FILE,
-			SavedServersConfig.class
-		);
+		final ProfilesConfig profilesConfig = gcClientVars.getProfilesConfig();
+		final Map<String, SavedProfileConfig> profiles = profilesConfig.getProfiles();
 		// populate dropdown list
 		this.lstProfiles.addItem(SAVEDSERVERS_Unsaved);
 		this.lstProfiles.addItem(SAVEDSERVERS_InternalServer);
-		for(final SavedServerProfile profile : config.getProfiles()) {
-			final String title = profile.formatForList();
+		for(final SavedProfileConfig profile : profiles.values()) {
+			final String title = FormatProfile(profile);
 			this.lstProfiles.addItem(title);
 			this.profiles.put(title, profile);
 		}
 		// select last used
-		this.lstProfiles.setSelectedItem(config.getLastUsedProfile());
+		this.lstProfiles.setSelectedItem(profilesConfig.getLastUsedProfile());
 	}
 
 
@@ -412,7 +408,7 @@ public class gcWindowLogin extends xWindow {
 				this.txtboxPass.setText("");
 				xApp.log().fine("Selected -internal- profile");
 			} else {
-				final SavedServerProfile profile = this.profiles.get(selected);
+				final SavedProfileConfig profile = this.profiles.get(selected);
 				this.txtboxHost.setText(profile.host);
 				this.txtboxPort.setText(Integer.toString(profile.port));
 				this.txtboxUser.setText(profile.user);
