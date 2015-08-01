@@ -1,13 +1,17 @@
 package com.growcontrol.client.configs;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import com.growcontrol.client.gcClientDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.Utils.utilsObject;
+import com.poixson.commonjava.xLogger.xLog;
 
 
-public class SavedServerProfile extends xConfig {
+public class SavedProfileConfig {
 
 	public final String name;
 	public final String host;
@@ -17,41 +21,67 @@ public class SavedServerProfile extends xConfig {
 
 
 
+	public static Map<String, SavedProfileConfig> get(final Set<Object> dataset) {
+		if(utils.isEmpty(dataset))
+			return null;
+		final Map<String, SavedProfileConfig> profiles =
+				new HashMap<String, SavedProfileConfig>();
+		for(final Object o : dataset) {
+			try {
+				final Map<String, Object> datamap =
+						utilsObject.castMap(
+								String.class,
+								Object.class,
+								o
+						);
+				final SavedProfileConfig profile = get(datamap);
+				profiles.put(profile.name, profile);
+			} catch (Exception e) {
+xLog.getRoot("config").trace(e);
+			}
+		}
+		return profiles;
+	}
+	public static SavedProfileConfig get(final Map<String, Object> datamap) {
+		if(utils.isEmpty(datamap))
+			return null;
+		final xConfig config = new xConfig(datamap);
+		return new SavedProfileConfig(
+				config.getString(gcClientDefines.PROFILE_NAME),
+				config.getString(gcClientDefines.PROFILE_HOST),
+				config.getInt(gcClientDefines.PROFILE_PORT, gcClientDefines.DEFAULT_SOCKET_PORT),
+				config.getString(gcClientDefines.PROFILE_USER),
+				config.getString(gcClientDefines.PROFILE_PASS)
+		);
+	}
 
-	public SavedServerProfile(final String name,
+
+
+	public SavedProfileConfig(final String name,
 			final String host, final int port,
 			final String user, final String pass) {
-		super(null);
 		this.name = name;
 		this.host = host;
 		this.port = port;
 		this.user = user;
 		this.pass = pass;
 	}
-	public SavedServerProfile(final Map<String, Object> data) {
-		super(data);
-		this.name = this.getString(NAME);
-		this.host = this.getString(HOST);
-		this.port = this.getInteger(PORT).intValue();
-		this.user = this.getString(USER);
-		this.pass = this.getString(PASS);
-	}
 
 
 
-	public String formatForList() {
-		final StringBuilder str = new StringBuilder();
-		str.append(this.name);
-		str.append("  ( ");
-		if(utils.isEmpty(this.host) || "localhost".equalsIgnoreCase(this.host))
-			str.append("localhost");
-		else
-			str.append(this.host);
-		if(this.port != gcClientConfig.DEFAULT_LISTEN_PORT)
-			str.append(":").append(this.port);
-		str.append(" )");
-		return str.toString();
-	}
+//	public String formatForList() {
+//		final StringBuilder str = new StringBuilder();
+//		str.append(this.name);
+//		str.append("  ( ");
+//		if(utils.isEmpty(this.host) || "localhost".equalsIgnoreCase(this.host))
+//			str.append("localhost");
+//		else
+//			str.append(this.host);
+//		if(this.port != gcClientConfig.DEFAULT_LISTEN_PORT)
+//			str.append(":").append(this.port);
+//		str.append(" )");
+//		return str.toString();
+//	}
 
 
 

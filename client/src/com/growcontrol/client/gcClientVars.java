@@ -1,5 +1,6 @@
 package com.growcontrol.client;
 
+import com.growcontrol.client.configs.ProfilesConfig;
 import com.growcontrol.client.configs.gcClientConfig;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonjava.Failure;
@@ -14,6 +15,7 @@ public class gcClientVars {
 	// configs
 	private static final Object configLock = new Object();
 	private static gcClientConfig config         = null;
+	private static ProfilesConfig profilesConfig = null;
 
 	// handlers
 	private static final xHandler system  = new xHandler();
@@ -52,6 +54,30 @@ public class gcClientVars {
 			}
 		}
 		return config;
+	}
+
+
+
+	// client config
+	public static ProfilesConfig getProfilesConfig() {
+		if(profilesConfig == null) {
+			synchronized(configLock) {
+				if(profilesConfig == null) {
+					profilesConfig = (ProfilesConfig) xConfigLoader.Load(
+							gcClientDefines.PROFILES_FILE,
+							ProfilesConfig.class,
+							true
+					);
+					if(profilesConfig == null) {
+						Failure.fail("Failed to load "+gcClientDefines.PROFILES_FILE);
+						return null;
+					}
+					if(profilesConfig.isFromResource())
+						gcClient.log().warning("Created default "+gcClientDefines.PROFILES_FILE);
+				}
+			}
+		}
+		return profilesConfig;
 	}
 
 

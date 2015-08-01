@@ -1,6 +1,7 @@
 package com.growcontrol.server.configs;
 
 import java.util.Map;
+import java.util.Set;
 
 import com.growcontrol.server.gcServer;
 import com.growcontrol.server.gcServerDefines;
@@ -15,6 +16,8 @@ import com.poixson.commonjava.xLogger.xLog;
 
 
 public final class gcServerConfig extends xConfig {
+
+	private volatile Map<String, NetConfig> netConfigs = null;
 
 
 
@@ -98,36 +101,20 @@ public final class gcServerConfig extends xConfig {
 
 
 
-	public Set<NetConfig> getSocketConfigs() {
-		final Set<Object> dataset = this.getSet(
-				Object.class,
-				gcServerDefines.CONFIG_SOCKETS
-		);
-		final Set<NetConfig> configs = new HashSet<NetConfig>();
-		if(utils.notEmpty(dataset)) {
-			for(final Object o : dataset) {
-				try {
-					final Map<String, Object> datamap = utilsObject.castMap(String.class, Object.class, o);
-					if(datamap == null) throw new RuntimeException("Failed to load socket config");
-					final gcServerSocketConfig gcCfg = new gcServerSocketConfig(datamap);
-					final NetConfig cfg = gcCfg.get();
-					if(cfg == null) throw new RuntimeException("Failed to load socket config");
-					configs.add(cfg);
-				} catch (Exception e) {
-					this.log().trace(e);
-				}
-			}
-			// log configs
-			for(final NetConfig dao : configs) {
-				if(dao.enabled) {
-					this.log().getWeak("sockets").finer(
-							dao.host+":"+Integer.toString(dao.port)+
-							(dao.ssl ? " (ssl)" : " (raw)")
-					);
-				}
-			}
+	public Map<String, NetConfig> getNetConfigs() {
+		if(this.netConfigs == null) {
+			final Set<Object> dataset = this.getSet(
+					Object.class,
+					gcServerDefines.CONFIG_SOCKETS
+			);
+			this.netConfigs = NetConfig.get(dataset);
 		}
-		return configs;
+		return this.netConfigs;
+	}
+	public NetConfig getNetConfig(final String name) {
+		if(this.netConfigs == null)
+			this.getNetConfigs();
+		return this.netConfigs.get(name);
 	}
 
 
