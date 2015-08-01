@@ -1,5 +1,6 @@
 package com.growcontrol.client.gui.dash;
 
+import com.growcontrol.client.gui.guiManager;
 import com.poixson.commonapp.gui.xWindow;
 import com.poixson.commonapp.gui.annotations.xWindowProperties;
 
@@ -23,6 +24,18 @@ public class gcWindowDash extends xWindow {
 
 		// show window
 		this.setVisible(true);
+	}
+
+
+
+	// close window
+	@Override
+	public void close() {
+		if(!this.closing.compareAndSet(false, true))
+			return;
+		this.closing.set(false);
+		super.close();
+		guiManager.get().doDashWindowClosed();
 	}
 
 

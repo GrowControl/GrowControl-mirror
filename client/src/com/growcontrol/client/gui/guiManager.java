@@ -94,11 +94,14 @@ public class guiManager {
 
 
 
-	// hook login window close event
+	// hook window close events
 	public void doLoginWindowClosed() {
 		// exit if dash not loaded
 		if(this.windowDash == null)
 			gcClient.get().Stop();
+	}
+	public void doDashWindowClosed() {
+		gcClient.get().Stop();
 	}
 
 
