@@ -17,6 +17,7 @@ import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.scheduler.ticker.xTickPrompt;
+import com.poixson.commonjava.scheduler.ticker.xTicker;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -138,6 +139,15 @@ public class gcServer extends xApp {
 
 
 
+	// tick scheduler
+	@xAppStep(type=StepType.STARTUP, title="Ticker", priority=80)
+	public void __STARTUP_ticker() {
+		xTicker.get()
+			.Start();
+	}
+
+
+
 	// sockets
 	@xAppStep(type=StepType.STARTUP, title="Sockets", priority=90)
 	public void __STARTUP_sockets() {
@@ -210,6 +220,15 @@ public class gcServer extends xApp {
 		final NetServerManager manager = NetServerManager.get();
 		manager.Stop();
 		manager.CloseAll();
+	}
+
+
+
+	// stop ticker
+	@xAppStep(type=StepType.SHUTDOWN, title="Ticker", priority=80)
+	public void __SHUTDOWN_ticker() {
+		xTicker.get()
+			.Stop();
 	}
 
 

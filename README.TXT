@@ -79,7 +79,7 @@ Priority | Location | Description
 50 | S/C | load plugins
 55 | S/C | enable plugins
 75 | PXN | load scheduler
-80 | PXN | start ticker
+80 | S   | start ticker
 90 | S   | start sockets
 95 | S/C | start scripts
 98 |   C | display login window
@@ -99,7 +99,7 @@ Priority | Location | Description
 98 |   C | close windows
 95 | S/C | stop scripts
 90 | S/C | close sockets
-80 | PXN | stop ticker
+80 | S   | stop ticker
 75 | PXN | stop scheduler
 70 | PXN | stop thread pools
 55 | S/C | disable plugins
