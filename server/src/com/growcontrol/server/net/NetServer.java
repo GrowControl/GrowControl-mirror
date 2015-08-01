@@ -11,7 +11,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import com.growcontrol.common.netty.NetConfig;
+import com.growcontrol.server.configs.NetConfig;
 import com.poixson.commonjava.Utils.xCloseableMany;
 import com.poixson.commonjava.xLogger.xLog;
 

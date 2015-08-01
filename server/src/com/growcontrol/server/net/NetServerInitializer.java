@@ -9,7 +9,7 @@ import io.netty.handler.codec.string.StringEncoder;
 import java.nio.charset.Charset;
 
 import com.growcontrol.common.netty.JsonObjectDecoder;
-import com.growcontrol.common.netty.NetConfig;
+import com.growcontrol.server.configs.NetConfig;
 import com.poixson.commonjava.xLogger.xLog;
 
 

@@ -15,8 +15,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.growcontrol.common.netty.NetConfig;
 import com.growcontrol.common.netty.NettyDetailedLogger;
+import com.growcontrol.server.configs.NetConfig;
 import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utils;

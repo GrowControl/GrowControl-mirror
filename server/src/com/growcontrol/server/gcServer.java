@@ -7,6 +7,7 @@ import org.fusesource.jansi.AnsiConsole;
 
 import com.growcontrol.common.scripting.gcScriptManager;
 import com.growcontrol.server.commands.gcServerCommands;
+import com.growcontrol.server.configs.gcServerConfig;
 import com.growcontrol.server.net.NetServerManager;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.app.annotations.xAppStep;
@@ -15,6 +16,7 @@ import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.scheduler.ticker.xTickPrompt;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -100,10 +102,11 @@ public class gcServer extends xApp {
 	// console input
 	@xAppStep(type=StepType.STARTUP, title="Console", priority=32)
 	public void __STARTUP_console() {
+		final gcServerConfig config = gcServerVars.getConfig();
 		xLog.getConsole()
 			.Start();
 		// prompt ticker
-		if(this.config.getPromptTickerEnabled())
+		if(config.getPromptTickerEnabled())
 			new xTickPrompt();
 	}
 
@@ -140,6 +143,15 @@ public class gcServer extends xApp {
 	public void __STARTUP_sockets() {
 		NetServerManager.get()
 			.Start();
+//		// log configs
+//		for(final NetConfig dao : configs) {
+//			if(dao.enabled) {
+//				this.log().getWeak("sockets").finer(
+//						dao.host+":"+Integer.toString(dao.port)+
+//						(dao.ssl ? " (ssl)" : " (raw)")
+//				);
+//			}
+//		}
 	}
 
 
