@@ -465,8 +465,11 @@ public class gcWindowLogin extends xWindow {
 	// close window
 	@Override
 	public void close() {
+		if(!this.closing.compareAndSet(false, true))
+			return;
 		// disconnect if attempting
 		this.Update(CARD_LOGIN);
+		this.closing.set(false);
 		super.close();
 		guiManager.get().doLoginWindowClosed();
 	}
