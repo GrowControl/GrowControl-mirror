@@ -2,6 +2,7 @@ package com.growcontrol.client.configs;
 
 import java.util.Map;
 
+import com.growcontrol.client.gcClientDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 
@@ -14,12 +15,6 @@ public class SavedServerProfile extends xConfig {
 	public final String user;
 	public final String pass;
 
-	// key names
-	public static final String NAME = "Name";
-	public static final String HOST = "Host";
-	public static final String PORT = "Port";
-	public static final String USER = "User";
-	public static final String PASS = "Pass";
 
 
 

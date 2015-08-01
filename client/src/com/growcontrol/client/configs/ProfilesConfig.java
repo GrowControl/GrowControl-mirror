@@ -6,18 +6,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.growcontrol.client.gcClientDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.xLogger.xLog;
 
 
 public class SavedServersConfig extends xConfig {
 
-	public static final String CONFIG_FILE = "savedservers.yml";
-
-	// key names
-	public static final String LAST_USED     = "Last Used Profile";
-	public static final String AUTO_CONNECT  = "Auto-Connect";
-	public static final String SAVED_SERVERS = "Saved Profiles";
+	private volatile Map<String, SavedProfileConfig> profiles = null;
 
 	protected final String lastUsedProfile;
 	protected final String autoConnect;
