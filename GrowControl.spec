@@ -1,6 +1,6 @@
 Name            : GrowControl
 Summary         : Automation software for home and garden, or hobby projects
-Version         : 3.5.%{BUILD_NUMBER}
+Version         : 3.5.48
 Release         : 1
 BuildArch       : noarch
 Prefix          : %{_javadir}/gc
