@@ -1,6 +1,5 @@
 package com.growcontrol.server;
 
-import com.growcontrol.common.meta.MetaRouter;
 import com.growcontrol.server.configs.gcServerConfig;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonjava.Failure;
@@ -48,11 +47,11 @@ public class gcServerVars {
 
 
 
-	// system event handler
-	private static final xHandler system = new xHandler();
-	public static xHandler system() {
-		return system;
-	}
+//	// system event handler
+//	private static final xHandler system = new xHandler();
+//	public static xHandler system() {
+//		return system;
+//	}
 
 
 
@@ -72,11 +71,11 @@ public class gcServerVars {
 
 
 
-	// meta router handler
-	private static final MetaRouter router = MetaRouter.get();
-	public static MetaRouter router() {
-		return router;
-	}
+//	// meta router handler
+//	private static final MetaRouter router = MetaRouter.get();
+//	public static MetaRouter router() {
+//		return router;
+//	}
 
 
 
