@@ -9,9 +9,20 @@ import com.poixson.commonjava.Utils.Keeper;
 
 public class gcClientVars {
 
-
-
 	private static volatile boolean inited = false;
+
+	// configs
+	private static final Object configLock = new Object();
+	private static gcClientConfig config         = null;
+
+	// handlers
+	private static final xHandler system  = new xHandler();
+//	private static final xHandler commands = new xHandler();
+	private static final xHandler plugins = new xHandler();
+//	private static final xHandler router;
+
+
+
 	public static void init() {
 		if(!inited)
 			Keeper.add(new gcClientVars());
@@ -22,8 +33,6 @@ public class gcClientVars {
 
 
 	// client config
-	private static gcClientConfig config = null;
-	private static final Object configLock = new Object();
 	public static gcClientConfig getConfig() {
 		if(config == null) {
 			synchronized(configLock) {
@@ -48,7 +57,6 @@ public class gcClientVars {
 
 
 	// system event handler
-	private static final xHandler system = new xHandler();
 	public static xHandler system() {
 		return system;
 	}
@@ -56,7 +64,6 @@ public class gcClientVars {
 
 
 //	// command event handler
-//	private static final xHandler commands = new xHandler();
 //	public static xHandler commands() {
 //		return commands;
 //	}
@@ -64,7 +71,6 @@ public class gcClientVars {
 
 
 	// plugin event handler
-	private static final xHandler plugins = new xHandler();
 	public static xHandler plugins() {
 		return plugins;
 	}
@@ -72,7 +78,6 @@ public class gcClientVars {
 
 
 //	// meta router handler
-//	private static final xHandler router;
 //	public static xHandler router() {
 //		return router;
 //	}
