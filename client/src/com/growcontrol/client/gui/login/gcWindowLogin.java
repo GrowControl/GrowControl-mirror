@@ -29,6 +29,7 @@ import com.growcontrol.client.gcClientDefines;
 import com.growcontrol.client.configs.SavedServerProfile;
 import com.growcontrol.client.configs.SavedServersConfig;
 import com.growcontrol.client.configs.gcClientConfig;
+import com.growcontrol.client.configs.SavedProfileConfig;
 import com.growcontrol.client.gui.guiManager;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.config.xConfigLoader;
@@ -365,6 +366,29 @@ public class gcWindowLogin extends xWindow {
 		}
 		// select last used
 		this.lstProfiles.setSelectedItem(config.getLastUsedProfile());
+	}
+
+
+
+	public static String FormatProfile(final SavedProfileConfig profile) {
+		if(profile == null) throw new NullPointerException("profile argument is required!");
+		final StringBuilder str = new StringBuilder();
+		// profile name
+		str.append(profile.name);
+		// host
+		str.append("  ( ");
+		if(utils.isEmpty(profile.host))
+			str.append("");
+		else
+		if("localhost".equalsIgnoreCase(profile.host))
+			str.append("localhost");
+		else
+			str.append(profile.host);
+		// port
+		if(profile.port != gcClientDefines.DEFAULT_SOCKET_PORT)
+			str.append(":").append(profile.port);
+		str.append(" )");
+		return str.toString();
 	}
 
 

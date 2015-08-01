@@ -69,20 +69,4 @@ xLog.getRoot("config").trace(e);
 
 
 
-//	public String formatForList() {
-//		final StringBuilder str = new StringBuilder();
-//		str.append(this.name);
-//		str.append("  ( ");
-//		if(utils.isEmpty(this.host) || "localhost".equalsIgnoreCase(this.host))
-//			str.append("localhost");
-//		else
-//			str.append(this.host);
-//		if(this.port != gcClientConfig.DEFAULT_LISTEN_PORT)
-//			str.append(":").append(this.port);
-//		str.append(" )");
-//		return str.toString();
-//	}
-
-
-
 }
