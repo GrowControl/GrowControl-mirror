@@ -51,9 +51,6 @@ public class gcWindowLogin extends xWindow {
 	private static final String WINDOW_TITLE = "Connect to..";
 	private static final int WINDOW_WIDTH = 320;
 
-	private static final String SAVEDSERVERS_Unsaved        = "[ Unsaved ]";
-	private static final String SAVEDSERVERS_InternalServer = "[ Standalone ]";
-
 	private static final String IMAGE_LOADING = "images/icon-loading-animated.gif";
 
 	// saved profiles
@@ -136,7 +133,7 @@ public class gcWindowLogin extends xWindow {
 			this.lstProfiles.addItemListener(
 					RemappedItemListener.get(
 							this,
-							"onSavedListEvent"
+							"onListClickEvent"
 					)
 			);
 		}
@@ -342,8 +339,9 @@ public class gcWindowLogin extends xWindow {
 		final ProfilesConfig profilesConfig = gcClientVars.getProfilesConfig();
 		final Map<String, SavedProfileConfig> profiles = profilesConfig.getProfiles();
 		// populate dropdown list
-		this.lstProfiles.addItem(SAVEDSERVERS_Unsaved);
-		this.lstProfiles.addItem(SAVEDSERVERS_InternalServer);
+		this.lstProfiles.addItem(gcClientDefines.PROFILE_NEW);
+//		this.lstProfiles.addItem(SAVEDSERVERS_Unsaved);
+//		this.lstProfiles.addItem(SAVEDSERVERS_InternalServer);
 		for(final SavedProfileConfig profile : profiles.values()) {
 			final String title = FormatProfile(profile);
 			this.lstProfiles.addItem(title);
@@ -360,6 +358,10 @@ public class gcWindowLogin extends xWindow {
 		final StringBuilder str = new StringBuilder();
 		// profile name
 		str.append(profile.name);
+		if(gcClientDefines.PROFILE_HOST_INTERNAL.equalsIgnoreCase(profile.host)) {
+			str.append(" ").append(gcClientDefines.PROFILE_HOST_INTERNAL);
+			return str.toString();
+		}
 		// host
 		str.append("  ( ");
 		if(utils.isEmpty(profile.host))
@@ -379,36 +381,66 @@ public class gcWindowLogin extends xWindow {
 
 
 	// dropdown list event
-	public void onSavedListEvent(final ItemEvent event) {
-		final String selected = event.getItem().toString();
+	public void onListClickEvent(final ItemEvent event) {
 		if(event.getStateChange() == ItemEvent.SELECTED) {
-			boolean isinternal = false;
-			if(SAVEDSERVERS_Unsaved.equals(selected)) {
-				if("- Internal -".equals(this.txtboxHost.getText()))
-					this.txtboxHost.setText("localhost");
-				if(utils.isEmpty(this.txtboxPort.getText()))
-					this.txtboxPort.setText(Integer.toString(gcClientDefines.DEFAULT_SOCKET_PORT));
-				xApp.log().fine("Selected -unsaved- profile");
-			} else if(SAVEDSERVERS_InternalServer.equals(selected)) {
-				isinternal = true;
-				this.txtboxHost.setText("- Internal -");
-				this.txtboxPort.setText("");
-				this.txtboxUser.setText("");
-				this.txtboxPass.setText("");
-				xApp.log().fine("Selected -internal- profile");
+			final String selected = event.getItem().toString();
+			String host = "";
+			String port = "";
+			String user = "";
+			String pass = "";
+			if(gcClientDefines.PROFILE_NEW.equals(selected)) {
+				xApp.log().fine("Selected <New Profile>");
 			} else {
 				final SavedProfileConfig profile = this.profiles.get(selected);
-				this.txtboxHost.setText(profile.host);
-				this.txtboxPort.setText(Integer.toString(profile.port));
-				this.txtboxUser.setText(profile.user);
-				this.txtboxPass.setText(profile.pass);
-				xApp.log().fine("Selected server profile: "+selected);
+				if(profile != null) {
+					xApp.log().fine("Selected profile: "+profile.name);
+					host = profile.host;
+					port = Integer.toString(profile.port);
+					user = profile.user;
+					pass = profile.pass;
+				}
 			}
-			this.txtboxHost.setEnabled(!isinternal);
-			this.txtboxPort.setEnabled(!isinternal);
-			this.txtboxUser.setEnabled(!isinternal);
-			this.txtboxPass.setEnabled(!isinternal);
+			// internal
+			if(gcClientDefines.PROFILE_HOST_INTERNAL.equalsIgnoreCase(host)) {
+				port = "N/A";
+				this.txtboxPort.setEnabled(false);
+			} else {
+				this.txtboxPort.setEnabled(true);
+			}
+			this.txtboxHost.setText(host);
+			this.txtboxPort.setText(port);
+			this.txtboxUser.setText(user);
+			this.txtboxPass.setText(pass);
 		}
+//		final String selected = event.getItem().toString();
+//		if(event.getStateChange() == ItemEvent.SELECTED) {
+//			boolean isinternal = false;
+//			if(SAVEDSERVERS_Unsaved.equals(selected)) {
+//				if("- Internal -".equals(this.txtboxHost.getText()))
+//					this.txtboxHost.setText("localhost");
+//				if(utils.isEmpty(this.txtboxPort.getText()))
+//					this.txtboxPort.setText(Integer.toString(gcClientDefines.DEFAULT_SOCKET_PORT));
+//				xApp.log().fine("Selected -unsaved- profile");
+//			} else if(SAVEDSERVERS_InternalServer.equals(selected)) {
+//				isinternal = true;
+//				this.txtboxHost.setText("- Internal -");
+//				this.txtboxPort.setText("");
+//				this.txtboxUser.setText("");
+//				this.txtboxPass.setText("");
+//				xApp.log().fine("Selected -internal- profile");
+//			} else {
+//				final SavedProfileConfig profile = this.profiles.get(selected);
+//				this.txtboxHost.setText(profile.host);
+//				this.txtboxPort.setText(Integer.toString(profile.port));
+//				this.txtboxUser.setText(profile.user);
+//				this.txtboxPass.setText(profile.pass);
+//				xApp.log().fine("Selected server profile: "+selected);
+//			}
+//			this.txtboxHost.setEnabled(!isinternal);
+//			this.txtboxPort.setEnabled(!isinternal);
+//			this.txtboxUser.setEnabled(!isinternal);
+//			this.txtboxPass.setEnabled(!isinternal);
+//		}
 	}
 
 
