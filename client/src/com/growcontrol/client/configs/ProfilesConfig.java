@@ -1,7 +1,8 @@
 package com.growcontrol.client.configs;
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.growcontrol.client.gcClientDefines;
 import com.poixson.commonapp.config.xConfig;
@@ -10,7 +11,7 @@ import com.poixson.commonjava.Utils.utils;
 
 public class ProfilesConfig extends xConfig {
 
-	private volatile Map<String, SavedProfileConfig> profiles = null;
+	private volatile LinkedHashMap<String, SavedProfileConfig> profiles = null;
 
 
 
@@ -54,9 +55,9 @@ public class ProfilesConfig extends xConfig {
 
 
 
-	public Map<String, SavedProfileConfig> getProfiles() {
+	public LinkedHashMap<String, SavedProfileConfig> getProfiles() {
 		if(this.profiles == null) {
-			final Set<Object> dataset = this.getSet(
+			final List<Object> dataset = this.getList(
 					Object.class,
 					gcClientDefines.PROFILES
 			);

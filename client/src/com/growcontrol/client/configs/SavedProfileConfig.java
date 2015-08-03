@@ -1,8 +1,8 @@
 package com.growcontrol.client.configs;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.growcontrol.client.gcClientDefines;
 import com.poixson.commonapp.config.xConfig;
@@ -21,11 +21,11 @@ public class SavedProfileConfig {
 
 
 
-	public static Map<String, SavedProfileConfig> get(final Set<Object> dataset) {
+	public static LinkedHashMap<String, SavedProfileConfig> get(final List<Object> dataset) {
 		if(utils.isEmpty(dataset))
 			return null;
-		final Map<String, SavedProfileConfig> profiles =
-				new HashMap<String, SavedProfileConfig>();
+		final LinkedHashMap<String, SavedProfileConfig> profiles =
+				new LinkedHashMap<String, SavedProfileConfig>();
 		for(final Object o : dataset) {
 			try {
 				final Map<String, Object> datamap =
