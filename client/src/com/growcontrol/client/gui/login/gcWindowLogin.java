@@ -45,7 +45,8 @@ import com.poixson.commonjava.Utils.utilsNumbers;
 
 
 @xWindowProperties(
-		resizable = false)
+		resizable = false
+)
 public class gcWindowLogin extends xWindow {
 	private static final long serialVersionUID = 1L;
 	private static final boolean DEBUGGING = false;
@@ -107,7 +108,7 @@ public class gcWindowLogin extends xWindow {
 		this.currentCard = CARD_LOGIN;
 		this.autoHeight(WINDOW_WIDTH);
 		this.setLocationRelativeTo(null);
-		// load savedservers.yml
+		// load profiles.yml
 		this.loadProfilesConfig();
 		// show window
 		this.Show();
