@@ -211,6 +211,17 @@ public class gcWindowLogin extends xWindow {
 			this.txtboxPort.setMargin(textboxInsets);
 			panel.add(this.txtboxPort, "growx, wrap");
 		}
+		// use ssl/tls
+		{
+			final JPanel pan = new JPanel();
+			final JCheckBox checkbox = new JCheckBox();
+			checkbox.setEnabled(false);
+			pan.add(checkbox);
+			final JLabel label = new JLabel("SSL/TLS");
+			label.setEnabled(false);
+			pan.add(label);
+			panel.add(pan, "span, growx, gaptop -50px, wrap");
+		}
 		// Login ----------
 		{
 			final JLabel label = new JLabel("Login");
