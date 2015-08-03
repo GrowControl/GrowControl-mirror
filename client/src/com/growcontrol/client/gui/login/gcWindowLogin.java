@@ -63,17 +63,17 @@ public class gcWindowLogin extends xWindow {
 	protected static final String CARD_CONNECTING = "connecting";
 
 	// login form
-	protected volatile JComboBox<String> lstProfiles = null;
-	protected volatile JTextField        txtboxHost  = null;
-	protected volatile JTextField        txtboxPort  = null;
-	protected volatile JTextField        txtboxUser  = null;
-	protected volatile JPasswordField    txtboxPass  = null;
-	protected volatile JButton           btnConnect  = null;
+	protected JComboBox<String> lstProfiles = null;
+	protected JTextField        txtboxHost  = null;
+	protected JTextField        txtboxPort  = null;
+	protected JTextField        txtboxUser  = null;
+	protected JPasswordField    txtboxPass  = null;
+	protected JButton           btnConnect  = null;
 
 	// connecting animation
-	protected volatile JLabel       txtStatus = null;
-	protected volatile JProgressBar progress  = null;
-	protected volatile JButton      btnCancel = null;
+	protected JLabel       txtStatus = null;
+	protected JProgressBar progress  = null;
+	protected JButton      btnCancel = null;
 
 	// socket
 //	protected volatile xSocket socket = null;
