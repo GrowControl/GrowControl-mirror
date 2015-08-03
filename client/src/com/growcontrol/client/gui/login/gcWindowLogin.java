@@ -1,5 +1,6 @@
 package com.growcontrol.client.gui.login;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -17,8 +18,10 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JPopupMenu;
 import javax.swing.JProgressBar;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -69,6 +72,9 @@ public class gcWindowLogin extends xWindow {
 	protected JTextField        txtboxUser  = null;
 	protected JPasswordField    txtboxPass  = null;
 	protected JButton           btnConnect  = null;
+	// profiles menu
+	protected JPopupMenu        menuProfile = null;
+	protected JButton           btnMenu     = null;
 
 	// connecting animation
 	protected JLabel       txtStatus = null;
@@ -125,17 +131,49 @@ public class gcWindowLogin extends xWindow {
 		final xFont labelFont   = new xFont("bold");
 		final xFont textboxFont = new xFont("fam:Arial,size=+2");
 		final Insets textboxInsets = new Insets(2, 2, 2, 2);
-		// profiles dropdown list
+		// top panel
 		{
-			this.lstProfiles = new JComboBox<String>();
-			panel.add(this.lstProfiles, "span, growx, gapleft 10px, gapright 10px, wrap");
-			// event listener
-			this.lstProfiles.addItemListener(
-					RemappedItemListener.get(
-							this,
-							"onListClickEvent"
-					)
-			);
+			final JPanel pan = new JPanel();
+			pan.setLayout(new BorderLayout());
+			// profiles dropdown list
+			{
+				this.lstProfiles = new JComboBox<String>();
+				// event listener
+				this.lstProfiles.addItemListener(
+						RemappedItemListener.get(
+								this,
+								"onListClickEvent"
+						)
+				);
+				pan.add(this.lstProfiles, BorderLayout.CENTER);
+			}
+			// >> profiles menu button
+			{
+				this.btnMenu = new JButton(">>");
+				this.btnMenu.setEnabled(false);
+				this.btnMenu.setFocusable(false);
+				this.btnMenu.setMargin(new Insets(0, 3, 0, 3));
+				// menu
+				this.menuProfile = new JPopupMenu();
+				// new profile
+				final JMenuItem itemNew = new JMenuItem("New Profile..");
+				this.menuProfile.add(itemNew);
+				// save profile
+				final JMenuItem itemSave = new JMenuItem("Save Profile..");
+				this.menuProfile.add(itemSave);
+				// delete profile
+				final JMenuItem itemDel = new JMenuItem("Remove Profile..");
+				this.menuProfile.add(itemDel);
+				// event listener
+				this.btnMenu.addActionListener(
+						RemappedActionListener.get(
+								this,
+								"onClickProfileMenuButton"
+						)
+				);
+				pan.add(this.btnMenu, BorderLayout.EAST);
+			}
+			panel.add(pan, "span, growx, gapleft 10px, gapright 10px, wrap");
 		}
 		// Server Location ----------
 		{
@@ -339,7 +377,7 @@ public class gcWindowLogin extends xWindow {
 		final ProfilesConfig profilesConfig = gcClientVars.getProfilesConfig();
 		final Map<String, SavedProfileConfig> profiles = profilesConfig.getProfiles();
 		// populate dropdown list
-		this.lstProfiles.addItem(gcClientDefines.PROFILE_NEW);
+//		this.lstProfiles.addItem(gcClientDefines.PROFILE_NEW);
 //		this.lstProfiles.addItem(SAVEDSERVERS_Unsaved);
 //		this.lstProfiles.addItem(SAVEDSERVERS_InternalServer);
 		for(final SavedProfileConfig profile : profiles.values()) {
@@ -388,17 +426,13 @@ public class gcWindowLogin extends xWindow {
 			String port = "";
 			String user = "";
 			String pass = "";
-			if(gcClientDefines.PROFILE_NEW.equals(selected)) {
-				xApp.log().fine("Selected <New Profile>");
-			} else {
-				final SavedProfileConfig profile = this.profiles.get(selected);
-				if(profile != null) {
-					xApp.log().fine("Selected profile: "+profile.name);
-					host = profile.host;
-					port = Integer.toString(profile.port);
-					user = profile.user;
-					pass = profile.pass;
-				}
+			final SavedProfileConfig profile = this.profiles.get(selected);
+			if(profile != null) {
+				xApp.log().fine("Selected profile: "+profile.name);
+				host = profile.host;
+				port = Integer.toString(profile.port);
+				user = profile.user;
+				pass = profile.pass;
 			}
 			// internal
 			if(gcClientDefines.PROFILE_HOST_INTERNAL.equalsIgnoreCase(host)) {
@@ -445,7 +479,19 @@ public class gcWindowLogin extends xWindow {
 
 
 
-	// button click event
+	// profile menu button click
+	public void onClickProfileMenuButton(final ActionEvent event) {
+		this.menuProfile.show(
+				this.btnMenu,
+				this.btnMenu.getWidth(),
+				0
+		);
+		xApp.log().fine("Showing profiles menu");
+	}
+
+
+
+	// connect button click
 	public void onClickConnectButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
 		xApp.log().fine("Clicked '"+buttonName+"' button");

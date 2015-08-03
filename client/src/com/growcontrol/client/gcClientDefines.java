@@ -43,7 +43,7 @@ public class gcClientDefines {
 		public static final String PROFILE_USER = "Username";
 		public static final String PROFILE_PASS = "Password";
 
-	public static final String PROFILE_NEW            = "<< New Profile >>";
+//	public static final String PROFILE_NEW            = "<< New Profile >>";
 	public static final String PROFILE_HOST_INTERNAL  = "<internal>";
 
 
