@@ -22,17 +22,17 @@ public class ProfilesConfig extends xConfig {
 
 
 	// last profile used
-	public String getLastUsedProfile() {
+	public SavedProfileConfig getLastUsedProfile() {
 		final String value = this.getString(gcClientDefines.PROFILE_LAST_USED);
 		if(utils.isEmpty(value))
 			return null;
-		return value;
+		return this.getProfile(value);
 	}
 
 
 
 	// auto connect
-	public String getAutoConnect() {
+	public SavedProfileConfig getAutoConnectProfile() {
 		// boolean value
 		final Boolean bool = this.getBoolean(gcClientDefines.PROFILE_AUTO_CONNECT);
 		if(bool != null) {
@@ -42,15 +42,9 @@ public class ProfilesConfig extends xConfig {
 		}
 		// string value
 		final String value = this.getString(gcClientDefines.PROFILE_AUTO_CONNECT);
-		if(!utils.isEmpty(value))
-			return value;
-		return null;
-	}
-	public SavedProfileConfig getAutoConnectProfile() {
-		final String name = this.getAutoConnect();
-		if(utils.isEmpty(name))
+		if(utils.isEmpty(value))
 			return null;
-		return this.getProfile(name);
+		return this.getProfile(value);
 	}
 
 
