@@ -1,12 +1,12 @@
-Last Used Profile: ""
+Last Used Profile: ''
 Auto-Connect: false
 Profiles:
-    - Name: "Local"
+    - Name: 'Local'
       Host: localhost
       Port: 1142
-      Username: "user"
-      Password: "pass"
-    - Name: "Internal"
+      Username: 'user'
+      Password: 'pass'
+    - Name: 'Internal'
       SSL: false
       Host: <internal>
       Port:

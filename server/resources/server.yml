@@ -5,9 +5,9 @@ Prompt Ticker: false
 Tick Interval: 10s
 Logic Threads: 0
 Zones:
-    - "ExampleZone"
+    - 'ExampleZone'
 Sockets:
     - Enable: false
       SSL: false
-      Host: 127.0.0.1
+      Host: '127.0.0.1'
       Port: 1142
