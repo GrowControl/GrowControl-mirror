@@ -9,6 +9,7 @@ import java.util.Set;
 import com.growcontrol.server.gcServerDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.Utils.utilsNumbers;
 import com.poixson.commonjava.Utils.utilsObject;
 import com.poixson.commonjava.xLogger.xLog;
 
@@ -19,6 +20,8 @@ public class NetServerConfig {
 	public final boolean ssl;
 	public final String  host;
 	public final int     port;
+
+	public final String key;
 
 
 
@@ -71,11 +74,13 @@ xLog.getRoot("config").trace(e);
 
 	public NetServerConfig(final boolean enabled, final boolean ssl,
 			final String host, final int port) {
-		if(port < 1 || port > 65535) throw new IllegalArgumentException("Invalid port number: "+Integer.toString(port));
+		if(port < 1 || port > utilsNumbers.MAX_PORT)
+			throw new IllegalArgumentException("Invalid port number: "+Integer.toString(port));
 		this.enabled = enabled;
 		this.ssl     = ssl;
-		this.host    = utils.isEmpty(host) ? null : host;
+		this.host    = (utils.isEmpty(host) ? null : host);
 		this.port    = port;
+		this.key = this.getKey();
 	}
 
 
@@ -99,17 +104,22 @@ xLog.getRoot("config").trace(e);
 
 	@Override
 	public String toString() {
+		return this.key;
+	}
+	private String getKey() {
+		final StringBuilder str = new StringBuilder();
 		final String host = this.getHost();
-		return (host == null ? "*" : this.host)+
-				":"+Integer.toString(this.port)+
-				(this.ssl ? "(ssl)" : "(raw)");
+		str.append(host == null ? "*" : host);
+		str.append(":").append(this.port);
+		if(this.ssl) str.append("<ssl>");
+		return str.toString();
 	}
 	public boolean matches(final NetServerConfig config) {
 		if(config == null)
 			return false;
 		if(this.enabled != config.enabled)
 			return false;
-		return this.toString().equals(config.toString());
+		return this.toString().equalsIgnoreCase(config.toString());
 	}
 
 
