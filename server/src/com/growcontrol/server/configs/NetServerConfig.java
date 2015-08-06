@@ -109,7 +109,7 @@ xLog.getRoot("config").trace(e);
 	private String getKey() {
 		final StringBuilder str = new StringBuilder();
 		final String host = this.getHost();
-		str.append(host == null ? "*" : host);
+		str.append(host == null ? "*" : host.toLowerCase());
 		str.append(":").append(this.port);
 		if(this.ssl) str.append("<ssl>");
 		return str.toString();
