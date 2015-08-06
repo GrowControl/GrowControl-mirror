@@ -3,7 +3,7 @@ package com.growcontrol.server.net;
 import io.netty.channel.socket.SocketChannel;
 
 
-public class NetServerState {
+public class ServerSocketState {
 
 	public static enum STATE { CLOSED, AUTHED }
 
@@ -15,7 +15,7 @@ public class NetServerState {
 
 
 
-	public NetServerState(final NetServer server, final SocketChannel channel) {
+	public ServerSocketState(final NetServer server, final SocketChannel channel) {
 		this.server  = server;
 		this.channel = channel;
 		this.handler = new NetServerHandler(this);
