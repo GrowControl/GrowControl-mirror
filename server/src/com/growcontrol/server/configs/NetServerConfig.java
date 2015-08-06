@@ -13,7 +13,7 @@ import com.poixson.commonjava.Utils.utilsObject;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public class NetConfig {
+public class NetServerConfig {
 
 	public final boolean enabled;
 	public final boolean ssl;
@@ -22,10 +22,10 @@ public class NetConfig {
 
 
 
-	public static Map<String, NetConfig> get(final Set<Object> dataset) {
+	public static Map<String, NetServerConfig> get(final Set<Object> dataset) {
 		if(utils.isEmpty(dataset))
 			return null;
-		final Map<String, NetConfig> configs = new HashMap<String, NetConfig>();
+		final Map<String, NetServerConfig> configs = new HashMap<String, NetServerConfig>();
 		for(final Object o : dataset) {
 			try {
 				final Map<String, Object> datamap =
@@ -34,7 +34,7 @@ public class NetConfig {
 								Object.class,
 								o
 						);
-				final NetConfig cfg = get(datamap);
+				final NetServerConfig cfg = get(datamap);
 				configs.put(cfg.toString(), cfg);
 			} catch (Exception e) {
 xLog.getRoot("config").trace(e);
@@ -42,7 +42,7 @@ xLog.getRoot("config").trace(e);
 		}
 		return configs;
 	}
-	public static NetConfig get(final Map<String, Object> datamap) {
+	public static NetServerConfig get(final Map<String, Object> datamap) {
 		if(utils.isEmpty(datamap))
 			return null;
 		final xConfig config = new xConfig(datamap);
@@ -59,7 +59,7 @@ xLog.getRoot("config").trace(e);
 				? gcServerDefines.DEFAULT_SOCKET_PORT_SSL
 				: gcServerDefines.DEFAULT_SOCKET_PORT
 		);
-		return new NetConfig(
+		return new NetServerConfig(
 				enabled,
 				ssl,
 				host,
@@ -69,7 +69,7 @@ xLog.getRoot("config").trace(e);
 
 
 
-	public NetConfig(final boolean enabled, final boolean ssl,
+	public NetServerConfig(final boolean enabled, final boolean ssl,
 			final String host, final int port) {
 		if(port < 1 || port > 65535) throw new IllegalArgumentException("Invalid port number: "+Integer.toString(port));
 		this.enabled = enabled;
@@ -104,7 +104,7 @@ xLog.getRoot("config").trace(e);
 				":"+Integer.toString(this.port)+
 				(this.ssl ? "(ssl)" : "(raw)");
 	}
-	public boolean matches(final NetConfig config) {
+	public boolean matches(final NetServerConfig config) {
 		if(config == null)
 			return false;
 		if(this.enabled != config.enabled)

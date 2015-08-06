@@ -17,7 +17,7 @@ import com.poixson.commonjava.xLogger.xLog;
 
 public final class gcServerConfig extends xConfig {
 
-	private volatile Map<String, NetConfig> netConfigs = null;
+	private volatile Map<String, NetServerConfig> netConfigs = null;
 
 
 
@@ -101,17 +101,17 @@ public final class gcServerConfig extends xConfig {
 
 
 
-	public Map<String, NetConfig> getNetConfigs() {
+	public Map<String, NetServerConfig> getNetConfigs() {
 		if(this.netConfigs == null) {
 			final Set<Object> dataset = this.getSet(
 					Object.class,
 					gcServerDefines.CONFIG_SOCKETS
 			);
-			this.netConfigs = NetConfig.get(dataset);
+			this.netConfigs = NetServerConfig.get(dataset);
 		}
 		return this.netConfigs;
 	}
-	public NetConfig getNetConfig(final String name) {
+	public NetServerConfig getNetConfig(final String name) {
 		if(this.netConfigs == null)
 			this.getNetConfigs();
 		return this.netConfigs.get(name);
