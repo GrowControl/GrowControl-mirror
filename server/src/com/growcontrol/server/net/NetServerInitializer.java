@@ -45,14 +45,14 @@ public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 	@Override
 	protected void initChannel(final SocketChannel channel) throws Exception {
 		// register new socket state
-		final ServerSocketState stateDAO = new ServerSocketState(
+		final ServerSocketState socketState = new ServerSocketState(
 				this.server,
 				channel
 		);
-		stateDAO.setState(SocketState.PREAUTH);
-		this.server.register(stateDAO);
-		stateDAO.log();
-		this.log(stateDAO).info("Accepted connection from: "+stateDAO.getStateKey());
+		socketState.setState(SocketState.PREAUTH);
+		this.server.register(socketState);
+		socketState.log();
+		this.log(socketState).info("Accepted connection from: "+socketState.getStateKey());
 //TODO:
 //		if(this.config.ssl) {
 //		if(this.manager.sslContext != null) {
@@ -92,8 +92,8 @@ public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 
 
 	// logger
-	public xLog log(final ServerSocketState stateDAO) {
-		return stateDAO.log();
+	public xLog log(final ServerSocketState socketState) {
+		return socketState.log();
 	}
 
 

@@ -40,10 +40,10 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 	public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
 		super.channelInactive(ctx);
 		final Channel channel = ctx.channel();
-		final ServerSocketState stateDAO = this.getServerSocketState(channel);
-		if(stateDAO == null) throw new RuntimeException();
-		this.server.unregister(stateDAO);
-		this.log(stateDAO).info("Connection closed");
+		final ServerSocketState socketState = this.getServerSocketState(channel);
+		if(socketState == null) throw new RuntimeException();
+		this.server.unregister(socketState);
+		this.log(socketState).info("Connection closed");
 	}
 //	@Override
 //	public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
@@ -114,11 +114,11 @@ xLog.getRoot("NET").trace(cause);
 
 	// logger
 	public xLog log(final Channel channel) {
-		final ServerSocketState stateDAO = this.server.getServerSocketState(channel);
-		return this.log(stateDAO);
+		final ServerSocketState socketState = this.server.getServerSocketState(channel);
+		return this.log(socketState);
 	}
-	public xLog log(final ServerSocketState stateDAO) {
-		return stateDAO.log();
+	public xLog log(final ServerSocketState socketState) {
+		return socketState.log();
 	}
 
 

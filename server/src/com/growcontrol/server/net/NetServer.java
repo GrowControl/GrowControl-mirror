@@ -89,11 +89,11 @@ public class NetServer implements xCloseableMany {
 	 * @param state
 	 * @return true to accept the connection or false to deny.
 	 */
-	public boolean register(final ServerSocketState stateDAO) {
-		if(stateDAO == null) throw new NullPointerException("state argument is required!");
-		final SocketChannel channel = stateDAO.getChannel();
+	public boolean register(final ServerSocketState socketState) {
+		if(socketState == null) throw new NullPointerException("state argument is required!");
+		final SocketChannel channel = socketState.getChannel();
 		if(channel == null) throw new NullPointerException("Channel is null, socket may have disconnected already!");
-		this.states.put(channel, stateDAO);
+		this.states.put(channel, socketState);
 		// check firewall
 		{
 			final NetFirewall firewall = this.getFirewall();
@@ -103,7 +103,7 @@ public class NetServer implements xCloseableMany {
 			);
 			// default firewall action
 			if(result == null) {
-				this.log().finer("No matching firewall rule for this socket: "+stateDAO.toString());
+				this.log().finer("No matching firewall rule for this socket: "+socketState.toString());
 //TODO:
 this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall action");
 
@@ -111,9 +111,9 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 			} else
 			// allowed by firewall
 			if(result) {
-				this.log().fine("Firewall allowed connection: "+stateDAO.toString());
+				this.log().fine("Firewall allowed connection: "+socketState.toString());
 			} else {
-				this.log().warning("Firewall blocked connection: "+stateDAO.toString());
+				this.log().warning("Firewall blocked connection: "+socketState.toString());
 				return false;
 			}
 		}
@@ -125,9 +125,9 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 	 * @param state
 	 */
 	// socket disconnected
-	public void unregister(final ServerSocketState stateDAO) {
-		if(stateDAO == null) throw new NullPointerException("state argument is required!");
-		this.states.remove(stateDAO);
+	public void unregister(final ServerSocketState socketState) {
+		if(socketState == null) throw new NullPointerException("state argument is required!");
+		this.states.remove(socketState);
 //TODO:
 	}
 	public ServerSocketState getServerSocketState(final Channel channel) {
