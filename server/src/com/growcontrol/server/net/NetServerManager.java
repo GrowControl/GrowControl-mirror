@@ -15,7 +15,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.net.ssl.SSLException;
 
@@ -28,7 +27,6 @@ import com.poixson.commonjava.Utils.threads.xThreadFactory;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-//public class NetServerManager implements xStartable, xCloseableMany {
 public class NetServerManager implements xCloseableMany {
 
 	public static final boolean DETAILED_LOG = false;
@@ -39,7 +37,6 @@ public class NetServerManager implements xCloseableMany {
 
 	// servers
 	protected final Map<String, NetServer> netServers = new ConcurrentHashMap<String, NetServer>();
-	protected final AtomicBoolean running = new AtomicBoolean(false);
 
 	// thread groups
 	protected final EventLoopGroup bossGroup;
@@ -214,10 +211,6 @@ public class NetServerManager implements xCloseableMany {
 //		if(!this.running.get())
 //			this.Stop();
 //	}
-//	@Override
-//	public void Stop() {
-//		this.CloseAll();
-//	}
 
 
 
@@ -277,7 +270,6 @@ public class NetServerManager implements xCloseableMany {
 		if(serversCount > 0)
 			log().info("Closed "+Integer.toString(serversCount)+
 					" socket servers, and "+Integer.toString(socketsCount)+" sockets");
-		this.running.set(false);
 	}
 	public void ClearClosed() {
 		if(this.netServers.size() == 0)
@@ -291,17 +283,6 @@ public class NetServerManager implements xCloseableMany {
 			}
 		}
 	}
-
-
-
-//	@Override
-//	public void run() {
-//		throw new UnsupportedOperationException();
-//	}
-//	@Override
-//	public boolean isRunning() {
-//		return this.running.get();
-//	}
 
 
 

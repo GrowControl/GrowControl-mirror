@@ -166,7 +166,6 @@ public class gcServer extends xApp {
 		}
 		// start socket servers
 		final NetServerManager manager = NetServerManager.get();
-//		manager.Start();
 		for(final NetServerConfig config : netConfigs.values()) {
 			if(!config.enabled) continue;
 			try {
@@ -243,7 +242,6 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=90)
 	public void __SHUTDOWN_sockets() {
 		final NetServerManager manager = NetServerManager.get();
-//		manager.Stop();
 		manager.CloseAll();
 	}
 
