@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class PacketHandler {
+public class PacketState {
 
 	public final Map<String, Class<? extends Packet>> packets = new HashMap<String, Class<? extends Packet>>();
 
 
 
-	public PacketHandler() {
+	public PacketState() {
 	}
 
 

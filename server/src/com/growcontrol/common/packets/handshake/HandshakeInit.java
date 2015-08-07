@@ -1,14 +1,15 @@
 package com.growcontrol.common.packets.handshake;
 
-import com.growcontrol.common.packets.PacketHandler;
+import com.growcontrol.common.packets.PacketState;
+
 
 
 public class HandshakeInit  {
 
 
 
-	public static void initPackets(final PacketHandler handler) {
-		handler.register(Packet_0_Hello.class);
+	public static void initPackets(final PacketState packetState) {
+		packetState.register(Packet_0_Hello.class);
 	}
 
 
