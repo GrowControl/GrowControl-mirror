@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 
 import com.growcontrol.common.net.JsonObjectDecoder;
 import com.growcontrol.common.net.SocketState.SessionState;
-import com.growcontrol.common.packets.handshake.Packet_Handshake;
+import com.growcontrol.common.packets.handshake.Packet_0_Hello;
 import com.poixson.commonapp.net.firewall.NetFirewall;
 import com.poixson.commonjava.xLogger.xLog;
 
@@ -78,8 +78,8 @@ public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 		pipe.addLast(strEncoder);
 		pipe.addLast(new JsonObjectDecoder());
 		pipe.addLast(socketState.getHandler());
-		// load handshake packets
-		Packet_Handshake.initPackets(socketState.getPacketState());
+		// listen for hello packet
+		Packet_0_Hello.init(socketState.getPacketState());
 	}
 
 

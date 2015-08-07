@@ -3,9 +3,22 @@ package com.growcontrol.common.packets.handshake;
 import java.util.Map;
 
 import com.growcontrol.common.packets.Packet;
+import com.growcontrol.common.packets.PacketState;
+import com.growcontrol.common.packets.annotations.PacketProperty;
 
 
-public class Packet_1_Hey implements Packet {
+@PacketProperty(
+		name="hey",
+		stateful=true
+)
+public class Packet_1_Hey extends Packet {
+
+
+
+	public static void init(final PacketState packetState) {
+		packetState.clear();
+		packetState.register(Packet_0_Hello.class);
+	}
 
 
 
