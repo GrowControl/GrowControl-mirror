@@ -1,6 +1,5 @@
 package com.growcontrol.server.net;
 
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -10,20 +9,22 @@ import com.poixson.commonjava.xLogger.xLog;
 // one instance per ServerSocketState
 public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 
-	protected final NetServer server;
+	private final NetServer server;
+	private final ServerSocketState socketState;
 
 
 
-	public NetServerHandler(final NetServer server) {
+	public NetServerHandler(final NetServer server, final ServerSocketState socketState) {
 		if(server == null) throw new NullPointerException("server argument is required!");
 		this.server = server;
+		this.socketState = socketState;
 	}
 
 
 
-	public ServerSocketState getServerSocketState(final Channel channel) {
-		return this.server.getServerSocketState(channel);
-	}
+//	public ServerSocketState getServerSocketState(final Channel channel) {
+//		return this.server.getServerSocketState(channel);
+//	}
 
 
 
@@ -37,13 +38,11 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 //this.log().publish("===> ACTIVE");
 //	}
 	@Override
-	public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
-		super.channelInactive(ctx);
-		final Channel channel = ctx.channel();
-		final ServerSocketState socketState = this.getServerSocketState(channel);
-		if(socketState == null) throw new RuntimeException();
-		this.server.unregister(socketState);
-		this.log(socketState).info("Connection closed");
+	public void channelInactive(final ChannelHandlerContext context) throws Exception {
+		super.channelInactive(context);
+		// unregister closed socket
+		this.server.unregister(this.socketState);
+		this.log().info("Connection closed");
 	}
 //	@Override
 //	public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
@@ -60,13 +59,10 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 
 	@Override
 	public void channelRead0(final ChannelHandlerContext context, final String msg) throws Exception {
-xLog.getRoot("NET").publish("");
-xLog.getRoot("NET").publish("==> "+msg+" <==");
-xLog.getRoot("NET").publish("CLASS NAME: "+msg.getClass().getName());
-xLog.getRoot("NET").publish("");
-//this.log().publish("==> "+msg+" <==");
-//this.log().publish();
-//this.log().publish("CLASS NAME: "+msg.getClass().getName());
+this.log().publish("");
+this.log().publish("==> "+msg+" <==");
+this.log().publish("CLASS NAME: "+msg.getClass().getName());
+this.log().publish("");
 //this.log().publish("==> "+msg.toString(Charset.forName("utf8"))+" <==");
 //this.log().publish();
 	}
@@ -95,10 +91,10 @@ xLog.getRoot("NET").publish("");
 	public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) throws Exception {
 		// IOException
 		if("Connection reset by peer".equals(cause.getMessage())) {
-xLog.getRoot("NET").warning("Connection reset by peer "+ctx.toString());
+			this.log().warning("Connection reset by peer "+ctx.toString());
 			return;
 		}
-xLog.getRoot("NET").trace(cause);
+		this.log().trace(cause);
 		ctx.close();
 //		String msg = "";
 //		try {
@@ -113,12 +109,8 @@ xLog.getRoot("NET").trace(cause);
 
 
 	// logger
-	public xLog log(final Channel channel) {
-		final ServerSocketState socketState = this.server.getServerSocketState(channel);
-		return this.log(socketState);
-	}
-	public xLog log(final ServerSocketState socketState) {
-		return socketState.log();
+	public xLog log() {
+		return this.socketState.log();
 	}
 
 

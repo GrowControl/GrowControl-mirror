@@ -100,14 +100,13 @@ public class NetServerManager implements xCloseableMany {
 		// this method is used in netty examples
 		//   bossGroup = new NioEventLoopGroup();
 		//   workGroup = new NioEventLoopGroup();
+		// firewall
+		this.firewall = new NetFirewall();
 		// ssl
 		final SelfSignedCertificate cert = new SelfSignedCertificate();
 		this.sslContext = SslContextBuilder.forServer(cert.certificate(), cert.privateKey()).build();
-		// firewall
-		this.firewall = new NetFirewall();
 //TODO:
-//		// packet handler
-//		this.handler = new NetServerHandler(this);
+//		// ssl packet handler
 //		this.bootstrap.childHandler(
 //				new ServerSocketChannelInitializer(this.log(), this.sslContext)
 //		);

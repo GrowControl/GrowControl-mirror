@@ -9,7 +9,8 @@ import io.netty.handler.codec.string.StringEncoder;
 import java.nio.charset.Charset;
 
 import com.growcontrol.common.net.JsonObjectDecoder;
-import com.growcontrol.common.net.SocketState;
+import com.growcontrol.common.net.SocketState.SessionState;
+import com.growcontrol.common.packets.handshake.Packet_Handshake;
 import com.poixson.commonapp.net.firewall.NetFirewall;
 import com.poixson.commonjava.xLogger.xLog;
 
@@ -18,8 +19,6 @@ import com.poixson.commonjava.xLogger.xLog;
 public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 
 	protected final NetServer        server;
-//	protected final NetServerHandler handler;
-//	protected final NetConfig        config;
 
 	// handlers
 	protected static final Charset charset = Charset.forName("UTF8");
@@ -30,15 +29,7 @@ public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 
 	public NetServerInitializer(final NetServer server) {
 		this.server  = server;
-//		this.handler = server.handler;
-//		this.config  = server.config;
 	}
-//	public NetServerInitializer(final NetServer server,
-//			final NetServerHandler handler, final NetConfig config) {
-//		this.server  = server;
-//		this.handler = handler;
-//		this.config  = config;
-//	}
 
 
 
@@ -49,7 +40,7 @@ public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 				this.server,
 				channel
 		);
-		socketState.setState(SocketState.PREAUTH);
+		socketState.setSessionState(SessionState.PREAUTH);
 		this.server.register(socketState);
 		socketState.log();
 		this.log(socketState).info("Accepted connection from: "+socketState.getStateKey());
@@ -86,7 +77,9 @@ public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 		pipe.addLast(strDecoder);
 		pipe.addLast(strEncoder);
 		pipe.addLast(new JsonObjectDecoder());
-		pipe.addLast(this.server.handler);
+		pipe.addLast(socketState.getHandler());
+		// load handshake packets
+		Packet_Handshake.initPackets(socketState.getPacketState());
 	}
 
 
