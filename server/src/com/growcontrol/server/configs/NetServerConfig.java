@@ -80,7 +80,7 @@ xLog.getRoot("config").trace(e);
 		this.ssl     = ssl;
 		this.host    = (utils.isEmpty(host) ? null : host);
 		this.port    = port;
-		this.key = this.getKey();
+		this.key = this.genKey();
 	}
 
 
@@ -106,7 +106,7 @@ xLog.getRoot("config").trace(e);
 	public String toString() {
 		return this.key;
 	}
-	private String getKey() {
+	private String genKey() {
 		final StringBuilder str = new StringBuilder();
 		final String host = this.getHost();
 		str.append(host == null ? "*" : host.toLowerCase());
