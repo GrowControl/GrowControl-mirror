@@ -6,6 +6,7 @@ Tick Interval: 10s
 Logic Threads: 0
 Zones:
     - 'ExampleZone'
+Socket Backlog: 5
 Sockets:
     - Enable: false
       SSL: false

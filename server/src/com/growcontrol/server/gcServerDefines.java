@@ -13,6 +13,7 @@ public class gcServerDefines {
 
 	public static final int DEFAULT_SOCKET_PORT     = 1142;
 	public static final int DEFAULT_SOCKET_PORT_SSL = 1143;
+	public static final int DEFAULT_SOCKET_BACKLOG  = 10;
 
 
 	// server config
@@ -26,6 +27,7 @@ public class gcServerDefines {
 	public static final String CONFIG_LOGIC_THREADS = "Logic Threads";
 //	public static final String CONFIG_ZONES         = "Zones";
 	// sockets
+	public static final String CONFIG_SOCKET_BACKLOG = "Socket Backlog";
 	public static final String CONFIG_SOCKETS       = "Sockets";
 		public static final String CONFIG_SOCKET_ENABLE = "Enable";
 		public static final String CONFIG_SOCKET_SSL    = "SSL";
