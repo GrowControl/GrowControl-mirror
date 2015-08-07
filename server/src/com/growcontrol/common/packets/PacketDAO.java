@@ -28,12 +28,18 @@ public class PacketDAO {
 	public Packet getInstance() throws InstantiationException, IllegalAccessException {
 		// stateful instance
 		if(this.props.stateful()) {
-			if(this.instance == null)
+			if(this.instance == null) {
 				this.instance = this.clss.newInstance();
+				this.instance.setDAO(this);
+			}
 			return this.instance;
 		}
 		// not stateful
-		return this.clss.newInstance();
+		{
+			final Packet instance = this.clss.newInstance();
+			instance.setDAO(this);
+			return instance;
+		}
 	}
 
 
