@@ -1,54 +1,33 @@
 package com.growcontrol.server.net;
 
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.socket.SocketChannel;
 
 import java.net.InetSocketAddress;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import com.growcontrol.common.net.SocketState;
-import com.poixson.commonjava.Utils.xCloseable;
+import com.growcontrol.common.packets.PacketState;
 import com.poixson.commonjava.xLogger.xLog;
 
 
 // one instance per socket connection
-public class ServerSocketState implements xCloseable {
+public class ServerSocketState extends SocketState {
 
-	private SocketState state = SocketState.CLOSED;
 	private NetServer server;
 	private SocketChannel channel;
 	private final NetServerHandler socketHandler;
-//	protected final NetServerHandler handler = new NetServerHandler(this);
-
-	protected static final AtomicInteger nextSocketId = new AtomicInteger(0);
-	public final int    id;
-	public final String key;
+	private final PacketState packetState;
 
 
 
 	public ServerSocketState(final NetServer server, final SocketChannel channel) {
+		super();
 		this.server  = server;
 		this.channel = channel;
 		this.socketHandler = new NetServerHandler(this.server, this);
-		this.id  = getNextId();
-		this.key = this.genKey();
-	}
-
-
-
-	private static int getNextId() {
-		return nextSocketId.incrementAndGet();
-	}
-
-
-
-	// socket state
-	public SocketState getState() {
-		return this.state;
-	}
-	public void setState(final SocketState state) {
-		this.state = state;
+		this.packetState = new PacketState();
+//		this.packetState = new PacketState(server, this);
 	}
 
 
@@ -62,7 +41,7 @@ public class ServerSocketState implements xCloseable {
 
 	// socket channel
 	public SocketChannel getChannel() {
-		if(SocketState.CLOSED.equals(this.state))
+		if(SessionState.CLOSED.equals(this.getSessionState()))
 			return null;
 		return this.channel;
 	}
@@ -71,6 +50,10 @@ public class ServerSocketState implements xCloseable {
 	public ChannelInboundHandlerAdapter getHandler() {
 		return this.socketHandler;
 	}
+	// packet handler
+	@Override
+	public PacketState getPacketState() {
+		return this.packetState;
 	}
 
 
@@ -86,21 +69,21 @@ xLog.getRoot("NET").trace(e);
 		}
 	}
 	public ChannelFuture closeSoon() {
-		this.state = SocketState.CLOSED;
+		this.setSessionState(SessionState.CLOSED);
 		final ChannelFuture futureClose = this.channel.close();
 		return futureClose;
 	}
 	@Override
 	public boolean isClosed() {
-		return false;
+		if(!this.channel.isOpen())
+			this.close();
+		return SessionState.CLOSED.equals(this.sessionState);
 	}
 
 
 
-	public String getStateKey() {
-		return this.key;
-	}
-	private String genKey() {
+	@Override
+	protected String genKey() {
 		final StringBuilder str = new StringBuilder();
 		final InetSocketAddress remote = this.channel.remoteAddress();
 		str.append("<").append(this.id).append(">");
@@ -108,18 +91,6 @@ xLog.getRoot("NET").trace(e);
 		str.append("->");
 		str.append(this.server.getServerKey());
 		return str.toString();
-	}
-	@Override
-	public String toString() {
-		return this.getStateKey();
-	}
-
-
-
-	// logger
-	public xLog log() {
-		return xLog.getRoot("NET")
-				.get(this.getStateKey());
 	}
 
 
