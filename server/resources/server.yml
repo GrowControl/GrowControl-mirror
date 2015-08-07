@@ -6,9 +6,12 @@ Tick Interval: 60s
 Logic Threads: 0
 Zones:
     - 'ExampleZone'
-Socket Backlog: 5
+Socket Backlog: 10
 Sockets:
-    - Enable: false
-      SSL: false
+    - Enable: true
       Host: '127.0.0.1'
       Port: 1142
+    - Enable: false
+      SSL: true
+      Host: '127.0.0.1'
+      Port: 1143
