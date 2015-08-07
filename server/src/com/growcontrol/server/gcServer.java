@@ -142,8 +142,12 @@ public class gcServer extends xApp {
 	// tick scheduler
 	@xAppStep(type=StepType.STARTUP, title="Ticker", priority=80)
 	public void __STARTUP_ticker() {
-		xTicker.get()
-			.Start();
+		final gcServerConfig config = gcServerVars.getConfig();
+		final xTicker ticker = xTicker.get();
+		ticker.setInterval(
+				config.getTickInterval()
+		);
+		ticker.Start();
 	}
 
 
