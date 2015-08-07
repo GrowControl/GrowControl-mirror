@@ -4,57 +4,47 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.poixson.commonjava.xLogger.xLog;
 
 
+// one instance per NetServer
 public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 
-	protected static final AtomicInteger count = new AtomicInteger(0);
-
-	protected final int id;
-
 	protected final NetServer server;
-	protected final NetStateDAO dao;
 
 
 
-	public NetServerHandler(final NetStateDAO dao) {
-		if(dao == null) throw new NullPointerException("dao argument is required!");
-		this.dao = dao;
-		this.server = dao.server;
-		this.id = count.incrementAndGet();
+	public NetServerHandler(final NetServer server) {
+		if(server == null) throw new NullPointerException("server argument is required!");
+		this.server = server;
 	}
 
 
 
-	// socket connected
-	@Override
-	public void channelActive(final ChannelHandlerContext ctx) throws Exception {
-		super.channelActive(ctx);
-		final Channel channel = ctx.channel();
-		// ensure channel matches
-		if(!channel.equals(this.dao.channel)) {
-			this.log().severe("Channel doesn't match!");
-			throw new RuntimeException();
-		}
-		this.log().info("Accepted connection from: "+channel.remoteAddress().toString());
-//		ctx.write("Welcome!\r\n");
-//		ctx.flush();
-//		this.log().publish("===> ACTIVE");
+	public ServerSocketState getServerSocketState(final Channel channel) {
+		return this.server.getServerSocketState(channel);
 	}
-	// socket disconnected
+
+
+
+//	@Override
+//	public void channelActive(final ChannelHandlerContext ctx) throws Exception {
+//		super.channelActive(ctx);
+//		final Channel channel = ctx.channel();
+//this.log().info("Accepted connection from: "+channel.remoteAddress().toString());
+//ctx.write("Welcome!\r\n");
+//ctx.flush();
+//this.log().publish("===> ACTIVE");
+//	}
 	@Override
 	public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
 		super.channelInactive(ctx);
 		final Channel channel = ctx.channel();
-//		this.server.unregister(channel);
-		this.log().info("Connection closed: "+channel.remoteAddress().toString());
+		final ServerSocketState stateDAO = this.getServerSocketState(channel);
+		if(stateDAO == null) throw new RuntimeException();
+		this.server.unregister(stateDAO);
+		this.log(stateDAO).info("Connection closed");
 	}
-
-
-
 //	@Override
 //	public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
 //		ctx.fireChannelRegistered();
@@ -69,16 +59,17 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 
 
 	@Override
-	public void channelRead0(final ChannelHandlerContext ctx,
-			final String msg) throws Exception {
-		this.log().publish("==> "+msg+" <==");
-//TODO:
-
-//		this.log().publish();
-//		this.log().publish("CLASS NAME: "+msg.getClass().getName());
-//		this.log().publish("==> "+msg.toString(Charset.forName("utf8"))+" <==");
-//		this.log().publish();
-
+	public void channelRead0(final ChannelHandlerContext context, final String msg) throws Exception {
+xLog.getRoot("NET").publish("");
+xLog.getRoot("NET").publish("==> "+msg+" <==");
+xLog.getRoot("NET").publish("CLASS NAME: "+msg.getClass().getName());
+xLog.getRoot("NET").publish("");
+//this.log().publish("==> "+msg+" <==");
+//this.log().publish();
+//this.log().publish("CLASS NAME: "+msg.getClass().getName());
+//this.log().publish("==> "+msg.toString(Charset.forName("utf8"))+" <==");
+//this.log().publish();
+	}
 //		if (msg instanceof HttpRequest) {
 //		HttpRequest req = (HttpRequest) msg;
 //		if (HttpHeaders.is100ContinueExpected(req))
@@ -93,23 +84,10 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 //			response.headers().set(CONNECTION, Values.KEEP_ALIVE);
 //			ctx.write(response);
 //		}
-
-	}
-	@Override
-	public void channelReadComplete(final ChannelHandlerContext ctx) {
-		ctx.flush();
-	}
-
-
-
-
-
-
-
-
-
-
-
+//	@Override
+//	public void channelReadComplete(final ChannelHandlerContext ctx) {
+//		ctx.flush();
+//	}
 
 
 
@@ -117,10 +95,10 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 	public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) throws Exception {
 		// IOException
 		if("Connection reset by peer".equals(cause.getMessage())) {
-			this.log().warning("Connection reset by peer "+ctx.toString());
+xLog.getRoot("NET").warning("Connection reset by peer "+ctx.toString());
 			return;
 		}
-		this.log().trace(cause);
+xLog.getRoot("NET").trace(cause);
 		ctx.close();
 //		String msg = "";
 //		try {
@@ -135,8 +113,12 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 
 
 	// logger
-	public xLog log() {
-		return this.server.log();
+	public xLog log(final Channel channel) {
+		final ServerSocketState stateDAO = this.server.getServerSocketState(channel);
+		return this.log(stateDAO);
+	}
+	public xLog log(final ServerSocketState stateDAO) {
+		return stateDAO.log();
 	}
 
 

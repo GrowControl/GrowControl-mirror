@@ -1,12 +1,15 @@
 package com.growcontrol.server;
 
 import java.io.PrintStream;
+import java.net.UnknownHostException;
+import java.util.Map;
 
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
 import com.growcontrol.common.scripting.gcScriptManager;
 import com.growcontrol.server.commands.gcServerCommands;
+import com.growcontrol.server.configs.NetServerConfig;
 import com.growcontrol.server.configs.gcServerConfig;
 import com.growcontrol.server.net.NetServerManager;
 import com.poixson.commonapp.app.xApp;
@@ -155,8 +158,26 @@ public class gcServer extends xApp {
 	// sockets
 	@xAppStep(type=StepType.STARTUP, title="Sockets", priority=90)
 	public void __STARTUP_sockets() {
-		NetServerManager.get()
-			.Start();
+		// load socket configs
+		final Map<String, NetServerConfig> netConfigs = gcServerVars.getConfig().getNetConfigs();
+		if(utils.isEmpty(netConfigs)) {
+			log().warning("No socket server configs found to load");
+			return;
+		}
+		// start socket servers
+		final NetServerManager manager = NetServerManager.get();
+//		manager.Start();
+		for(final NetServerConfig config : netConfigs.values()) {
+			if(!config.enabled) continue;
+			try {
+				manager.getServer(config);
+			} catch (UnknownHostException e) {
+				log().trace(e);
+			} catch (InterruptedException e) {
+				log().trace(e);
+				break;
+			}
+		}
 //		// log configs
 //		for(final NetConfig dao : configs) {
 //			if(dao.enabled) {
@@ -222,7 +243,7 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=90)
 	public void __SHUTDOWN_sockets() {
 		final NetServerManager manager = NetServerManager.get();
-		manager.Stop();
+//		manager.Stop();
 		manager.CloseAll();
 	}
 

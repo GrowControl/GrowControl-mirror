@@ -2,81 +2,75 @@ package com.growcontrol.server.net;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
+import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
-import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
-import com.growcontrol.server.configs.NetConfig;
+import com.growcontrol.server.gcServerVars;
+import com.growcontrol.server.configs.NetServerConfig;
+import com.poixson.commonapp.net.firewall.NetFirewall;
 import com.poixson.commonjava.Utils.xCloseableMany;
 import com.poixson.commonjava.xLogger.xLog;
 
 
 public class NetServer implements xCloseableMany {
 
-	protected final NetServerManager manager;
-
-	protected final NetConfig config;
-	protected final String configKey;
+	public final NetServerConfig config;
+	public final String serverKey;
 	protected volatile boolean closed = false;
 
 	protected final ServerBootstrap bootstrap;
 	protected final NetServerInitializer initer;
-//	protected final NetServerHandler handler;
+	protected final NetServerHandler handler;
 	protected final Channel serverChannel;
 
-	protected final CopyOnWriteArraySet<NetStateDAO> states = new CopyOnWriteArraySet<NetStateDAO>();
-
-	// firewall
-//	protected final NetFirewall firewall;
-
-	// debug logger
-//	protected final LoggingHandler handlerLogger;
+	protected final Map<Channel, ServerSocketState> states = new ConcurrentHashMap<Channel, ServerSocketState>();
 
 
 
-	public NetServer(final NetConfig config)
-			throws UnknownHostException, SocketException, InterruptedException {
+//throws UnknownHostException, SocketException, InterruptedException {
+	public NetServer(final NetServerConfig config) throws UnknownHostException, InterruptedException {
 		if(config == null)  throw new NullPointerException("config argument is required!");
-		if(!config.enabled) throw new UnsupportedOperationException("This socket server is disabled");
+		if(!config.enabled) throw new UnsupportedOperationException("This socket server is disabled!");
 		this.config = config;
-		this.configKey = config.toString();
-		this.manager = NetServerManager.get();
-		this.log().finer("Starting socket server..   "+this.configKey);
-		// bootstrap
-		this.bootstrap = new ServerBootstrap();
-		this.bootstrap.group(
-				this.manager.bossGroup,
-				this.manager.workGroup
-		);
-		this.bootstrap.option(
-				ChannelOption.SO_BACKLOG,
-				NetServerManager.BACKLOG
-		);
+		this.serverKey = this.config.toString();
+		this.log().finer("Starting socket server..");
+		// server bootstrap
+		{
+			final NetServerManager manager = NetServerManager.get();
+			this.bootstrap = new ServerBootstrap();
+			this.bootstrap.group(
+					manager.bossGroup,
+					manager.workGroup
+			);
+		}
+		// socket backlog
+		{
+			final int backlog = gcServerVars.getConfig().getSocketBacklog();
+			this.bootstrap.option(
+					ChannelOption.SO_BACKLOG,
+					backlog
+			);
+		}
 		this.bootstrap.channel(NioServerSocketChannel.class);
-//		// this method is bad for servers
-//		this.bossGroup = Executors.newCachedThreadPool();
-//		this.workGroup = Executors.newCachedThreadPool();
-//		// this is used in netty examples
-//		this.bossGroup = new NioEventLoopGroup();
-//		this.workGroup = new NioEventLoopGroup();
 		// debug
-		if(this.manager.debug) {
+		if(NetServerManager.DETAILED_LOG) {
 			final LoggingHandler handlerLogger = new LoggingHandler(LogLevel.INFO);
-			this.bootstrap.handler(     handlerLogger);
+			this.bootstrap.handler(handlerLogger);
 			this.bootstrap.childHandler(handlerLogger);
-//			this.handlerLogger = new LoggingHandler(LogLevel.INFO);
-//			this.bootstrap.handler(     this.handlerLogger);
-//			this.bootstrap.childHandler(this.handlerLogger);
-//		} else {
-//			this.handlerLogger = null;
 		}
 		// protocol handler
-//		this.handler = new NetServerHandler(this);
+		this.handler = new NetServerHandler(this);
 		// socket initializer
 		this.initer = new NetServerInitializer(this);
 		this.bootstrap.childHandler(this.initer);
@@ -85,57 +79,129 @@ public class NetServer implements xCloseableMany {
 				this.config.getInetAddress(),
 				this.config.port
 		).sync().channel();
-		this.log().info("Socket server listening on "+this.config.toString());
+		this.log().info("Socket server listening for connections..");
 	}
 
 
 
 	/**
-	 *  New socket connection accepted.
-	 *  @return true to accept the connection or false to deny.
+	 * New socket connection accepted.
+	 * @param state
+	 * @return true to accept the connection or false to deny.
 	 */
-	public boolean register(final NetStateDAO dao) {
-		if(dao == null) throw new NullPointerException("dao argument is required!");
-		this.states.add(dao);
-//		final SocketChannel channel = state.getChannel();
-//		// check firewall
-//		if(!this.manager.firewall.check(channel)) {
-//			return false;
-//		}
-		//TODO: store the socket
+	public boolean register(final ServerSocketState stateDAO) {
+		if(stateDAO == null) throw new NullPointerException("state argument is required!");
+		final SocketChannel channel = stateDAO.getChannel();
+		if(channel == null) throw new NullPointerException("Channel is null, socket may have disconnected already!");
+		this.states.put(channel, stateDAO);
+		// check firewall
+		{
+			final NetFirewall firewall = this.getFirewall();
+			final Boolean result = firewall.check(
+					channel.localAddress(),
+					channel.remoteAddress()
+			);
+			// default firewall action
+			if(result == null) {
+				this.log().finer("No matching firewall rule for this socket: "+stateDAO.toString());
+//TODO:
+this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall action");
+
+
+			} else
+			// allowed by firewall
+			if(result) {
+				this.log().fine("Firewall allowed connection: "+stateDAO.toString());
+			} else {
+				this.log().warning("Firewall blocked connection: "+stateDAO.toString());
+				return false;
+			}
+		}
+//TODO: store the socket
 		return true;
 	}
+	/**
+	 * Remove disconnected socket.
+	 * @param state
+	 */
 	// socket disconnected
-	public void unregister(final NetStateDAO dao) {
-		if(dao == null) throw new NullPointerException("dao argument is required!");
-		this.states.remove(dao);
+	public void unregister(final ServerSocketState stateDAO) {
+		if(stateDAO == null) throw new NullPointerException("state argument is required!");
+		this.states.remove(stateDAO);
 //TODO:
+	}
+	public ServerSocketState getServerSocketState(final Channel channel) {
+		if(channel == null)
+			return null;
+		return this.states.get(channel);
 	}
 
 
 
+	public int getSocketsCount() {
+		return this.states.size();
+	}
+	public String getServerKey() {
+		return this.serverKey;
+	}
+
+
+
+	public NetFirewall getFirewall() {
+		return NetServerManager.get()
+				.getFirewall();
+	}
+
+
+
+	/**
+	 * Stop listening for connections.
+	 */
 	@Override
 	public void close() {
-		this.closed = true;
-//		this.log().info("Stopping socket server..");
 		try {
-			this.serverChannel.close().sync();
+			this.closeSoon()
+				.sync();
 		} catch (InterruptedException e) {
 			this.log().trace(e);
 		}
-		this.log().info("Stopped socket server: "+this.config.toString());
 	}
-	// close all socket connections
+	public ChannelFuture closeSoon() {
+		this.closed = true;
+		this.log().info("Stopping socket server..");
+		return this.serverChannel.close();
+	}
+	/**
+	 *  Disconnect all connected sockets.
+	 */
 	@Override
 	public void CloseAll() {
-//TODO:
-//		this.log().info("Closing sockets..");
-//		final Iterator<Channel> it = this.channels.iterator();
-//		while(it.hasNext()) {
-//			it.next().close().sync();
-//			it.remove();
-//		}
-//		this.channels.clear();
+		// clone states list
+		final Collection<ServerSocketState> states = this.states.values();
+		if(states.isEmpty())
+			return;
+		this.log().info("Closing sockets..");
+		// close sockets
+		final Set<ChannelFuture> futureCloses = new HashSet<ChannelFuture>();
+		for(final ServerSocketState state : states) {
+			futureCloses.add(
+					state.closeSoon()
+			);
+//			this.states.remove(state);
+		}
+		// wait for sockets to close
+		for(final ChannelFuture future : futureCloses) {
+			try {
+				future.sync();
+			} catch (InterruptedException e) {
+				this.log().trace(e);
+				break;
+			}
+		}
+		this.log().info("Closed "+Integer.toString(states.size())+" sockets");
+		final int stillConnected = this.states.size();
+		if(stillConnected > 0)
+			this.log().warning(Integer.toString(stillConnected)+" sockets still connected!");
 	}
 	@Override
 	public boolean isClosed() {
@@ -148,8 +214,8 @@ public class NetServer implements xCloseableMany {
 	private volatile xLog _log = null;
 	public xLog log() {
 		if(this._log == null)
-			this._log = this.manager.log()
-				.get(this.configKey);
+			this._log = xLog.getRoot("NET")
+					.get("SERVER|"+this.serverKey);
 		return this._log;
 	}
 

@@ -1,234 +1,322 @@
 package com.growcontrol.server.net;
 
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.handler.ssl.SslContext;
+import io.netty.handler.ssl.SslContextBuilder;
+import io.netty.handler.ssl.util.SelfSignedCertificate;
 
-import java.io.IOException;
-import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.security.cert.CertificateException;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.growcontrol.common.netty.NettyDetailedLogger;
-import com.growcontrol.server.configs.NetConfig;
-import com.poixson.commonjava.xVars;
+import javax.net.ssl.SSLException;
+
+import com.growcontrol.server.configs.NetServerConfig;
+import com.poixson.commonapp.net.firewall.NetFirewall;
 import com.poixson.commonjava.Utils.Keeper;
-import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.Utils.utilsThread;
 import com.poixson.commonjava.Utils.xCloseableMany;
-import com.poixson.commonjava.Utils.xStartable;
 import com.poixson.commonjava.Utils.threads.xThreadFactory;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public class NetServerManager implements xStartable, xCloseableMany {
+//public class NetServerManager implements xStartable, xCloseableMany {
+public class NetServerManager implements xCloseableMany {
 
-	public static final boolean DETAILED_LOGGING = false;
-	public static final int BACKLOG = 10;
-	protected final boolean debug;
+	public static final boolean DETAILED_LOG = false;
 
 	// manager instance
 	private static volatile NetServerManager instance = null;
 	private static final Object instanceLock = new Object();
-	protected volatile boolean running = false;
 
-	// server instances
-	protected final Map<String, NetServer> servers = new HashMap<String, NetServer>();
-	// temporary storage of configs, used when starting servers
-	protected final Set<NetConfig> tempConfigs = new HashSet<NetConfig>();
+	// servers
+	protected final Map<String, NetServer> netServers = new ConcurrentHashMap<String, NetServer>();
+	protected final AtomicBoolean running = new AtomicBoolean(false);
 
-	// threads
+	// thread groups
 	protected final EventLoopGroup bossGroup;
 	protected final EventLoopGroup workGroup;
 
 	// firewall
-//	protected final NetFirewall firewall;
+	protected final NetFirewall firewall;
 
 	// ssl
 	protected final SslContext sslContext;
 
-//	protected final NetHandler handler;
 
 
-
+	public static NetServer get(final NetServerConfig config) {
+		try {
+			return get().getServer(config);
+		} catch (UnknownHostException e) {
+			log().trace(e);
+			return null;
+		} catch (InterruptedException e) {
+			log().trace(e);
+			return null;
+		}
+	}
 	public static NetServerManager get() {
 		if(instance == null) {
 			synchronized(instanceLock) {
-				if(instance == null)
-					instance = new NetServerManager();
+				try {
+					if(instance == null)
+						instance = new NetServerManager();
+				} catch (SSLException e) {
+					instance = null;
+					log().trace(e);
+					return null;
+				} catch (CertificateException e) {
+					instance = null;
+					log().trace(e);
+					return null;
+				}
 			}
 		}
 		return instance;
 	}
-	private NetServerManager() {
+	protected NetServerManager() throws SSLException, CertificateException {
 		Keeper.add(this);
-		this.debug = (xVars.debug() && DETAILED_LOGGING);
-		if(this.debug)
-			NettyDetailedLogger.Install(this.log());
 		// thread groups
 		final int cores = Runtime.getRuntime().availableProcessors();
 		this.bossGroup = new NioEventLoopGroup(1,     new xThreadFactory("netty-boss", true));
 		this.workGroup = new NioEventLoopGroup(cores, new xThreadFactory("netty-work", true));
-//TODO:
+		// this method is bad for servers
+		//   bossGroup = Executors.newCachedThreadPool();
+		//   workGroup = Executors.newCachedThreadPool();
+		// this method is used in netty examples
+		//   bossGroup = new NioEventLoopGroup();
+		//   workGroup = new NioEventLoopGroup();
 		// ssl
-		this.sslContext = null;
-//TODO:
+		final SelfSignedCertificate cert = new SelfSignedCertificate();
+		this.sslContext = SslContextBuilder.forServer(cert.certificate(), cert.privateKey()).build();
 		// firewall
-//		this.firewall = new NetFirewall();
-
-
-		// protocol handler
+		this.firewall = new NetFirewall();
+//TODO:
+//		// packet handler
 //		this.handler = new NetServerHandler(this);
 //		this.bootstrap.childHandler(
 //				new ServerSocketChannelInitializer(this.log(), this.sslContext)
 //		);
 
 
+//		this.debug = (xVars.debug() && DETAILED_LOGGING);
+//		if(this.debug)
+//			NettyDetailedLogger.Install(this.log());
 	}
 
 
 
-	@Override
-	public void Start() {
-		this.running = true;
-		final Map<String, NetConfig> cfgs = new HashMap<String, NetConfig>();
-		synchronized(this.tempConfigs) {
-			for(final NetConfig cfg : this.tempConfigs) {
-				final String key = cfg.toString();
-				if(utils.isEmpty(key))    continue;
-				if(cfgs.containsKey(key)) continue;
-				cfgs.put(key, cfg);
-			}
+	public NetServer getServer(final NetServerConfig config) throws UnknownHostException, InterruptedException {
+		if(config == null) throw new NullPointerException("config argument is required!");
+		final String key = config.toString();
+		// get existing server
+		{
+			final NetServer server = this.netServers.get(key);
+			if(server != null && !server.isClosed())
+				return server;
 		}
-		synchronized(this.servers) {
-			// stop removed servers
-			if(!this.servers.isEmpty()) {
-				final Iterator<Entry<String, NetServer>> it = this.servers.entrySet().iterator();
-				while(it.hasNext()) {
-					final Entry<String, NetServer> entry = it.next();
-					// stop no longer needed servers
-					final NetConfig cfg = cfgs.get(entry.getKey());
-					if(cfg == null || !cfg.enabled) {
-						final NetServer server = entry.getValue();
-						utils.safeClose(server);
-						it.remove();
-					}
+		// new server
+		synchronized(this.netServers){
+			// check once more
+			{
+				final NetServer server = this.netServers.get(key);
+				if(server != null) {
+					if(server.isClosed())
+						this.ClearClosed();
+					else
+						return server;
 				}
 			}
-			// start new servers
-			if(cfgs.isEmpty()) {
-				this.log().warning("No socket server configs loaded.");
-			} else {
-				this.log().info("Starting socket servers..");
-				for(final Entry<String, NetConfig> entry : cfgs.entrySet()) {
-					final String key = entry.getKey();
-					final NetConfig cfg = entry.getValue();
-					// server already exists
-					if(this.servers.containsKey(key))
-						continue;
-					// not enabled
-					if(!cfg.enabled)
-						continue;
-					try {
-						final NetServer server = new NetServer(cfg);
-						this.servers.put(key, server);
-					} catch (UnknownHostException e) {
-						this.log().severe("Failed to start socket server "+key);
-						this.log().trace(e);
-						continue;
-					} catch (SocketException e) {
-						if("Permission denied".equals(e.getMessage()))
-							this.log().severe("Valid port numbers are >= 1024 for non-root users");
-						this.log().trace(e);
-					} catch (InterruptedException e) {
-						this.log().severe("Failed to start socket server "+key);
-						this.log().trace(e);
-						this.Stop();
-						return;
-					}
-				}
-			}
-		}
-		// unexpected stop
-		if(!this.running)
-			this.Stop();
-	}
-	@Override
-	public void Stop() {
-		this.log().info("Stopping socket servers..");
-		synchronized(this.servers) {
-this.log().severe("SERVER COUNT: "+Integer.toString(this.servers.size()));
-			this.running = false;
-			final Iterator<NetServer> it = this.servers.values().iterator();
-			while(it.hasNext()) {
-				it.next().close();
-				it.remove();
-			}
-this.log().severe("SERVER COUNT: "+Integer.toString(this.servers.size()));
-			this.servers.clear();
-this.log().severe("SERVER COUNT: "+Integer.toString(this.servers.size()));
-		}
-	}
-
-
-
-	@Override
-	public void run() {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public boolean isRunning() {
-		return this.running;
-	}
-
-
-
-	// close all socket connections
-	@Override
-	public void CloseAll() {
-		synchronized(this.servers) {
-			if(this.servers.isEmpty())
-				return;
-			this.log().info("Closing sockets..");
-			for(final NetServer server : this.servers.values()) {
-				server.CloseAll();
+			// new server
+			{
+				final NetServer server = new NetServer(config);
+				this.netServers.put(key, server);
+				return server;
 			}
 		}
 	}
-	@Override
-	public void close() throws IOException {
-		throw new UnsupportedOperationException();
-	}
+
+
+
+//	@Override
+//	public void Start() {
+//		if(!this.running.compareAndSet(false, true))
+//			return;
+
+//		final Map<String, NetConfig> cfgs = new HashMap<String, NetConfig>();
+//		synchronized(this.tempConfigs) {
+//			for(final NetConfig cfg : this.tempConfigs) {
+//				final String key = cfg.toString();
+//				if(utils.isEmpty(key))    continue;
+//				if(cfgs.containsKey(key)) continue;
+//				cfgs.put(key, cfg);
+//			}
+//		}
+//		synchronized(this.servers) {
+//			// stop removed servers
+//			if(!this.servers.isEmpty()) {
+//				final Iterator<Entry<String, NetServer>> it = this.servers.entrySet().iterator();
+//				while(it.hasNext()) {
+//					final Entry<String, NetServer> entry = it.next();
+//					// stop no longer needed servers
+//					final NetConfig cfg = cfgs.get(entry.getKey());
+//					if(cfg == null || !cfg.enabled) {
+//						final NetServer server = entry.getValue();
+//						utils.safeClose(server);
+//						it.remove();
+//					}
+//				}
+//			}
+//			// start new servers
+//			if(cfgs.isEmpty()) {
+//				this.log().warning("No socket server configs loaded.");
+//			} else {
+//				this.log().info("Starting socket servers..");
+//				for(final Entry<String, NetConfig> entry : cfgs.entrySet()) {
+//					final String key = entry.getKey();
+//					final NetConfig cfg = entry.getValue();
+//					// server already exists
+//					if(this.servers.containsKey(key))
+//						continue;
+//					// not enabled
+//					if(!cfg.enabled)
+//						continue;
+//					try {
+//						final NetServer server = new NetServer(cfg);
+//						this.servers.put(key, server);
+//					} catch (UnknownHostException e) {
+//						this.log().severe("Failed to start socket server "+key);
+//						this.log().trace(e);
+//						continue;
+//					} catch (SocketException e) {
+//						if("Permission denied".equals(e.getMessage()))
+//							this.log().severe("Valid port numbers are >= 1024 for non-root users");
+//						this.log().trace(e);
+//					} catch (InterruptedException e) {
+//						this.log().severe("Failed to start socket server "+key);
+//						this.log().trace(e);
+//						this.Stop();
+//						return;
+//					}
+//				}
+//			}
+//		}
+//		// unexpected stop
+//		if(!this.running.get())
+//			this.Stop();
+//	}
+//	@Override
+//	public void Stop() {
+//		this.CloseAll();
+//	}
+
+
+
 	@Override
 	public boolean isClosed() {
-		return !this.running;
+		throw new UnsupportedOperationException();
+	}
+	@Override
+	public void close() {
+		throw new UnsupportedOperationException();
+	}
+	@Override
+	public void CloseAll() {
+		if(this.netServers.size() == 0)
+			return;
+		log().info("Closing socket servers..");
+		int serversCount = 0;
+		int socketsCount = 0;
+		synchronized(this.netServers) {
+			final Collection<NetServer> servers = this.netServers.values();
+			// close servers
+			{
+				final Set<ChannelFuture> futureCloses = new HashSet<ChannelFuture>();
+				final Iterator<NetServer> it = servers.iterator();
+				while(it.hasNext()) {
+					final NetServer server = it.next();
+					if(!server.isClosed())
+						serversCount++;
+					futureCloses.add(
+							server.closeSoon()
+					);
+				}
+				// wait for servers to stop listening
+				for(final ChannelFuture future : futureCloses) {
+					try {
+						future.sync();
+					} catch (InterruptedException e) {
+						log().trace(e);
+						break;
+					}
+				}
+			}
+			// wait a moment
+			utilsThread.Sleep(50L);
+			// close sockets
+			{
+				log().info("Closing sockets..");
+				final Iterator<NetServer> it = servers.iterator();
+				while(it.hasNext()) {
+					final NetServer server = it.next();
+					socketsCount += server.getSocketsCount();
+					server.CloseAll();
+				}
+			}
+			this.ClearClosed();
+		}
+		if(serversCount > 0)
+			log().info("Closed "+Integer.toString(serversCount)+
+					" socket servers, and "+Integer.toString(socketsCount)+" sockets");
+		this.running.set(false);
+	}
+	public void ClearClosed() {
+		if(this.netServers.size() == 0)
+			return;
+		synchronized(this.netServers) {
+			final Iterator<NetServer> it = this.netServers.values().iterator();
+			while(it.hasNext()) {
+				final NetServer server = it.next();
+				if(server.isClosed())
+					this.netServers.remove(server.getServerKey());
+			}
+		}
 	}
 
 
 
-	public void setConfigs(final Collection<NetConfig> configs) {
-		if(configs == null) throw new NullPointerException("configs argument is required!");
-this.log().severe("CONFIGS: "+Integer.toString(configs.size()));
-		synchronized(this.tempConfigs) {
-			this.tempConfigs.clear();
-			if(!configs.isEmpty())
-				this.tempConfigs.addAll(configs);
-		}
+//	@Override
+//	public void run() {
+//		throw new UnsupportedOperationException();
+//	}
+//	@Override
+//	public boolean isRunning() {
+//		return this.running.get();
+//	}
+
+
+
+	public NetFirewall getFirewall() {
+		return this.firewall;
 	}
 
 
 
 	// logger
-	private volatile xLog _log = null;
-	public xLog log() {
-		if(this._log == null)
-			this._log = xLog.getRoot();
-		return this._log;
+	private static volatile xLog _log = null;
+	public static xLog log() {
+		if(_log == null)
+			_log = xLog.getRoot("NET");
+		return _log;
 	}
 
 
