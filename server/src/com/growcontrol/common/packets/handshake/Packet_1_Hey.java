@@ -10,7 +10,7 @@ public class Packet_1_Hey implements Packet {
 
 
 	@Override
-	public boolean handle(final Map<String, Object> json) {
+	public boolean handle(final String name, final Map<String, Object> json) {
 		return false;
 	}
 

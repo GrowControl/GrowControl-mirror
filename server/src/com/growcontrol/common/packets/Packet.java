@@ -6,7 +6,7 @@ import java.util.Map;
 public interface Packet {
 
 
-	public boolean handle(final Map<String, Object> json);
+	public boolean handle(String name, final Map<String, Object> json);
 
 
 }
