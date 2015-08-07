@@ -12,11 +12,13 @@ import com.poixson.commonjava.Utils.xCloseable;
 import com.poixson.commonjava.xLogger.xLog;
 
 
+// one instance per socket connection
 public class ServerSocketState implements xCloseable {
 
 	private SocketState state = SocketState.CLOSED;
 	private NetServer server;
 	private SocketChannel channel;
+	private final NetServerHandler socketHandler;
 //	protected final NetServerHandler handler = new NetServerHandler(this);
 
 	protected static final AtomicInteger nextSocketId = new AtomicInteger(0);
@@ -28,6 +30,7 @@ public class ServerSocketState implements xCloseable {
 	public ServerSocketState(final NetServer server, final SocketChannel channel) {
 		this.server  = server;
 		this.channel = channel;
+		this.socketHandler = new NetServerHandler(this.server, this);
 		this.id  = getNextId();
 		this.key = this.genKey();
 	}
@@ -63,17 +66,12 @@ public class ServerSocketState implements xCloseable {
 			return null;
 		return this.channel;
 	}
-	public boolean ChannelMatches(final Channel channel) {
-		if(channel == null)
-			return false;
-		return channel.equals(this.channel);
+	// socket handler
+	@Override
+	public ChannelInboundHandlerAdapter getHandler() {
+		return this.socketHandler;
 	}
-
-
-
-//	public NetServerHandler getHandler() {
-//		return this.handler;
-//	}
+	}
 
 
 

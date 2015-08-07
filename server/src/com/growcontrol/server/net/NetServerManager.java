@@ -27,6 +27,14 @@ import com.poixson.commonjava.Utils.threads.xThreadFactory;
 import com.poixson.commonjava.xLogger.xLog;
 
 
+/*
+NetServerManager
+  -> NetServer
+     -> NetServerInitializer
+        ServerSocketState
+        -> NetServerHandler
+           PacketState
+ */
 public class NetServerManager implements xCloseableMany {
 
 	public static final boolean DETAILED_LOG = false;

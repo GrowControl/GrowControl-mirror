@@ -31,7 +31,6 @@ public class NetServer implements xCloseableMany {
 
 	protected final ServerBootstrap bootstrap;
 	protected final NetServerInitializer initer;
-	protected final NetServerHandler handler;
 	protected final Channel serverChannel;
 
 	protected final Map<Channel, ServerSocketState> states = new ConcurrentHashMap<Channel, ServerSocketState>();
@@ -69,8 +68,6 @@ public class NetServer implements xCloseableMany {
 			this.bootstrap.handler(handlerLogger);
 			this.bootstrap.childHandler(handlerLogger);
 		}
-		// protocol handler
-		this.handler = new NetServerHandler(this);
 		// socket initializer
 		this.initer = new NetServerInitializer(this);
 		this.bootstrap.childHandler(this.initer);
@@ -187,7 +184,6 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 			futureCloses.add(
 					state.closeSoon()
 			);
-//			this.states.remove(state);
 		}
 		// wait for sockets to close
 		for(final ChannelFuture future : futureCloses) {

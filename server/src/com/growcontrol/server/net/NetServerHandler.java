@@ -7,7 +7,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-// one instance per NetServer
+// one instance per ServerSocketState
 public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 
 	protected final NetServer server;
