@@ -1,4 +1,4 @@
-package com.growcontrol.common.netty;
+package com.growcontrol.common.net;
 
 import io.netty.util.internal.logging.AbstractInternalLogger;
 import io.netty.util.internal.logging.InternalLogger;

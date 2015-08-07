@@ -72,7 +72,8 @@ xLog.getRoot("config").trace(e);
 
 
 
-	public NetServerConfig(final boolean enabled, final boolean ssl,
+	public NetServerConfig(
+			final boolean enabled, final boolean ssl,
 			final String host, final int port) {
 		if(port < 1 || port > utilsNumbers.MAX_PORT)
 			throw new IllegalArgumentException("Invalid port number: "+Integer.toString(port));
