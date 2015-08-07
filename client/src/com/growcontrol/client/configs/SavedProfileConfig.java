@@ -26,13 +26,13 @@ public class SavedProfileConfig {
 			return null;
 		final LinkedHashMap<String, SavedProfileConfig> profiles =
 				new LinkedHashMap<String, SavedProfileConfig>();
-		for(final Object o : dataset) {
+		for(final Object obj : dataset) {
 			try {
 				final Map<String, Object> datamap =
 						utilsObject.castMap(
 								String.class,
 								Object.class,
-								o
+								obj
 						);
 				final SavedProfileConfig profile = get(datamap);
 				profiles.put(profile.name, profile);

@@ -29,13 +29,13 @@ public class NetServerConfig {
 		if(utils.isEmpty(dataset))
 			return null;
 		final Map<String, NetServerConfig> configs = new HashMap<String, NetServerConfig>();
-		for(final Object o : dataset) {
+		for(final Object obj : dataset) {
 			try {
 				final Map<String, Object> datamap =
 						utilsObject.castMap(
 								String.class,
 								Object.class,
-								o
+								obj
 						);
 				final NetServerConfig cfg = get(datamap);
 				configs.put(cfg.toString(), cfg);

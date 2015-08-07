@@ -25,13 +25,13 @@ public class WindowConfig {
 		if(utils.isEmpty(dataset))
 			return null;
 		final Map<String, WindowConfig> configs = new HashMap<String, WindowConfig>();
-		for(final Object o : dataset) {
+		for(final Object obj : dataset) {
 			try {
 				final Map<String, Object> datamap =
 						utilsObject.castMap(
 								String.class,
 								Object.class,
-								o
+								obj
 						);
 				final WindowConfig window = get(datamap);
 				configs.put(window.getWindowName(), window);
