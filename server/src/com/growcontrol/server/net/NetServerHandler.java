@@ -3,6 +3,12 @@ package com.growcontrol.server.net;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+import java.util.Map;
+
+import org.yaml.snakeyaml.Yaml;
+
+import com.growcontrol.common.packets.PacketState;
+import com.poixson.commonjava.Utils.utilsObject;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -19,12 +25,6 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 		this.server = server;
 		this.socketState = socketState;
 	}
-
-
-
-//	public ServerSocketState getServerSocketState(final Channel channel) {
-//		return this.server.getServerSocketState(channel);
-//	}
 
 
 
@@ -65,6 +65,12 @@ this.log().publish("CLASS NAME: "+msg.getClass().getName());
 this.log().publish("");
 //this.log().publish("==> "+msg.toString(Charset.forName("utf8"))+" <==");
 //this.log().publish();
+
+		final PacketState packetState = this.socketState.getPacketState();
+		final Yaml yaml = new Yaml();
+		final Object obj = yaml.load(msg);
+		final Map<String, Object> json = utilsObject.castMap(String.class, Object.class, obj);
+		packetState.handle(json);
 	}
 //		if (msg instanceof HttpRequest) {
 //		HttpRequest req = (HttpRequest) msg;
