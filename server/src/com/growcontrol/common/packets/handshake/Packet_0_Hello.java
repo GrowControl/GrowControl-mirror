@@ -10,6 +10,12 @@ import com.growcontrol.common.packets.PacketState;
 import com.growcontrol.common.packets.annotations.PacketProperty;
 
 
+/*
+{
+	packet: hello,
+	version: <client-version>
+}
+*/
 @PacketProperty(
 		name="hello",
 		stateful=true
