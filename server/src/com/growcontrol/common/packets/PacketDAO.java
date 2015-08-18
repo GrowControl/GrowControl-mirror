@@ -6,21 +6,26 @@ import com.poixson.commonjava.Utils.utils;
 
 public class PacketDAO {
 
-	public final String name;
-	public final Class<? extends Packet> clss;
-	public final PacketProperty props;
+	public final Class<? extends Packet> packetClass;
 	public volatile Packet instance = null;
 
+	// properties
+	public final String  name;
+	public final boolean stateful;
 
 
-	public PacketDAO(final Class<? extends Packet> clss) {
-		if(clss == null) throw new NullPointerException("clss argument is required!");
-		this.clss = clss;
-		this.props = clss.getAnnotation(PacketProperty.class);
+	public PacketDAO(final Class<? extends Packet> packetClass) {
+		if(packetClass == null) throw new NullPointerException("packetClass argument is required!");
+		this.packetClass = packetClass;
+		// load properties annotation
+		final PacketProperties props = packetClass.getAnnotation(PacketProperties.class);
 		String name = null;
-		if(this.props != null)
-			name = this.props.name();
-		this.name = (utils.isEmpty(name) ? clss.getName() : name);
+		if(props != null)
+			name = props.name();
+		if(utils.isEmpty(name))
+			name = packetClass.getName();
+		this.name = name;
+		this.stateful = props.stateful();
 	}
 
 
