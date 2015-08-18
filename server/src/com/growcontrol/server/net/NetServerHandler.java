@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.yaml.snakeyaml.Yaml;
 
+import com.growcontrol.common.packets.PacketException;
 import com.growcontrol.common.packets.PacketState;
 import com.poixson.commonjava.Utils.utilsObject;
 import com.poixson.commonjava.xLogger.xLog;
@@ -68,7 +69,15 @@ this.log().publish("");
 
 		final PacketState packetState = this.socketState.getPacketState();
 		final Yaml yaml = new Yaml();
-		final Object obj = yaml.load(msg);
+		final Object obj;
+		try {
+			obj = yaml.load(msg);
+		} catch (Exception e) {
+			this.log().trace(e);
+			context.close()
+				.sync();
+			throw new PacketException(e);
+		}
 		final Map<String, Object> json = utilsObject.castMap(String.class, Object.class, obj);
 		packetState.handle(json);
 	}

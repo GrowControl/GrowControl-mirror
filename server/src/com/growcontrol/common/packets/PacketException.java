@@ -9,6 +9,9 @@ public class PacketException extends Exception {
 	public PacketException(final String msg) {
 		super(msg);
 	}
+	public PacketException(final Throwable e) {
+		super(e);
+	}
 
 
 
