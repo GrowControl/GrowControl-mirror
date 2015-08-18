@@ -16,7 +16,7 @@ public abstract class Packet {
 
 
 	public abstract Object generate();
-	public abstract boolean handle(String name, final Map<String, Object> json);
+	public abstract boolean handle(final String name, final Map<String, Object> json);
 
 
 

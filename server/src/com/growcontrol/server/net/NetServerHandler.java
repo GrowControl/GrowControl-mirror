@@ -94,14 +94,16 @@ this.log().publish("");
 
 
 	@Override
-	public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) throws Exception {
+	public void exceptionCaught(final ChannelHandlerContext context,
+			final Throwable cause) throws Exception {
 		// IOException
 		if("Connection reset by peer".equals(cause.getMessage())) {
-			this.log().warning("Connection reset by peer "+ctx.toString());
+			this.log().warning("Connection reset by peer "+context.toString());
 			return;
 		}
 		this.log().trace(cause);
-		ctx.close();
+		context.close()
+			.sync();
 //		String msg = "";
 //		try {
 //			final Channel ch = ctx.channel();

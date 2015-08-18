@@ -79,7 +79,9 @@ public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 		pipe.addLast(new JsonObjectDecoder());
 		pipe.addLast(socketState.getHandler());
 		// listen for hello packet
-		Packet_0_Hello.init(socketState.getPacketState());
+		Packet_0_Hello.init(
+				socketState.getPacketState()
+		);
 	}
 
 

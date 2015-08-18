@@ -1,6 +1,5 @@
 package com.growcontrol.common.packets;
 
-import com.growcontrol.common.packets.annotations.PacketProperty;
 import com.poixson.commonjava.Utils.utils;
 
 
@@ -32,16 +31,16 @@ public class PacketDAO {
 
 	public Packet getInstance() throws InstantiationException, IllegalAccessException {
 		// stateful instance
-		if(this.props.stateful()) {
+		if(this.stateful) {
 			if(this.instance == null) {
-				this.instance = this.clss.newInstance();
+				this.instance = this.packetClass.newInstance();
 				this.instance.setDAO(this);
 			}
 			return this.instance;
 		}
 		// not stateful
 		{
-			final Packet instance = this.clss.newInstance();
+			final Packet instance = this.packetClass.newInstance();
 			instance.setDAO(this);
 			return instance;
 		}

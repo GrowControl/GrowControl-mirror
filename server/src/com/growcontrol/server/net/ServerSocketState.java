@@ -50,7 +50,7 @@ public class ServerSocketState extends SocketState {
 	public ChannelInboundHandlerAdapter getHandler() {
 		return this.socketHandler;
 	}
-	// packet handler
+	// packet state holder
 	@Override
 	public PacketState getPacketState() {
 		return this.packetState;

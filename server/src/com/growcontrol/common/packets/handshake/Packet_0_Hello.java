@@ -6,8 +6,8 @@ import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
 import com.growcontrol.common.packets.Packet;
+import com.growcontrol.common.packets.PacketProperties;
 import com.growcontrol.common.packets.PacketState;
-import com.growcontrol.common.packets.annotations.PacketProperty;
 
 
 /*
@@ -16,7 +16,7 @@ import com.growcontrol.common.packets.annotations.PacketProperty;
 	version: <client-version>
 }
 */
-@PacketProperty(
+@PacketProperties(
 		name="hello",
 		stateful=true
 )

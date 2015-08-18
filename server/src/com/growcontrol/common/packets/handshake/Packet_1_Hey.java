@@ -6,8 +6,8 @@ import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 
 import com.growcontrol.common.packets.Packet;
+import com.growcontrol.common.packets.PacketProperties;
 import com.growcontrol.common.packets.PacketState;
-import com.growcontrol.common.packets.annotations.PacketProperty;
 
 
 /*
@@ -16,7 +16,7 @@ import com.growcontrol.common.packets.annotations.PacketProperty;
 	version: <server-version>
 }
 */
-@PacketProperty(
+@PacketProperties(
 		name="hey",
 		stateful=true
 )
@@ -26,7 +26,7 @@ public class Packet_1_Hey extends Packet {
 
 	public static void init(final PacketState packetState) {
 		packetState.clear();
-		packetState.register(Packet_0_Hello.class);
+		packetState.register(Packet_1_Hey.class);
 	}
 
 
@@ -44,7 +44,13 @@ public class Packet_1_Hey extends Packet {
 
 	@Override
 	public boolean handle(final String name, final Map<String, Object> json) {
-		return false;
+System.out.println();
+System.out.println();
+System.out.println("GOT PACKET! HEY");
+System.out.println(name);
+System.out.println();
+System.out.println();
+		return true;
 	}
 
 
