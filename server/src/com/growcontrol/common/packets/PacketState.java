@@ -54,8 +54,10 @@ public class PacketState {
 
 
 
-	public boolean handle(final Map<String, Object> json) {
+	public boolean handle(final Map<String, Object> json) throws PacketException {
+		if(json == null) throw new PacketException("invalid json");
 		final String name = (String) json.get("packet");
+		if(utils.isEmpty(name)) throw new PacketException("invalid packet; packet name is required");
 		boolean handled = false;
 		synchronized(this.packets) {
 			for(final PacketDAO dao : this.packets) {
