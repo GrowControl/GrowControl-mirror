@@ -18,7 +18,8 @@ import com.growcontrol.common.packets.PacketState;
 */
 @PacketProperties(
 		name="hey",
-		stateful=true
+		stateful=true,
+		async=false
 )
 public class Packet_1_Hey extends Packet {
 

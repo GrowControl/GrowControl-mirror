@@ -11,6 +11,7 @@ public class PacketDAO {
 	// properties
 	public final String  name;
 	public final boolean stateful;
+	public final boolean async;
 
 
 	public PacketDAO(final Class<? extends Packet> packetClass) {
@@ -25,6 +26,7 @@ public class PacketDAO {
 			name = packetClass.getName();
 		this.name = name;
 		this.stateful = props.stateful();
+		this.async    = props.async();
 	}
 
 

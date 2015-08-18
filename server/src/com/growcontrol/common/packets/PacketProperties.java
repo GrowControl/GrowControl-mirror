@@ -13,6 +13,7 @@ public @interface PacketProperties {
 
 	String  name();
 	boolean stateful() default false;
+	boolean async()    default false;
 
 
 }
