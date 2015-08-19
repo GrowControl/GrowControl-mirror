@@ -1,7 +1,7 @@
 package com.growcontrol.common.meta;
 
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import com.poixson.commonjava.EventListener.xEvent.Priority;
 import com.poixson.commonjava.EventListener.xEventData;
@@ -21,7 +21,7 @@ public class MetaRouter extends xHandler {
 	private static final Object lock = new Object();
 
 	// listener addresses
-	protected static final Map<MetaAddress, MetaListener> known =
+	protected static final ConcurrentMap<MetaAddress, MetaListener> known =
 			new ConcurrentHashMap<MetaAddress, MetaListener>();
 
 

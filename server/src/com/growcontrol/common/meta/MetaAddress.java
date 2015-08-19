@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsString;
@@ -14,7 +15,8 @@ public class MetaAddress {
 	public final String hash;
 	protected final Map<String, String> tags = new HashMap<String, String>();
 
-	protected static final Map<String, MetaAddress> addresses = new ConcurrentHashMap<String, MetaAddress>();
+	protected static final ConcurrentMap<String, MetaAddress> addresses =
+			new ConcurrentHashMap<String, MetaAddress>();
 
 
 

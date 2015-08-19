@@ -12,9 +12,9 @@ import io.netty.handler.logging.LoggingHandler;
 import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import com.growcontrol.server.gcServerVars;
 import com.growcontrol.server.configs.NetServerConfig;
@@ -33,7 +33,8 @@ public class NetServer implements xCloseableMany {
 	protected final NetServerInitializer initer;
 	protected final Channel serverChannel;
 
-	protected final Map<Channel, ServerSocketState> states = new ConcurrentHashMap<Channel, ServerSocketState>();
+	protected final ConcurrentMap<Channel, ServerSocketState> states =
+			new ConcurrentHashMap<Channel, ServerSocketState>();
 
 
 

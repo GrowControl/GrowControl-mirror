@@ -12,9 +12,9 @@ import java.security.cert.CertificateException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import javax.net.ssl.SSLException;
 
@@ -44,7 +44,8 @@ public class NetServerManager implements xCloseableMany {
 	private static final Object instanceLock = new Object();
 
 	// servers
-	protected final Map<String, NetServer> netServers = new ConcurrentHashMap<String, NetServer>();
+	protected final ConcurrentMap<String, NetServer> netServers =
+			new ConcurrentHashMap<String, NetServer>();
 
 	// thread groups
 	protected final EventLoopGroup bossGroup;
