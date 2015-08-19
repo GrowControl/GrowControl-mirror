@@ -25,12 +25,18 @@ public class PacketDAO {
 		this.packetClass = packetClass;
 		// load properties annotation
 		final PacketProperties props = packetClass.getAnnotation(PacketProperties.class);
-		String name = null;
-		if(props != null)
-			name = props.name();
-		if(utils.isEmpty(name))
-			name = packetClass.getName();
-		this.name = name;
+		// packet name
+		if(props != null) {
+			this.name = props.name();
+		} else {
+			String name = packetClass.getName();
+			if(name.startsWith("Packet_"))
+				name = name.substring("Packet_".length());
+			this.name = name;
+		}
+		if(utils.isEmpty(this.name))
+			throw new NullPointerException("Packet name is required!");
+		// more packet properties
 		this.stateful = props.stateful();
 		this.async    = props.async();
 	}
