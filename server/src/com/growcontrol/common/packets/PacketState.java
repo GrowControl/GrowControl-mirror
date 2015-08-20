@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.Yaml;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.xLogger.xLog;
 
@@ -81,6 +83,18 @@ xLog.getRoot("NET").trace(e);
 		if(!handled)
 xLog.getRoot("NET").warning("Unhandled packet! "+name);
 		return handled;
+	}
+
+
+
+	public Yaml getYaml() {
+		if(this.yaml == null) {
+			final DumperOptions options = new DumperOptions();
+			options.setDefaultFlowStyle(DumperOptions.FlowStyle.FLOW);
+			options.setPrettyFlow(true);
+			this.yaml = new Yaml(options);
+		}
+		return this.yaml;
 	}
 
 

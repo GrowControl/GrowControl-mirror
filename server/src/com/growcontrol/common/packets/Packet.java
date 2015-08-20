@@ -44,9 +44,6 @@ public abstract class Packet {
 					.load(str)
 		);
 	}
-	protected Yaml getYaml() {
-		return this.dao.getYaml();
-	}
 
 
 

@@ -1,8 +1,5 @@
 package com.growcontrol.common.packets;
 
-import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.Yaml;
-
 import com.poixson.commonjava.Utils.utils;
 
 
@@ -15,8 +12,6 @@ public class PacketDAO {
 	public final String  name;
 	public final boolean stateful;
 	public final boolean async;
-
-	protected Yaml yaml = null;
 
 
 
@@ -58,18 +53,6 @@ public class PacketDAO {
 			instance.setDAO(this);
 			return instance;
 		}
-	}
-
-
-
-	public Yaml getYaml() {
-		if(this.yaml == null) {
-			final DumperOptions options = new DumperOptions();
-			options.setDefaultFlowStyle(DumperOptions.FlowStyle.FLOW);
-			options.setPrettyFlow(true);
-			this.yaml = new Yaml(options);
-		}
-		return this.yaml;
 	}
 
 
