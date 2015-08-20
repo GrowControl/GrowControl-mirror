@@ -24,7 +24,20 @@ public class gcClient extends xApp {
 	 * @return client instance object.
 	 */
 	public static gcClient get() {
-		return (gcClient) xApp.get();
+		final xApp app = xApp.get();
+		if(app == null)
+			return null;
+		if(app instanceof gcClient)
+			return (gcClient) app;
+		return null;
+	}
+	public static gcClient peak() {
+		final xApp app = xApp.peak();
+		if(app == null)
+			return null;
+		if(app instanceof gcClient)
+			return (gcClient) app;
+		return null;
 	}
 
 
@@ -36,6 +49,7 @@ public class gcClient extends xApp {
 	public static void main(final String[] args) {
 		initMain(args, gcClient.class);
 	}
+	// new instance
 	public gcClient() {
 		super();
 		gcClientVars.init();
@@ -313,6 +327,9 @@ public class gcClient extends xApp {
 	// ascii header
 	@Override
 	protected void displayLogo() {
+		DisplayLogo();
+	}
+	static void DisplayLogo() {
 		final PrintStream out = AnsiConsole.out;
 		final Ansi.Color bgcolor = Ansi.Color.BLACK;
 		out.println();

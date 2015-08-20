@@ -34,7 +34,20 @@ public class gcServer extends xApp {
 	 * @return
 	 */
 	public static gcServer get() {
-		return (gcServer) xApp.get();
+		final xApp app = xApp.get();
+		if(app == null)
+			return null;
+		if(app instanceof gcServer)
+			return (gcServer) app;
+		return null;
+	}
+	public static gcServer peak() {
+		final xApp app = xApp.peak();
+		if(app == null)
+			return null;
+		if(app instanceof gcServer)
+			return (gcServer) app;
+		return null;
 	}
 
 
@@ -46,6 +59,7 @@ public class gcServer extends xApp {
 	public static void main(final String[] args) {
 		initMain(args, gcServer.class);
 	}
+	// new instance
 	public gcServer() {
 		super();
 		gcServerVars.init();
@@ -85,6 +99,9 @@ public class gcServer extends xApp {
 	// load config
 	@xAppStep(type=StepType.STARTUP, title="Config", priority=20)
 	public void __STARTUP_config() {
+		_LoadConfig();
+	}
+	static void _LoadConfig() {
 		gcServerVars.getConfig();
 	}
 
@@ -129,6 +146,9 @@ public class gcServer extends xApp {
 	// load plugins
 	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=50)
 	public void __STARTUP_load_plugins() {
+		_LoadPlugins();
+	}
+	static void _LoadPlugins() {
 		final xPluginManager manager = xPluginManager.get();
 		manager.setClassField("Server Main");
 		manager.loadAll();
@@ -140,6 +160,9 @@ public class gcServer extends xApp {
 	// enable plugins
 	@xAppStep(type=StepType.STARTUP, title="EnablePlugins", priority=55)
 	public void __STARTUP_enable_plugins() {
+		_EnablePlugins();
+	}
+	static void _EnablePlugins() {
 		xPluginManager.get()
 			.enableAll();
 	}
@@ -149,6 +172,9 @@ public class gcServer extends xApp {
 	// tick scheduler
 	@xAppStep(type=StepType.STARTUP, title="Ticker", priority=80)
 	public void __STARTUP_ticker() {
+		_StartTicker();
+	}
+	static void _StartTicker() {
 		final gcServerConfig config = gcServerVars.getConfig();
 		final xTicker ticker = xTicker.get();
 		ticker.setInterval(
@@ -197,6 +223,9 @@ public class gcServer extends xApp {
 	// scripts
 	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=95)
 	public void __STARTUP_scripts() {
+		_StartScripts();
+	}
+	static void _StartScripts() {
 		final gcScriptManager manager = gcScriptManager.get();
 		manager.loadAll();
 		manager.StartAll();
@@ -236,6 +265,9 @@ public class gcServer extends xApp {
 	// scripts
 	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=95)
 	public void __SHUTDOWN_scripts() {
+		_StopScripts();
+	}
+	static void _StopScripts() {
 		gcScriptManager.get()
 			.StopAll();
 	}
@@ -254,6 +286,9 @@ public class gcServer extends xApp {
 	// stop ticker
 	@xAppStep(type=StepType.SHUTDOWN, title="Ticker", priority=80)
 	public void __SHUTDOWN_ticker() {
+		_StopTicker();
+	}
+	static void _StopTicker() {
 		xTicker.get()
 			.Stop();
 	}
@@ -263,6 +298,9 @@ public class gcServer extends xApp {
 	// disable plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="DisablePlugins", priority=55)
 	public void __SHUTDOWN_disable_plugins() {
+		_DisablePlugins();
+	}
+	static void _DisablePlugins() {
 		xPluginManager.get()
 			.disableAll();
 	}
@@ -272,6 +310,9 @@ public class gcServer extends xApp {
 	// unload plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="UnloadPlugins", priority=50)
 	public void __SHUTDOWN_unload_plugins() {
+		_UnloadPlugins();
+	}
+	static void _UnloadPlugins() {
 		xPluginManager.get()
 			.unloadAll();
 	}
@@ -388,7 +429,10 @@ public class gcServer extends xApp {
 
 	// ascii header
 	@Override
-	protected void displayLogo() {
+	public void displayLogo() {
+		DisplayLogo();
+	}
+	static void DisplayLogo() {
 		final PrintStream out = AnsiConsole.out;
 		final Ansi.Color bgcolor = Ansi.Color.BLACK;
 		out.println();
