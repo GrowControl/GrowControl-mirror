@@ -7,6 +7,7 @@ import java.util.Map;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
+import com.growcontrol.common.commands.gcCommonCommands;
 import com.growcontrol.common.scripting.gcScriptManager;
 import com.growcontrol.server.commands.gcServerCommands;
 import com.growcontrol.server.configs.NetServerConfig;
@@ -93,6 +94,9 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.STARTUP, title="Commands", priority=30)
 	public void __STARTUP_commands() {
 		final xHandler handler = gcServerVars.commands();
+		handler.register(
+				new gcCommonCommands()
+		);
 		handler.register(
 				new gcServerCommands()
 		);
