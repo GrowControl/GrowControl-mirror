@@ -22,6 +22,21 @@ public abstract class Packet {
 
 
 
+	public void send(final Packet packet) {
+		this.dao.packetState
+				.send(packet);
+	}
+	public void send(final Class<? extends Packet> packetClass) throws PacketException {
+		this.dao.packetState
+				.send(packetClass);
+	}
+	public void send(final Object json) {
+		this.dao.packetState
+				.send(json);
+	}
+
+
+
 	public abstract Object generate();
 	public abstract void handle(final String name, final Map<String, Object> json);
 
