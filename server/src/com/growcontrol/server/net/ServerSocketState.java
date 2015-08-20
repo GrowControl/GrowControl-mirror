@@ -58,6 +58,13 @@ public class ServerSocketState extends SocketState {
 
 
 
+	@Override
+	public void send(final String data) {
+		this.channel.writeAndFlush(data);
+	}
+
+
+
 	// close the socket
 	@Override
 	public void close() {

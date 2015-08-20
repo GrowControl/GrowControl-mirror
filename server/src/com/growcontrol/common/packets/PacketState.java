@@ -61,6 +61,63 @@ public class PacketState {
 
 
 
+	public PacketDAO getPacketDAO(final String name) {
+		synchronized(this.packetTypes) {
+			return this.packetTypes
+					.get(name);
+		}
+	}
+	public PacketDAO getPacketDAO(final Class<? extends Packet> packetClass) {
+		if(this.packetTypes.isEmpty())
+			return null;
+		synchronized(this.packetTypes) {
+			final Iterator<PacketDAO> it = this.packetTypes.values().iterator();
+			while(it.hasNext()) {
+				final PacketDAO dao = it.next();
+				if(dao.classEquals(packetClass))
+					return dao;
+			}
+		}
+		return null;
+	}
+
+
+
+	public void send(final Packet packet) {
+		final Object json = packet.generate();
+		this.send(json);
+	}
+	public void send(final Class<? extends Packet> packetClass) throws PacketException {
+		if(packetClass == null) throw new NullPointerException("packetClass argument is required!");
+		final PacketDAO dao = this.getPacketDAO(packetClass);
+		if(dao == null) throw new PacketException("Packet type not registered: "+packetClass.getName());
+		// get packet instance
+		final Packet packet;
+		try {
+			packet = dao.getInstance();
+		} catch (InstantiationException e) {
+xLog.getRoot("NET").severe("Failed to create packet instance for: "+packetClass.getName());
+			throw new PacketException(e);
+		} catch (IllegalAccessException e) {
+xLog.getRoot("NET").severe("Failed to create packet instance for: "+packetClass.getName());
+			throw new PacketException(e);
+		}
+		if(packet == null) throw new NullPointerException("Failed to get packet instance!");
+		this.send(packet);
+	}
+	public void send(final Object json) {
+		if(json == null) throw new NullPointerException("json argument is required!");
+		final String data = Packet.convert(this.getYaml(), json);
+		if(utils.isEmpty(data)) throw new NullPointerException("data is null or empty!");
+		this.socketState.send(data);
+xLog.getRoot("NET").publish("");
+xLog.getRoot("NET").publish("SERVER SENDING PACKET:");
+xLog.getRoot("NET").publish("==>"+data+"<==");
+xLog.getRoot("NET").publish("");
+	}
+
+
+
 	public void handle(final String str) throws PacketException {
 		if(utils.isEmpty(str)) throw new PacketException("empty packet data");
 		// parse json
@@ -70,10 +127,7 @@ public class PacketState {
 		);
 		final String name = (String) json.get("packet");
 		if(utils.isEmpty(name)) throw new PacketException("invalid packet; packet name is required");
-		final PacketDAO dao;
-		synchronized(this.packetTypes) {
-			dao = this.packetTypes.get(name);
-		}
+		final PacketDAO dao = this.getPacketDAO(name);
 		// unknown packet
 		if(dao == null) {
 xLog.getRoot("NET").warning("Unhandled packet! "+name);

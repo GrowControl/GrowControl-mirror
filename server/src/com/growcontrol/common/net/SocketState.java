@@ -31,6 +31,10 @@ public abstract class SocketState implements xCloseable {
 
 
 
+	public abstract void send(final String data);
+
+
+
 	public SocketState() {
 		this.id  = getNextId();
 	}
