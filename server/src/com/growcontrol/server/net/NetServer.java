@@ -16,14 +16,14 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import com.growcontrol.common.net.NetParent;
 import com.growcontrol.server.gcServerVars;
 import com.growcontrol.server.configs.NetServerConfig;
 import com.poixson.commonapp.net.firewall.NetFirewall;
-import com.poixson.commonjava.Utils.xCloseableMany;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public class NetServer implements xCloseableMany {
+public class NetServer implements NetParent {
 
 	public final NetServerConfig config;
 	public final String serverKey;
