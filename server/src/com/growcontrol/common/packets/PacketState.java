@@ -1,88 +1,97 @@
 package com.growcontrol.common.packets;
 
-import java.util.List;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.Map.Entry;
 
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
+
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.xLogger.xLog;
 
 
 public class PacketState {
 
-	protected final List<PacketDAO> packets = new CopyOnWriteArrayList<PacketDAO>();
+	protected final Map<String, PacketDAO> packetTypes =
+			new LinkedHashMap<String, PacketDAO>();
 
-//	public final Map<String, Packet> packets = new LinkedHashMap<String, Packet>();
-
-//	protected final Map<String, Class<? extends Packet>> packetClasses =
-//			new LinkedHashMap<String, Class<? extends Packet>>();
-//	protected final Map<String, Packet> packetInstances =
-//			new HashMap<String, Packet>();
-//	protected final Map<String, PacketProperty> packerProps =
-//			new HashMap<String, PacketProperty>();
+	protected Yaml yaml = null;
 
 
 
 //	public PacketState(final NetServer server, final ServerSocketState socketState) {
-//	this.server = server;
-//	this.socketState = socketState;
-//}
-
-
-
-	public void register(final Class<? extends Packet> packetClass) {
-		synchronized(this.packets) {
-			final PacketDAO dao = new PacketDAO(packetClass);
-			this.packets.add(dao);
-//			final String name = packetClass.getName();
-//System.out.println("NAME::::::::::::: "+name);
-//System.exit(1);
-//			this.packetClasses.put(name, packetClass);
-		}
-	}
-	public void clear() {
-		synchronized(this.packets) {
-			this.packets.clear();
-		}
-	}
-//	public void clearAll() {
-//		this.clear();
-//		synchronized(this.packetInstances) {
-//			this.packetInstances.clear();
-//		}
+//		this.server = server;
+//		this.socketState = socketState;
 //	}
 
 
 
-	public boolean handle(final Map<String, Object> json) throws PacketException {
-		if(json == null) throw new PacketException("invalid json");
-		final String name = (String) json.get("packet");
-		if(utils.isEmpty(name)) throw new PacketException("invalid packet; packet name is required");
-		boolean handled = false;
-		synchronized(this.packets) {
-			for(final PacketDAO dao : this.packets) {
-				try {
-					if(utils.isEmpty(dao.name) || "*".equals(dao.name))
-						handled = dao.getInstance().handle(name, json);
-					else
-					if(name.equals(dao.name))
-						handled = dao.getInstance().handle(name, json);
-				} catch (InstantiationException e) {
-xLog.getRoot("NET").trace(e);
-					return false;
-				} catch (IllegalAccessException e) {
-xLog.getRoot("NET").trace(e);
-					return false;
+	public void register(final Class<? extends Packet> packetClass) {
+		synchronized(this.packetTypes) {
+			final PacketDAO dao = new PacketDAO(packetClass);
+			this.packetTypes.put(dao.name, dao);
+			xLog.getRoot("NET").finer("Registered packet type: "+dao.name);
+		}
+	}
+	public boolean clear(final Class<? extends Packet> packetClass) {
+		if(this.packetTypes.isEmpty())
+			return false;
+		synchronized(this.packetTypes) {
+			final Iterator<Entry<String, PacketDAO>> it = this.packetTypes.entrySet().iterator();
+			while(it.hasNext()) {
+				final Entry<String, PacketDAO> entry = it.next();
+				final PacketDAO dao = entry.getValue();
+				if(dao.classEquals(packetClass)) {
+					it.remove();
+					return true;
 				}
-				if(handled)
-					break;
 			}
 		}
-		if(!handled)
+		return false;
+	}
+	public void clearAll() {
+		if(this.packetTypes.isEmpty())
+			return;
+		synchronized(this.packetTypes) {
+			this.packetTypes.clear();
+		}
+	}
+
+
+
+	public void handle(final String str) throws PacketException {
+		if(utils.isEmpty(str)) throw new PacketException("empty packet data");
+		// parse json
+		final Map<String, Object> json = Packet.convertMap(
+				this.getYaml(),
+				str
+		);
+		final String name = (String) json.get("packet");
+		if(utils.isEmpty(name)) throw new PacketException("invalid packet; packet name is required");
+		final PacketDAO dao;
+		synchronized(this.packetTypes) {
+			dao = this.packetTypes.get(name);
+		}
+		// unknown packet
+		if(dao == null) {
 xLog.getRoot("NET").warning("Unhandled packet! "+name);
-		return handled;
+			return;
+		}
+		try {
+			// handle packet
+			dao.getInstance()
+				.handle(name, json);
+		} catch (InstantiationException e) {
+xLog.getRoot("NET").warning("Problem handling packet! "+name);
+xLog.getRoot("NET").trace(e);
+			return;
+		} catch (IllegalAccessException e) {
+xLog.getRoot("NET").warning("Problem handling packet! "+name);
+xLog.getRoot("NET").trace(e);
+			return;
+		}
 	}
 
 
