@@ -19,6 +19,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JPopupMenu;
@@ -33,6 +34,7 @@ import com.growcontrol.client.gcClientVars;
 import com.growcontrol.client.configs.ProfilesConfig;
 import com.growcontrol.client.configs.SavedProfileConfig;
 import com.growcontrol.client.gui.guiManager;
+import com.growcontrol.client.net.NetClientManager;
 import com.poixson.commonapp.gui.guiUtils;
 import com.poixson.commonapp.gui.xFont;
 import com.poixson.commonapp.gui.xWindow;
@@ -514,26 +516,43 @@ public class gcWindowLogin extends xWindow {
 		this.Update(CARD_CONNECTING);
 		this.txtStatus.setText("Connecting..");
 		// connect to server
-@SuppressWarnings("unused")
-		final String hostStr = this.txtboxHost.getText();
-@SuppressWarnings("unused")
-		final Integer portInt = utilsNumbers.toInteger(this.txtboxPort.getText());
-//		if(portInt == null || !utilsNumbers.isMinMax(portInt.intValue(), 1, xSocket.MAX_PORT_NUMBER)) {
-//			log().warning("Invalid port: "+this.txtboxPort.getText());
-//			JOptionPane.showMessageDialog(this, "Invalid port number provided: "+
-//					this.txtboxPort.getText()+"\n\n"+
-//					"Valid port numbers are between: 1 and "+
-//					Integer.toString(xSocket.MAX_PORT_NUMBER)+"  \n"+
-//					"Default: "+Integer.toString(gcClientConfig.DEFAULT_LISTEN_PORT),
-//					"Invalid port..",
-//					JOptionPane.ERROR_MESSAGE);
-//			return;
+//TODO:
+		final String name = (String) this.lstProfiles.getSelectedItem();
+		final boolean ssl = false;
+		final String  host = this.txtboxHost.getText();
+		final Integer port = utilsNumbers.toInteger(this.txtboxPort.getText());
+		if(port == null || !utilsNumbers.isMinMax(port.intValue(), 1, utilsNumbers.MAX_PORT)) {
+			log().warning("Invalid port: "+this.txtboxPort.getText());
+			JOptionPane.showMessageDialog(this, "Invalid port number provided: "+
+					this.txtboxPort.getText()+"\n\n"+
+					"Valid port numbers are between: 1 and "+
+					Integer.toString(utilsNumbers.MAX_PORT)+"  \n"+
+					"Default: "+Integer.toString(gcClientDefines.DEFAULT_SOCKET_PORT(ssl)),
+					"Invalid port..",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+//TODO:
+		final String user = "";
+		final String pass = "";
+		// load profile
+		final SavedProfileConfig profile = new SavedProfileConfig(
+				name,
+				host,
+				port,
+				user,
+				pass
+		);
+		// start socket client
+//		final NetClientManager manager = NetClientManager.get();
+//		try {
+			NetClientManager.connect(profile);
+//		} catch (UnknownHostException e) {
+//			log().trace(e);
+//		} catch (InterruptedException e) {
+//			log().trace(e);
+//			break;
 //		}
-//TODO: this will be changed
-//		this.socket = new xSocketTCP();
-//		this.socket.setHost(hostStr);
-//		this.socket.setPort(portInt.intValue());
-//		this.socket.connect();
 	}
 	public void onClickCancelButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
