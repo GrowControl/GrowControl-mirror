@@ -57,4 +57,16 @@ public class PacketDAO {
 
 
 
+	public boolean classEquals(final Class<? extends Packet> packetClass) {
+		if(packetClass == null)
+			return false;
+		final String expected = packetClass.getName();
+		final String actual   = this.packetClass.getName();
+		if(utils.isEmpty(expected) || utils.isEmpty(actual))
+			return false;
+		return expected.equals(actual);
+	}
+
+
+
 }
