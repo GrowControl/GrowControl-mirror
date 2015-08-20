@@ -9,7 +9,7 @@ import com.growcontrol.common.packets.PacketProperties;
 import com.growcontrol.common.packets.PacketState;
 
 
-/*
+/* server to client
 {
 	packet: hey,
 	version: <server-version>
@@ -19,7 +19,7 @@ import com.growcontrol.common.packets.PacketState;
 		name="hey",
 		stateful=true,
 		async=false,
-		direction=PacketDirection.ServerToClient
+		direction=PacketDirection.SERVER_TO_CLIENT
 )
 public class Packet_1_Hey extends Packet {
 

@@ -133,8 +133,20 @@ xLog.getRoot("NET").publish("");
 xLog.getRoot("NET").warning("Unhandled packet! "+name);
 			return;
 		}
+		// check packet direction
+		{
+			final PacketDirection expected = this.netParent.getDirection();
+			final PacketDirection current  = dao.direction;
+			if(!PacketDirection.canReceive(expected, current)) {
+xLog.getRoot("NET").severe("Illegal packet direction!");
+				throw new IllegalStateException(
+						"Packet type: "+current.toString()+
+						" is not handled by: "+expected.toString()+" !"
+				);
+			}
+		}
+		// handle packet
 		try {
-			// handle packet
 			dao.getInstance()
 				.handle(name, json);
 		} catch (InstantiationException e) {

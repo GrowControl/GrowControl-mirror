@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import com.growcontrol.common.net.NetParent;
+import com.growcontrol.common.packets.PacketDirection;
 import com.growcontrol.server.gcServerVars;
 import com.growcontrol.server.configs.NetServerConfig;
 import com.poixson.commonapp.net.firewall.NetFirewall;
@@ -148,6 +149,13 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 	public NetFirewall getFirewall() {
 		return NetServerManager.get()
 				.getFirewall();
+	}
+
+
+
+	@Override
+	public PacketDirection getDirection() {
+		return PacketDirection.SERVER_TO_CLIENT;
 	}
 
 

@@ -12,6 +12,7 @@ public class PacketDAO {
 	public final String  name;
 	public final boolean stateful;
 	public final boolean async;
+	public final PacketDirection direction;
 
 
 
@@ -34,6 +35,7 @@ public class PacketDAO {
 		// more packet properties
 		this.stateful = props.stateful();
 		this.async    = props.async();
+		this.direction = props.direction();
 	}
 
 
