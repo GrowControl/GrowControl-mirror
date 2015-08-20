@@ -16,6 +16,7 @@
 		<io.netty-version>4.0.30.Final</io.netty-version>
 		<junit-version>4.12</junit-version>
 		<maven-compiler-plugin-version>3.3</maven-compiler-plugin-version>
+		<surefire-version>2.18.1</surefire-version>
 		<maven-jar-plugin-version>2.6</maven-jar-plugin-version>
 		<maven-assembly-plugin-version>2.5.5</maven-assembly-plugin-version>
 		<maven-shade-plugin-version>2.4.1</maven-shade-plugin-version>
