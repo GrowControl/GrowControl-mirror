@@ -6,6 +6,7 @@ import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.Utils.Keeper;
+import com.poixson.commonjava.xLogger.xLog;
 
 
 public class gcClientVars {
@@ -49,7 +50,7 @@ public class gcClientVars {
 						return null;
 					}
 					if(config.isFromResource())
-						gcClient.log().warning("Created default "+gcClientDefines.CONFIG_FILE);
+						xLog.getRoot().warning("Created default "+gcClientDefines.CONFIG_FILE);
 				}
 			}
 		}
@@ -73,7 +74,7 @@ public class gcClientVars {
 						return null;
 					}
 					if(profilesConfig.isFromResource())
-						gcClient.log().warning("Created default "+gcClientDefines.PROFILES_FILE);
+						xLog.getRoot().warning("Created default "+gcClientDefines.PROFILES_FILE);
 				}
 			}
 		}

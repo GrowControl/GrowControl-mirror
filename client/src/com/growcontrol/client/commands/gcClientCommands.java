@@ -1,6 +1,5 @@
 package com.growcontrol.client.commands;
 
-import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.EventListener.xEvent;
 import com.poixson.commonjava.EventListener.xEvent.Priority;
 import com.poixson.commonjava.xLogger.xLog;
@@ -187,7 +186,7 @@ public final class gcClientCommands implements xCommandListener {
 	private volatile xLog _log = null;
 	public xLog log() {
 		if(this._log == null)
-			this._log = xApp.log();
+			this._log = xLog.getRoot("GUI");
 		return this._log;
 	}
 	public void publish(final String msg) {

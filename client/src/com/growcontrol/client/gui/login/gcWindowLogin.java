@@ -33,7 +33,6 @@ import com.growcontrol.client.gcClientVars;
 import com.growcontrol.client.configs.ProfilesConfig;
 import com.growcontrol.client.configs.SavedProfileConfig;
 import com.growcontrol.client.gui.guiManager;
-import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.gui.guiUtils;
 import com.poixson.commonapp.gui.xFont;
 import com.poixson.commonapp.gui.xWindow;
@@ -42,6 +41,7 @@ import com.poixson.commonapp.gui.remapped.RemappedActionListener;
 import com.poixson.commonapp.gui.remapped.RemappedItemListener;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
+import com.poixson.commonjava.xLogger.xLog;
 
 
 @xWindowProperties(
@@ -359,7 +359,7 @@ public class gcWindowLogin extends xWindow {
 //				this.socket = null;
 //			}
 			if(!this.currentCard.equals(CARD_LOGIN)) {
-				xApp.log().fine("Showing card: "+CARD_LOGIN);
+				log().fine("Showing card: "+CARD_LOGIN);
 				this.cardLayout.show(this.getContentPane(), CARD_LOGIN);
 				this.currentCard = CARD_LOGIN;
 			}
@@ -369,7 +369,7 @@ public class gcWindowLogin extends xWindow {
 		case "conn":
 		case "auth":
 			if(!this.currentCard.equals(CARD_CONNECTING)) {
-				xApp.log().fine("Showing card: "+CARD_CONNECTING);
+				log().fine("Showing card: "+CARD_CONNECTING);
 				this.cardLayout.show(this.getContentPane(), CARD_CONNECTING);
 				this.currentCard = CARD_CONNECTING;
 			}
@@ -440,7 +440,7 @@ public class gcWindowLogin extends xWindow {
 			String pass = "";
 			final SavedProfileConfig profile = this.profiles.get(selected);
 			if(profile != null) {
-				xApp.log().fine("Selected profile: "+profile.name);
+				log().fine("Selected profile: "+profile.name);
 				host = profile.host;
 				port = Integer.toString(profile.port);
 				user = profile.user;
@@ -466,21 +466,21 @@ public class gcWindowLogin extends xWindow {
 //					this.txtboxHost.setText("localhost");
 //				if(utils.isEmpty(this.txtboxPort.getText()))
 //					this.txtboxPort.setText(Integer.toString(gcClientDefines.DEFAULT_SOCKET_PORT));
-//				xApp.log().fine("Selected -unsaved- profile");
+//				log().fine("Selected -unsaved- profile");
 //			} else if(SAVEDSERVERS_InternalServer.equals(selected)) {
 //				isinternal = true;
 //				this.txtboxHost.setText("- Internal -");
 //				this.txtboxPort.setText("");
 //				this.txtboxUser.setText("");
 //				this.txtboxPass.setText("");
-//				xApp.log().fine("Selected -internal- profile");
+//				log().fine("Selected -internal- profile");
 //			} else {
 //				final SavedProfileConfig profile = this.profiles.get(selected);
 //				this.txtboxHost.setText(profile.host);
 //				this.txtboxPort.setText(Integer.toString(profile.port));
 //				this.txtboxUser.setText(profile.user);
 //				this.txtboxPass.setText(profile.pass);
-//				xApp.log().fine("Selected server profile: "+selected);
+//				log().fine("Selected server profile: "+selected);
 //			}
 //			this.txtboxHost.setEnabled(!isinternal);
 //			this.txtboxPort.setEnabled(!isinternal);
@@ -498,7 +498,7 @@ public class gcWindowLogin extends xWindow {
 				this.btnMenu.getWidth(),
 				0
 		);
-		xApp.log().fine("Showing profiles menu");
+		log().fine("Showing profiles menu");
 	}
 
 
@@ -506,7 +506,7 @@ public class gcWindowLogin extends xWindow {
 	// connect button click
 	public void onClickConnectButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
-		xApp.log().fine("Clicked '"+buttonName+"' button");
+		log().fine("Clicked '"+buttonName+"' button");
 		// show connecting card
 		this.Update(CARD_CONNECTING);
 		this.txtStatus.setText("Connecting..");
@@ -516,7 +516,7 @@ public class gcWindowLogin extends xWindow {
 @SuppressWarnings("unused")
 		final Integer portInt = utilsNumbers.toInteger(this.txtboxPort.getText());
 //		if(portInt == null || !utilsNumbers.isMinMax(portInt.intValue(), 1, xSocket.MAX_PORT_NUMBER)) {
-//			xApp.log().warning("Invalid port: "+this.txtboxPort.getText());
+//			log().warning("Invalid port: "+this.txtboxPort.getText());
 //			JOptionPane.showMessageDialog(this, "Invalid port number provided: "+
 //					this.txtboxPort.getText()+"\n\n"+
 //					"Valid port numbers are between: 1 and "+
@@ -534,7 +534,7 @@ public class gcWindowLogin extends xWindow {
 	}
 	public void onClickCancelButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
-		xApp.log().fine("Clicked '"+buttonName+"' button");
+		log().fine("Clicked '"+buttonName+"' button");
 		// show login card
 		this.Update(CARD_LOGIN);
 	}
@@ -551,6 +551,13 @@ public class gcWindowLogin extends xWindow {
 		this.closing.set(false);
 		super.close();
 		guiManager.get().doLoginWindowClosed();
+	}
+
+
+
+	// logger
+	public static xLog log() {
+		return xLog.getRoot("GUI");
 	}
 
 

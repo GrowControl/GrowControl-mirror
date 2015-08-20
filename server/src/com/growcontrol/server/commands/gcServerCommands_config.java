@@ -2,7 +2,6 @@ package com.growcontrol.server.commands;
 
 import com.growcontrol.server.gcServerVars;
 import com.growcontrol.server.configs.gcServerConfig;
-import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
 import com.poixson.commonjava.xLogger.handlers.xCommandListener;
@@ -88,7 +87,7 @@ public class gcServerCommands_config implements xCommandListener {
 	private volatile xLog _log = null;
 	public xLog log() {
 		if(this._log == null)
-			this._log = xApp.log();
+			this._log = xLog.getRoot("server");
 		return this._log;
 	}
 	public void publish(final String msg) {
