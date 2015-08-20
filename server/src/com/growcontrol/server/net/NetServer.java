@@ -40,7 +40,8 @@ public class NetServer implements NetParent {
 
 
 //throws UnknownHostException, SocketException, InterruptedException {
-	public NetServer(final NetServerConfig config) throws UnknownHostException, InterruptedException {
+	public NetServer(final NetServerConfig config)
+			throws UnknownHostException, InterruptedException {
 		if(config == null)  throw new NullPointerException("config argument is required!");
 		if(!config.enabled) throw new UnsupportedOperationException("This socket server is disabled!");
 		this.config = config;
