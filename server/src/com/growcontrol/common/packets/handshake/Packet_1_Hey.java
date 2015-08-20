@@ -3,8 +3,6 @@ package com.growcontrol.common.packets.handshake;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.yaml.snakeyaml.Yaml;
-
 import com.growcontrol.common.packets.Packet;
 import com.growcontrol.common.packets.PacketProperties;
 import com.growcontrol.common.packets.PacketState;
@@ -26,7 +24,7 @@ public class Packet_1_Hey extends Packet {
 
 
 	public static void init(final PacketState packetState) {
-		packetState.clear();
+		packetState.clearAll();
 		packetState.register(Packet_1_Hey.class);
 	}
 
@@ -34,11 +32,10 @@ public class Packet_1_Hey extends Packet {
 
 	@Override
 	public Object generate() {
-		final Map<String, Object> map = new HashMap<String, Object>();
+		final Map<String, String> map = new HashMap<String, String>();
 		map.put("packet", "hey");
 		map.put("version", "3.5.99");
-		final Yaml yaml = new Yaml();
-		return yaml.dump(map);
+		return map;
 	}
 
 
