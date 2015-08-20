@@ -43,14 +43,13 @@ public class Packet_0_Hello extends Packet {
 
 
 	@Override
-	public boolean handle(final String name, final Map<String, Object> json) {
+	public void handle(final String name, final Map<String, Object> json) {
 System.out.println();
 System.out.println();
 System.out.println("GOT PACKET! HELLO");
 System.out.println(name);
 System.out.println();
 System.out.println();
-		return true;
 	}
 
 
