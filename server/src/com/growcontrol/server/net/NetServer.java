@@ -143,6 +143,10 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 	public String getServerKey() {
 		return this.serverKey;
 	}
+	@Override
+	public String getKeyHash() {
+		return this.getServerKey();
+	}
 
 
 
