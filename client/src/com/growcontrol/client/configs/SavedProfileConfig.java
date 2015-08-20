@@ -51,9 +51,7 @@ xLog.getRoot("config").trace(e);
 		final String host = config.getString(gcClientDefines.PROFILE_HOST);
 		final int    port = config.getInt   (
 				gcClientDefines.PROFILE_PORT,
-				ssl
-				? gcClientDefines.DEFAULT_SOCKET_PORT
-				: gcClientDefines.DEFAULT_SOCKET_PORT_SSL
+				gcClientDefines.DEFAULT_SOCKET_PORT(ssl)
 		);
 		final String user = config.getString(gcClientDefines.PROFILE_USER);
 		final String pass = config.getString(gcClientDefines.PROFILE_PASS);

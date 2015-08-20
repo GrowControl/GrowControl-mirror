@@ -4,9 +4,16 @@ package com.growcontrol.client;
 public class gcClientDefines {
 
 
-	// defaults
-	public static final int DEFAULT_SOCKET_PORT     = 1142;
+	// default port
+	public static final int DEFAULT_SOCKET_PORT_RAW = 1142;
 	public static final int DEFAULT_SOCKET_PORT_SSL = 1143;
+	public static int DEFAULT_SOCKET_PORT(final boolean ssl) {
+		return (
+			ssl
+			? DEFAULT_SOCKET_PORT_RAW
+			: DEFAULT_SOCKET_PORT_SSL
+		);
+	}
 
 //	public static final xTime DEFAULT_TICK_INTERVAL = xTime.get("1s");
 //	public static final int   DEFAULT_LISTEN_PORT   = 1142;

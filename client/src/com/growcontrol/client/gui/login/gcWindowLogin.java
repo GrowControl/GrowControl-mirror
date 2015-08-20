@@ -412,6 +412,9 @@ public class gcWindowLogin extends xWindow {
 			str.append(" ").append(gcClientDefines.PROFILE_HOST_INTERNAL);
 			return str.toString();
 		}
+		// ssl
+//TODO:
+		final boolean ssl = false;
 		// host
 		str.append("  ( ");
 		if(utils.isEmpty(profile.host))
@@ -422,7 +425,7 @@ public class gcWindowLogin extends xWindow {
 		else
 			str.append(profile.host);
 		// port
-		if(profile.port != gcClientDefines.DEFAULT_SOCKET_PORT)
+		if(profile.port != gcClientDefines.DEFAULT_SOCKET_PORT(ssl))
 			str.append(":").append(profile.port);
 		str.append(" )");
 		return str.toString();

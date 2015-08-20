@@ -58,9 +58,7 @@ xLog.getRoot("config").trace(e);
 		final String host = config.getString(gcServerDefines.CONFIG_SOCKET_HOST);
 		final int    port = config.getInt   (
 				gcServerDefines.CONFIG_SOCKET_PORT,
-				ssl
-				? gcServerDefines.DEFAULT_SOCKET_PORT_SSL
-				: gcServerDefines.DEFAULT_SOCKET_PORT
+				gcServerDefines.DEFAULT_SOCKET_PORT(ssl)
 		);
 		return new NetServerConfig(
 				enabled,
