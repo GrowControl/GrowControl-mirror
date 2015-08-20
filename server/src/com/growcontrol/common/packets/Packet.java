@@ -10,6 +10,11 @@ import com.poixson.commonjava.Utils.utilsObject;
 import com.poixson.commonjava.xLogger.xLog;
 
 
+/*
+SocketState (NetServer, SocketChannel, PacketState)
+  -> PacketState (PacketDAO[], NetParent)
+     -> PacketDAO (PacketState, Packet, PacketProperties, PacketDirection)
+*/
 public abstract class Packet {
 
 	protected volatile PacketDAO dao = null;

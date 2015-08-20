@@ -55,8 +55,8 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 	@Override
 	public void channelRead0(final ChannelHandlerContext context, final String msg) throws Exception {
 this.log().publish("");
-this.log().publish("==> "+msg+" <==");
-this.log().publish("CLASS NAME: "+msg.getClass().getName());
+this.log().publish("SERVER RECEIVED PACKET:");
+this.log().publish("==>"+msg+"<==");
 this.log().publish("");
 //this.log().publish("==> "+msg.toString(Charset.forName("utf8"))+" <==");
 //this.log().publish();

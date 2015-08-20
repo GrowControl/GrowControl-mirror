@@ -26,8 +26,7 @@ public class ServerSocketState extends SocketState {
 		this.server  = server;
 		this.channel = channel;
 		this.socketHandler = new NetServerHandler(this.server, this);
-		this.packetState = new PacketState();
-//		this.packetState = new PacketState(server, this);
+		this.packetState   = new PacketState(     this.server, this);
 	}
 
 

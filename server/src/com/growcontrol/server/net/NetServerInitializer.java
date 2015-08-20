@@ -18,7 +18,7 @@ import com.poixson.commonjava.xLogger.xLog;
 // one instance per NetServer
 public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 
-	protected final NetServer        server;
+	protected final NetServer server;
 
 	// handlers
 	protected static final Charset charset = Charset.forName("UTF8");

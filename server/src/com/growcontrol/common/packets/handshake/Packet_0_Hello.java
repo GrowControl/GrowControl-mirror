@@ -44,6 +44,11 @@ public class Packet_0_Hello extends Packet {
 
 	@Override
 	public void handle(final String name, final Map<String, Object> json) {
+
+		this.send(new Packet_1_Hey());
+//		this.send(Packet_1_Hey.class);
+
+
 System.out.println();
 System.out.println();
 System.out.println("GOT PACKET! HELLO");

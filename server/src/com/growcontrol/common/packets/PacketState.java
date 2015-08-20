@@ -8,6 +8,8 @@ import java.util.Map.Entry;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
+import com.growcontrol.common.net.NetParent;
+import com.growcontrol.common.net.SocketState;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.xLogger.xLog;
 
@@ -17,22 +19,25 @@ public class PacketState {
 	protected final Map<String, PacketDAO> packetTypes =
 			new LinkedHashMap<String, PacketDAO>();
 
+	protected final NetParent netParent;
+	protected final SocketState socketState;
+
 	protected Yaml yaml = null;
 
 
 
-//	public PacketState(final NetServer server, final ServerSocketState socketState) {
-//		this.server = server;
-//		this.socketState = socketState;
-//	}
+	public PacketState(final NetParent netParent, final SocketState socketState) {
+		this.netParent   = netParent;
+		this.socketState = socketState;
+	}
 
 
 
 	public void register(final Class<? extends Packet> packetClass) {
 		synchronized(this.packetTypes) {
-			final PacketDAO dao = new PacketDAO(packetClass);
+			final PacketDAO dao = new PacketDAO(this, packetClass);
 			this.packetTypes.put(dao.name, dao);
-			xLog.getRoot("NET").finer("Registered packet type: "+dao.name);
+xLog.getRoot("NET").finer("Registered packet type: "+dao.name);
 		}
 	}
 	public boolean clear(final Class<? extends Packet> packetClass) {
