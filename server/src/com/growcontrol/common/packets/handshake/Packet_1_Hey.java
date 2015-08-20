@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.growcontrol.common.packets.Packet;
+import com.growcontrol.common.packets.PacketDirection;
 import com.growcontrol.common.packets.PacketProperties;
 import com.growcontrol.common.packets.PacketState;
 
@@ -17,7 +18,8 @@ import com.growcontrol.common.packets.PacketState;
 @PacketProperties(
 		name="hey",
 		stateful=true,
-		async=false
+		async=false,
+		direction=PacketDirection.ServerToClient
 )
 public class Packet_1_Hey extends Packet {
 

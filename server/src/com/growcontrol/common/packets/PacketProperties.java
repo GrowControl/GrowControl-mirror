@@ -15,5 +15,7 @@ public @interface PacketProperties {
 	boolean stateful(); // default false;
 	boolean async();    // default false;
 
+	PacketDirection direction();
+
 
 }
