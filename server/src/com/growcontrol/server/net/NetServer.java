@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import com.growcontrol.common.netty.NetParent;
+import com.growcontrol.common.netty.SocketState;
 import com.growcontrol.common.packets.PacketDirection;
 import com.growcontrol.server.gcServerVars;
 import com.growcontrol.server.configs.NetServerConfig;
@@ -134,12 +135,20 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 			return null;
 		return this.states.get(channel);
 	}
+	@Override
+	public SocketState getSocketState(final Channel channel) {
+		return this.getServerSocketState(channel);
+	}
 
 
 
+	@Override
 	public int getSocketsCount() {
 		return this.states.size();
 	}
+
+
+
 	public String getServerKey() {
 		return this.serverKey;
 	}
