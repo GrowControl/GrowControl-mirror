@@ -64,6 +64,7 @@ public class RadioButtonTreeCellRenderer extends JPanel implements CheckboxTreeC
 		setBackground(UIManager.getColor("Tree.textBackground"));
 	}
 
+	@Override
 	public Component getTreeCellRendererComponent(JTree tree, Object value,
 			boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
 		this.label.setText(value.toString());
@@ -81,6 +82,7 @@ public class RadioButtonTreeCellRenderer extends JPanel implements CheckboxTreeC
 		return this;
 	}
 
+	@Override
 	public boolean isOnHotspot(int x, int y) {
 		return (this.button.getBounds().contains(x, y));
 	}

@@ -436,6 +436,7 @@ public class CheckboxTree extends JTree {
 			// add a treeCheckingListener to repaint upon checking modifications
 			newCheckingModel.addTreeCheckingListener(
 				new TreeCheckingListener() {
+					@Override
 					public void valueChanged(TreeCheckingEvent e) {
 						repaint();
 					}

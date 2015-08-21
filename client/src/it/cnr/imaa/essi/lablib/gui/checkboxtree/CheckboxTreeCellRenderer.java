@@ -50,6 +50,7 @@ public interface CheckboxTreeCellRenderer extends TreeCellRenderer {
 	 *
 	 * @see TreeCellRenderer#getTreeCellRendererComponent
 	 */
+	@Override
 	Component getTreeCellRendererComponent(JTree tree, Object value,
 			boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus);
 

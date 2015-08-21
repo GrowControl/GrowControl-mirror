@@ -57,6 +57,7 @@ public class CheckboxTreeApplet extends JApplet {
 		JScrollPane textPane = new JScrollPane(textArea);
 		tree.addTreeCheckingListener(
 			new TreeCheckingListener() {
+				@Override
 				public void valueChanged(TreeCheckingEvent e) {
 					// convert(e.getLeadingPath());
 					textArea.append("Checking event source: " + (e.getPath().getLastPathComponent()) + "\n");
@@ -86,6 +87,7 @@ public class CheckboxTreeApplet extends JApplet {
 		for (int i = 0, n = modes.length; i < n; i++) {
 			final int g = i;
 			ActionListener modeListener = new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent actionEvent) {
 					tree.getCheckingModel().clearChecking();
 					tree.getCheckingModel().setCheckingMode(modes[g]);
@@ -106,6 +108,7 @@ public class CheckboxTreeApplet extends JApplet {
 		// expand all action
 		JButton actionButton = new JButton("Expand all");
 		ActionListener actionListener = new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				tree.expandAll();
 			}
@@ -115,6 +118,7 @@ public class CheckboxTreeApplet extends JApplet {
 		// clear all action
 		JButton clearButton = new JButton("Clear checking");
 		ActionListener clearListener = new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				tree.clearChecking();
 			}
@@ -124,6 +128,7 @@ public class CheckboxTreeApplet extends JApplet {
 		// add a children action
 		JButton addButton = new JButton("Add child");
 		ActionListener addListener = new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				TreePath selected = tree.getSelectionPath();
 				if (selected != null) {
@@ -141,6 +146,7 @@ public class CheckboxTreeApplet extends JApplet {
 		// remove a children action
 		JButton removeButton = new JButton("Remove selected node");
 		ActionListener removeListener = new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				TreePath selected = tree.getSelectionPath();
 				if (selected != null) {
@@ -181,6 +187,7 @@ public class CheckboxTreeApplet extends JApplet {
 		// creating this applet's GUI.
 		try {
 			javax.swing.SwingUtilities.invokeAndWait(new Runnable() {
+				@Override
 				public void run() {
 					createGUI();
 				}

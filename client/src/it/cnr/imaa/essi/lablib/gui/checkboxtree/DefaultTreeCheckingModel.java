@@ -40,34 +40,42 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 
 	private final static TreeModel NULL_TREE_MODEL = new TreeModel() {
 
+	@Override
 	public void addTreeModelListener(TreeModelListener l) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
+	@Override
 	public Object getChild(Object parent, int index) {
 		return null;
 	}
 
+	@Override
 	public int getChildCount(Object parent) {
 		return 0;
 	}
 
+	@Override
 	public int getIndexOfChild(Object parent, Object child) {
 		return 0;
 	}
 
+	@Override
 	public Object getRoot() {
 		return null;
 	}
 
+	@Override
 	public boolean isLeaf(Object node) {
 		return false;
 	}
 
+	@Override
 	public void removeTreeModelListener(TreeModelListener l) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
+	@Override
 	public void valueForPathChanged(TreePath path, Object newValue) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -83,6 +91,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 		/**
 		 * Updates the tree greyness in case of nodes changes.
 		 */
+		@Override
 		public void treeNodesChanged(TreeModelEvent e) {
 			TreePath path = e.getTreePath();
 			updateSubTreeGreyness(path);
@@ -92,6 +101,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 		/**
 		 * Updates the check of the just inserted nodes.
 		 */
+		@Override
 		public void treeNodesInserted(TreeModelEvent e) {
 			TreePath path = e.getTreePath();
 			DefaultTreeCheckingModel.this.checkingMode.updateCheckAfterChildrenInserted(path);
@@ -100,6 +110,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 		/**
 		 * Nothing to do if nodes were removed.
 		 */
+		@Override
 		public void treeNodesRemoved(TreeModelEvent e) {
 			TreePath path = e.getTreePath();
 			DefaultTreeCheckingModel.this.checkingMode.updateCheckAfterChildrenRemoved(path);
@@ -108,6 +119,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 		/**
 		 * Updates the tree greyness in case of structure changes.
 		 */
+		@Override
 		public void treeStructureChanged(TreeModelEvent e) {
 			TreePath path = e.getTreePath();
 			DefaultTreeCheckingModel.this.checkingMode.updateCheckAfterStructureChanged(path);
@@ -150,6 +162,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	 * Adds a path to the checked paths set.
 	 * @param path the path to be added.
 	 */
+	@Override
 	public void addCheckingPath(TreePath path) {
 		this.checkingMode.checkPath(path);
 		TreeCheckingEvent event = new TreeCheckingEvent(this, path, true);
@@ -160,6 +173,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	 * Adds the paths to the checked paths set.
 	 * @param paths the paths to be added.
 	 */
+	@Override
 	public void addCheckingPaths(TreePath[] paths) {
 		for (TreePath path : paths) {
 			addCheckingPath(path);
@@ -179,6 +193,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	 * checking TreePaths changes.
 	 * @param x the new listener to be added
 	 */
+	@Override
 	public void addTreeCheckingListener(TreeCheckingListener x) {
 		this.listenerList.add(TreeCheckingListener.class, x);
 	}
@@ -201,6 +216,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	/**
 	 * Clears the checking.
 	 */
+	@Override
 	public void clearChecking() {
 		this.checkedPathsSet.clear();
 		this.greyedPathsSet.clear();
@@ -228,6 +244,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	/**
 	 * @return The CheckingMode.
 	 */
+	@Override
 	public CheckingMode getCheckingMode() {
 		if (this.checkingMode instanceof SimpleTreeCheckingMode)
 			return CheckingMode.SIMPLE;
@@ -245,6 +262,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	/**
 	 * @return Returns the paths that are in the checking.
 	 */
+	@Override
 	public TreePath[] getCheckingPaths() {
 		return this.checkedPathsSet.toArray(new TreePath[this.checkedPathsSet.size()]);
 	}
@@ -252,6 +270,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	/**
 	 * @return Returns the path of any root of a subtree in the checking.
 	 */
+	@Override
 	public TreePath[] getCheckingRoots() {
 		TreePath[] retVal = new TreePath[] {};
 		if (this.model.getRoot() != null) {
@@ -328,6 +347,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	/**
 	 * @return The paths that are in the greying.
 	 */
+	@Override
 	public TreePath[] getGreyingPaths() {
 		return this.greyedPathsSet.toArray(new TreePath[this.greyedPathsSet.size()]);
 	}
@@ -348,14 +368,17 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 		return pathHasChildrenWithValue(path, !isPathChecked(path));
 	}
 
+	@Override
 	public boolean isPathChecked(TreePath path) {
 		return this.checkedPathsSet.contains(path);
 	}
 
+	@Override
 	public boolean isPathEnabled(TreePath path) {
 		return !this.disabledPathsSet.contains(path);
 	}
 
+	@Override
 	public boolean isPathGreyed(TreePath path) {
 		return this.greyedPathsSet.contains(path);
 	}
@@ -410,6 +433,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	 * Removes a path from the checked paths set
 	 * @param path the path to be removed
 	 */
+	@Override
 	public void removeCheckingPath(TreePath path) {
 		this.checkingMode.uncheckPath(path);
 		TreeCheckingEvent event = new TreeCheckingEvent(this, path, false);
@@ -420,6 +444,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	 * Removes the paths from the checked paths set
 	 * @param paths the paths to be removed
 	 */
+	@Override
 	public void removeCheckingPaths(TreePath[] paths) {
 		for (TreePath path : paths) {
 			removeCheckingPath(path);
@@ -439,6 +464,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	 * of checking TreePaths changes.
 	 * @param x the listener to remove
 	 */
+	@Override
 	public void removeTreeCheckingListener(TreeCheckingListener x) {
 		this.listenerList.remove(TreeCheckingListener.class, x);
 	}
@@ -447,6 +473,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	 * Sets the specified checking mode. The consistence of the existing
 	 * checking is not enforced nor controlled.
 	 */
+	@Override
 	public void setCheckingMode(CheckingMode mode) {
 		/*
 		 * CheckingMode implements togglePath method (cf. the Strategy Pattern).
@@ -488,6 +515,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	/**
 	 * Sets the checking to path.
 	 */
+	@Override
 	public void setCheckingPath(TreePath path) {
 		clearChecking();
 		addCheckingPath(path);
@@ -496,6 +524,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	/**
 	 * Sets the checking to the specified paths.
 	 */
+	@Override
 	public void setCheckingPaths(TreePath[] paths) {
 		clearChecking();
 		for (TreePath path : paths) {
@@ -507,6 +536,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	 * Sets whether or not the path is enabled.
 	 * @param path the path to enable/disable
 	 */
+	@Override
 	public void setPathEnabled(TreePath path, boolean enable) {
 		if (enable)
 			this.disabledPathsSet.remove(path);
@@ -518,6 +548,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	 * Sets whether or not the paths are enabled.
 	 * @param paths the paths to enable/disable
 	 */
+	@Override
 	public void setPathsEnabled(TreePath[] paths, boolean enable) {
 		for (TreePath path : paths) {
 			setPathEnabled(path, enable);
@@ -541,6 +572,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 	 * Delegates to the current checkingMode the toggling style, using the
 	 * Strategy Pattern.
 	 */
+	@Override
 	public void toggleCheckingPath(TreePath path) {
 		if (!isPathEnabled(path))
 			return;

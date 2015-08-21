@@ -104,6 +104,7 @@ public class DefaultCheckboxTreeCellRenderer extends JPanel implements CheckboxT
 	/**
 	 * Decorates this renderer based on the passed in components.
 	 */
+	@Override
 	public Component getTreeCellRendererComponent(JTree tree, Object object,
 			boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
 		/*
@@ -139,6 +140,7 @@ public class DefaultCheckboxTreeCellRenderer extends JPanel implements CheckboxT
 	 * @param x
 	 * @param y
 	 */
+	@Override
 	public boolean isOnHotspot(int x, int y) {
 		return this.checkBox.contains(x, y);
 	}

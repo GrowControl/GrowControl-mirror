@@ -55,6 +55,7 @@ public class LookAndFeelExample extends JFrame implements ActionListener {
 		// Schedule a job for the event dispatcher thread:
 		// creating and showing this application's GUI.
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 					System.out.println(info);
@@ -182,6 +183,7 @@ public class LookAndFeelExample extends JFrame implements ActionListener {
 		return retVal;
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent action) {
 		String actionName = action.getActionCommand();
 		String lafName = null;

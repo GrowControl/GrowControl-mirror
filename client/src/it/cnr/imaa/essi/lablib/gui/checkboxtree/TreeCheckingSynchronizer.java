@@ -15,6 +15,7 @@ public class TreeCheckingSynchronizer implements TreeCheckingListener {
 		tree2.addTreeCheckingListener(this);
 	}
 
+	@Override
 	public void valueChanged(TreeCheckingEvent e) {
 		Object source = e.getSource();
 		TreePath leadingPath = e.getPath();

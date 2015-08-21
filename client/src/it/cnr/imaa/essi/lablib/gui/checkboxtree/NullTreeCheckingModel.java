@@ -42,6 +42,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#addCheckingPath
 	 * (javax.swing.tree.TreePath)
 	 */
+	@Override
 	public void addCheckingPath(TreePath path) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -52,6 +53,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#addCheckingPaths
 	 * (javax.swing.tree.TreePath[])
 	 */
+	@Override
 	public void addCheckingPaths(TreePath[] paths) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -62,6 +64,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * addTreeCheckingListener
 	 * (it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingListener)
 	 */
+	@Override
 	public void addTreeCheckingListener(TreeCheckingListener tcl) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -72,6 +75,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#clearChecking
 	 * ()
 	 */
+	@Override
 	public void clearChecking() {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -82,6 +86,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#getCheckingMode
 	 * ()
 	 */
+	@Override
 	public CheckingMode getCheckingMode() {
 		return null;
 	}
@@ -92,6 +97,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#getCheckingPaths
 	 * ()
 	 */
+	@Override
 	public TreePath[] getCheckingPaths() {
 		return null;
 	}
@@ -102,6 +108,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#getCheckingRoots
 	 * ()
 	 */
+	@Override
 	public TreePath[] getCheckingRoots() {
 		return null;
 	}
@@ -112,6 +119,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#getGreyingPaths
 	 * ()
 	 */
+	@Override
 	public TreePath[] getGreyingPaths() {
 		return null;
 	}
@@ -122,6 +130,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#isPathChecked
 	 * (javax.swing.tree.TreePath)
 	 */
+	@Override
 	public boolean isPathChecked(TreePath path) {
 		return false;
 	}
@@ -132,6 +141,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#isPathEnabled
 	 * (javax.swing.tree.TreePath)
 	 */
+	@Override
 	public boolean isPathEnabled(TreePath path) {
 		return true;
 	}
@@ -142,6 +152,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#isPathGreyed
 	 * (javax.swing.tree.TreePath)
 	 */
+	@Override
 	public boolean isPathGreyed(TreePath path) {
 		return false;
 	}
@@ -152,6 +163,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#removeCheckingPath
 	 * (javax.swing.tree.TreePath)
 	 */
+	@Override
 	public void removeCheckingPath(TreePath path) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -161,6 +173,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#
 	 * removeCheckingPaths(javax.swing.tree.TreePath[])
 	 */
+	@Override
 	public void removeCheckingPaths(TreePath[] paths) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -171,6 +184,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * removeTreeCheckingListener
 	 * (it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingListener)
 	 */
+	@Override
 	public void removeTreeCheckingListener(TreeCheckingListener tcl) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -181,6 +195,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#setCheckingMode
 	 * (it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel.CheckingMode)
 	 */
+	@Override
 	public void setCheckingMode(CheckingMode mode) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -191,6 +206,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#setCheckingPath
 	 * (javax.swing.tree.TreePath)
 	 */
+	@Override
 	public void setCheckingPath(TreePath path) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -201,6 +217,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#setCheckingPaths
 	 * (javax.swing.tree.TreePath[])
 	 */
+	@Override
 	public void setCheckingPaths(TreePath[] paths) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -211,6 +228,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#setPathEnabled
 	 * (javax.swing.tree.TreePath, boolean)
 	 */
+	@Override
 	public void setPathEnabled(TreePath path, boolean enable) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -221,6 +239,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#setPathsEnabled
 	 * (javax.swing.tree.TreePath[], boolean)
 	 */
+	@Override
 	public void setPathsEnabled(TreePath[] paths, boolean enable) {
 		// nothing to do (cf. the Null Object pattern)
 	}
@@ -231,6 +250,7 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#toggleCheckingPath
 	 * (javax.swing.tree.TreePath)
 	 */
+	@Override
 	public void toggleCheckingPath(TreePath pathForRow) {
 		// nothing to do (cf. the Null Object pattern)
 	}

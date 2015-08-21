@@ -41,6 +41,7 @@ public class CheckboxTreeExample extends JFrame {
 
 	private class RefreshListener implements KeyListener {
 
+	@Override
 	public void keyPressed(KeyEvent e) {
 		TreePath p = CheckboxTreeExample.this.checkboxTree.getSelectionPath();
 		DefaultMutableTreeNode resource = null;
@@ -74,9 +75,11 @@ public class CheckboxTreeExample extends JFrame {
 
 	}
 
+	@Override
 	public void keyReleased(KeyEvent e) {
 	}
 
+	@Override
 	public void keyTyped(KeyEvent e) {
 	}
 	}
@@ -121,6 +124,7 @@ public class CheckboxTreeExample extends JFrame {
 
 			this.checkboxTree.addTreeCheckingListener(
 				new TreeCheckingListener() {
+					@Override
 					public void valueChanged(TreeCheckingEvent e) {
 						System.out.println("checking set changed, leading path: " + ((TreeNode) e.getPath().getLastPathComponent()).toString());
 						System.out.println("checking roots: ");
