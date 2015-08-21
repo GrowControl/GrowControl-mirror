@@ -9,17 +9,20 @@ import com.growcontrol.common.packets.PacketProperties;
 import com.growcontrol.common.packets.PacketState;
 
 
-/* server to client
-{
-	packet: hey,
-	version: <server-version>
-}
-*/
+/*
+ * Description: Confirm this is a gc server
+ * Direction:   server to client
+ * JSON:
+ * {
+ *     packet: hey,
+ *     version: <server-version>
+ * }
+ */
 @PacketProperties(
-		name="hey",
-		stateful=true,
-		async=false,
-		direction=PacketDirection.SERVER_TO_CLIENT
+		name      = "hey",
+		stateful  = true,
+		async     = false,
+		direction = PacketDirection.SERVER_TO_CLIENT
 )
 public class Packet_1_Hey extends Packet {
 
