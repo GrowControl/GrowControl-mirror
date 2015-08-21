@@ -7,7 +7,7 @@
 	<name>GrowControl-Server</name>
 	<artifactId>gcServer</artifactId>
 	<groupId>com.growcontrol</groupId>
-	<version>3.5.48</version>
+	<version>3.6.1</version>
 	<packaging>jar</packaging>
 	<url>http://growcontrol.com</url>
 	<properties>
