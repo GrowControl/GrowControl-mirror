@@ -41,7 +41,8 @@ public class NetServer implements NetParent {
 
 
 //throws UnknownHostException, SocketException, InterruptedException {
-	public NetServer(final NetServerConfig config) throws UnknownHostException, InterruptedException {
+	public NetServer(final NetServerConfig config)
+			throws UnknownHostException, InterruptedException {
 		if(config == null)  throw new NullPointerException("config argument is required!");
 		if(!config.enabled) throw new UnsupportedOperationException("This socket server is disabled!");
 		this.config = config;
@@ -90,7 +91,7 @@ public class NetServer implements NetParent {
 	 * @return true to accept the connection or false to deny.
 	 */
 	public boolean register(final ServerSocketState socketState) {
-		if(socketState == null) throw new NullPointerException("state argument is required!");
+		if(socketState == null) throw new NullPointerException("socketState argument is required!");
 		final SocketChannel channel = socketState.getChannel();
 		if(channel == null) throw new NullPointerException("Channel is null, socket may have disconnected already!");
 		this.states.put(channel, socketState);
@@ -126,10 +127,12 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 	 */
 	// socket disconnected
 	public void unregister(final ServerSocketState socketState) {
-		if(socketState == null) throw new NullPointerException("state argument is required!");
+		if(socketState == null) throw new NullPointerException("socketState argument is required!");
 		this.states.remove(socketState);
-//TODO:
 	}
+
+
+
 	public ServerSocketState getServerSocketState(final Channel channel) {
 		if(channel == null)
 			return null;
@@ -186,8 +189,8 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 		}
 	}
 	public ChannelFuture closeSoon() {
-		this.closed = true;
 		this.log().info("Stopping socket server..");
+		this.closed = true;
 		return this.serverChannel.close();
 	}
 	/**
@@ -216,10 +219,22 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 				break;
 			}
 		}
-		this.log().info("Closed "+Integer.toString(states.size())+" sockets");
+		this.log().info(
+				(new StringBuilder())
+				.append("Closed ")
+				.append(futureCloses.size())
+				.append(" sockets")
+				.toString()
+		);
 		final int stillConnected = this.states.size();
-		if(stillConnected > 0)
-			this.log().warning(Integer.toString(stillConnected)+" sockets still connected!");
+		if(stillConnected > 0) {
+			this.log().warning(
+					(new StringBuilder())
+					.append(stillConnected)
+					.append(" sockets still connected!")
+					.toString()
+			);
+		}
 	}
 	@Override
 	public boolean isClosed() {
@@ -233,7 +248,7 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 	public xLog log() {
 		if(this._log == null)
 			this._log = xLog.getRoot("NET")
-					.get("SERVER|"+this.serverKey);
+					.get("S|"+this.serverKey);
 		return this._log;
 	}
 

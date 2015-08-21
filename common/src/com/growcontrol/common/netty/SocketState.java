@@ -67,6 +67,13 @@ public abstract class SocketState implements xCloseable {
 			throw new RuntimeException("Unknown socket state! "+state.name());
 		}
 	}
+	@Override
+	public boolean isClosed() {
+		return SessionState.CLOSED.equals(this);
+	}
+	public boolean isAuthed() {
+		return SessionState.AUTHED.equals(this);
+	}
 
 
 

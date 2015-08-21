@@ -60,6 +60,7 @@ public class NetServerManager implements xCloseableMany {
 
 
 	public static NetServer get(final NetServerConfig config) {
+		if(config == null) throw new NullPointerException("config argument is required!");
 		try {
 			return get().getServer(config);
 		} catch (UnknownHostException e) {
@@ -120,7 +121,8 @@ public class NetServerManager implements xCloseableMany {
 
 
 
-	public NetServer getServer(final NetServerConfig config) throws UnknownHostException, InterruptedException {
+	public NetServer getServer(final NetServerConfig config)
+			throws UnknownHostException, InterruptedException {
 		if(config == null) throw new NullPointerException("config argument is required!");
 		final String key = config.toString();
 		// get existing server
@@ -275,9 +277,17 @@ public class NetServerManager implements xCloseableMany {
 			}
 			this.ClearClosed();
 		}
-		if(serversCount > 0)
-			log().info("Closed "+Integer.toString(serversCount)+
-					" socket servers, and "+Integer.toString(socketsCount)+" sockets");
+		if(serversCount > 0) {
+			log().info(
+					(new StringBuilder())
+					.append("Closed ")
+					.append(serversCount)
+					.append(" socket servers, and ")
+					.append(socketsCount)
+					.append(" sockets")
+					.toString()
+			);
+		}
 	}
 	public void ClearClosed() {
 		if(this.netServers.size() == 0)

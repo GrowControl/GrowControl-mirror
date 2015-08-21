@@ -15,8 +15,10 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 
 
 
-	public NetServerHandler(final NetServer server, final ServerSocketState socketState) {
+	public NetServerHandler(final NetServer server,
+			final ServerSocketState socketState) {
 		if(server == null) throw new NullPointerException("server argument is required!");
+		if(socketState == null) throw new NullPointerException("socketState argument is required!");
 		this.server = server;
 		this.socketState = socketState;
 	}

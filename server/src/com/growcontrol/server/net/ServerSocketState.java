@@ -21,7 +21,8 @@ public class ServerSocketState extends SocketState {
 
 
 
-	public ServerSocketState(final NetServer server, final SocketChannel channel) {
+	public ServerSocketState(final NetServer server,
+			final SocketChannel channel) {
 		super();
 		this.server  = server;
 		this.channel = channel;
@@ -32,15 +33,15 @@ public class ServerSocketState extends SocketState {
 
 
 	// socket server
-	public NetServer getServer() {
-		return this.server;
-	}
+//	public NetServer getServer() {
+//		return this.server;
+//	}
 
 
 
 	// socket channel
 	public SocketChannel getChannel() {
-		if(SessionState.CLOSED.equals(this.getSessionState()))
+		if(this.isClosed())
 			return null;
 		return this.channel;
 	}
@@ -81,9 +82,11 @@ xLog.getRoot("NET").trace(e);
 	}
 	@Override
 	public boolean isClosed() {
-		if(!this.channel.isOpen())
+		if(!this.channel.isOpen()) {
 			this.close();
-		return SessionState.CLOSED.equals(this.sessionState);
+			return true;
+		}
+		return super.isClosed();
 	}
 
 
@@ -92,9 +95,9 @@ xLog.getRoot("NET").trace(e);
 	protected String genKey() {
 		final StringBuilder str = new StringBuilder();
 		final InetSocketAddress remote = this.channel.remoteAddress();
-		str.append("<").append(this.id).append(">");
+		str.append("[").append(this.id).append("] ");
 		str.append(remote.getHostName()).append(":").append(remote.getPort());
-		str.append("->");
+		str.append(" -> ");
 		str.append(this.server.getServerKey());
 		return str.toString();
 	}
