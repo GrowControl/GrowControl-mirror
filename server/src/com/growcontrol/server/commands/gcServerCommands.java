@@ -367,7 +367,7 @@ public final class gcServerCommands implements xCommandListener {
 	private volatile xLog _log = null;
 	public xLog log() {
 		if(this._log == null)
-			this._log = xApp.log();
+			this._log = xLog.getRoot("SERVER");
 		return this._log;
 	}
 	public void publish(final String msg) {

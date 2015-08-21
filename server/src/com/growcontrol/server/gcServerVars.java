@@ -5,6 +5,7 @@ import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.EventListener.xHandler;
 import com.poixson.commonjava.Utils.Keeper;
+import com.poixson.commonjava.xLogger.xLog;
 
 
 public class gcServerVars {
@@ -47,7 +48,7 @@ public class gcServerVars {
 						return null;
 					}
 					if(config.isFromResource())
-						gcServer.log().warning("Created default "+gcServerDefines.CONFIG_FILE);
+						xLog.getRoot("CONFIG").warning("Created default "+gcServerDefines.CONFIG_FILE);
 				}
 			}
 		}

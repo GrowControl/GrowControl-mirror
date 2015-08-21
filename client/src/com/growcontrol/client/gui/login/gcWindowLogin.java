@@ -33,7 +33,6 @@ import com.growcontrol.client.gcClientVars;
 import com.growcontrol.client.configs.ProfilesConfig;
 import com.growcontrol.client.configs.SavedProfileConfig;
 import com.growcontrol.client.gui.guiManager;
-import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.gui.guiUtils;
 import com.poixson.commonapp.gui.xFont;
 import com.poixson.commonapp.gui.xWindow;
@@ -359,7 +358,7 @@ public class gcWindowLogin extends xWindow {
 //				this.socket = null;
 //			}
 			if(!this.currentCard.equals(CARD_LOGIN)) {
-				xApp.log().fine("Showing card: "+CARD_LOGIN);
+				log().fine("Showing card: "+CARD_LOGIN);
 				this.cardLayout.show(this.getContentPane(), CARD_LOGIN);
 				this.currentCard = CARD_LOGIN;
 			}
@@ -369,7 +368,7 @@ public class gcWindowLogin extends xWindow {
 		case "conn":
 		case "auth":
 			if(!this.currentCard.equals(CARD_CONNECTING)) {
-				xApp.log().fine("Showing card: "+CARD_CONNECTING);
+				log().fine("Showing card: "+CARD_CONNECTING);
 				this.cardLayout.show(this.getContentPane(), CARD_CONNECTING);
 				this.currentCard = CARD_CONNECTING;
 			}
@@ -440,7 +439,7 @@ public class gcWindowLogin extends xWindow {
 			String pass = "";
 			final SavedProfileConfig profile = this.profiles.get(selected);
 			if(profile != null) {
-				xApp.log().fine("Selected profile: "+profile.name);
+				log().fine("Selected profile: "+profile.name);
 				host = profile.host;
 				port = Integer.toString(profile.port);
 				user = profile.user;
@@ -498,7 +497,7 @@ public class gcWindowLogin extends xWindow {
 				this.btnMenu.getWidth(),
 				0
 		);
-		xApp.log().fine("Showing profiles menu");
+		log().fine("Showing profiles menu");
 	}
 
 
@@ -506,7 +505,7 @@ public class gcWindowLogin extends xWindow {
 	// connect button click
 	public void onClickConnectButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
-		xApp.log().fine("Clicked '"+buttonName+"' button");
+		log().fine("Clicked '"+buttonName+"' button");
 		// show connecting card
 		this.Update(CARD_CONNECTING);
 		this.txtStatus.setText("Connecting..");
@@ -534,7 +533,7 @@ public class gcWindowLogin extends xWindow {
 	}
 	public void onClickCancelButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
-		xApp.log().fine("Clicked '"+buttonName+"' button");
+		log().fine("Clicked '"+buttonName+"' button");
 		// show login card
 		this.Update(CARD_LOGIN);
 	}

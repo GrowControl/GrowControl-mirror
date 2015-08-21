@@ -3,7 +3,6 @@ package com.growcontrol.server.configs;
 import java.util.Map;
 import java.util.Set;
 
-import com.growcontrol.server.gcServer;
 import com.growcontrol.server.gcServerDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
@@ -134,8 +133,7 @@ public final class gcServerConfig extends xConfig {
 	private volatile xLog _log = null;
 	public xLog log() {
 		if(this._log == null)
-			this._log = gcServer.log()
-				.getWeak("config");
+			this._log = xLog.getRoot("CONFIG");
 		return this._log;
 	}
 

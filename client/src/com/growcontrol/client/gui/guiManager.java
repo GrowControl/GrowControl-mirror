@@ -3,10 +3,10 @@ package com.growcontrol.client.gui;
 import com.growcontrol.client.gcClient;
 import com.growcontrol.client.gui.dash.gcWindowDash;
 import com.growcontrol.client.gui.login.gcWindowLogin;
-import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.gui.guiUtils;
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.xLogger.xLog;
 
 
 public class guiManager {
@@ -74,7 +74,7 @@ public class guiManager {
 		}
 		// mode has changed
 		if(!mode.equals(this.currentMode)) {
-			xApp.log().info("Displaying mode: "+mode.toString());
+			xLog.getRoot("GUI").info("Displaying mode: "+mode.toString());
 			this.lastMode = this.currentMode;
 			this.currentMode = mode;
 		}
