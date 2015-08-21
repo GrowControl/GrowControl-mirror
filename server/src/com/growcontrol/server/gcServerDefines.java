@@ -3,7 +3,8 @@ package com.growcontrol.server;
 import com.poixson.commonjava.Utils.xTime;
 
 
-public class gcServerDefines {
+public final class gcServerDefines {
+	private gcServerDefines() {}
 
 
 	// defaults

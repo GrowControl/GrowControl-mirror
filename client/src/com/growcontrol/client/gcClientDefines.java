@@ -1,7 +1,8 @@
 package com.growcontrol.client;
 
 
-public class gcClientDefines {
+public final class gcClientDefines {
+	private gcClientDefines() {}
 
 
 	// defaults
