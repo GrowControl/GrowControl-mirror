@@ -6,7 +6,7 @@ import io.netty.channel.socket.SocketChannel;
 
 import java.net.InetSocketAddress;
 
-import com.growcontrol.common.net.SocketState;
+import com.growcontrol.common.netty.SocketState;
 import com.growcontrol.common.packets.PacketState;
 import com.poixson.commonjava.xLogger.xLog;
 

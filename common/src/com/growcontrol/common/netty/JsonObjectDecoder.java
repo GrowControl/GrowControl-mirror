@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.growcontrol.common.net;
+package com.growcontrol.common.netty;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;

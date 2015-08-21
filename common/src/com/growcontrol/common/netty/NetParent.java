@@ -1,4 +1,4 @@
-package com.growcontrol.common.net;
+package com.growcontrol.common.netty;
 
 import com.growcontrol.common.packets.PacketDirection;
 import com.poixson.commonjava.Utils.xCloseableMany;

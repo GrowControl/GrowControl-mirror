@@ -8,8 +8,8 @@ import io.netty.handler.codec.string.StringEncoder;
 
 import java.nio.charset.Charset;
 
-import com.growcontrol.common.net.JsonObjectDecoder;
-import com.growcontrol.common.net.SocketState.SessionState;
+import com.growcontrol.common.netty.JsonObjectDecoder;
+import com.growcontrol.common.netty.SocketState.SessionState;
 import com.growcontrol.common.packets.handshake.Packet_0_Hello;
 import com.poixson.commonapp.net.firewall.NetFirewall;
 import com.poixson.commonjava.xLogger.xLog;

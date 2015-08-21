@@ -1,4 +1,4 @@
-package com.growcontrol.common.net;
+package com.growcontrol.common.netty;
 
 import io.netty.channel.ChannelInboundHandlerAdapter;
 

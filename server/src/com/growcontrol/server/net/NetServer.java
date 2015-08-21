@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import com.growcontrol.common.net.NetParent;
+import com.growcontrol.common.netty.NetParent;
 import com.growcontrol.common.packets.PacketDirection;
 import com.growcontrol.server.gcServerVars;
 import com.growcontrol.server.configs.NetServerConfig;
