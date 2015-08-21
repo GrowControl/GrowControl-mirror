@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.growcontrol.client.gcClientDefines;
+import com.growcontrol.common.gcDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsObject;
@@ -51,9 +52,7 @@ xLog.getRoot("config").trace(e);
 		final String host = config.getString(gcClientDefines.PROFILE_HOST);
 		final int    port = config.getInt   (
 				gcClientDefines.PROFILE_PORT,
-				ssl
-				? gcClientDefines.DEFAULT_SOCKET_PORT
-				: gcClientDefines.DEFAULT_SOCKET_PORT_SSL
+				gcDefines.DEFAULT_SOCKET_PORT(ssl)
 		);
 		final String user = config.getString(gcClientDefines.PROFILE_USER);
 		final String pass = config.getString(gcClientDefines.PROFILE_PASS);

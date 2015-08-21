@@ -5,9 +5,6 @@ public class gcClientDefines {
 
 
 	// defaults
-	public static final int DEFAULT_SOCKET_PORT     = 1142;
-	public static final int DEFAULT_SOCKET_PORT_SSL = 1143;
-
 //	public static final xTime DEFAULT_TICK_INTERVAL = xTime.get("1s");
 //	public static final int   DEFAULT_LISTEN_PORT   = 1142;
 //	public static final int   DEFAULT_LOGIC_THREADS = 0;

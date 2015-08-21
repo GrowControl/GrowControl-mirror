@@ -33,6 +33,7 @@ import com.growcontrol.client.gcClientVars;
 import com.growcontrol.client.configs.ProfilesConfig;
 import com.growcontrol.client.configs.SavedProfileConfig;
 import com.growcontrol.client.gui.guiManager;
+import com.growcontrol.common.gcDefines;
 import com.poixson.commonapp.gui.guiUtils;
 import com.poixson.commonapp.gui.xFont;
 import com.poixson.commonapp.gui.xWindow;
@@ -411,6 +412,9 @@ public class gcWindowLogin extends xWindow {
 			str.append(" ").append(gcClientDefines.PROFILE_HOST_INTERNAL);
 			return str.toString();
 		}
+		// ssl
+//TODO:
+		final boolean ssl = false;
 		// host
 		str.append("  ( ");
 		if(utils.isEmpty(profile.host))
@@ -421,7 +425,7 @@ public class gcWindowLogin extends xWindow {
 		else
 			str.append(profile.host);
 		// port
-		if(profile.port != gcClientDefines.DEFAULT_SOCKET_PORT)
+		if(profile.port != gcDefines.DEFAULT_SOCKET_PORT(ssl))
 			str.append(":").append(profile.port);
 		str.append(" )");
 		return str.toString();

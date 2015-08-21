@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.growcontrol.common.gcDefines;
 import com.growcontrol.server.gcServerDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
@@ -58,9 +59,7 @@ xLog.getRoot("config").trace(e);
 		final String host = config.getString(gcServerDefines.CONFIG_SOCKET_HOST);
 		final int    port = config.getInt   (
 				gcServerDefines.CONFIG_SOCKET_PORT,
-				ssl
-				? gcServerDefines.DEFAULT_SOCKET_PORT_SSL
-				: gcServerDefines.DEFAULT_SOCKET_PORT
+				gcDefines.DEFAULT_SOCKET_PORT(ssl)
 		);
 		return new NetServerConfig(
 				enabled,

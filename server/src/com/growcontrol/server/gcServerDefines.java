@@ -11,8 +11,6 @@ public class gcServerDefines {
 	public static final xTime   DEFAULT_TICK_INTERVAL = xTime.get("60s");
 	public static final int     DEFAULT_LOGIC_THREADS = 0;
 
-	public static final int DEFAULT_SOCKET_PORT     = 1142;
-	public static final int DEFAULT_SOCKET_PORT_SSL = 1143;
 	public static final int DEFAULT_SOCKET_BACKLOG  = 10;
 
 
