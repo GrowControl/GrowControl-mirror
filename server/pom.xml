@@ -12,8 +12,8 @@
 	<url>http://growcontrol.com</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<pxnCommon-version>[3.5,3.6)</pxnCommon-version>
-		<io.netty-version>4.0.30.Final</io.netty-version>
+<!--		<pxnCommon-version>[3.6,3.7)</pxnCommon-version> -->
+<!--		<io.netty-version>4.0.30.Final</io.netty-version> -->
 		<junit-version>4.12</junit-version>
 		<maven-compiler-plugin-version>3.3</maven-compiler-plugin-version>
 		<surefire-version>2.18.1</surefire-version>
@@ -129,15 +129,10 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>com.poixson</groupId>
-			<artifactId>pxnCommon</artifactId>
-			<version>${pxnCommon-version}</version>
+			<groupId>com.growcontrol</groupId>
+			<artifactId>gcCommon</artifactId>
+			<version>${project.version}</version>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-all</artifactId>
-			<version>${io.netty-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

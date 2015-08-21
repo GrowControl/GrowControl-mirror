@@ -181,7 +181,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.growcontrol</groupId>
-			<artifactId>gcServer</artifactId>
+			<artifactId>gcCommon</artifactId>
 			<version>${project.version}</version>
 			<scope>compile</scope>
 		</dependency>
