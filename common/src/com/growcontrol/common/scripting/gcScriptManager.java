@@ -9,7 +9,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
-import com.growcontrol.server.gcServer;
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsDirFile;
@@ -46,7 +45,8 @@ public class gcScriptManager {
 	private gcScriptManager() {
 		Keeper.add(this);
 		this.factory = new ScriptEngineManager();
-		this.factory.put("ServerVersion", gcServer.get().getVersion());
+//TODO:
+//		this.factory.put("ServerVersion", gcServer.get().getVersion());
 	}
 
 
