@@ -23,6 +23,7 @@ import com.poixson.commonapp.net.firewall.NetFirewall;
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utilsThread;
 import com.poixson.commonjava.Utils.xCloseableMany;
+import com.poixson.commonjava.Utils.xTimeU;
 import com.poixson.commonjava.Utils.threads.xThreadFactory;
 import com.poixson.commonjava.xLogger.xLog;
 
@@ -288,6 +289,17 @@ public class NetServerManager implements xCloseableMany {
 					.toString()
 			);
 		}
+		// stop thread pools
+		this.bossGroup.shutdownGracefully(
+				500L,
+				800L,
+				xTimeU.MS
+		);
+		this.workGroup.shutdownGracefully(
+				500L,
+				800L,
+				xTimeU.MS
+		);
 	}
 	public void ClearClosed() {
 		if(this.netServers.size() == 0)
