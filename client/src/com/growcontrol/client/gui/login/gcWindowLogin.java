@@ -534,6 +534,33 @@ public class gcWindowLogin extends xWindow {
 //		this.socket.setHost(hostStr);
 //		this.socket.setPort(portInt.intValue());
 //		this.socket.connect();
+
+
+
+//TODO:
+//		final String user = "";
+//		final String pass = "";
+//		// load profile
+//		final SavedProfileConfig profile = new SavedProfileConfig(
+//				name,
+//				host,
+//				port,
+//				user,
+//				pass
+//		);
+//		// start socket client
+//		final NetClientManager manager = NetClientManager.get();
+//		try {
+//			NetClientManager.connect(profile);
+//		} catch (UnknownHostException e) {
+//			log().trace(e);
+//		} catch (InterruptedException e) {
+//			log().trace(e);
+//			break;
+//		}		 //		}
+
+
+
 	}
 	public void onClickCancelButton(final ActionEvent event) {
 		final String buttonName = ((JButton) event.getSource()).getActionCommand();
