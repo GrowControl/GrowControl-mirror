@@ -10,6 +10,7 @@ import com.poixson.commonjava.xLogger.xLog;
 
 
 public abstract class SocketState implements xCloseable {
+	private static final String LOG_NAME = "NET";
 
 	// socket session state
 	protected volatile SessionState sessionState = SessionState.CLOSED;
@@ -93,7 +94,7 @@ public abstract class SocketState implements xCloseable {
 
 	// logger
 	public xLog log() {
-		return xLog.getRoot("NET")
+		return xLog.getRoot(LOG_NAME)
 				.get(this.getStateKey());
 	}
 

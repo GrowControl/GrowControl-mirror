@@ -26,6 +26,7 @@ import com.poixson.commonjava.xLogger.xLog;
 
 
 public class NetServer implements NetParent {
+	private static final String LOG_NAME = "NET";
 
 	public final NetServerConfig config;
 	public final String serverKey;
@@ -247,7 +248,7 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 	private volatile xLog _log = null;
 	public xLog log() {
 		if(this._log == null)
-			this._log = xLog.getRoot("NET")
+			this._log = xLog.getRoot(LOG_NAME)
 					.get("S|"+this.serverKey);
 		return this._log;
 	}

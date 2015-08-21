@@ -15,6 +15,7 @@ import com.poixson.commonjava.xLogger.xLog;
 
 
 public final class gcServerConfig extends xConfig {
+	private static final String LOG_NAME = "CONFIG";
 
 	private volatile Map<String, NetServerConfig> netConfigs = null;
 
@@ -133,7 +134,7 @@ public final class gcServerConfig extends xConfig {
 	private volatile xLog _log = null;
 	public xLog log() {
 		if(this._log == null)
-			this._log = xLog.getRoot("CONFIG");
+			this._log = xLog.getRoot(LOG_NAME);
 		return this._log;
 	}
 

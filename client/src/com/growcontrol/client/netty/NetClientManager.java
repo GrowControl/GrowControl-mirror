@@ -36,6 +36,7 @@ NetClientManager
            PacketState
  */
 public class NetClientManager implements xCloseableMany {
+	private static final String LOG_NAME = "NET";
 
 	public static final boolean DETAILED_LOG = false;
 
@@ -237,7 +238,7 @@ public class NetClientManager implements xCloseableMany {
 	private static volatile xLog _log = null;
 	public static xLog log() {
 		if(_log == null)
-			_log = xLog.getRoot("NET");
+			_log = xLog.getRoot(LOG_NAME);
 		return _log;
 	}
 

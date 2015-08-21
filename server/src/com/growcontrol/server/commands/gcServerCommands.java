@@ -13,6 +13,7 @@ import com.poixson.commonjava.xLogger.handlers.xCommandListener;
 
 
 public final class gcServerCommands implements xCommandListener {
+	private static final String LOG_NAME = "SERVER";
 
 	protected volatile gcServerCommands_config inconfig = null;
 
@@ -367,7 +368,7 @@ public final class gcServerCommands implements xCommandListener {
 	private volatile xLog _log = null;
 	public xLog log() {
 		if(this._log == null)
-			this._log = xLog.getRoot("SERVER");
+			this._log = xLog.getRoot(LOG_NAME);
 		return this._log;
 	}
 	public void publish(final String msg) {

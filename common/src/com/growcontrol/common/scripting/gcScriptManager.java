@@ -19,6 +19,7 @@ import com.poixson.commonjava.xLogger.xLog;
 
 //https://docs.oracle.com/javase/6/docs/technotes/guides/scripting/programmer_guide/
 public class gcScriptManager {
+	private static final String LOG_NAME = "SCRIPT";
 
 	public static final String LANGUAGE = "JavaScript";
 
@@ -157,7 +158,7 @@ public class gcScriptManager {
 
 	// logger
 	public xLog log() {
-		return xLog.getRoot().get("gcScripts");
+		return xLog.getRoot().get(LOG_NAME);
 	}
 
 

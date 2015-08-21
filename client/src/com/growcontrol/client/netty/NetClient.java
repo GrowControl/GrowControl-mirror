@@ -24,6 +24,7 @@ import com.poixson.commonjava.xLogger.xLog;
 
 
 public class NetClient implements NetParent {
+	private static final String LOG_NAME = "NET";
 
 	public final SavedProfileConfig profile;
 	public final String clientKey;
@@ -228,7 +229,7 @@ public class NetClient implements NetParent {
 	private volatile xLog _log = null;
 	public xLog log() {
 		if(this._log == null)
-			this._log = xLog.getRoot("NET")
+			this._log = xLog.getRoot(LOG_NAME)
 					.get("C|"+this.clientKey);
 		return this._log;
 	}
