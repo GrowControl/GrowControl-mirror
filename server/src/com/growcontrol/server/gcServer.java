@@ -67,6 +67,9 @@ public class gcServer extends xApp {
 			case "--debug":
 				xVars.debug(true);
 				break;
+			case "--internal":
+				gcServerVars.setInternal(true);
+				break;
 			default:
 				System.out.println("Unknown argument: "+arg);
 				System.exit(1);

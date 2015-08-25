@@ -12,6 +12,9 @@ public class gcServerVars {
 
 	private static volatile boolean inited = false;
 
+	// internal mode
+	private static volatile boolean internal = false;
+
 	// configs
 	private static gcServerConfig config = null;
 	private static final Object configLock = new Object();
@@ -29,6 +32,15 @@ public class gcServerVars {
 			Keeper.add(new gcServerVars());
 	}
 	private gcServerVars() {
+	}
+
+
+
+	public static boolean isInternal() {
+		return internal;
+	}
+	public static void setInternal(final boolean value) {
+		internal = value;
 	}
 
 
