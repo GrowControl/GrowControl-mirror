@@ -30,6 +30,7 @@ import net.miginfocom.swing.MigLayout;
 
 import com.growcontrol.client.gcClientDefines;
 import com.growcontrol.client.gcClientVars;
+import com.growcontrol.client.gcServerManager;
 import com.growcontrol.client.configs.ProfilesConfig;
 import com.growcontrol.client.configs.SavedProfileConfig;
 import com.growcontrol.client.gui.guiManager;
@@ -42,6 +43,7 @@ import com.poixson.commonapp.gui.remapped.RemappedActionListener;
 import com.poixson.commonapp.gui.remapped.RemappedItemListener;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
+import com.poixson.commonjava.xLogger.xLog;
 
 
 @xWindowProperties(
@@ -534,6 +536,11 @@ public class gcWindowLogin extends xWindow {
 //		this.socket.setHost(hostStr);
 //		this.socket.setPort(portInt.intValue());
 //		this.socket.connect();
+
+
+
+xLog.getRoot().title("STARTING SERVER");
+gcServerManager.get().Start();
 
 
 
