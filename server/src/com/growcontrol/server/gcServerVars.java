@@ -23,7 +23,7 @@ public class gcServerVars {
 //	private static final xHandler system = new xHandler();
 	private static final xHandler commands = new xHandler();
 	private static final xHandler plugins = new xHandler();
-//	private static final MetaRouter router = MetaRouter.get();
+	private static final MetaRouter router = MetaRouter.get();
 
 
 
@@ -90,10 +90,10 @@ public class gcServerVars {
 
 
 
-//	// meta router handler
-//	public static MetaRouter router() {
-//		return router;
-//	}
+	// meta event handler
+	public static MetaRouter router() {
+		return router;
+	}
 
 
 

@@ -20,9 +20,7 @@ public class gcClientVars {
 
 	// handlers
 	private static final xHandler system  = new xHandler();
-//	private static final xHandler commands = new xHandler();
 	private static final xHandler plugins = new xHandler();
-//	private static final xHandler router;
 
 
 
@@ -90,24 +88,10 @@ public class gcClientVars {
 
 
 
-//	// command event handler
-//	public static xHandler commands() {
-//		return commands;
-//	}
-
-
-
 	// plugin event handler
 	public static xHandler plugins() {
 		return plugins;
 	}
-
-
-
-//	// meta router handler
-//	public static xHandler router() {
-//		return router;
-//	}
 
 
 
