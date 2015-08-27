@@ -44,11 +44,9 @@ sudo apt-get install git maven openjdk-7-jdk
 From the locaton you'd like to set up your workspace, the following commands will download the workspace setup script, clone the github repositories, and build with maven.
 
 Most distros:
-wget https://gist.githubusercontent.com/lorenzop/ef0496ccc483e81834cf/raw/0aa04299add4a54fb79664e3af9f4d0bcc69746f/getgc.sh && sh getgc.sh
+wget http://dl.growcontrol.com/getgc.sh  &&  sh getgc.sh
 
 Once this completes successfully, you'll have eclipse projects ready to import, as well as a compiled copy of the project in GrowControl/target/
-
-The sourcecode for gitgc.sh can be found here: https://gist.github.com/lorenzop/ef0496ccc483e81834cf
 
 You may now open your workspace in Eclipse, then import the following project locations:
 
