@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.growcontrol.common.gcDefines;
 import com.poixson.commonjava.Utils.StreamBridge;
 import com.poixson.commonjava.Utils.xStartable;
 import com.poixson.commonjava.xLogger.xLog;
 
 
 public class gcServerManager implements xStartable {
+	private final static String LOG_NAME = gcDefines.LOG_NAME_SERVER;
 
 	private static volatile gcServerManager instance = null;
 	private static final Object instanceLock = new Object();
@@ -66,20 +68,20 @@ public class gcServerManager implements xStartable {
 		} catch (IOException e) {
 			this.process = null;
 			this.running.set(false);
-			xLog.getRoot().trace(e);
+			log().trace(e);
 			throw new RuntimeException(e);
 		}
 
 //System.out.println("EXIT: ");
 //System.out.print(this.process.exitValue());
 if(this.process.isAlive())
-xLog.getRoot().severe("IS ALIVE");
+log().severe("IS ALIVE");
 
 //BufferedReader reader = new BufferedReader(new InputStreamReader(this.process.getInputStream()));
 //String line;
 //try {
 //	while( (line = reader.readLine()) != null) {
-//		xLog.getRoot().publish(line);
+//		xLog.publish(line);
 //	}
 //} catch (IOException e) {
 //	// TODO Auto-generated catch block
@@ -94,9 +96,7 @@ xLog.getRoot().severe("IS ALIVE");
 					@Override
 					public void write(final int b) throws IOException {
 						if(b == '\r' || b == '\n') {
-
-xLog.getRoot("SERVER").publish(this.buf.toString());
-
+							log().publish(this.buf.toString());
 							this.buf.setLength(0);
 							return;
 						}
@@ -113,9 +113,7 @@ xLog.getRoot("SERVER").publish(this.buf.toString());
 					@Override
 					public void write(final int b) throws IOException {
 						if(b == '\r' || b == '\n') {
-
-xLog.getRoot("ERR").publish(this.buf.toString());
-
+							log().get("ERR").publish(this.buf.toString());
 							this.buf.setLength(0);
 							return;
 						}
@@ -139,6 +137,16 @@ xLog.getRoot("ERR").publish(this.buf.toString());
 	@Override
 	public boolean isRunning() {
 		return this.running.get();
+	}
+
+
+
+	// logger
+	private static volatile xLog _log = null;
+	public static xLog log() {
+		if(_log == null)
+			_log = xLog.getRoot(LOG_NAME);
+		return _log;
 	}
 
 
