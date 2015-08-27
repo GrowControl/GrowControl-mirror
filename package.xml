@@ -8,21 +8,21 @@
 	<fileSets>
 		<fileSet>
 			<directory>${project.basedir}/server/target/</directory>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>./</outputDirectory>
 			<includes>
 				<include>gcServer-*.jar</include>
 			</includes>
 		</fileSet>
 		<fileSet>
 			<directory>${project.basedir}/client/target/</directory>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>./</outputDirectory>
 			<includes>
 				<include>gcClient-*.jar</include>
 			</includes>
 		</fileSet>
 		<fileSet>
 			<directory>${project.basedir}/client/target/</directory>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>./</outputDirectory>
 			<includes>
 				<include>GrowControl-*.exe</include>
 			</includes>
@@ -38,7 +38,7 @@
 -->
 		<fileSet>
 			<directory>${project.basedir}/</directory>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory>./</outputDirectory>
 			<includes>
 				<include>changelog.txt</include>
 				<include>readme.txt</include>
