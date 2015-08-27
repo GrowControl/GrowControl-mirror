@@ -26,16 +26,15 @@
 		<cobertura-version>2.7</cobertura-version>
 	</properties>
 	<scm>
-		<url>https://github.com/PoiXson/GrowControl</url>
-		<connection>scm:git:https://github.com/PoiXson/GrowControl.git</connection>
-		<developerConnection>scm:git:https://github.com/PoiXson/GrowControl.git</developerConnection>
+		<url>https://github.com/GrowControl/GrowControl</url>
+		<connection>scm:git:https://github.com/GrowControl/GrowControl.git</connection>
 	</scm>
 	<organization>
-		<name>PoiXson</name>
-		<url>http://poixson.com</url>
+		<name>GrowControl</name>
+		<url>http://growcontrol.com</url>
 	</organization>
 	<issueManagement>
-		<url>https://github.com/PoiXson/GrowControl/issues</url>
+		<url>https://github.com//GrowControl/GrowControl/issues</url>
 		<system>github</system>
 	</issueManagement>
 	<ciManagement>
