@@ -41,27 +41,52 @@ Ubuntu:
 sudo apt-get update
 sudo apt-get install git maven openjdk-7-jdk
 
-From the locaton you'd like to set up your workspace, the following commands will clone the github repo's.
+From the locaton you'd like to set up your workspace, the following commands will download the workspace setup script, clone the github repositories, and build with maven.
 
-git clone https://github.com/PoiXson/GrowControl.git
-git clone https://github.com/PoiXson/pxnCommon.git
+Most distros:
+wget https://gist.githubusercontent.com/lorenzop/ef0496ccc483e81834cf/raw/0aa04299add4a54fb79664e3af9f4d0bcc69746f/getgc.sh && sh getgc.sh
 
-First, compile the pxnCommon package:
-(cd pxnCommon; mvn clean install)
+Once this completes successfully, you'll have eclipse projects ready to import, as well as a compiled copy of the project in GrowControl/target/
 
-Then finally compile GrowControl:
-(cd GrowControl; mvn clean install)
+The sourcecode for gitgc.sh can be found here: https://gist.github.com/lorenzop/ef0496ccc483e81834cf
+
+You may now open your workspace in Eclipse, then import the following project locations:
+
+pxnCommon/
+GrowControl/common/
+GrowControl/server/
+GrowControl/client/
+
+
+
+Manual Setup
+------------
+
+If you'd like to manually set up your workspace, this too is easy with a few commands. From the locaton you'd like to set up your workspace:
+
+git clone git@github.com:GrowControl/pxnCommon.git
+git clone git@github.com:GrowControl/GrowControl.git
+
+From within each of the directories, pxnCommon/ and GrowControl/ run the following:
+
+cd pxnCommon/
+mvn clean eclipse:eclipse dependency:sources install
+cd ..
+cd GrowControl/
+mvn clean eclipse:eclipse dependency:sources install
+cd ..
 
 You'll then find the compiled jar's in the following locations:
 GrowControl/target/
 GrowControl/server/target/
 GrowControl/client/target/
 
-Note: the files beginning with scant- contain only project specific classes. Required libraries aren't included in these jar's.
+To compile again, you may run the following command anywhere you see a pom.xml file:
 
-In order to create the project files to import into Eclipse:
-(cd pxnCommon; mvn eclipse:eclipse dependency:sources)
-(cd GrowControl; mvn eclipse:eclipse dependency:sources)
+mvn clean install
+
+
+Note: the files beginning with scant- contain only project specific classes. Required libraries aren't included in these jar's.
 
 
 
