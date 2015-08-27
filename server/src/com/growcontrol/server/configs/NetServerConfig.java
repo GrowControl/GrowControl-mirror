@@ -12,10 +12,11 @@ import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
 import com.poixson.commonjava.Utils.utilsObject;
+import com.poixson.commonjava.Utils.xHashable;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public class NetServerConfig {
+public class NetServerConfig implements xHashable {
 
 	public final boolean enabled;
 	public final boolean ssl;
@@ -39,7 +40,7 @@ public class NetServerConfig {
 								obj
 						);
 				final NetServerConfig cfg = get(datamap);
-				configs.put(cfg.toString(), cfg);
+				configs.put(cfg.getKey(), cfg);
 			} catch (Exception e) {
 xLog.getRoot("config").trace(e);
 			}
@@ -106,6 +107,10 @@ xLog.getRoot("config").trace(e);
 	public String toString() {
 		return this.key;
 	}
+	@Override
+	public String getKey() {
+		return this.key;
+	}
 	private String genKey() {
 		final StringBuilder str = new StringBuilder();
 		final String host = this.getHost();
@@ -114,12 +119,14 @@ xLog.getRoot("config").trace(e);
 		if(this.ssl) str.append("<ssl>");
 		return str.toString();
 	}
-	public boolean matches(final NetServerConfig config) {
-		if(config == null)
+	@Override
+	public boolean matches(final xHashable hashable) {
+		if(hashable == null || !(hashable instanceof NetServerConfig) )
 			return false;
+		final NetServerConfig config = (NetServerConfig) hashable;
 		if(this.enabled != config.enabled)
 			return false;
-		return this.toString().equalsIgnoreCase(config.toString());
+		return this.getKey().equalsIgnoreCase(config.getKey());
 	}
 
 
