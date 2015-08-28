@@ -13,7 +13,7 @@ import com.poixson.commonjava.Utils.xHashable;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public class SavedProfileConfig implements xHashable {
+public class SavedProfile implements xHashable {
 
 	public final String name;
 	public final String host;
@@ -23,11 +23,11 @@ public class SavedProfileConfig implements xHashable {
 
 
 
-	public static LinkedHashMap<String, SavedProfileConfig> get(final List<Object> dataset) {
+	public static LinkedHashMap<String, SavedProfile> get(final List<Object> dataset) {
 		if(utils.isEmpty(dataset))
 			return null;
-		final LinkedHashMap<String, SavedProfileConfig> profiles =
-				new LinkedHashMap<String, SavedProfileConfig>();
+		final LinkedHashMap<String, SavedProfile> profiles =
+				new LinkedHashMap<String, SavedProfile>();
 		for(final Object obj : dataset) {
 			try {
 				final Map<String, Object> datamap =
@@ -36,7 +36,7 @@ public class SavedProfileConfig implements xHashable {
 								Object.class,
 								obj
 						);
-				final SavedProfileConfig profile = get(datamap);
+				final SavedProfile profile = get(datamap);
 				profiles.put(profile.name, profile);
 			} catch (Exception e) {
 xLog.getRoot("config").trace(e);
@@ -44,7 +44,7 @@ xLog.getRoot("config").trace(e);
 		}
 		return profiles;
 	}
-	public static SavedProfileConfig get(final Map<String, Object> datamap) {
+	public static SavedProfile get(final Map<String, Object> datamap) {
 		if(utils.isEmpty(datamap))
 			return null;
 		final xConfig config = new xConfig(datamap);
@@ -57,7 +57,7 @@ xLog.getRoot("config").trace(e);
 		);
 		final String user = config.getString(gcClientDefines.PROFILE_USER);
 		final String pass = config.getString(gcClientDefines.PROFILE_PASS);
-		return new SavedProfileConfig(
+		return new SavedProfile(
 				name,
 				host,
 				port,
@@ -68,7 +68,7 @@ xLog.getRoot("config").trace(e);
 
 
 
-	public SavedProfileConfig(final String name,
+	public SavedProfile(final String name,
 			final String host, final int port,
 			final String user, final String pass) {
 		this.name = name;
@@ -89,9 +89,9 @@ xLog.getRoot("config").trace(e);
 		return this.name;
 	}
 	public boolean matches(final xHashable hashable) {
-		if(hashable == null || !(hashable instanceof SavedProfileConfig) )
+		if(hashable == null || !(hashable instanceof SavedProfile) )
 			return false;
-		final SavedProfileConfig profile = (SavedProfileConfig) hashable;
+		final SavedProfile profile = (SavedProfile) hashable;
 		return this.getKey().equalsIgnoreCase(profile.getKey());
 	}
 

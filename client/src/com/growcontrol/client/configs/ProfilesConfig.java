@@ -11,7 +11,7 @@ import com.poixson.commonjava.Utils.utils;
 
 public class ProfilesConfig extends xConfig {
 
-	private volatile LinkedHashMap<String, SavedProfileConfig> profiles = null;
+	private volatile LinkedHashMap<String, SavedProfile> profiles = null;
 	private final Object profilesLock = new Object();
 
 
@@ -24,7 +24,7 @@ public class ProfilesConfig extends xConfig {
 
 
 	// last profile used
-	public SavedProfileConfig getLastUsedProfile() {
+	public SavedProfile getLastUsedProfile() {
 		final String value = this.getString(gcClientDefines.PROFILE_LAST_USED);
 		if(utils.isEmpty(value))
 			return null;
@@ -34,7 +34,7 @@ public class ProfilesConfig extends xConfig {
 
 
 	// auto connect
-	public SavedProfileConfig getAutoConnectProfile() {
+	public SavedProfile getAutoConnectProfile() {
 		// boolean value
 		final Boolean bool = this.getBoolean(gcClientDefines.PROFILE_AUTO_CONNECT);
 		if(bool != null) {
@@ -51,7 +51,7 @@ public class ProfilesConfig extends xConfig {
 
 
 
-	public LinkedHashMap<String, SavedProfileConfig> getProfiles() {
+	public LinkedHashMap<String, SavedProfile> getProfiles() {
 		if(this.profiles == null) {
 			synchronized(this.profilesLock) {
 				if(this.profiles == null) {
@@ -59,13 +59,13 @@ public class ProfilesConfig extends xConfig {
 							Object.class,
 							gcClientDefines.PROFILES
 					);
-					this.profiles = SavedProfileConfig.get(dataset);
+					this.profiles = SavedProfile.get(dataset);
 				}
 			}
 		}
 		return this.profiles;
 	}
-	public SavedProfileConfig getProfile(final String name) {
+	public SavedProfile getProfile(final String name) {
 		if(this.profiles == null)
 			this.getProfiles();
 		return this.profiles.get(name);

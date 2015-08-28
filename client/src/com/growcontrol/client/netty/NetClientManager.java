@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import javax.net.ssl.SSLException;
 
-import com.growcontrol.client.configs.SavedProfileConfig;
+import com.growcontrol.client.configs.SavedProfile;
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utilsThread;
 import com.poixson.commonjava.Utils.xCloseableMany;
@@ -56,7 +56,7 @@ public class NetClientManager implements xCloseableMany {
 
 
 
-	public static NetClient get(final SavedProfileConfig profile) {
+	public static NetClient get(final SavedProfile profile) {
 		if(profile == null) throw new NullPointerException("profile argument is required!");
 		try {
 			return get().getClient(profile);
@@ -115,7 +115,7 @@ public class NetClientManager implements xCloseableMany {
 
 
 
-	public NetClient getClient(final SavedProfileConfig profile)
+	public NetClient getClient(final SavedProfile profile)
 			throws UnknownHostException, InterruptedException {
 		if(profile == null) throw new NullPointerException("profile argument is required!");
 		final String key = profile.toString();

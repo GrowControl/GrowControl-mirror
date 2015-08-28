@@ -32,7 +32,7 @@ import com.growcontrol.client.gcClientDefines;
 import com.growcontrol.client.gcClientVars;
 import com.growcontrol.client.gcServerManager;
 import com.growcontrol.client.configs.ProfilesConfig;
-import com.growcontrol.client.configs.SavedProfileConfig;
+import com.growcontrol.client.configs.SavedProfile;
 import com.growcontrol.client.gui.guiManager;
 import com.growcontrol.common.gcDefines;
 import com.poixson.commonapp.gui.guiUtils;
@@ -60,7 +60,7 @@ public class gcWindowLogin extends xWindow {
 	private static final String IMAGE_LOADING = "images/icon-loading-animated.gif";
 
 	// saved profiles
-	protected final Map<String, SavedProfileConfig> profiles = new LinkedHashMap<String, SavedProfileConfig>();
+	protected final Map<String, SavedProfile> profiles = new LinkedHashMap<String, SavedProfile>();
 
 	// card panels
 	protected final CardLayout cardLayout;
@@ -389,12 +389,12 @@ public class gcWindowLogin extends xWindow {
 	public void loadProfilesConfig() {
 		if(guiUtils.forceDispatchThread(this, "loadProfilesConfig")) return;
 		final ProfilesConfig profilesConfig = gcClientVars.getProfilesConfig();
-		final Map<String, SavedProfileConfig> profiles = profilesConfig.getProfiles();
+		final Map<String, SavedProfile> profiles = profilesConfig.getProfiles();
 		// populate dropdown list
 //		this.lstProfiles.addItem(gcClientDefines.PROFILE_NEW);
 //		this.lstProfiles.addItem(SAVEDSERVERS_Unsaved);
 //		this.lstProfiles.addItem(SAVEDSERVERS_InternalServer);
-		for(final SavedProfileConfig profile : profiles.values()) {
+		for(final SavedProfile profile : profiles.values()) {
 			final String title = FormatProfile(profile);
 			this.lstProfiles.addItem(title);
 			this.profiles.put(title, profile);
@@ -405,7 +405,7 @@ public class gcWindowLogin extends xWindow {
 
 
 
-	public static String FormatProfile(final SavedProfileConfig profile) {
+	public static String FormatProfile(final SavedProfile profile) {
 		if(profile == null) throw new NullPointerException("profile argument is required!");
 		final StringBuilder str = new StringBuilder();
 		// profile name
@@ -443,7 +443,7 @@ public class gcWindowLogin extends xWindow {
 			String port = "";
 			String user = "";
 			String pass = "";
-			final SavedProfileConfig profile = this.profiles.get(selected);
+			final SavedProfile profile = this.profiles.get(selected);
 			if(profile != null) {
 				log().fine("Selected profile: "+profile.name);
 				host = profile.host;
@@ -480,7 +480,7 @@ public class gcWindowLogin extends xWindow {
 //				this.txtboxPass.setText("");
 //				xApp.log().fine("Selected -internal- profile");
 //			} else {
-//				final SavedProfileConfig profile = this.profiles.get(selected);
+//				final SavedProfile profile = this.profiles.get(selected);
 //				this.txtboxHost.setText(profile.host);
 //				this.txtboxPort.setText(Integer.toString(profile.port));
 //				this.txtboxUser.setText(profile.user);
@@ -548,7 +548,7 @@ gcServerManager.get().Start();
 //		final String user = "";
 //		final String pass = "";
 //		// load profile
-//		final SavedProfileConfig profile = new SavedProfileConfig(
+//		final SavedProfile profile = new SavedProfile(
 //				name,
 //				host,
 //				port,

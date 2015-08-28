@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import com.growcontrol.client.configs.SavedProfileConfig;
+import com.growcontrol.client.configs.SavedProfile;
 import com.growcontrol.common.netty.NetParent;
 import com.growcontrol.common.netty.SocketState;
 import com.growcontrol.common.packets.PacketDirection;
@@ -26,7 +26,7 @@ import com.poixson.commonjava.xLogger.xLog;
 public class NetClient implements NetParent {
 	private static final String LOG_NAME = "NET";
 
-	public final SavedProfileConfig profile;
+	public final SavedProfile profile;
 	public final String clientKey;
 	protected volatile boolean closed = false;
 
@@ -41,7 +41,7 @@ public class NetClient implements NetParent {
 
 	//throws UnknownHostException, SocketException, InterruptedException {
 @SuppressWarnings("unused")
-	public NetClient(final SavedProfileConfig profile)
+	public NetClient(final SavedProfile profile)
 			throws UnknownHostException, InterruptedException {
 		if(profile == null) throw new NullPointerException("profile argument is required!");
 		this.profile = profile;
