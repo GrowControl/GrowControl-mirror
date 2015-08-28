@@ -41,7 +41,7 @@ public class gcClientVars {
 					config = (gcClientConfig) xConfigLoader.Load(
 							gcClientDefines.CONFIG_FILE,
 							gcClientConfig.class,
-							true
+							gcClient.class
 					);
 					if(config == null) {
 						Failure.fail("Failed to load "+gcClientDefines.CONFIG_FILE);
@@ -65,7 +65,7 @@ public class gcClientVars {
 					profilesConfig = (ProfilesConfig) xConfigLoader.Load(
 							gcClientDefines.PROFILES_FILE,
 							ProfilesConfig.class,
-							true
+							gcClient.class
 					);
 					if(profilesConfig == null) {
 						Failure.fail("Failed to load "+gcClientDefines.PROFILES_FILE);
