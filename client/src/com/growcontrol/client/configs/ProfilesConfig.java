@@ -12,6 +12,7 @@ import com.poixson.commonjava.Utils.utils;
 public class ProfilesConfig extends xConfig {
 
 	private volatile LinkedHashMap<String, SavedProfileConfig> profiles = null;
+	private final Object profilesLock = new Object();
 
 
 
@@ -51,11 +52,15 @@ public class ProfilesConfig extends xConfig {
 
 	public LinkedHashMap<String, SavedProfileConfig> getProfiles() {
 		if(this.profiles == null) {
-			final List<Object> dataset = this.getList(
-					Object.class,
-					gcClientDefines.PROFILES
-			);
-			this.profiles = SavedProfileConfig.get(dataset);
+			synchronized(this.profilesLock) {
+				if(this.profiles == null) {
+					final List<Object> dataset = this.getList(
+							Object.class,
+							gcClientDefines.PROFILES
+					);
+					this.profiles = SavedProfileConfig.get(dataset);
+				}
+			}
 		}
 		return this.profiles;
 	}
