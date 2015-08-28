@@ -16,6 +16,7 @@ import com.poixson.commonjava.xLogger.xLog;
 public class SavedProfile implements xHashable {
 
 	public final String name;
+
 	public final String host;
 	public final int    port;
 	public final String user;

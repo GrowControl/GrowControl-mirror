@@ -15,6 +15,7 @@ import com.poixson.commonjava.xLogger.xLog;
 public class WindowConfig implements xHashable {
 
 	public final String name;
+
 	public final Integer x;
 	public final Integer y;
 	public final Integer w;

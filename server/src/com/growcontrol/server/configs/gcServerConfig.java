@@ -15,7 +15,7 @@ import com.poixson.commonjava.xLogger.xLog;
 
 
 public final class gcServerConfig extends xConfig {
-	private static final String LOG_NAME = "CONFIG";
+	public static final String LOG_NAME = "CONFIG";
 
 	private volatile Map<String, NetServerConfig> netConfigs = null;
 

@@ -19,12 +19,12 @@ import com.poixson.commonjava.xLogger.xLog;
 public class NetServerConfig implements xHashable {
 	private static final String LOG_NAME = "CONFIG";
 
+	public final String key;
+
 	public final boolean enabled;
 	public final boolean ssl;
 	public final String  host;
 	public final int     port;
-
-	public final String key;
 
 
 

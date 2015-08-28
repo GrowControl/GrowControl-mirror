@@ -48,7 +48,7 @@ public class gcClientVars {
 						return null;
 					}
 					if(config.isFromResource())
-						xLog.getRoot("CLIENT").warning("Created default "+gcClientDefines.CONFIG_FILE);
+						xLog.getRoot(gcClientConfig.LOG_NAME).warning("Created default "+gcClientDefines.CONFIG_FILE);
 				}
 			}
 		}

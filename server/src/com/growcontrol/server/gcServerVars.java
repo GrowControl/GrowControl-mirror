@@ -61,7 +61,7 @@ public class gcServerVars {
 						return null;
 					}
 					if(config.isFromResource())
-						xLog.getRoot("CONFIG").warning("Created default "+gcServerDefines.CONFIG_FILE);
+						xLog.getRoot(gcServerConfig.LOG_NAME).warning("Created default "+gcServerDefines.CONFIG_FILE);
 				}
 			}
 		}

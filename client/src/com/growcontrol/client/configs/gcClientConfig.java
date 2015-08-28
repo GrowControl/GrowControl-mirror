@@ -10,6 +10,7 @@ import com.poixson.commonjava.xLogger.xLevel;
 
 
 public final class gcClientConfig extends xConfig {
+	public static final String LOG_NAME = "CONFIG";
 
 	private volatile Map<String, WindowConfig> windowConfigs = null;
 
