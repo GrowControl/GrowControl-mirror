@@ -8,10 +8,11 @@ import com.growcontrol.client.gcClientDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsObject;
+import com.poixson.commonjava.Utils.xHashable;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public class WindowConfig {
+public class WindowConfig implements xHashable {
 
 	public final String name;
 	public final Integer x;
@@ -92,6 +93,17 @@ xLog.getRoot("config").trace(e);
 
 	public String getWindowName() {
 		return this.name;
+	}
+	@Override
+	public String toString() {
+		return this.name;
+	}
+	@Override
+	public String getKey() {
+		return this.name;
+	}
+	public boolean matches(final xHashable hashable) {
+		throw new UnsupportedOperationException();
 	}
 
 

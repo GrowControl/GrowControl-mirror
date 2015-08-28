@@ -9,10 +9,11 @@ import com.growcontrol.common.gcDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsObject;
+import com.poixson.commonjava.Utils.xHashable;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public class SavedProfileConfig {
+public class SavedProfileConfig implements xHashable {
 
 	public final String name;
 	public final String host;
@@ -75,6 +76,23 @@ xLog.getRoot("config").trace(e);
 		this.port = port;
 		this.user = user;
 		this.pass = pass;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
+	@Override
+	public String getKey() {
+		return this.name;
+	}
+	public boolean matches(final xHashable hashable) {
+		if(hashable == null || !(hashable instanceof SavedProfileConfig) )
+			return false;
+		final SavedProfileConfig profile = (SavedProfileConfig) hashable;
+		return this.getKey().equalsIgnoreCase(profile.getKey());
 	}
 
 
