@@ -16,6 +16,7 @@ public class ProfilesConfig extends xConfig {
 
 
 
+	// new config instance
 	public ProfilesConfig(final Map<String, Object> datamap) {
 		super(datamap);
 	}

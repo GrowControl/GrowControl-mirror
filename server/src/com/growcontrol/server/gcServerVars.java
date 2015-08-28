@@ -1,5 +1,6 @@
 package com.growcontrol.server;
 
+import com.growcontrol.common.meta.MetaRouter;
 import com.growcontrol.server.configs.gcServerConfig;
 import com.poixson.commonapp.config.xConfigLoader;
 import com.poixson.commonjava.Failure;

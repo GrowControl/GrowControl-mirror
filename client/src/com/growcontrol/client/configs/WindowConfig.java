@@ -22,6 +22,7 @@ public class WindowConfig implements xHashable {
 
 
 
+	// configs from set
 	public static Map<String, WindowConfig> get(final Set<Object> dataset) {
 		if(utils.isEmpty(dataset))
 			return null;
@@ -42,6 +43,7 @@ xLog.getRoot("config").trace(e);
 		}
 		return configs;
 	}
+	// config from map
 	public static WindowConfig get(final Map<String, Object> datamap) {
 		if(utils.isEmpty(datamap))
 			return null;
@@ -62,6 +64,7 @@ xLog.getRoot("config").trace(e);
 
 
 
+	// new config instance
 	public WindowConfig(final String name,
 			final Integer x, final Integer y,
 			final Integer w, final Integer h) {

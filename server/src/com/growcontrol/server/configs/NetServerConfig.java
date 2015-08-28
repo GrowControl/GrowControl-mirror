@@ -17,6 +17,7 @@ import com.poixson.commonjava.xLogger.xLog;
 
 
 public class NetServerConfig implements xHashable {
+	private static final String LOG_NAME = "CONFIG";
 
 	public final boolean enabled;
 	public final boolean ssl;
@@ -42,7 +43,7 @@ public class NetServerConfig implements xHashable {
 				final NetServerConfig cfg = get(datamap);
 				configs.put(cfg.getKey(), cfg);
 			} catch (Exception e) {
-xLog.getRoot("config").trace(e);
+xLog.getRoot(LOG_NAME).trace(e);
 			}
 		}
 		return configs;
@@ -72,6 +73,7 @@ xLog.getRoot("config").trace(e);
 
 
 
+	// new config instance
 	public NetServerConfig(
 			final boolean enabled, final boolean ssl,
 			final String host, final int port) {
