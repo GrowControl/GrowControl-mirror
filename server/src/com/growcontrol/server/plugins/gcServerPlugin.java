@@ -6,6 +6,7 @@ import com.growcontrol.common.meta.MetaRouter;
 import com.growcontrol.server.gcServerVars;
 import com.poixson.commonapp.plugin.xJavaPlugin;
 import com.poixson.commonjava.EventListener.xListener;
+import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.handlers.xCommandListener;
 
 
@@ -42,10 +43,11 @@ public abstract class gcServerPlugin extends xJavaPlugin {
 		if(xCommandListener.class.isInstance(listenerClass)) {
 			gcServerVars.commands()
 				.unregister(listenerClass);
-			// unknown
-			} else {
-				throw new RuntimeException("Cannot register unknown listener type: "
-						+listenerClass.getName());
+		// unknown
+		} else {
+xLog.getRoot().warning("Unknown listener type, cannot unregister.");
+//			throw new RuntimeException("Cannot register unknown listener type: "
+//					+listenerClass.getName());
 		}
 	}
 
