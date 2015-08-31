@@ -106,6 +106,7 @@ xLog.getRoot("config").trace(e);
 	public String getKey() {
 		return this.name;
 	}
+	@Override
 	public boolean matches(final xHashable hashable) {
 		throw new UnsupportedOperationException();
 	}
