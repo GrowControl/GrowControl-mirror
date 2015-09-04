@@ -92,11 +92,6 @@ public class NetClient implements NetParent {
 
 
 
-
-
-
-
-
 	/**
 	 * New socket connection established.
 	 * @param state
