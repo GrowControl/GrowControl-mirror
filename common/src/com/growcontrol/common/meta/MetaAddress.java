@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import com.growcontrol.common.gcDefines;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsString;
 
@@ -42,7 +43,7 @@ public class MetaAddress {
 			String hash = null;
 			for(int i=0; i<100; i++) {
 				// generate random hash
-				hash = utilsString.RandomString(MetaRouter.ADDRESS_LENGTH);
+				hash = utilsString.RandomString(gcDefines.ADDRESS_MAX_LENGTH);
 				// be sure hash is unique (rarely a problem)
 				if(!addresses.containsKey(hash))
 					break;

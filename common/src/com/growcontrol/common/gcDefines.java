@@ -9,6 +9,9 @@ public final class gcDefines {
 	public static final String LOG_NAME_CLIENT = "CLIENT";
 
 
+	public static final int ADDRESS_MAX_LENGTH = 8;
+
+
 	// default ports
 	public static final int DEFAULT_SOCKET_PORT_RAW = 1142;
 	public static final int DEFAULT_SOCKET_PORT_SSL = 1143;

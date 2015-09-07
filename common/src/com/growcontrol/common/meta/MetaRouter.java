@@ -15,8 +15,6 @@ import com.poixson.commonjava.Utils.threads.xThreadPool;
 
 public class MetaRouter extends xHandler {
 
-	public static final int ADDRESS_LENGTH = 8;
-
 	private static volatile MetaRouter instance = null;
 	private static final Object lock = new Object();
 
