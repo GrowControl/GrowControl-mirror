@@ -2,62 +2,86 @@ package com.growcontrol.common.meta.metaTypes;
 
 import com.growcontrol.common.meta.InvalidMetaFormatException;
 import com.growcontrol.common.meta.MetaType;
+import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
 
 
 public class MetaPH extends MetaType {
 	private static final long serialVersionUID = 31L;
+	public static final String TYPE_NAME = "pH";
 
 	protected volatile Integer value = null;
 
 
 
-	public static MetaPH get(final String str) {
+	public static MetaPH get() {
+		return new MetaPH();
+	}
+	public static MetaPH get(final String value) {
 		final MetaPH meta = new MetaPH();
-		meta.set(str);
+		meta.set(value);
 		return meta;
 	}
 	@Override
 	public MetaPH clone() {
-		final MetaPH meta = new MetaPH();
-		if(this.value != null)
-			meta.set(this.getStringValue());
-		return meta;
+		return new MetaPH(this);
+	}
+
+
+
+	public MetaPH() {
+	}
+	public MetaPH(final MetaPH value) {
+		this.set(value);
+	}
+	public MetaPH(final String value) {
+		this.set(value);
+	}
+
+
+
+	@Override
+	public String getTypeName() {
+		return TYPE_NAME;
 	}
 
 
 
 	// set value
+	public void set(final MetaPH value) {
+		this.value = value.value;
+	}
 	public void set(final int value) {
 		this.value = new Integer(value);
 	}
 	public void set(final Integer value) {
-		if(value == null)
-			this.value = null;
-		else
-			this.value = new Integer(value.intValue());
+		this.value =
+				value == null
+				? null
+				: new Integer(value.intValue());
 	}
 	@Override
-	public void set(final String str) {
-		if(str == null) {
+	public void set(final String value) {
+		if(utils.isEmpty(value)) {
 			this.value = null;
-			return;
+		} else {
+			final Integer i = utilsNumbers.toInteger(value);
+			if(i == null) throw new InvalidMetaFormatException("'"+value+"'");
+			this.value = i;
 		}
-		final Integer i = utilsNumbers.toInteger(str);
-		if(i == null) throw new InvalidMetaFormatException("'"+str+"'");
-		this.value = i;
 	}
 
 
 
 	// get value
-	public Integer value() {
+	@Override
+	public Integer getValue() {
 		if(this.value == null)
 			return null;
 		return new Integer(this.value.intValue());
 	}
 	@Override
-	public String getStringValue() {
+	public String getString() {
 		if(this.value == null)
 			return null;
 		return this.value.toString();

@@ -2,62 +2,86 @@ package com.growcontrol.common.meta.metaTypes;
 
 import com.growcontrol.common.meta.InvalidMetaFormatException;
 import com.growcontrol.common.meta.MetaType;
+import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
 
 
 public class MetaThermal extends MetaType {
 	private static final long serialVersionUID = 31L;
+	public static final String TYPE_NAME = "Thermal";
 
 	protected volatile Double value = null;
 
 
 
-	public static MetaThermal get(final String str) {
+	public static MetaThermal get() {
+		return new MetaThermal();
+	}
+	public static MetaThermal get(final String value) {
 		final MetaThermal meta = new MetaThermal();
-		meta.set(str);
+		meta.set(value);
 		return meta;
 	}
 	@Override
 	public MetaThermal clone() {
-		final MetaThermal meta = new MetaThermal();
-		if(this.value != null)
-			meta.set(this.getStringValue());
-		return meta;
+		return new MetaThermal(this);
+	}
+
+
+
+	public MetaThermal() {
+	}
+	public MetaThermal(final MetaThermal value) {
+		this.set(value);
+	}
+	public MetaThermal(final String value) {
+		this.set(value);
+	}
+
+
+
+	@Override
+	public String getTypeName() {
+		return TYPE_NAME;
 	}
 
 
 
 	// set value
+	public void set(final MetaThermal value) {
+		this.value = value.value;
+	}
 	public void set(final double value) {
 		this.value = new Double(value);
 	}
 	public void set(final Double value) {
-		if(value == null)
-			this.value = null;
-		else
-			this.value = new Double(value.doubleValue());
+		this.value =
+				value == null
+				? null
+				: new Double(value.doubleValue());
 	}
 	@Override
-	public void set(final String str) {
-		if(str == null) {
+	public void set(final String value) {
+		if(utils.isEmpty(value)) {
 			this.value = null;
-			return;
+		} else {
+			final Double d = utilsNumbers.toDouble(value);
+			if(d == null) throw new InvalidMetaFormatException("'"+value+"'");
+			this.value = d;
 		}
-		final Double d = utilsNumbers.toDouble(str);
-		if(d == null) throw new InvalidMetaFormatException("'"+str+"'");
-		this.value = d;
 	}
 
 
 
 	// get value
-	public Double value() {
+	@Override
+	public Double getValue() {
 		if(this.value == null)
 			return null;
 		return new Double(this.value.doubleValue());
 	}
 	@Override
-	public String getStringValue() {
+	public String getString() {
 		if(this.value == null)
 			return null;
 		return this.value.toString();

@@ -2,62 +2,86 @@ package com.growcontrol.common.meta.metaTypes;
 
 import com.growcontrol.common.meta.InvalidMetaFormatException;
 import com.growcontrol.common.meta.MetaType;
+import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
 
 
 public class MetaIO extends MetaType {
 	private static final long serialVersionUID = 31L;
+	public static final String TYPE_NAME = "IO";
 
 	protected volatile Boolean value = null;
 
 
 
-	public static MetaIO get(final String str) {
+	public static MetaIO get() {
+		return new MetaIO();
+	}
+	public static MetaIO get(final String value) {
 		final MetaIO meta = new MetaIO();
-		meta.set(str);
+		meta.set(value);
 		return meta;
 	}
 	@Override
 	public MetaIO clone() {
-		final MetaIO meta = new MetaIO();
-		if(this.value != null)
-			meta.set(this.getStringValue());
-		return meta;
+		return new MetaIO(this);
+	}
+
+
+
+	public MetaIO() {
+	}
+	public MetaIO(final MetaIO value) {
+		this.set(value);
+	}
+	public MetaIO(final String value) {
+		this.set(value);
+	}
+
+
+
+	@Override
+	public String getTypeName() {
+		return TYPE_NAME;
 	}
 
 
 
 	// set value
+	public void set(final MetaIO value) {
+		this.value = value.value;
+	}
 	public void set(final boolean value) {
 		this.value = new Boolean(value);
 	}
 	public void set(final Boolean value) {
-		if(value == null)
-			this.value = null;
-		else
-			this.value = new Boolean(value.booleanValue());
+		this.value =
+				value == null
+				? null
+				: new Boolean(value.booleanValue());
 	}
 	@Override
-	public void set(final String str) {
-		if(str == null) {
+	public void set(final String value) {
+		if(utils.isEmpty(value)) {
 			this.value = null;
-			return;
+		} else {
+			final Boolean b = utilsNumbers.toBoolean(value);
+			if(b == null) throw new InvalidMetaFormatException("'"+value+"'");
+			this.value = b;
 		}
-		final Boolean b = utilsNumbers.toBoolean(str);
-		if(b == null) throw new InvalidMetaFormatException("'"+str+"'");
-		this.value = b;
 	}
 
 
 
 	// get value
-	public Boolean value() {
+	@Override
+	public Boolean getValue() {
 		if(this.value == null)
 			return null;
 		return new Boolean(this.value.booleanValue());
 	}
 	@Override
-	public String getStringValue() {
+	public String getString() {
 		if(this.value == null)
 			return null;
 		return this.value.toString();
