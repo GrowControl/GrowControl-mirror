@@ -6,15 +6,15 @@ import com.poixson.commonjava.EventListener.xEventData;
 public class MetaEvent extends xEventData {
 
 	public final MetaAddress destination;
-	public final Meta meta;
+	public final MetaType value;
 
 
 
-	public MetaEvent(final MetaAddress address, final Meta meta) {
+	public MetaEvent(final MetaAddress address, final MetaType value) {
 		if(address == null) throw new NullPointerException("address argument is required!");
-		if(meta    == null) throw new NullPointerException("meta argument is required!");
+		if(value   == null) throw new NullPointerException("meta argument is required!");
 		this.destination = address;
-		this.meta = meta;
+		this.value       = value;
 	}
 
 
@@ -24,7 +24,7 @@ public class MetaEvent extends xEventData {
 		final StringBuilder str = new StringBuilder();
 		str.append(this.destination.toString())
 			.append("|")
-			.append(this.meta.toString());
+			.append(this.value.toString());
 		return str.toString();
 	}
 

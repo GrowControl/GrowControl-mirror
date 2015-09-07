@@ -80,16 +80,16 @@ public class MetaRouter extends xHandler {
 		if(utils.isEmpty(value))   throw new NullPointerException("value argument is required!");
 		this.route(
 			MetaAddress.get(address),
-			Meta.get(value)
+			MetaType.get(value)
 		);
 	}
-	public void route(final MetaAddress address, final Meta meta) {
+	public void route(final MetaAddress address, final MetaType value) {
 		if(address == null) throw new NullPointerException("address argument is required!");
-		if(meta    == null) throw new NullPointerException("meta argument is required!");
+		if(value   == null) throw new NullPointerException("meta argument is required!");
 		this.route(
 			new MetaEvent(
 				address,
-				meta
+				value
 			)
 		);
 	}
@@ -128,7 +128,7 @@ public class MetaRouter extends xHandler {
 
 	// xRunnableEvent
 	protected xRunnable getRunnable(final MetaListener listener, final MetaEvent event) {
-		return new xRunnable("MetaEvent-"+event.destination+"-"+event.meta.toString()) {
+		return new xRunnable("MetaEvent-"+event.destination+"-"+event.value.toString()) {
 			private volatile MetaListener listener;
 			private volatile MetaEvent event;
 			public xRunnable init(final MetaListener listener, final MetaEvent event) {

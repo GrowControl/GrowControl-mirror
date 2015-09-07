@@ -1,11 +1,11 @@
 package com.growcontrol.common.meta.metaTypes;
 
 import com.growcontrol.common.meta.InvalidMetaFormatException;
-import com.growcontrol.common.meta.Meta;
+import com.growcontrol.common.meta.MetaType;
 import com.poixson.commonjava.Utils.utilsNumbers;
 
 
-public class MetaIO extends Meta {
+public class MetaIO extends MetaType {
 	private static final long serialVersionUID = 31L;
 
 	protected volatile Boolean value = null;

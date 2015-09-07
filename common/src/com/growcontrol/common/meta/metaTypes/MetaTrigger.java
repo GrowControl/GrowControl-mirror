@@ -1,9 +1,9 @@
 package com.growcontrol.common.meta.metaTypes;
 
-import com.growcontrol.common.meta.Meta;
+import com.growcontrol.common.meta.MetaType;
 
 
-public class MetaTrigger extends Meta {
+public class MetaTrigger extends MetaType {
 	private static final long serialVersionUID = 31L;
 
 

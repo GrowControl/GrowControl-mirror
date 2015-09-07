@@ -5,36 +5,36 @@ import java.io.Serializable;
 import com.growcontrol.common.meta.metaTypes.MetaString;
 
 
-public abstract class Meta implements Serializable {
+public abstract class MetaType implements Serializable {
 	private static final long serialVersionUID = 31L;
 
 
 
-	public static Meta get(final String data) {
+	public static MetaType get(final String data) {
 		return MetaString.get(data);
 	}
-	protected Meta() {
+	protected MetaType() {
 	}
 	@Override
-	public abstract Meta clone();
+	public abstract MetaType clone();
 
 
 
-	public static Meta convert(final Class<? extends Meta> clss, final Meta meta)
+	public static MetaType convert(final Class<? extends MetaType> clss, final MetaType type)
 			throws ReflectiveOperationException {
-		if(meta.getClass().equals(clss))
-			return meta;
-		final Meta m = clss.newInstance();
-		m.set(
-			meta.getStringValue()
+		if(type.getClass().equals(clss))
+			return type;
+		final MetaType meta = clss.newInstance();
+		meta.set(
+			type.getStringValue()
 		);
-		return m;
+		return meta;
 	}
 
 
 
 	// set value
-	public void set(final Meta meta) {
+	public void set(final MetaType meta) {
 		this.set(meta.getStringValue());
 	}
 	public abstract void set(final String str);

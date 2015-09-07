@@ -1,10 +1,10 @@
 package com.growcontrol.common.meta.metaTypes;
 
-import com.growcontrol.common.meta.Meta;
+import com.growcontrol.common.meta.MetaType;
 import com.poixson.commonjava.Utils.utils;
 
 
-public class MetaString extends Meta {
+public class MetaString extends MetaType {
 	private static final long serialVersionUID = 31L;
 
 	protected volatile String value = null;
