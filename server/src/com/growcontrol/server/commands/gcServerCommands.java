@@ -1,9 +1,9 @@
 package com.growcontrol.server.commands;
 
 import com.growcontrol.common.gcDefines;
-import com.growcontrol.common.meta.Meta;
 import com.growcontrol.common.meta.MetaAddress;
 import com.growcontrol.common.meta.MetaRouter;
+import com.growcontrol.common.meta.MetaType;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.xEvents.annotations.xEvent;
@@ -216,7 +216,7 @@ public final class gcServerCommands implements xCommandListener {
 		}
 		event.setHandled();
 		final MetaAddress addr = MetaAddress.get(event.arg(1));
-		final Meta meta = Meta.get(event.arg(2));
+		final MetaType meta = MetaType.get(event.arg(2));
 		this.log().stats("Setting [ "+addr.toString()+" ] to [ "+meta.toString()+" ]");
 		MetaRouter.get().route(addr, meta);
 	}

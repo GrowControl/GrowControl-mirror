@@ -13,7 +13,7 @@ import com.poixson.commonjava.xEvents.xEventListener.ListenerPriority;
 import com.poixson.commonjava.xEvents.xHandler;
 
 
-public class MetaRouter extends xHandler {
+public class MetaRouter extends xHandler<MetaListener> {
 
 	private static volatile MetaRouter instance = null;
 	private static final Object lock = new Object();

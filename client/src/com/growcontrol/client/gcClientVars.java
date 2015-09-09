@@ -3,9 +3,9 @@ package com.growcontrol.client;
 import com.growcontrol.client.configs.ProfilesConfig;
 import com.growcontrol.client.configs.gcClientConfig;
 import com.poixson.commonapp.config.xConfigLoader;
+import com.poixson.commonapp.plugin.xHandlerPlugins;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.Utils.Keeper;
-import com.poixson.commonjava.xEvents.xHandler;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -19,8 +19,8 @@ public class gcClientVars {
 	private static ProfilesConfig profilesConfig = null;
 
 	// handlers
-	private static final xHandler system  = new xHandler();
-	private static final xHandler plugins = new xHandler();
+	//private static final xHandlerSystem  system  = new xHandlerSystem();
+	private static final xHandlerPlugins plugins = new xHandlerPlugins();
 
 
 
@@ -81,15 +81,15 @@ public class gcClientVars {
 
 
 
-	// system event handler
-	public static xHandler system() {
-		return system;
-	}
+//	// system event handler
+//	public static xHandlerSystem system() {
+//		return system;
+//	}
 
 
 
 	// plugin event handler
-	public static xHandler plugins() {
+	public static xHandlerPlugins plugins() {
 		return plugins;
 	}
 
