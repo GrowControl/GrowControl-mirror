@@ -19,10 +19,10 @@ import com.poixson.commonapp.app.annotations.xAppStep.StepType;
 import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.scheduler.ticker.xTickHandler;
 import com.poixson.commonjava.scheduler.ticker.xTickPrompt;
-import com.poixson.commonjava.scheduler.ticker.xTicker;
-import com.poixson.commonjava.xEvents.xHandler;
 import com.poixson.commonjava.xLogger.xLog;
+import com.poixson.commonjava.xLogger.commands.xCommandsHandler;
 
 
 public class gcServer extends xApp {
@@ -96,7 +96,7 @@ public class gcServer extends xApp {
 	// command prompt
 	@xAppStep(type=StepType.STARTUP, title="Commands", priority=30)
 	public void __STARTUP_commands() {
-		final xHandler handler = gcServerVars.commands();
+		final xCommandsHandler handler = gcServerVars.commands();
 		handler.register(
 				new gcCommonCommands()
 		);
@@ -153,7 +153,7 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.STARTUP, title="Ticker", priority=80)
 	public void __STARTUP_ticker() {
 		final gcServerConfig config = gcServerVars.getConfig();
-		final xTicker ticker = xTicker.get();
+		final xTickHandler ticker = xTickHandler.get();
 		ticker.setInterval(
 				config.getTickInterval()
 		);
@@ -257,7 +257,7 @@ public class gcServer extends xApp {
 	// stop ticker
 	@xAppStep(type=StepType.SHUTDOWN, title="Ticker", priority=80)
 	public void __SHUTDOWN_ticker() {
-		xTicker.get()
+		xTickHandler.get()
 			.Stop();
 	}
 
