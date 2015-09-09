@@ -4,8 +4,8 @@ import com.growcontrol.common.gcDefines;
 import com.growcontrol.server.gcServerVars;
 import com.growcontrol.server.configs.gcServerConfig;
 import com.poixson.commonjava.xLogger.xLog;
-import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
-import com.poixson.commonjava.xLogger.handlers.xCommandListener;
+import com.poixson.commonjava.xLogger.commands.xCommandEvent;
+import com.poixson.commonjava.xLogger.commands.xCommandListener;
 
 
 public class gcServerCommands_config implements xCommandListener {

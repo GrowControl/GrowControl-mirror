@@ -5,12 +5,11 @@ import com.growcontrol.common.meta.Meta;
 import com.growcontrol.common.meta.MetaAddress;
 import com.growcontrol.common.meta.MetaRouter;
 import com.poixson.commonapp.app.xApp;
-import com.poixson.commonjava.EventListener.xEvent;
-import com.poixson.commonjava.EventListener.xEvent.Priority;
 import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.xEvents.annotations.xEvent;
 import com.poixson.commonjava.xLogger.xLog;
-import com.poixson.commonjava.xLogger.handlers.xCommandEvent;
-import com.poixson.commonjava.xLogger.handlers.xCommandListener;
+import com.poixson.commonjava.xLogger.commands.xCommandEvent;
+import com.poixson.commonjava.xLogger.commands.xCommandListener;
 
 
 public final class gcServerCommands implements xCommandListener {
@@ -23,8 +22,8 @@ public final class gcServerCommands implements xCommandListener {
 	// server commands
 	@Override
 	@xEvent(
-			priority=Priority.NORMAL,
-			threaded=false,
+			priority=ListenerPriority.NORMAL,
+//			async=false,
 			filterHandled=true,
 			filterCancelled=true)
 	public void onCommand(final xCommandEvent event) {

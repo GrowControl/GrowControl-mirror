@@ -1,7 +1,7 @@
 package com.growcontrol.client.plugins;
 
 import com.poixson.commonapp.plugin.xJavaPlugin;
-import com.poixson.commonjava.EventListener.xListener;
+import com.poixson.commonjava.xEvents.xEventListener;
 
 
 public abstract class gcClientPlugin extends xJavaPlugin {
@@ -9,7 +9,7 @@ public abstract class gcClientPlugin extends xJavaPlugin {
 
 
 	@Override
-	public void register(final xListener listener) {
+	public void register(final xEventListener listener) {
 		if(listener == null) throw new NullPointerException("Cannot register null listener!");
 //		// command listener
 //		if(listener instanceof xCommandListener) {
@@ -25,7 +25,7 @@ public abstract class gcClientPlugin extends xJavaPlugin {
 
 
 	@Override
-	public void unregister(final Class<? extends xListener> listenerClass) {
+	public void unregister(final Class<? extends xEventListener> listenerClass) {
 		if(listenerClass == null) throw new NullPointerException("Cannot unregister null listener!");
 //		// command listener
 //		if(xCommandListener.class.isInstance(listenerClass)) {

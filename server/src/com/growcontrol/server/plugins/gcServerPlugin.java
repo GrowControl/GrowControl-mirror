@@ -5,9 +5,9 @@ import com.growcontrol.common.meta.MetaListener;
 import com.growcontrol.common.meta.MetaRouter;
 import com.growcontrol.server.gcServerVars;
 import com.poixson.commonapp.plugin.xJavaPlugin;
-import com.poixson.commonjava.EventListener.xListener;
+import com.poixson.commonjava.xEvents.xEventListener;
 import com.poixson.commonjava.xLogger.xLog;
-import com.poixson.commonjava.xLogger.handlers.xCommandListener;
+import com.poixson.commonjava.xLogger.commands.xCommandListener;
 
 
 public abstract class gcServerPlugin extends xJavaPlugin {
@@ -15,7 +15,7 @@ public abstract class gcServerPlugin extends xJavaPlugin {
 
 
 	@Override
-	public void register(final xListener listener) {
+	public void register(final xEventListener listener) {
 		if(listener == null) throw new NullPointerException("Cannot register null listener!");
 		// command listener
 		if(listener instanceof xCommandListener) {
@@ -37,7 +37,7 @@ public abstract class gcServerPlugin extends xJavaPlugin {
 
 
 	@Override
-	public void unregister(final Class<? extends xListener> listenerClass) {
+	public void unregister(final Class<? extends xEventListener> listenerClass) {
 		if(listenerClass == null) throw new NullPointerException("Cannot unregister null listener!");
 		// command listener
 		if(xCommandListener.class.isInstance(listenerClass)) {

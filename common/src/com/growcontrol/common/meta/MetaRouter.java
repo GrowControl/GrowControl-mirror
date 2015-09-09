@@ -3,14 +3,14 @@ package com.growcontrol.common.meta;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import com.poixson.commonjava.EventListener.xEvent.Priority;
-import com.poixson.commonjava.EventListener.xEventData;
-import com.poixson.commonjava.EventListener.xHandler;
-import com.poixson.commonjava.EventListener.xListener;
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.xRunnable;
 import com.poixson.commonjava.Utils.threads.xThreadPool;
+import com.poixson.commonjava.xEvents.xEventData;
+import com.poixson.commonjava.xEvents.xEventListener;
+import com.poixson.commonjava.xEvents.xEventListener.ListenerPriority;
+import com.poixson.commonjava.xEvents.xHandler;
 
 
 public class MetaRouter extends xHandler {
@@ -165,12 +165,12 @@ public class MetaRouter extends xHandler {
 
 
 	@Override
-	public void register(final xListener listener) {
+	public void register(final xEventListener listener) {
 		throw new UnsupportedOperationException("Must supply MetaAddress argument "+
 				"when registering a MetaListener");
 	}
 	@Override
-	public void unregister(final xListener listener) {
+	public void unregister(final xEventListener listener) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -179,11 +179,11 @@ public class MetaRouter extends xHandler {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void triggerNow(final xEventData event, final Priority onlyPriority) {
+	public void triggerNow(final xEventData event, final ListenerPriority onlyPriority) {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void triggerNow(final xThreadPool pool, final xEventData event, final Priority onlyPriority) {
+	public void triggerNow(final xThreadPool pool, final xEventData event, final ListenerPriority onlyPriority) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -192,21 +192,21 @@ public class MetaRouter extends xHandler {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void triggerLater(final xEventData event, final Priority onlyPriority) {
+	public void triggerLater(final xEventData event, final ListenerPriority onlyPriority) {
 		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void triggerLater(final xThreadPool pool, final xEventData event, final Priority onlyPriority) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	protected xRunnable getRunnable(final xEventData event, final Priority onlyPriority) {
+	public void triggerLater(final xThreadPool pool, final xEventData event, final ListenerPriority onlyPriority) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void doTrigger(final xEventData event, final Priority priority) {
+	protected xRunnable getRunnable(final xEventData event, final ListenerPriority onlyPriority) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public void doTrigger(final xEventData event, final ListenerPriority priority) {
 		throw new UnsupportedOperationException();
 	}
 

@@ -1,6 +1,6 @@
 package com.growcontrol.common.meta;
 
-import com.poixson.commonjava.EventListener.xEventData;
+import com.poixson.commonjava.xEvents.xEventData;
 
 
 public class MetaEvent extends xEventData {

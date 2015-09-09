@@ -1,9 +1,9 @@
 package com.growcontrol.common.meta;
 
-import com.poixson.commonjava.EventListener.xListener;
+import com.poixson.commonjava.xEvents.xEventListener;
 
 
-public interface MetaListener extends xListener {
+public interface MetaListener extends xEventListener {
 
 
 	public void onMetaEvent(final MetaEvent event);
