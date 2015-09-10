@@ -5,15 +5,12 @@ import java.util.concurrent.ConcurrentMap;
 
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.Utils.xRunnable;
-import com.poixson.commonjava.Utils.threads.xThreadPool;
 import com.poixson.commonjava.xEvents.xEventData;
 import com.poixson.commonjava.xEvents.xEventListener;
-import com.poixson.commonjava.xEvents.xEventListener.ListenerPriority;
-import com.poixson.commonjava.xEvents.xHandler;
+import com.poixson.commonjava.xEvents.xHandlerGeneric;
 
 
-public class MetaRouter extends xHandler<MetaListener> {
+public class MetaRouter extends xHandlerGeneric {
 
 	private static volatile MetaRouter instance = null;
 	private static final Object lock = new Object();
@@ -39,6 +36,19 @@ public class MetaRouter extends xHandler<MetaListener> {
 
 
 
+	// listener type
+	@Override
+	public Class<? extends xEventListener> getEventListenerType() {
+		return MetaListener.class;
+	}
+	// event type
+	@Override
+	public Class<? extends xEventData> getEventDataType() {
+		return MetaEvent.class;
+	}
+
+
+
 	public String register(final String address, final MetaListener listener) {
 		return this.register(
 			MetaAddress.get(address),
@@ -57,157 +67,68 @@ public class MetaRouter extends xHandler<MetaListener> {
 		known.put(addr, listener);
 		return addr.hash;
 	}
-
-
-
-	public MetaAddress[] getKnown() {
-		final MetaAddress[] addresses;
-		synchronized(known) {
-			addresses =
-				known.isEmpty()
-				? new MetaAddress[0]
-				: known.keySet().toArray(new MetaAddress[0]);
-		}
-		return addresses;
+	@Override
+	public void register(final xEventListener listener) {
+		throw new UnsupportedOperationException();
 	}
 
 
 
-	public void route(final String address, final String value) {
-		if(utils.isEmpty(address)) throw new NullPointerException("address argument is required!");
-		if(utils.isEmpty(value))   throw new NullPointerException("value argument is required!");
+	// route an event
+	public void route(final String destAddr, final String value) {
+		if(utils.isEmpty(destAddr)) throw new NullPointerException("destAddr argument is required!");
+		if(utils.isEmpty(value))    throw new NullPointerException("value argument is required!");
+		final MetaType metaValue = MetaType.get(value);
+		if(metaValue == null) throw new IllegalArgumentException("Invalid meta value: "+value);
 		this.route(
-			MetaAddress.get(address),
-			MetaType.get(value)
+				destAddr,
+				metaValue
 		);
 	}
-	public void route(final MetaAddress address, final MetaType value) {
-		if(address == null) throw new NullPointerException("address argument is required!");
-		if(value   == null) throw new NullPointerException("meta argument is required!");
+	public void route(final String destAddr, final MetaType value) {
+		if(utils.isEmpty(destAddr)) throw new NullPointerException("destAddr argument is required!");
+		if(value == null)           throw new NullPointerException("value argument is required!");
+		final MetaAddress addr = MetaAddress.get(destAddr);
+		if(addr == null) throw new IllegalArgumentException("Invalid destination address: "+destAddr);
 		this.route(
-			new MetaEvent(
-				address,
+				addr,
 				value
-			)
 		);
 	}
-	public boolean route(final MetaEvent event) {
-		if(event == null) throw new NullPointerException("event argument is required!");
-		return this.route( (xThreadPool) null, event );
-	}
-	public boolean route(final xThreadPool pool, final MetaEvent event) {
-		if(event == null) throw new NullPointerException("event argument is required!");
-		// get address listener
-		final MetaListener listener = this.getAddressListener(event.destination);
-		if(listener == null) {
-			log().warning("No destination found for meta event: "+event.toString());
-			return false;
-		}
-		// trigger the event
-		final xThreadPool p =
-			pool == null
-			? xThreadPool.getMainPool()
-			: pool;
-		p.runLater(
-			this.getRunnable(listener, event)
-		);
-		return true;
+	public void route(final MetaAddress dest, final MetaType value) {
+		if(dest  == null) throw new NullPointerException("dest argument is required!");
+		if(value == null) throw new NullPointerException("value argument is required!");
+		final MetaEvent event = new MetaEvent(dest, value);
+		this.trigger(event);
 	}
 
 
 
-	// get listener by address
-	public MetaListener getAddressListener(final MetaAddress address) {
-		if(address == null) throw new NullPointerException("address argument is required!");
-		return known.get(address);
+	// get all known addresses
+	public MetaAddress[] getKnown() {
+		return known.values().toArray(new MetaAddress[0]);
 	}
-
-
-
-	// xRunnableEvent
-	protected xRunnable getRunnable(final MetaListener listener, final MetaEvent event) {
-		return new xRunnable("MetaEvent-"+event.destination+"-"+event.value.toString()) {
-			private volatile MetaListener listener;
-			private volatile MetaEvent event;
-			public xRunnable init(final MetaListener listener, final MetaEvent event) {
-				this.listener = listener;
-				this.event = event;
-				return this;
-			}
-			@Override
-			public void run() {
-				if(this.event == null) throw new NullPointerException("event variable cannot be null!");
-				doRoute(this.listener, this.event);
-			}
-		}.init(listener, event);
-	}
-
-
-
-	public void doRoute(final MetaListener listener, final MetaEvent event) {
-		if(listener == null) throw new NullPointerException("listener argument is required!");
-		if(event == null)    throw new NullPointerException("event argument is required!");
-		listener.onMetaEvent(event);
-	}
+//		final MetaAddress[] addresses;
+//		synchronized(known) {
+//			addresses =
+//				known.isEmpty()
+//				? new MetaAddress[0]
+//				: known.keySet().toArray(new MetaAddress[0]);
+//		}
+//		return addresses;
+//	}
+//	// get listener by address string
+//	public MetaListener getAddressListener(final MetaAddress address) {
+//		if(address == null) throw new NullPointerException("address argument is required!");
+//		return known.get(address);
+//	}
 
 
 
 	@Override
 	public void unregisterAll() {
-		this.listeners.clear();
-	}
-
-
-
-	// ==================================================
-	// disable these functions
-
-
-
-	@Override
-	public void register(final xEventListener listener) {
-		throw new UnsupportedOperationException("Must supply MetaAddress argument "+
-				"when registering a MetaListener");
-	}
-	@Override
-	public void unregister(final xEventListener listener) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void triggerNow(final xEventData event) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void triggerNow(final xEventData event, final ListenerPriority onlyPriority) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void triggerNow(final xThreadPool pool, final xEventData event, final ListenerPriority onlyPriority) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void triggerLater(final xEventData event) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void triggerLater(final xEventData event, final ListenerPriority onlyPriority) {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void triggerLater(final xThreadPool pool, final xEventData event, final ListenerPriority onlyPriority) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	protected xRunnable getRunnable(final xEventData event, final ListenerPriority onlyPriority) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public void doTrigger(final xEventData event, final ListenerPriority priority) {
-		throw new UnsupportedOperationException();
+		super.unregisterAll();
+		known.clear();
 	}
 
 
