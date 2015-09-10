@@ -231,7 +231,7 @@ public final class gcServerCommands implements xCommandListener {
 
 
 	protected void _list(final xCommandEvent event) {
-		if(event.isHelp()) {
+		if(event.isHelp() || event.numArgs() < 1) {
 			this._list_help(event);
 			return;
 		}
@@ -241,6 +241,7 @@ public final class gcServerCommands implements xCommandListener {
 			this.publish("THREADS... (sorry, this is unfinished)");
 			break;
 		case "addresses":
+		case "addr":
 			final MetaRouter router = MetaRouter.get();
 			// dests
 			this.publish("Destination Addresses");
@@ -254,6 +255,9 @@ public final class gcServerCommands implements xCommandListener {
 			for(final MetaAddress addr : router.getKnownSources())
 				this.publish("  "+addr.hash);
 			this.publish();
+			break;
+		default:
+			this._list_help(event);
 			break;
 		}
 	}

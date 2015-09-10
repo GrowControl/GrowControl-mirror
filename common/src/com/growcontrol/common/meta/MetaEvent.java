@@ -24,7 +24,7 @@ public class MetaEvent extends xEventData {
 	public String toString() {
 		final StringBuilder str = new StringBuilder();
 		str.append(this.destination.toString())
-			.append("|")
+			.append(">")
 			.append(this.value.toString());
 		return str.toString();
 	}
