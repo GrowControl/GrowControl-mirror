@@ -5,6 +5,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import com.growcontrol.common.meta.exceptions.InvalidMetaValueException;
+import com.growcontrol.common.meta.exceptions.UnknownAddressException;
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.xEvents.xEventData;
@@ -59,8 +61,7 @@ public class MetaRouter extends xHandlerGeneric {
 		if(utils.isEmpty(addrStr)) throw new NullPointerException("addrStr argument is required!");
 		if(listener == null)       throw new NullPointerException("listener argument is required!");
 		final MetaAddress address = MetaAddress.get(addrStr);
-		if(address == null) throw new IllegalArgumentException("Invalid address argument: "+addrStr);
-//		if(address == null) throw new UnknownAddressException(address);
+		if(address == null) throw new UnknownAddressException(addrStr);
 		return this.register(
 			address,
 			listener
@@ -92,7 +93,7 @@ public class MetaRouter extends xHandlerGeneric {
 		if(utils.isEmpty(destAddr)) throw new NullPointerException("destAddr argument is required!");
 		if(utils.isEmpty(value))    throw new NullPointerException("value argument is required!");
 		final MetaType metaValue = MetaType.get(value);
-		if(metaValue == null) throw new IllegalArgumentException("Invalid meta value: "+value);
+		if(metaValue == null) throw new InvalidMetaValueException(value);
 		this.route(
 				destAddr,
 				metaValue
@@ -102,7 +103,7 @@ public class MetaRouter extends xHandlerGeneric {
 		if(utils.isEmpty(destAddr)) throw new NullPointerException("destAddr argument is required!");
 		if(value == null)           throw new NullPointerException("value argument is required!");
 		final MetaAddress addr = MetaAddress.get(destAddr);
-		if(addr == null) throw new IllegalArgumentException("Invalid destination address: "+destAddr);
+		if(addr == null) throw new UnknownAddressException(destAddr);
 		this.route(
 				addr,
 				value

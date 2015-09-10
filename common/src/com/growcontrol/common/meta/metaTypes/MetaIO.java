@@ -1,7 +1,7 @@
 package com.growcontrol.common.meta.metaTypes;
 
-import com.growcontrol.common.meta.InvalidMetaFormatException;
 import com.growcontrol.common.meta.MetaType;
+import com.growcontrol.common.meta.exceptions.InvalidMetaValueException;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
 
@@ -66,7 +66,7 @@ public class MetaIO extends MetaType {
 			this.value = null;
 		} else {
 			final Boolean b = utilsNumbers.toBoolean(value);
-			if(b == null) throw new InvalidMetaFormatException("'"+value+"'");
+			if(b == null) throw new InvalidMetaValueException(value);
 			this.value = b;
 		}
 	}

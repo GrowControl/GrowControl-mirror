@@ -1,16 +1,16 @@
-package com.growcontrol.common.meta;
+package com.growcontrol.common.meta.exceptions;
 
 
-public class InvalidMetaFormatException extends NumberFormatException {
+public class InvalidMetaValueException extends RuntimeException {
 	private static final long serialVersionUID = 31L;
 
 
 
-	public InvalidMetaFormatException() {
+	public InvalidMetaValueException() {
 		super();
 	}
-	public InvalidMetaFormatException(final String msg) {
-		super(msg);
+	public InvalidMetaValueException(final String value) {
+		super("Invalid meta value: "+value);
 	}
 
 
