@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentMap;
 import com.growcontrol.common.gcDefines;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsString;
+import com.poixson.commonjava.xLogger.xLog;
 
 
 public class MetaAddress {
@@ -47,11 +48,11 @@ public class MetaAddress {
 				// be sure hash is unique (rarely a problem)
 				if(!addresses.containsKey(hash))
 					break;
-				MetaRouter.log().finest("Duplicate address hash generated, trying again..");
+xLog.getRoot().finest("Duplicate address hash generated, trying again..");
 			}
 			if(utils.isEmpty(hash))
 				throw new RuntimeException("Failed to generate a unique address hash");
-			MetaRouter.log().finest("Generated a unique random address hash: "+hash);
+xLog.getRoot().finest("Generated a unique random address hash: "+hash);
 			addr = get(hash);
 		}
 		return addr;

@@ -11,6 +11,7 @@ public class MetaEvent extends xEventData {
 
 
 	public MetaEvent(final MetaAddress address, final MetaType value) {
+		super();
 		if(address == null) throw new NullPointerException("address argument is required!");
 		if(value   == null) throw new NullPointerException("meta argument is required!");
 		this.destination = address;

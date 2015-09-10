@@ -40,7 +40,7 @@ public class NetClient implements NetParent {
 
 
 	//throws UnknownHostException, SocketException, InterruptedException {
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 	public NetClient(final SavedProfile profile)
 			throws UnknownHostException, InterruptedException {
 		if(profile == null) throw new NullPointerException("profile argument is required!");

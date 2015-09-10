@@ -42,7 +42,7 @@ public abstract class gcServerPlugin extends xJavaPlugin {
 		// command listener
 		if(xCommandListener.class.isInstance(listenerClass)) {
 			gcServerVars.commands()
-				.unregister(listenerClass);
+				.unregisterType(listenerClass);
 		// unknown
 		} else {
 xLog.getRoot().warning("Unknown listener type, cannot unregister.");
