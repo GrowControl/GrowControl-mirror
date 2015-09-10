@@ -19,7 +19,7 @@ public class gcCommonCommands implements xCommandListener {
 			filterHandled=true,
 			filterCancelled=true)
 	public void onCommand(final xCommandEvent event) {
-		switch(event.arg(0)) {
+		switch(event.getArg(0)) {
 		case "test":
 			this._test(event);
 			break;

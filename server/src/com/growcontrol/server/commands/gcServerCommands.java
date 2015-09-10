@@ -31,7 +31,7 @@ public final class gcServerCommands implements xCommandListener {
 			this.inconfig.onCommand(event);
 			return;
 		}
-		switch(event.arg(0)) {
+		switch(event.getArg(0)) {
 		// config mode
 		case "config":
 			if(event.isHelp()) {
@@ -136,7 +136,7 @@ public final class gcServerCommands implements xCommandListener {
 		event.setHandled();
 		final StringBuilder msg = new StringBuilder();
 		msg.append(" (console) ");
-		msg.append(event.commandStr.substring(event.arg(0).length() + 1));
+		msg.append(event.commandStr.substring(event.getArg(0).length() + 1));
 		this.publish(msg.toString());
 	}
 	protected void _say_help(final xCommandEvent event) {
@@ -174,7 +174,7 @@ public final class gcServerCommands implements xCommandListener {
 		}
 		event.setHandled();
 		this.publish();
-		if("gc".equals(event.arg(1))) {
+		if("gc".equals(event.getArg(1))) {
 			this.publish("Performing garbage collection..");
 			System.gc();
 		}
@@ -215,8 +215,8 @@ public final class gcServerCommands implements xCommandListener {
 			return;
 		}
 		event.setHandled();
-		final MetaAddress addr = MetaAddress.get(event.arg(1));
-		final MetaType meta = MetaType.get(event.arg(2));
+		final MetaAddress addr = MetaAddress.get(event.getArg(1));
+		final MetaType meta = MetaType.get(event.getArg(2));
 		this.log().stats("Setting [ "+addr.toString()+" ] to [ "+meta.toString()+" ]");
 		MetaRouter.get().route(addr, meta);
 	}
@@ -236,7 +236,7 @@ public final class gcServerCommands implements xCommandListener {
 			return;
 		}
 		event.setHandled();
-		switch(event.arg(1)) {
+		switch(event.getArg(1)) {
 		case "threads":
 			this.publish("THREADS... (sorry, this is unfinished)");
 			break;

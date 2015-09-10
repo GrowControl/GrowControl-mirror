@@ -24,7 +24,7 @@ public class gcServerCommands_config implements xCommandListener {
 
 	@Override
 	public void onCommand(xCommandEvent event) {
-		switch(event.arg(0)) {
+		switch(event.getArg(0)) {
 		case "exit": {
 			this._exit(event);
 			break;
