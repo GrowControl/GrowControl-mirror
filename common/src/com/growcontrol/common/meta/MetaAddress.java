@@ -9,10 +9,11 @@ import java.util.concurrent.ConcurrentMap;
 import com.growcontrol.common.gcDefines;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsString;
+import com.poixson.commonjava.Utils.xHashable;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public class MetaAddress {
+public class MetaAddress implements xHashable {
 
 	public final String hash;
 	protected final Map<String, String> tags = new HashMap<String, String>();
@@ -99,6 +100,16 @@ xLog.getRoot().finest("Generated a unique random address hash: "+hash);
 			str.append("]");
 		}
 		return str.toString();
+	}
+	@Override
+	public String getKey() {
+		return this.hash;
+	}
+	@Override
+	public boolean matches(final xHashable hashable) {
+		if(hashable == null || !(hashable instanceof MetaAddress))
+			return false;
+		return this.getKey().equalsIgnoreCase(hashable.getKey());
 	}
 
 
