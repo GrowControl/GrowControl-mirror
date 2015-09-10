@@ -1,7 +1,9 @@
 package com.growcontrol.common.meta;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utils;
@@ -16,8 +18,10 @@ public class MetaRouter extends xHandlerGeneric {
 	private static final Object instanceLock = new Object();
 
 	// listener addresses
-	protected static final ConcurrentMap<MetaAddress, MetaListener> known =
+	private final Map<MetaAddress, MetaListener> dests =
 			new ConcurrentHashMap<MetaAddress, MetaListener>();
+	private final Set<MetaAddress> sources =
+			new CopyOnWriteArraySet<MetaAddress>();
 
 
 
@@ -51,22 +55,29 @@ public class MetaRouter extends xHandlerGeneric {
 
 
 
-	public String register(final String address, final MetaListener listener) {
+	public String register(final String addrStr, final MetaListener listener) {
+		if(utils.isEmpty(addrStr)) throw new NullPointerException("addrStr argument is required!");
+		if(listener == null)       throw new NullPointerException("listener argument is required!");
+		final MetaAddress address = MetaAddress.get(addrStr);
+		if(address == null) throw new IllegalArgumentException("Invalid address argument: "+addrStr);
+//		if(address == null) throw new UnknownAddressException(address);
 		return this.register(
-			MetaAddress.get(address),
+			address,
 			listener
 		);
 	}
 	public String register(final MetaAddress address, final MetaListener listener) {
+		if(address  == null) throw new NullPointerException("address argument is required!");
+		if(listener == null) throw new NullPointerException("listener argument is required!");
 		final MetaAddress addr =
-			address == null
+				address == null
 				? MetaAddress.getRandom()
 				: address;
-		if(known.containsKey(addr))
+		if(this.dests.containsKey(addr))
 			log().fine("Replacing meta event listener: "+addr.hash);
 		else
 			log().finer("Registered meta address: "+addr.hash);
-		known.put(addr, listener);
+		this.dests.put(addr, listener);
 		return addr.hash;
 	}
 	@Override
@@ -106,31 +117,40 @@ public class MetaRouter extends xHandlerGeneric {
 
 
 
-	// get all known addresses
-	public MetaAddress[] getKnown() {
-		return known.values().toArray(new MetaAddress[0]);
+	// get known destination addresses
+	public MetaAddress[] getKnownDestinations() {
+		return this.dests.keySet()
+				.toArray(new MetaAddress[0]);
 	}
-//		final MetaAddress[] addresses;
-//		synchronized(known) {
-//			addresses =
-//				known.isEmpty()
-//				? new MetaAddress[0]
-//				: known.keySet().toArray(new MetaAddress[0]);
-//		}
-//		return addresses;
-//	}
-//	// get listener by address string
-//	public MetaListener getAddressListener(final MetaAddress address) {
-//		if(address == null) throw new NullPointerException("address argument is required!");
-//		return known.get(address);
-//	}
+
+
+
+	// get known source addresses
+	public MetaAddress[] getKnownSources() {
+		return this.sources
+				.toArray(new MetaAddress[0]);
+	}
+
+
+
+	// get listener by address
+	public MetaListener getListener(final String destAddr) {
+		final MetaAddress address = MetaAddress.get(destAddr);
+		if(address == null)
+			return null;
+		return getListener(address);
+	}
+	public MetaListener getListener(final MetaAddress destAddr) {
+		return this.dests.get(destAddr);
+	}
 
 
 
 	@Override
 	public void unregisterAll() {
 		super.unregisterAll();
-		known.clear();
+		this.dests.clear();
+		this.sources.clear();
 	}
 
 

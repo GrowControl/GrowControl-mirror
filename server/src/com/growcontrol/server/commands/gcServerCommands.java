@@ -241,11 +241,18 @@ public final class gcServerCommands implements xCommandListener {
 			this.publish("THREADS... (sorry, this is unfinished)");
 			break;
 		case "addresses":
-			this.publish("Addresses");
-			this.publish("=========");
 			final MetaRouter router = MetaRouter.get();
-			for(final MetaAddress addr : router.getKnown())
-				this.publish("  "+addr.toString());
+			// dests
+			this.publish("Destination Addresses");
+			this.publish("=====================");
+			for(final MetaAddress addr : router.getKnownDestinations())
+				this.publish("  "+addr.hash);
+			this.publish();
+			// sources
+			this.publish("Source Addresses");
+			this.publish("================");
+			for(final MetaAddress addr : router.getKnownSources())
+				this.publish("  "+addr.hash);
 			this.publish();
 			break;
 		}
@@ -258,9 +265,6 @@ public final class gcServerCommands implements xCommandListener {
 		this.publish("  addresses");
 		this.publish();
 	}
-
-
-
 
 
 
