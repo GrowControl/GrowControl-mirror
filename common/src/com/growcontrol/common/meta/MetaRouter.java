@@ -13,7 +13,7 @@ import com.poixson.commonjava.xEvents.xHandlerGeneric;
 public class MetaRouter extends xHandlerGeneric {
 
 	private static volatile MetaRouter instance = null;
-	private static final Object lock = new Object();
+	private static final Object instanceLock = new Object();
 
 	// listener addresses
 	protected static final ConcurrentMap<MetaAddress, MetaListener> known =
@@ -23,15 +23,17 @@ public class MetaRouter extends xHandlerGeneric {
 
 	public static MetaRouter get() {
 		if(instance == null) {
-			synchronized(lock) {
-				if(instance == null)
+			synchronized(instanceLock) {
+				if(instance == null) {
 					instance = new MetaRouter();
+					Keeper.add(instance);
+				}
 			}
 		}
 		return instance;
 	}
-	public MetaRouter() {
-		Keeper.add(this);
+	private MetaRouter() {
+		super();
 	}
 
 
