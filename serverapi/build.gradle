@@ -1,0 +1,57 @@
+// gcServerAPI
+
+plugins {
+	id 'java'
+	id 'eclipse'
+}
+
+version = '3.6.1'
+group = 'com.growcontrol.api.server'
+defaultTasks 'clean', 'build'
+
+[ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src'
+		}
+		resources {
+			srcDir 'resources'
+		}
+	}
+}
+
+jar {
+	archiveName = "${project.name}-${project.version}.jar"
+}
+
+repositories {
+	jcenter()
+	//mavenCentral()
+}
+
+dependencies {
+	testCompile 'junit:junit:4.12'
+}
+
+configurations.all {
+	resolutionStrategy {
+		failOnVersionConflict()
+		cacheDynamicVersionsFor 5*60, 'seconds'
+		cacheChangingModulesFor 0, 'seconds'
+	}
+}
+
+task sourceJar(type: Jar, dependsOn: classes) {
+	archiveName = "${project.name}-${project.version}-sources.jar"
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+artifacts {
+	archives sourceJar
+}
