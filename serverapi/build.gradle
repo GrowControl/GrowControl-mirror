@@ -9,6 +9,8 @@ version = '3.6.1'
 group = 'com.growcontrol.api.server'
 defaultTasks 'clean', 'build'
 
+def junitVersion = '4.12'
+
 [ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
 
 sourceCompatibility = 1.8
@@ -35,7 +37,7 @@ repositories {
 }
 
 dependencies {
-	testCompile 'junit:junit:4.12'
+	testCompile "junit:junit:${junitVersion}"
 }
 
 configurations.all {

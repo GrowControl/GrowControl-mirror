@@ -10,6 +10,9 @@ version = '3.6.1'
 group = 'com.growcontrol.common'
 defaultTasks 'clean', 'build', 'shadow'
 
+def nettyVersion = '4.0.31.Final'
+def junitVersion = '4.12'
+
 [ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
 
 sourceCompatibility = 1.8
@@ -41,8 +44,8 @@ repositories {
 dependencies {
 	compile fileTree( dir: '../../pxnCommon/build/libs/', include: ["pxnCommon-${project.version}.jar"] )
 //	compile 'com.poixson:pxnCommon:3.6.1'
-	compile 'io.netty:netty-all:4.0.31.Final'
-	testCompile 'junit:junit:4.12'
+	compile "io.netty:netty-all:${nettyVersion}"
+	testCompile "junit:junit:${junitVersion}"
 }
 
 configurations.all {
