@@ -15,8 +15,8 @@ def junitVersion = '4.12'
 
 
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 [ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
 
@@ -28,7 +28,7 @@ sourceSets {
 			srcDir 'src'
 		}
 		resources {
-			srcDir 'resources'
+			srcDir 'resources/'
 		}
 	}
 }
