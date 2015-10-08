@@ -29,6 +29,19 @@ sourceSets {
 
 jar {
 	archiveName = "${project.name}-${project.version}.jar"
+	// write app.properties file
+	Properties props = new Properties()
+	File propsFile = new File('resources/app.properties')
+	props.load(propsFile.newDataInputStream())
+	props.setProperty('name',       "${project.name}")
+	props.setProperty('title',      "GrowControl-ClientAPI")
+	props.setProperty('version',    "${project.version}")
+	props.setProperty('url',        'http://growcontrol.com')
+	props.setProperty('org_name',   'PoiXson')
+	props.setProperty('org_url',    'http://poixson.com')
+	props.setProperty('issue_name', 'github')
+	props.setProperty('issue_url',  'https://github.com/GrowControl/GrowControl/issues')
+	props.store(propsFile.newWriter(), null)
 }
 
 repositories {
