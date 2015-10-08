@@ -64,3 +64,16 @@ task sourceJar(type: Jar, dependsOn: classes) {
 artifacts {
 	archives sourceJar
 }
+
+task copy (type: Copy) {
+	def path = new File('../../output/')
+	path.mkdirs()
+	copy {
+		from "build/libs/${project.name}-${project.version}.jar"
+		into '../../output/'
+	}
+	copy {
+		from "build/libs/${project.name}-${project.version}-sources.jar"
+		into '../../output/'
+	}
+}
