@@ -6,17 +6,23 @@ plugins {
 	id 'com.github.johnrengelman.shadow' version '1.2.2'
 }
 
+
+
 version = '3.6.1'
-group = 'com.growcontrol.common'
+group   = 'com.growcontrol.common'
 defaultTasks 'clean', 'build', 'shadow'
 
 def nettyVersion = '4.0.31.Final'
 def junitVersion = '4.12'
 
+
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
 [ compileJava, compileTestJava ]*.options*.encoding = 'UTF-8'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+
 
 sourceSets {
 	main {
@@ -28,6 +34,8 @@ sourceSets {
 		}
 	}
 }
+
+
 
 jar {
 	archiveName = "${project.name}-${project.version}-sparse.jar"
@@ -45,38 +53,43 @@ jar {
 	props.setProperty('issue_url',  'https://github.com/GrowControl/GrowControl/issues')
 	props.store(propsFile.newWriter(), null)
 }
-
 shadowJar {
 	archiveName = "${project.name}-${project.version}.jar"
 }
 
+
+
 repositories {
 	jcenter()
 }
-
 dependencies {
-	compile fileTree( dir: '../../pxnCommon/build/libs/', include: ["pxnCommon-${project.version}.jar"] )
-//	compile 'com.poixson:pxnCommon:3.6.1'
+	compile fileTree( dir: '../../output/', include: ["pxnCommon-${project.version}.jar"] )
 	compile "io.netty:netty-all:${nettyVersion}"
 	testCompile "junit:junit:${junitVersion}"
 }
+
+
 
 configurations.all {
 	resolutionStrategy {
 		failOnVersionConflict()
 		cacheDynamicVersionsFor 5*60, 'seconds'
-		cacheChangingModulesFor 0, 'seconds'
+		cacheChangingModulesFor 0,    'seconds'
 	}
 }
 
+
+
 task sourceJar(type: Jar, dependsOn: classes) {
-	classifier = 'sources'
+	archiveName = "${project.name}-${project.version}-sources.jar"
+	classifier  = 'sources'
 	from sourceSets.main.allSource
 }
-
 artifacts {
 	archives sourceJar
 }
+
+
 
 task copy (type: Copy) {
 	def path = new File('../../output/')
