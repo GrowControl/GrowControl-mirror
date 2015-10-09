@@ -14,6 +14,7 @@ group   = 'com.growcontrol.server'
 mainClassName = 'com.growcontrol.server.gcServer'
 defaultTasks 'clean', 'build', 'shadow', 'install'
 
+def jsscVersion  = '2.8.0'
 def junitVersion = '4.12'
 
 
@@ -70,6 +71,7 @@ repositories {
 dependencies {
 	compile fileTree( dir: '../../output/', include: ["gcCommon-${project.version}.jar"] )
 	compile fileTree( dir: '../../output/', include: ["gcServerAPI-${project.version}.jar"] )
+	compile "org.scream3r:jssc:${jsscVersion}"
 	testCompile "junit:junit:${junitVersion}"
 }
 
