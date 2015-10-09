@@ -25,7 +25,7 @@ targetCompatibility = 1.8
 sourceSets {
 	main {
 		java {
-			srcDir 'src'
+			srcDir 'src/'
 		}
 		resources {
 			srcDir 'resources/'
@@ -53,7 +53,7 @@ jar {
 }
 jar.doLast {
 	def result = 'git checkout resources/app.properties'.execute()
-	println "Restore: ${result}"
+	println ":restore resources/app.properties"
 }
 
 
