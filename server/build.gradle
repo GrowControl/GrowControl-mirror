@@ -12,7 +12,7 @@ plugins {
 version = '3.6.1'
 group   = 'com.growcontrol.server'
 mainClassName = 'com.growcontrol.server.gcServer'
-defaultTasks 'clean', 'build', 'shadow'
+defaultTasks 'clean', 'build', 'shadow', 'install'
 
 def junitVersion = '4.12'
 
@@ -96,7 +96,7 @@ artifacts {
 
 
 
-task copy (type: Copy) {
+task install << {
 	def path = new File('../../output/')
 	path.mkdirs()
 	copy {

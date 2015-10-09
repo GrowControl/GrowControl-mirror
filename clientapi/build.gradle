@@ -9,7 +9,7 @@ plugins {
 
 version = '3.6.1'
 group   = 'com.growcontrol.api.client'
-defaultTasks 'clean', 'build'
+defaultTasks 'clean', 'build', 'install'
 
 def junitVersion = '4.12'
 
@@ -89,7 +89,7 @@ artifacts {
 
 
 
-task copy (type: Copy) {
+task install << {
 	def path = new File('../../output/')
 	path.mkdirs()
 	copy {
