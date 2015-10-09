@@ -13,6 +13,7 @@ group   = 'com.growcontrol.common'
 defaultTasks 'clean', 'build', 'shadow', 'install'
 
 def nettyVersion = '4.0.31.Final'
+def jsscVersion  = '2.8.0'
 def junitVersion = '4.12'
 
 
@@ -69,6 +70,7 @@ repositories {
 dependencies {
 	compile fileTree( dir: '../../output/', include: ["pxnCommon-${project.version}.jar"] )
 	compile "io.netty:netty-all:${nettyVersion}"
+	compile "org.scream3r:jssc:${jsscVersion}"
 	testCompile "junit:junit:${junitVersion}"
 }
 
