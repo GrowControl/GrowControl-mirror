@@ -80,6 +80,13 @@ public class gcServer extends xApp {
 
 
 
+	@Override
+	public xCommandsHandler getCommandsHandler() {
+		return gcServerVars.commands();
+	}
+
+
+
 	// ------------------------------------------------------------------------------- //
 	// startup
 
