@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.growcontrol.common.gcDefines;
-import com.growcontrol.server.gcServerDefines;
+import com.growcontrol.common.gcCommonDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
@@ -54,14 +53,14 @@ xLog.getRoot(LOG_NAME).trace(e);
 		final xConfig config = new xConfig(datamap);
 		// default to enable if key doesn't exist
 		final boolean enabled =
-				config.exists(gcServerDefines.CONFIG_SOCKET_ENABLE)
-				? config.getBool(gcServerDefines.CONFIG_SOCKET_ENABLE, false)
+				config.exists(gcCommonDefines.CONFIG_SOCKET_ENABLE)
+				? config.getBool(gcCommonDefines.CONFIG_SOCKET_ENABLE, false)
 				: true;
-		final boolean ssl = config.getBool  (gcServerDefines.CONFIG_SOCKET_SSL, false);
-		final String host = config.getString(gcServerDefines.CONFIG_SOCKET_HOST);
+		final boolean ssl = config.getBool  (gcCommonDefines.CONFIG_SOCKET_SSL, false);
+		final String host = config.getString(gcCommonDefines.CONFIG_SOCKET_HOST);
 		final int    port = config.getInt   (
-				gcServerDefines.CONFIG_SOCKET_PORT,
-				gcDefines.DEFAULT_SOCKET_PORT(ssl)
+				gcCommonDefines.CONFIG_SOCKET_PORT,
+				gcCommonDefines.DEFAULT_SOCKET_PORT(ssl)
 		);
 		return new NetServerConfig(
 				enabled,

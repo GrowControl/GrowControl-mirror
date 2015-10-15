@@ -5,14 +5,18 @@ public final class gcCommonDefines {
 	private gcCommonDefines() {}
 
 
+
+	// logger name
 	public static final String LOG_NAME_SERVER = "SERVER";
 	public static final String LOG_NAME_CLIENT = "CLIENT";
 
 
-	public static final int ADDRESS_MAX_LENGTH = 8;
 
+	// defaults
+	public static final int ADDRESS_MAX_LENGTH = 16;
 
-	// default ports
+	// socket defaults
+	public static final int DEFAULT_SOCKET_BACKLOG  = 10;
 	public static final int DEFAULT_SOCKET_PORT_RAW = 1142;
 	public static final int DEFAULT_SOCKET_PORT_SSL = 1143;
 	public static int DEFAULT_SOCKET_PORT(final boolean ssl) {
@@ -22,6 +26,22 @@ public final class gcCommonDefines {
 			: DEFAULT_SOCKET_PORT_SSL
 		);
 	}
+
+
+
+	// config keys
+	public static final String CONFIG_VERSION       = "Version";
+	public static final String CONFIG_LOG_LEVEL     = "Log Level";
+	public static final String CONFIG_DEBUG         = "Debug";
+
+	// socket config keys
+	public static final String CONFIG_SOCKET_BACKLOG = "Socket Backlog";
+	public static final String CONFIG_SOCKETS        = "Sockets";
+		public static final String CONFIG_SOCKET_ENABLE = "Enable";
+		public static final String CONFIG_SOCKET_SSL    = "SSL";
+		public static final String CONFIG_SOCKET_HOST   = "Host";
+		public static final String CONFIG_SOCKET_PORT   = "Port";
+
 
 
 }

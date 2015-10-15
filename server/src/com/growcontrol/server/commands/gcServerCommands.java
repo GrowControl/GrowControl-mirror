@@ -1,9 +1,9 @@
 package com.growcontrol.server.commands;
 
-import com.growcontrol.common.gcDefines;
 import com.growcontrol.common.meta.MetaAddress;
 import com.growcontrol.common.meta.MetaRouter;
 import com.growcontrol.common.meta.MetaType;
+import com.growcontrol.server.gcServerDefines;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.xEvents.annotations.xEvent;
@@ -13,7 +13,7 @@ import com.poixson.commonjava.xLogger.commands.xCommandListener;
 
 
 public final class gcServerCommands implements xCommandListener {
-	private static final String LOG_NAME = gcDefines.LOG_NAME_SERVER;
+	private static final String LOG_NAME = gcServerDefines.LOG_NAME;
 
 	protected volatile gcServerCommands_config inconfig = null;
 

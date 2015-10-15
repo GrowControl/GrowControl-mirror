@@ -3,7 +3,7 @@ Log Level: info
 Debug: false
 Prompt Ticker: false
 Tick Interval: 60s
-Logic Threads: 0
+Meta Threads: 0
 Zones:
     - 'ExampleZone'
 Socket Backlog: 10

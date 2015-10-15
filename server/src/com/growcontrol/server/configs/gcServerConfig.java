@@ -3,6 +3,7 @@ package com.growcontrol.server.configs;
 import java.util.Map;
 import java.util.Set;
 
+import com.growcontrol.common.gcCommonDefines;
 import com.growcontrol.server.gcServerDefines;
 import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
@@ -29,7 +30,7 @@ public final class gcServerConfig extends xConfig {
 
 	// version
 	public String getVersion() {
-		final String value = this.getString(gcServerDefines.CONFIG_VERSION);
+		final String value = this.getString(gcCommonDefines.CONFIG_VERSION);
 		if(utils.isEmpty(value))
 			return null;
 		return value;
@@ -39,7 +40,7 @@ public final class gcServerConfig extends xConfig {
 
 	// log level
 	public xLevel getLogLevel() {
-		final String value = this.getString(gcServerDefines.CONFIG_LOG_LEVEL);
+		final String value = this.getString(gcCommonDefines.CONFIG_LOG_LEVEL);
 		if(utils.isEmpty(value))
 			return null;
 		return xLevel.parse(value);
@@ -49,7 +50,7 @@ public final class gcServerConfig extends xConfig {
 
 	// debug
 	public Boolean getDebug() {
-		return this.getBoolean(gcServerDefines.CONFIG_DEBUG);
+		return this.getBoolean(gcCommonDefines.CONFIG_DEBUG);
 	}
 
 
@@ -84,9 +85,9 @@ public final class gcServerConfig extends xConfig {
 
 	// logic threads (0 uses main thread)
 	public int getLogicThreads() {
-		if(!exists(gcServerDefines.CONFIG_LOGIC_THREADS))
-			return gcServerDefines.DEFAULT_LOGIC_THREADS;
-		final Integer value = this.getInteger(gcServerDefines.CONFIG_LOGIC_THREADS);
+		if(!exists(gcServerDefines.CONFIG_META_THREADS))
+			return gcServerDefines.DEFAULT_META_THREADS;
+		final Integer value = this.getInteger(gcServerDefines.CONFIG_META_THREADS);
 		return utilsNumbers.MinMax(value.intValue(), 0, xThreadPool.POOL_LIMIT);
 	}
 
@@ -104,8 +105,8 @@ public final class gcServerConfig extends xConfig {
 	// socket backlog
 	public int getSocketBacklog() {
 		return this.getInt(
-				gcServerDefines.CONFIG_SOCKET_BACKLOG,
-				gcServerDefines.DEFAULT_SOCKET_BACKLOG
+				gcCommonDefines.CONFIG_SOCKET_BACKLOG,
+				gcCommonDefines.DEFAULT_SOCKET_BACKLOG
 		);
 	}
 
@@ -116,7 +117,7 @@ public final class gcServerConfig extends xConfig {
 		if(this.netConfigs == null) {
 			final Set<Object> dataset = this.getSet(
 					Object.class,
-					gcServerDefines.CONFIG_SOCKETS
+					gcCommonDefines.CONFIG_SOCKETS
 			);
 			this.netConfigs = NetServerConfig.get(dataset);
 		}

@@ -1,6 +1,6 @@
 package com.growcontrol.server.commands;
 
-import com.growcontrol.common.gcDefines;
+import com.growcontrol.server.gcServerDefines;
 import com.growcontrol.server.gcServerVars;
 import com.growcontrol.server.configs.gcServerConfig;
 import com.poixson.commonjava.xLogger.xLog;
@@ -9,7 +9,7 @@ import com.poixson.commonjava.xLogger.commands.xCommandListener;
 
 
 public class gcServerCommands_config implements xCommandListener {
-	private static final String LOG_NAME = gcDefines.LOG_NAME_SERVER;
+	private static final String LOG_NAME = gcServerDefines.LOG_NAME;
 
 	private final gcServerCommands parent;
 
