@@ -1,8 +1,8 @@
 package com.growcontrol.common;
 
 
-public final class gcDefines {
-	private gcDefines() {}
+public final class gcCommonDefines {
+	private gcCommonDefines() {}
 
 
 	public static final String LOG_NAME_SERVER = "SERVER";
