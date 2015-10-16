@@ -16,7 +16,6 @@ public final class gcCommonDefines {
 	public static final int ADDRESS_MAX_LENGTH = 16;
 
 	// socket defaults
-	public static final int DEFAULT_SOCKET_BACKLOG  = 10;
 	public static final int DEFAULT_SOCKET_PORT_RAW = 1142;
 	public static final int DEFAULT_SOCKET_PORT_SSL = 1143;
 	public static int DEFAULT_SOCKET_PORT(final boolean ssl) {

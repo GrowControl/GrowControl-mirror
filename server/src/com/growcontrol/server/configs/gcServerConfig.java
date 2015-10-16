@@ -105,8 +105,8 @@ public final class gcServerConfig extends xConfig {
 	// socket backlog
 	public int getSocketBacklog() {
 		return this.getInt(
-				gcCommonDefines.CONFIG_SOCKET_BACKLOG,
-				gcCommonDefines.DEFAULT_SOCKET_BACKLOG
+				gcServerDefines.CONFIG_SOCKET_BACKLOG,
+				gcServerDefines.DEFAULT_SOCKET_BACKLOG
 		);
 	}
 
@@ -117,7 +117,7 @@ public final class gcServerConfig extends xConfig {
 		if(this.netConfigs == null) {
 			final Set<Object> dataset = this.getSet(
 					Object.class,
-					gcCommonDefines.CONFIG_SOCKETS
+					gcServerDefines.CONFIG_SOCKETS
 			);
 			this.netConfigs = NetServerConfig.get(dataset);
 		}
