@@ -1,10 +1,10 @@
-package com.growcontrol.client.plugins;
+package com.growcontrol.api.clientapi.plugins;
 
 import com.poixson.commonapp.plugin.xJavaPlugin;
 import com.poixson.commonjava.xEvents.xEventListener;
 
 
-public abstract class gcClientPlugin extends xJavaPlugin {
+public abstract class apiClientPlugin extends xJavaPlugin {
 
 
 

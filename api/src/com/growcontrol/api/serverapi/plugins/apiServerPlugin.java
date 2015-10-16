@@ -1,4 +1,4 @@
-package com.growcontrol.server.plugins;
+package com.growcontrol.api.serverapi.plugins;
 
 import com.growcontrol.common.meta.MetaAddress;
 import com.growcontrol.common.meta.MetaListener;
@@ -10,7 +10,7 @@ import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.commands.xCommandListener;
 
 
-public abstract class gcServerPlugin extends xJavaPlugin {
+public abstract class apiServerPlugin extends xJavaPlugin {
 
 
 
