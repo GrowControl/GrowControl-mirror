@@ -30,7 +30,7 @@ public final class apiClientDefines {
 			public static final String PROFILE_PASS = "Password";
 
 //			public static final String PROFILE_NEW            = "<< New Profile >>";
-//			public static final String PROFILE_HOST_INTERNAL  = "<internal>";
+			public static final String PROFILE_HOST_INTERNAL  = "<internal>";
 
 
 
