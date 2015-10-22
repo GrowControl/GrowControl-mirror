@@ -10,7 +10,7 @@ public class MetaPH extends MetaType {
 	private static final long serialVersionUID = 31L;
 	public static final String TYPE_NAME = "pH";
 
-	protected volatile Integer value = null;
+	protected volatile Double value = null;
 
 
 
@@ -32,10 +32,13 @@ public class MetaPH extends MetaType {
 
 	public MetaPH() {
 	}
-	public MetaPH(final MetaPH value) {
+	public MetaPH(final double value) {
 		this.set(value);
 	}
 	public MetaPH(final String value) {
+		this.set(value);
+	}
+	public MetaPH(final MetaPH value) {
 		this.set(value);
 	}
 
@@ -49,37 +52,37 @@ public class MetaPH extends MetaType {
 
 
 	// set value
-	public void set(final MetaPH value) {
-		this.value = value.value;
+	public void set(final double value) {
+		this.value = new Double(value);
 	}
-	public void set(final int value) {
-		this.value = new Integer(value);
-	}
-	public void set(final Integer value) {
+	public void set(final Double value) {
 		this.value =
 				value == null
 				? null
-				: new Integer(value.intValue());
+				: new Double(value.doubleValue());
 	}
 	@Override
 	public void set(final String value) {
 		if(utils.isEmpty(value)) {
 			this.value = null;
 		} else {
-			final Integer i = utilsNumbers.toInteger(value);
-			if(i == null) throw new InvalidMetaValueException(value);
-			this.value = i;
+			final Double d = utilsNumbers.toDouble(value);
+			if(d == null) throw new InvalidMetaValueException(value);
+			this.value = d;
 		}
+	}
+	public void set(final MetaPH value) {
+		this.value = value.value;
 	}
 
 
 
 	// get value
 	@Override
-	public Integer getValue() {
+	public Double getValue() {
 		if(this.value == null)
 			return null;
-		return new Integer(this.value.intValue());
+		return new Double(this.value.doubleValue());
 	}
 	@Override
 	public String getString() {

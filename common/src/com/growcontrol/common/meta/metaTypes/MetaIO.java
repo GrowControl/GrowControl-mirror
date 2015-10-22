@@ -32,10 +32,13 @@ public class MetaIO extends MetaType {
 
 	public MetaIO() {
 	}
-	public MetaIO(final MetaIO value) {
+	public MetaIO(final boolean value) {
 		this.set(value);
 	}
 	public MetaIO(final String value) {
+		this.set(value);
+	}
+	public MetaIO(final MetaIO value) {
 		this.set(value);
 	}
 
@@ -49,9 +52,6 @@ public class MetaIO extends MetaType {
 
 
 	// set value
-	public void set(final MetaIO value) {
-		this.value = value.value;
-	}
 	public void set(final boolean value) {
 		this.value = new Boolean(value);
 	}
@@ -70,6 +70,9 @@ public class MetaIO extends MetaType {
 			if(b == null) throw new InvalidMetaValueException(value);
 			this.value = b;
 		}
+	}
+	public void set(final MetaIO value) {
+		this.value = value.value;
 	}
 
 

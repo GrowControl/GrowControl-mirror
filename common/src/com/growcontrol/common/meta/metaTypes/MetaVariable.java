@@ -32,10 +32,13 @@ public class MetaVariable extends MetaType {
 
 	public MetaVariable() {
 	}
-	public MetaVariable(final MetaVariable value) {
+	public MetaVariable(final int value) {
 		this.set(value);
 	}
 	public MetaVariable(final String value) {
+		this.set(value);
+	}
+	public MetaVariable(final MetaVariable value) {
 		this.set(value);
 	}
 
@@ -49,9 +52,6 @@ public class MetaVariable extends MetaType {
 
 
 	// set value
-	public void set(final MetaVariable value) {
-		this.value = value.value;
-	}
 	public void set(final int value) {
 		this.value = new Integer(value);
 	}
@@ -70,6 +70,9 @@ public class MetaVariable extends MetaType {
 			if(i == null) throw new InvalidMetaValueException(value);
 			this.value = i;
 		}
+	}
+	public void set(final MetaVariable value) {
+		this.value = value.value;
 	}
 
 

@@ -45,12 +45,12 @@ public class MetaString extends MetaType {
 
 
 	// set value
-	public void set(final MetaString value) {
-		this.value = value.value;
-	}
 	@Override
 	public void set(final String value) {
 		this.value = value;
+	}
+	public void set(final MetaString value) {
+		this.value = value.value;
 	}
 
 

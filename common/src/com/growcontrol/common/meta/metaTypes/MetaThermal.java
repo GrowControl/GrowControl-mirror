@@ -52,9 +52,6 @@ public class MetaThermal extends MetaType {
 
 
 	// set value
-	public void set(final MetaThermal value) {
-		this.value = value.value;
-	}
 	public void set(final double value) {
 		this.value = new Double(value);
 	}
@@ -73,6 +70,9 @@ public class MetaThermal extends MetaType {
 			if(d == null) throw new InvalidMetaValueException(value);
 			this.value = d;
 		}
+	}
+	public void set(final MetaThermal value) {
+		this.value = value.value;
 	}
 
 

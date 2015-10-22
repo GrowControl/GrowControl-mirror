@@ -32,10 +32,13 @@ public class MetaEC extends MetaType {
 
 	public MetaEC() {
 	}
-	public MetaEC(final MetaEC value) {
+	public MetaEC(final int value) {
 		this.set(value);
 	}
 	public MetaEC(final String value) {
+		this.set(value);
+	}
+	public MetaEC(final MetaEC value) {
 		this.set(value);
 	}
 
@@ -49,9 +52,6 @@ public class MetaEC extends MetaType {
 
 
 	// set value
-	public void set(final MetaEC value) {
-		this.value = value.value;
-	}
 	public void set(final int value) {
 		this.value = new Integer(value);
 	}
@@ -70,6 +70,9 @@ public class MetaEC extends MetaType {
 			if(i == null) throw new InvalidMetaValueException(value);
 			this.value = i;
 		}
+	}
+	public void set(final MetaEC value) {
+		this.value = value.value;
 	}
 
 
