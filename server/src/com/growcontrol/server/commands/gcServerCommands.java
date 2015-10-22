@@ -14,8 +14,20 @@ import com.poixson.commonjava.xLogger.commands.xCommandListener;
 
 public final class gcServerCommands implements xCommandListener {
 	private static final String LOG_NAME = gcServerDefines.LOG_NAME;
+	public static final String LISTENER_NAME = "ServerCommands";
 
 	protected volatile gcServerCommands_config inconfig = null;
+
+
+
+	@Override
+	public String getName() {
+		return LISTENER_NAME;
+	}
+	@Override
+	public String toString() {
+		return this.getName();
+	}
 
 
 

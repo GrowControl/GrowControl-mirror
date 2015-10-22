@@ -10,6 +10,7 @@ import com.poixson.commonjava.xLogger.commands.xCommandListener;
 
 public class gcServerCommands_config implements xCommandListener {
 	private static final String LOG_NAME = gcServerDefines.LOG_NAME;
+	private static final String LISTENER_NAME = gcServerCommands.LISTENER_NAME;
 
 	private final gcServerCommands parent;
 
@@ -18,6 +19,14 @@ public class gcServerCommands_config implements xCommandListener {
 	protected gcServerCommands_config(final gcServerCommands parent) {
 		this.parent = parent;
 		xLog.getConsole().setPrompt(" config> ");
+	}
+	@Override
+	public String getName() {
+		return LISTENER_NAME;
+	}
+	@Override
+	public String toString() {
+		return this.getName();
 	}
 
 

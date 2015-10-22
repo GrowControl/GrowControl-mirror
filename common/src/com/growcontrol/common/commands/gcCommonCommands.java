@@ -8,6 +8,7 @@ import com.poixson.commonjava.xLogger.commands.xCommandListener;
 
 
 public class gcCommonCommands implements xCommandListener {
+	private static final String LISTENER_NAME = "CommonCommands";
 
 
 
@@ -47,6 +48,14 @@ public class gcCommonCommands implements xCommandListener {
 			this._clear(event);
 			break;
 		}
+	}
+	@Override
+	public String getName() {
+		return LISTENER_NAME;
+	}
+	@Override
+	public String toString() {
+		return this.getName();
 	}
 
 
