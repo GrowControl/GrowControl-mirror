@@ -17,10 +17,11 @@ public class MetaEC extends MetaType {
 	public static MetaEC get() {
 		return new MetaEC();
 	}
+	public static MetaEC get(final int value) {
+		return new MetaEC(value);
+	}
 	public static MetaEC get(final String value) {
-		final MetaEC meta = new MetaEC();
-		meta.set(value);
-		return meta;
+		return new MetaEC(value);
 	}
 	@Override
 	public MetaEC clone() {

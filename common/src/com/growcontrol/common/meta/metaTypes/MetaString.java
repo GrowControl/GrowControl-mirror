@@ -28,10 +28,10 @@ public class MetaString extends MetaType {
 
 	public MetaString() {
 	}
-	public MetaString(final MetaString value) {
+	public MetaString(final String value) {
 		this.set(value);
 	}
-	public MetaString(final String value) {
+	public MetaString(final MetaString value) {
 		this.set(value);
 	}
 

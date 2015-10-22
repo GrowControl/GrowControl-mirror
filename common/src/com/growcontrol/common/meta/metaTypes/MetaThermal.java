@@ -17,10 +17,11 @@ public class MetaThermal extends MetaType {
 	public static MetaThermal get() {
 		return new MetaThermal();
 	}
+	public static MetaThermal get(final double value) {
+		return new MetaThermal(value);
+	}
 	public static MetaThermal get(final String value) {
-		final MetaThermal meta = new MetaThermal();
-		meta.set(value);
-		return meta;
+		return new MetaThermal(value);
 	}
 	@Override
 	public MetaThermal clone() {
@@ -31,10 +32,13 @@ public class MetaThermal extends MetaType {
 
 	public MetaThermal() {
 	}
-	public MetaThermal(final MetaThermal value) {
+	public MetaThermal(final double value) {
 		this.set(value);
 	}
 	public MetaThermal(final String value) {
+		this.set(value);
+	}
+	public MetaThermal(final MetaThermal value) {
 		this.set(value);
 	}
 

@@ -17,10 +17,11 @@ public class MetaVariable extends MetaType {
 	public static MetaVariable get() {
 		return new MetaVariable();
 	}
+	public static MetaVariable get(final int value) {
+		return new MetaVariable(value);
+	}
 	public static MetaVariable get(final String value) {
-		final MetaVariable meta = new MetaVariable();
-		meta.set(value);
-		return meta;
+		return new MetaVariable(value);
 	}
 	@Override
 	public MetaVariable clone() {

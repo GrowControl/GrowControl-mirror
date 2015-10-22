@@ -17,10 +17,11 @@ public class MetaIO extends MetaType {
 	public static MetaIO get() {
 		return new MetaIO();
 	}
+	public static MetaIO get(final boolean value) {
+		return new MetaIO(value);
+	}
 	public static MetaIO get(final String value) {
-		final MetaIO meta = new MetaIO();
-		meta.set(value);
-		return meta;
+		return new MetaIO(value);
 	}
 	@Override
 	public MetaIO clone() {

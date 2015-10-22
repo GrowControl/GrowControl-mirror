@@ -17,10 +17,11 @@ public class MetaPH extends MetaType {
 	public static MetaPH get() {
 		return new MetaPH();
 	}
+	public static MetaPH get(final double value) {
+		return new MetaPH(value);
+	}
 	public static MetaPH get(final String value) {
-		final MetaPH meta = new MetaPH();
-		meta.set(value);
-		return meta;
+		return new MetaPH(value);
 	}
 	@Override
 	public MetaPH clone() {
