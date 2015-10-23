@@ -52,6 +52,8 @@ public class gcServerVars {
 			synchronized(configLock) {
 				if(config == null) {
 					config = (gcServerConfig) xConfigLoader.Load(
+							xLog.getRoot(),
+							null,
 							gcServerDefines.CONFIG_FILE,
 							gcServerConfig.class,
 							gcServer.class
