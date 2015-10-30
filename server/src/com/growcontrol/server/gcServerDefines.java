@@ -16,7 +16,7 @@ public final class gcServerDefines {
 
 	// defaults
 	public static final xTime   DEFAULT_TICK_INTERVAL = xTime.get("60s");
-	public static final int     DEFAULT_META_THREADS  = 0;
+	public static final int     DEFAULT_LOGIC_THREADS = 0;
 	public static final boolean DEFAULT_PROMPT_TICKER = false;
 
 	// socket defaults
@@ -29,7 +29,7 @@ public final class gcServerDefines {
 
 	// config keys
 	public static final String CONFIG_TICK_INTERVAL = "Tick Interval";
-	public static final String CONFIG_META_THREADS  = "Meta Threads";
+	public static final String CONFIG_LOGIC_THREADS = "Logic Threads";
 	public static final String CONFIG_PROMPT_TICKER = "Prompt Ticker";
 
 
