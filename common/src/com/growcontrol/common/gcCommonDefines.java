@@ -36,10 +36,10 @@ public final class gcCommonDefines {
 	// socket config keys
 	public static final String CONFIG_SOCKET_BACKLOG = "Socket Backlog";
 	public static final String CONFIG_SOCKETS        = "Sockets";
-		public static final String CONFIG_SOCKET_ENABLE = "Enable";
-		public static final String CONFIG_SOCKET_SSL    = "SSL";
-		public static final String CONFIG_SOCKET_HOST   = "Host";
-		public static final String CONFIG_SOCKET_PORT   = "Port";
+		public static final String CONFIG_SOCKET_ENABLED = "Enabled";
+		public static final String CONFIG_SOCKET_SSL     = "SSL";
+		public static final String CONFIG_SOCKET_HOST    = "Host";
+		public static final String CONFIG_SOCKET_PORT    = "Port";
 
 
 

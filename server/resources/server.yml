@@ -8,10 +8,10 @@ Zones:
     - 'ExampleZone'
 Socket Backlog: 10
 Sockets:
-    - Enable: true
+    - Enabled: true
       Host: '127.0.0.1'
       Port: 1142
-    - Enable: false
+    - Enabled: false
       SSL: true
       Host: '127.0.0.1'
       Port: 1143
