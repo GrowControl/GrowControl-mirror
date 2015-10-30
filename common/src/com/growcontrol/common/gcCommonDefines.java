@@ -1,5 +1,7 @@
 package com.growcontrol.common;
 
+import com.poixson.commonjava.xLogger.xLevel;
+
 
 public final class gcCommonDefines {
 	private gcCommonDefines() {}
@@ -13,9 +15,12 @@ public final class gcCommonDefines {
 
 
 	// defaults
+	public static final xLevel DEFAULT_LOG_LEVEL = xLevel.INFO;
+	public static final boolean DEFAULT_DEBUG = false;
 	public static final int ADDRESS_MAX_LENGTH = 16;
 
 	// socket defaults
+	public static final boolean DEFAULT_SOCKET_SSL = false;
 	public static final int DEFAULT_SOCKET_PORT_RAW = 1142;
 	public static final int DEFAULT_SOCKET_PORT_SSL = 1143;
 	public static int DEFAULT_SOCKET_PORT(final boolean ssl) {

@@ -6,6 +6,12 @@ public final class apiClientDefines {
 
 
 
+	// defaults
+	public static final String  DEFAULT_LAST_PROFILE = null;
+	public static final boolean DEFAULT_AUTO_CONNECT = false;
+
+
+
 	// window states
 	public static final String CONFIG_WINDOWS       = "Windows";
 		public static final String CONFIG_WINDOW_NAME   = "Name";
@@ -19,7 +25,7 @@ public final class apiClientDefines {
 		// saved profiles
 		public static final String PROFILES_FILE        = "profiles.yml";
 
-		public static final String PROFILE_LAST_USED    = "Last Used Profile";
+		public static final String PROFILE_LAST_PROFILE = "Last Used Profile";
 		public static final String PROFILE_AUTO_CONNECT = "Auto-Connect";
 		public static final String PROFILES             = "Profiles";
 			public static final String PROFILE_NAME = "Name";
