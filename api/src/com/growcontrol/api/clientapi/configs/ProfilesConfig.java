@@ -1,71 +1,91 @@
 package com.growcontrol.api.clientapi.configs;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.growcontrol.api.clientapi.apiClientDefines;
 import com.poixson.commonapp.config.xConfig;
+import com.poixson.commonapp.config.xConfigException;
 import com.poixson.commonjava.Utils.utils;
 
 
 public class ProfilesConfig extends xConfig {
 
-	private volatile LinkedHashMap<String, SavedProfile> profiles = null;
+	public final String lastProfile;
+	public final boolean autoConnect;
+
+	private volatile Map<String, SavedProfile> profiles = null;
 	private final Object profilesLock = new Object();
 
 
 
 	// new config instance
-	public ProfilesConfig(final Map<String, Object> datamap) {
+	public ProfilesConfig(final Map<String, Object> datamap)
+			throws xConfigException {
 		super(datamap);
+		this.lastProfile = this.getStr(
+				apiClientDefines.PROFILE_LAST_PROFILE,
+				apiClientDefines.DEFAULT_LAST_PROFILE
+		);
+		this.autoConnect = this.getBool(
+				apiClientDefines.PROFILE_AUTO_CONNECT,
+				apiClientDefines.DEFAULT_AUTO_CONNECT
+		);
 	}
+
+
+
 	// last profile used
 	public SavedProfile getLastUsedProfile() {
-		final String value = this.getString(apiClientDefines.PROFILE_LAST_USED);
-		if(utils.isEmpty(value))
+		if(utils.isEmpty(this.lastProfile))
 			return null;
-		return this.getProfile(value);
+		return this.getProfile(this.lastProfile);
 	}
-
-
-
 	// auto connect
+	public boolean isAutoConnect() {
+		return this.autoConnect;
+	}
 	public SavedProfile getAutoConnectProfile() {
-		// boolean value
-		final Boolean bool = this.getBoolean(apiClientDefines.PROFILE_AUTO_CONNECT);
-		if(bool != null) {
-			return bool.booleanValue()
-					? this.getLastUsedProfile()
-					: null;
-		}
-		// string value
-		final String value = this.getString(apiClientDefines.PROFILE_AUTO_CONNECT);
-		if(utils.isEmpty(value))
+		if(!this.autoConnect)
 			return null;
-		return this.getProfile(value);
+		final SavedProfile profile = this.getLastUsedProfile();
+		if(profile != null)
+			return profile;
+		return null;
 	}
 
 
 
-	public LinkedHashMap<String, SavedProfile> getProfiles() {
+	public Map<String, SavedProfile> getProfiles()
+			throws xConfigException {
 		if(this.profiles == null) {
 			synchronized(this.profilesLock) {
 				if(this.profiles == null) {
-					final List<Object> dataset = this.getList(
-							Object.class,
-							apiClientDefines.PROFILES
+					final List<xConfig> configsList =
+						this.getConfigList(
+							apiClientDefines.PROFILES,
+							SavedProfile.class
 					);
-					this.profiles = SavedProfile.get(dataset);
+					final LinkedHashMap<String, SavedProfile> profilesMap =
+							new LinkedHashMap<String, SavedProfile>();
+					for(final xConfig cfg : configsList) {
+						final SavedProfile p = (SavedProfile) cfg;
+						profilesMap.put(p.getKey(), p);
+					}
+					this.profiles = Collections.unmodifiableMap(profilesMap);
 				}
 			}
 		}
 		return this.profiles;
 	}
 	public SavedProfile getProfile(final String name) {
-		if(this.profiles == null)
-			this.getProfiles();
-		return this.profiles.get(name);
+		try {
+			final Map<String, SavedProfile> profiles = this.getProfiles();
+			return profiles.get(name);
+		} catch (xConfigException ignore) {}
+		return null;
 	}
 
 

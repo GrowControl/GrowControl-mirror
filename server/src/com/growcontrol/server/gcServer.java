@@ -16,7 +16,9 @@ import com.growcontrol.server.net.NetServerManager;
 import com.poixson.commonapp.app.xApp;
 import com.poixson.commonapp.app.annotations.xAppStep;
 import com.poixson.commonapp.app.annotations.xAppStep.StepType;
+import com.poixson.commonapp.config.xConfigException;
 import com.poixson.commonapp.plugin.xPluginManager;
+import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.scheduler.ticker.xTickHandler;
@@ -173,7 +175,14 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.STARTUP, title="Sockets", priority=90)
 	public void __STARTUP_sockets() {
 		// load socket configs
-		final Map<String, NetServerConfig> netConfigs = gcServerVars.getConfig().getNetConfigs();
+		final Map<String, NetServerConfig> netConfigs;
+		try {
+			netConfigs = gcServerVars.getConfig().getNetConfigs();
+		} catch (xConfigException e) {
+			this.log().trace(e);
+			Failure.fail(e.getMessage());
+			return;
+		}
 		if(utils.isEmpty(netConfigs)) {
 			log().warning("No socket server configs found to load");
 			return;

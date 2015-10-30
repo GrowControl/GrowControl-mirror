@@ -2,21 +2,17 @@ package com.growcontrol.server.configs;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import com.growcontrol.common.gcCommonDefines;
 import com.poixson.commonapp.config.xConfig;
+import com.poixson.commonapp.config.xConfigException;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
-import com.poixson.commonjava.Utils.utilsObject;
 import com.poixson.commonjava.Utils.xHashable;
-import com.poixson.commonjava.xLogger.xLog;
 
 
-public class NetServerConfig implements xHashable {
-	private static final String LOG_NAME = "CONFIG";
+public class NetServerConfig extends xConfig implements xHashable {
 
 	public final String key;
 
@@ -27,63 +23,52 @@ public class NetServerConfig implements xHashable {
 
 
 
-	public static Map<String, NetServerConfig> get(final Set<Object> dataset) {
-		if(utils.isEmpty(dataset))
-			return null;
-		final Map<String, NetServerConfig> configs = new HashMap<String, NetServerConfig>();
-		for(final Object obj : dataset) {
-			try {
-				final Map<String, Object> datamap =
-						utilsObject.castMap(
-								String.class,
-								Object.class,
-								obj
-						);
-				final NetServerConfig cfg = get(datamap);
-				configs.put(cfg.getKey(), cfg);
-			} catch (Exception e) {
-xLog.getRoot(LOG_NAME).trace(e);
-			}
-		}
-		return configs;
-	}
-	public static NetServerConfig get(final Map<String, Object> datamap) {
-		if(utils.isEmpty(datamap))
-			return null;
-		final xConfig config = new xConfig(datamap);
-		// default to enable if key doesn't exist
-		final boolean enabled =
-				config.exists(gcCommonDefines.CONFIG_SOCKET_ENABLE)
-				? config.getBool(gcCommonDefines.CONFIG_SOCKET_ENABLE, false)
-				: true;
-		final boolean ssl = config.getBool  (gcCommonDefines.CONFIG_SOCKET_SSL, false);
-		final String host = config.getString(gcCommonDefines.CONFIG_SOCKET_HOST);
-		final int    port = config.getInt   (
-				gcCommonDefines.CONFIG_SOCKET_PORT,
-				gcCommonDefines.DEFAULT_SOCKET_PORT(ssl)
-		);
-		return new NetServerConfig(
-				enabled,
-				ssl,
-				host,
-				port
-		);
-	}
-
-
-
 	// new config instance
-	public NetServerConfig(
-			final boolean enabled, final boolean ssl,
-			final String host, final int port) {
-		if(port < 1 || port > utilsNumbers.MAX_PORT)
-			throw new IllegalArgumentException("Invalid port number: "+Integer.toString(port));
-		this.enabled = enabled;
-		this.ssl     = ssl;
-		this.host    = (utils.isEmpty(host) ? null : host);
-		this.port    = port;
+	public NetServerConfig(final Map<String, Object> datamap)
+			throws xConfigException {
+		super(datamap);
+		// enabled - default to enable if key doesn't exist
+		this.enabled =
+				this.exists(gcCommonDefines.CONFIG_SOCKET_ENABLED)
+				? this.getBool(gcCommonDefines.CONFIG_SOCKET_ENABLED, false)
+				: true;
+		// ssl
+		{
+			Boolean value = this.getBool(gcCommonDefines.CONFIG_SOCKET_SSL, false);
+			if(value == null) {
+				final int tmpPort = this.getInt(gcCommonDefines.CONFIG_SOCKET_PORT, -1);
+				if(tmpPort > 0) {
+					if(tmpPort == gcCommonDefines.DEFAULT_SOCKET_PORT_SSL)
+						value = Boolean.TRUE;
+				}
+			}
+			this.ssl =
+					value == null
+					? gcCommonDefines.DEFAULT_SOCKET_SSL
+					: value.booleanValue();
+		}
+		// host
+		this.host = this.getString(gcCommonDefines.CONFIG_SOCKET_HOST);
+		if(utils.isEmpty(this.host)) throw new xConfigException("Host is missing from config!");
+		// port
+		this.port = this.getInt(
+				gcCommonDefines.CONFIG_SOCKET_PORT,
+				gcCommonDefines.DEFAULT_SOCKET_PORT(this.ssl)
+		);
+		if(this.port < 1 || this.port > utilsNumbers.MAX_PORT)
+			throw new IllegalArgumentException("Invalid port number: "+Integer.toString(this.port));
+		// key
 		this.key = this.genKey();
 	}
+//	public NetServerConfig(
+//			final boolean enabled, final boolean ssl,
+//			final String host, final int port) {
+//		this.enabled = enabled;
+//		this.ssl     = ssl;
+//		this.host    = (utils.isEmpty(host) ? null : host);
+//		this.port    = port;
+//		this.key = this.genKey();
+//	}
 
 
 

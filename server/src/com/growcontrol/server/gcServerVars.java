@@ -2,7 +2,7 @@ package com.growcontrol.server;
 
 import com.growcontrol.common.meta.MetaRouter;
 import com.growcontrol.server.configs.gcServerConfig;
-import com.poixson.commonapp.config.xConfigLoader;
+import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.xLogger.xLog;
@@ -51,8 +51,8 @@ public class gcServerVars {
 		if(config == null) {
 			synchronized(configLock) {
 				if(config == null) {
-					config = (gcServerConfig) xConfigLoader.Load(
-							xLog.getRoot(),
+					config = (gcServerConfig) xConfig.Load(
+							null,
 							null,
 							gcServerDefines.CONFIG_FILE,
 							gcServerConfig.class,

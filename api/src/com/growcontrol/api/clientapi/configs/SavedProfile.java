@@ -1,22 +1,19 @@
 package com.growcontrol.api.clientapi.configs;
 
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.growcontrol.api.clientapi.apiClientDefines;
 import com.growcontrol.common.gcCommonDefines;
 import com.poixson.commonapp.config.xConfig;
+import com.poixson.commonapp.config.xConfigException;
 import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.Utils.utilsObject;
 import com.poixson.commonjava.Utils.xHashable;
-import com.poixson.commonjava.xLogger.xLog;
 
 
-public class SavedProfile implements xHashable {
-	private static final String LOG_NAME = "CONFIG";
+public class SavedProfile extends xConfig implements xHashable {
 
 	public final String name;
+	public final boolean ssl;
 	public final String host;
 	public final int    port;
 	public final String user;
@@ -24,71 +21,31 @@ public class SavedProfile implements xHashable {
 
 
 
-	public static LinkedHashMap<String, SavedProfile> get(final List<Object> dataset) {
-		if(utils.isEmpty(dataset))
-			return null;
-		final LinkedHashMap<String, SavedProfile> profiles =
-				new LinkedHashMap<String, SavedProfile>();
-		for(final Object obj : dataset) {
-			try {
-				final Map<String, Object> datamap =
-						utilsObject.castMap(
-								String.class,
-								Object.class,
-								obj
-						);
-				final SavedProfile profile = get(datamap);
-				profiles.put(profile.name, profile);
-			} catch (Exception e) {
-				xLog.getRoot(LOG_NAME).trace(e);
-			}
-		}
-		return profiles;
-	}
-	public static SavedProfile get(final Map<String, Object> datamap) {
-		if(utils.isEmpty(datamap))
-			return null;
-		final xConfig config = new xConfig(datamap);
-		final String name = config.getString(apiClientDefines.PROFILE_NAME);
-		final boolean ssl = config.getBool(  apiClientDefines.PROFILE_SSL, false);
-		final String host = config.getString(apiClientDefines.PROFILE_HOST);
-		final int    port = config.getInt   (
+	public SavedProfile(final Map<String, Object> datamap)
+			throws xConfigException {
+		super(datamap);
+		this.name = this.getString(apiClientDefines.PROFILE_NAME);
+		this.ssl  = this.getBool(  apiClientDefines.PROFILE_SSL, false);
+		this.host = this.getString(apiClientDefines.PROFILE_HOST);
+		if(utils.isEmpty(this.name)) throw new xConfigException("Name is missing from profiles config!");
+		if(utils.isEmpty(this.host)) throw new xConfigException("Host is missing from profiles config!");
+		this.port = this.getInt (
 				apiClientDefines.PROFILE_PORT,
-				gcCommonDefines.DEFAULT_SOCKET_PORT(ssl)
+				gcCommonDefines.DEFAULT_SOCKET_PORT(this.ssl)
 		);
-		final String user = config.getString(apiClientDefines.PROFILE_USER);
-		final String pass = config.getString(apiClientDefines.PROFILE_PASS);
-		return new SavedProfile(
-				name,
-				host,
-				port,
-				user,
-				pass
-		);
+		this.user = this.getString(apiClientDefines.PROFILE_USER);
+		this.pass = this.getString(apiClientDefines.PROFILE_PASS);
 	}
-
-
-
-//	@Override
-//	public String getKey() {
-//		return null;
+//	public SavedProfile(final String name,
+//			final String host, final int port,
+//			final String user, final String pass)
+//			throws xConfigException {
+//		this.name = name;
+//		this.host = host;
+//		this.port = port;
+//		this.user = user;
+//		this.pass = pass;
 //	}
-//	@Override
-//	public boolean matches(xHashable arg0) {
-//		return false;
-//	}
-
-
-
-	public SavedProfile(final String name,
-			final String host, final int port,
-			final String user, final String pass) {
-		this.name = name;
-		this.host = host;
-		this.port = port;
-		this.user = user;
-		this.pass = pass;
-	}
 
 
 
