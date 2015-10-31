@@ -5,13 +5,13 @@ Prompt Ticker: false
 Tick Interval: 60s
 Logic Threads: 0
 Zones:
-    - 'ExampleZone'
+  - 'ExampleZone'
 Socket Backlog: 10
 Sockets:
-    - Enabled: true
-      Host: '127.0.0.1'
-      Port: 1142
-    - Enabled: false
-      SSL: true
-      Host: '127.0.0.1'
-      Port: 1143
+  - Enabled: true
+    Host: '127.0.0.1'
+    Port: 1142
+  - Enabled: false
+    SSL: true
+    Host: '127.0.0.1'
+    Port: 1143
