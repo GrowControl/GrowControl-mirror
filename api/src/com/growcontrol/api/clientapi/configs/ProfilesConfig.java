@@ -16,8 +16,7 @@ public class ProfilesConfig extends xConfig {
 	public final String lastProfile;
 	public final boolean autoConnect;
 
-	private volatile Map<String, SavedProfile> profiles = null;
-	private final Object profilesLock = new Object();
+	private final Map<String, SavedProfile> profiles;
 
 
 
@@ -33,6 +32,21 @@ public class ProfilesConfig extends xConfig {
 				apiClientDefines.PROFILE_AUTO_CONNECT,
 				apiClientDefines.DEFAULT_AUTO_CONNECT
 		);
+		this.profiles = this.loadProfiles();
+	}
+	private Map<String, SavedProfile> loadProfiles()
+			throws xConfigException {
+		final List<xConfig> configsList = this.getConfigList(
+				apiClientDefines.PROFILES,
+				SavedProfile.class
+		);
+		final LinkedHashMap<String, SavedProfile> profilesMap =
+				new LinkedHashMap<String, SavedProfile>();
+		for(final xConfig cfg : configsList) {
+			final SavedProfile p = (SavedProfile) cfg;
+			profilesMap.put(p.getKey(), p);
+		}
+		return Collections.unmodifiableMap(profilesMap);
 	}
 
 
@@ -58,34 +72,11 @@ public class ProfilesConfig extends xConfig {
 
 
 
-	public Map<String, SavedProfile> getProfiles()
-			throws xConfigException {
-		if(this.profiles == null) {
-			synchronized(this.profilesLock) {
-				if(this.profiles == null) {
-					final List<xConfig> configsList =
-						this.getConfigList(
-							apiClientDefines.PROFILES,
-							SavedProfile.class
-					);
-					final LinkedHashMap<String, SavedProfile> profilesMap =
-							new LinkedHashMap<String, SavedProfile>();
-					for(final xConfig cfg : configsList) {
-						final SavedProfile p = (SavedProfile) cfg;
-						profilesMap.put(p.getKey(), p);
-					}
-					this.profiles = Collections.unmodifiableMap(profilesMap);
-				}
-			}
-		}
+	public Map<String, SavedProfile> getProfiles() {
 		return this.profiles;
 	}
 	public SavedProfile getProfile(final String name) {
-		try {
-			final Map<String, SavedProfile> profiles = this.getProfiles();
-			return profiles.get(name);
-		} catch (xConfigException ignore) {}
-		return null;
+		return this.profiles.get(name);
 	}
 
 
