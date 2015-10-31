@@ -3,6 +3,7 @@ package com.growcontrol.server;
 import com.growcontrol.common.meta.MetaRouter;
 import com.growcontrol.server.configs.gcServerConfig;
 import com.poixson.commonapp.config.xConfig;
+import com.poixson.commonapp.config.xConfigException;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.xLogger.xLog;
@@ -51,13 +52,18 @@ public class gcServerVars {
 		if(config == null) {
 			synchronized(configLock) {
 				if(config == null) {
-					config = (gcServerConfig) xConfig.Load(
-							null,
-							null,
-							gcServerDefines.CONFIG_FILE,
-							gcServerConfig.class,
-							gcServer.class
-					);
+					try {
+						config = (gcServerConfig) xConfig.Load(
+								null,
+								null,
+								gcServerDefines.CONFIG_FILE,
+								gcServerConfig.class,
+								gcServer.class
+						);
+					} catch (xConfigException e) {
+						xLog.getRoot().trace(e);
+						config = null;
+					}
 					if(config == null) {
 						Failure.fail("Failed to load "+gcServerDefines.CONFIG_FILE);
 						return null;
