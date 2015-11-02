@@ -4,6 +4,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import com.growcontrol.common.packets.PacketState;
+import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -17,8 +18,8 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 
 	public NetServerHandler(final NetServer server,
 			final ServerSocketState socketState) {
-		if(server == null) throw new NullPointerException("server argument is required!");
-		if(socketState == null) throw new NullPointerException("socketState argument is required!");
+		if(server == null)      throw new RequiredArgumentException("server");
+		if(socketState == null) throw new RequiredArgumentException("socketState");
 		this.server = server;
 		this.socketState = socketState;
 	}

@@ -10,6 +10,7 @@ import com.growcontrol.common.gcCommonDefines;
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.Utils.xHashable;
+import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -65,7 +66,7 @@ xLog.getRoot().finest("Generated a unique random address hash: "+hash);
 
 
 	public MetaAddress setTag(final String key, final String value) {
-		if(utils.isEmpty(key)) throw new NullPointerException("key argument is required!");
+		if(utils.isEmpty(key)) throw new RequiredArgumentException("key");
 		synchronized(this.tags) {
 			this.tags.put(key, value);
 		}

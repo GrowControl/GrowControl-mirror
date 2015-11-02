@@ -12,6 +12,7 @@ import com.growcontrol.common.meta.exceptions.InvalidMetaValueException;
 import com.growcontrol.common.meta.exceptions.UnknownAddressException;
 import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 import com.poixson.commonjava.xEvents.xEventData;
 import com.poixson.commonjava.xEvents.xEventListener;
 import com.poixson.commonjava.xEvents.xEventListener.ListenerPriority;
@@ -71,8 +72,8 @@ public class MetaRouter extends xHandlerSimple {
 
 
 	public String register(final String addrStr, final MetaListener listener) {
-		if(utils.isEmpty(addrStr)) throw new NullPointerException("addrStr argument is required!");
-		if(listener == null)       throw new NullPointerException("listener argument is required!");
+		if(utils.isEmpty(addrStr)) throw new RequiredArgumentException("addrStr");
+		if(listener == null)       throw new RequiredArgumentException("listener");
 		final MetaAddress address = MetaAddress.get(addrStr);
 		if(address == null) throw new UnknownAddressException(addrStr);
 		return this.register(
@@ -81,8 +82,8 @@ public class MetaRouter extends xHandlerSimple {
 		);
 	}
 	public String register(final MetaAddress address, final MetaListener listener) {
-		if(address  == null) throw new NullPointerException("address argument is required!");
-		if(listener == null) throw new NullPointerException("listener argument is required!");
+		if(address  == null) throw new RequiredArgumentException("address");
+		if(listener == null) throw new RequiredArgumentException("listener");
 		final MetaAddress addr =
 				address == null
 				? MetaAddress.getRandom()
@@ -123,7 +124,7 @@ public class MetaRouter extends xHandlerSimple {
 //TODO: this is untested
 	@Override
 	public void unregister(final xEventListener listener) {
-		if(listener == null) throw new NullPointerException("listener argument is required!");
+		if(listener == null) throw new RequiredArgumentException("listener");
 		if(!(listener instanceof MetaListener))
 			throw new UnsupportedOperationException();
 		final MetaListener expected = (MetaListener) listener;
@@ -150,7 +151,7 @@ public class MetaRouter extends xHandlerSimple {
 	}
 	@Override
 	public void unregisterType(final Class<?> listenerClass) {
-		if(listenerClass == null) throw new NullPointerException("listener argument is required!");
+		if(listenerClass == null) throw new RequiredArgumentException("listener class");
 		final Iterator<Entry<MetaAddress, xListenerDAO>> it =
 				this.dests.entrySet().iterator();
 		int count = 0;
@@ -182,8 +183,8 @@ public class MetaRouter extends xHandlerSimple {
 
 	// route an event
 	public void route(final String destAddr, final String value) {
-		if(utils.isEmpty(destAddr)) throw new NullPointerException("destAddr argument is required!");
-		if(utils.isEmpty(value))    throw new NullPointerException("value argument is required!");
+		if(utils.isEmpty(destAddr)) throw new RequiredArgumentException("destAddr");
+		if(utils.isEmpty(value))    throw new RequiredArgumentException("value");
 		final MetaType metaValue = MetaType.get(value);
 		if(metaValue == null) throw new InvalidMetaValueException(value);
 		this.route(
@@ -192,8 +193,8 @@ public class MetaRouter extends xHandlerSimple {
 		);
 	}
 	public void route(final String destAddr, final MetaType value) {
-		if(utils.isEmpty(destAddr)) throw new NullPointerException("destAddr argument is required!");
-		if(value == null)           throw new NullPointerException("value argument is required!");
+		if(utils.isEmpty(destAddr)) throw new RequiredArgumentException("destAddr");
+		if(value == null)           throw new RequiredArgumentException("value");
 		final MetaAddress addr = MetaAddress.get(destAddr);
 		if(addr == null) throw new UnknownAddressException(destAddr);
 		this.route(
@@ -202,8 +203,8 @@ public class MetaRouter extends xHandlerSimple {
 		);
 	}
 	public void route(final MetaAddress dest, final MetaType value) {
-		if(dest  == null) throw new NullPointerException("dest argument is required!");
-		if(value == null) throw new NullPointerException("value argument is required!");
+		if(dest  == null) throw new RequiredArgumentException("dest");
+		if(value == null) throw new RequiredArgumentException("value");
 		final MetaEvent event = new MetaEvent(dest, value);
 		this.trigger(event);
 	}
@@ -221,7 +222,7 @@ public class MetaRouter extends xHandlerSimple {
 //this.log().warning("xHandler->trigger() function is unfinished!");
 
 
-		if(event == null) throw new NullPointerException("event argument is required!");
+		if(event == null) throw new RequiredArgumentException("event");
 		final MetaEvent metaEvent = (MetaEvent) event;
 		this.log().finest("Triggering meta event: "+event.toString());
 //		final Set<xRunnableEvent> waitFor = new HashSet<xRunnableEvent>();

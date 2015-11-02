@@ -24,6 +24,7 @@ import com.poixson.commonjava.Utils.Keeper;
 import com.poixson.commonjava.Utils.utilsThread;
 import com.poixson.commonjava.Utils.xCloseableMany;
 import com.poixson.commonjava.Utils.xTimeU;
+import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 import com.poixson.commonjava.Utils.threads.xThreadFactory;
 import com.poixson.commonjava.xLogger.xLog;
 
@@ -62,7 +63,7 @@ public class NetServerManager implements xCloseableMany {
 
 
 	public static NetServer get(final NetServerConfig config) {
-		if(config == null) throw new NullPointerException("config argument is required!");
+		if(netConfig == null) throw new RequiredArgumentException("netConfig");
 		try {
 			return get().getServer(config);
 		} catch (UnknownHostException e) {
@@ -125,7 +126,7 @@ public class NetServerManager implements xCloseableMany {
 
 	public NetServer getServer(final NetServerConfig config)
 			throws UnknownHostException, InterruptedException {
-		if(config == null) throw new NullPointerException("config argument is required!");
+		if(netConfig == null) throw new RequiredArgumentException("netConfig");
 		final String key = config.toString();
 		// get existing server
 		{

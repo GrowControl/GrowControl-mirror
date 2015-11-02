@@ -22,6 +22,7 @@ import com.growcontrol.common.packets.PacketDirection;
 import com.growcontrol.server.gcServerVars;
 import com.growcontrol.server.configs.NetServerConfig;
 import com.poixson.commonapp.net.firewall.NetFirewall;
+import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -44,7 +45,7 @@ public class NetServer implements NetParent {
 //throws UnknownHostException, SocketException, InterruptedException {
 	public NetServer(final NetServerConfig config)
 			throws UnknownHostException, InterruptedException {
-		if(config == null)  throw new NullPointerException("config argument is required!");
+		if(netConfig == null)  throw new RequiredArgumentException("netConfig");
 		if(!config.enabled) throw new UnsupportedOperationException("This socket server is disabled!");
 		this.config = config;
 		this.serverKey = this.config.toString();
@@ -92,7 +93,7 @@ public class NetServer implements NetParent {
 	 * @return true to accept the connection or false to deny.
 	 */
 	public boolean register(final ServerSocketState socketState) {
-		if(socketState == null) throw new NullPointerException("socketState argument is required!");
+		if(socketState == null) throw new RequiredArgumentException("socketState");
 		final SocketChannel channel = socketState.getChannel();
 		if(channel == null) throw new NullPointerException("Channel is null, socket may have disconnected already!");
 		this.states.put(channel, socketState);
@@ -128,7 +129,7 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 	 */
 	// socket disconnected
 	public void unregister(final ServerSocketState socketState) {
-		if(socketState == null) throw new NullPointerException("socketState argument is required!");
+		if(socketState == null) throw new RequiredArgumentException("socketState");
 		this.states.remove(socketState);
 	}
 

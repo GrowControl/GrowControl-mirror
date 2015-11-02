@@ -2,6 +2,7 @@ package com.growcontrol.common.meta.metaTypes;
 
 import com.growcontrol.common.meta.MetaType;
 import com.poixson.commonjava.Utils.xRunnable;
+import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 
 
 public class MetaTrigger extends MetaType {
@@ -53,7 +54,7 @@ public class MetaTrigger extends MetaType {
 		this.run = xRunnable.cast(run);
 	}
 	public void set(final xRunnable run) {
-		if(run == null) throw new NullPointerException("run argument is required!");
+		if(run == null) throw new RequiredArgumentException("run");
 		this.run = run;
 	}
 	@Override

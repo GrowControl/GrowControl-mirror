@@ -11,6 +11,7 @@ import org.yaml.snakeyaml.Yaml;
 import com.growcontrol.common.netty.NetParent;
 import com.growcontrol.common.netty.SocketState;
 import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -93,7 +94,7 @@ xLog.getRoot("NET").finer("Registered packet type: "+dao.name);
 		this.send(json);
 	}
 	public void send(final Class<? extends Packet> packetClass) throws PacketException {
-		if(packetClass == null) throw new NullPointerException("packetClass argument is required!");
+		if(packetClass == null) throw new RequiredArgumentException("packetClass");
 		final PacketDAO dao = this.getPacketDAO(packetClass);
 		if(dao == null) throw new PacketException("Packet type not registered: "+packetClass.getName());
 		// get packet instance
@@ -111,7 +112,7 @@ xLog.getRoot("NET").severe("Failed to create packet instance for: "+packetClass.
 		this.send(packet);
 	}
 	public void send(final Object json) {
-		if(json == null) throw new NullPointerException("json argument is required!");
+		if(json == null) throw new RequiredArgumentException("json");
 		final String data = Packet.convert(this.getYaml(), json);
 		if(utils.isEmpty(data)) throw new NullPointerException("data is null or empty!");
 		this.socketState.send(data);

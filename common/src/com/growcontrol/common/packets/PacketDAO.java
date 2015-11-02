@@ -1,6 +1,7 @@
 package com.growcontrol.common.packets;
 
 import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 
 
 public class PacketDAO {
@@ -19,8 +20,8 @@ public class PacketDAO {
 
 	public PacketDAO(final PacketState packetState,
 			final Class<? extends Packet> packetClass) {
-		if(packetState == null) throw new NullPointerException("packetState argument is required!");
-		if(packetClass == null) throw new NullPointerException("packetClass argument is required!");
+		if(packetState == null) throw new RequiredArgumentException("packetState");
+		if(packetClass == null) throw new RequiredArgumentException("packetClass");
 		this.packetState = packetState;
 		this.packetClass = packetClass;
 		// load properties annotation
@@ -35,7 +36,7 @@ public class PacketDAO {
 			this.name = name;
 		}
 		if(utils.isEmpty(this.name))
-			throw new NullPointerException("Packet name is required!");
+			throw new RequiredArgumentException("packet name");
 		// more packet properties
 		this.stateful  = props.stateful();
 		this.async     = props.async();

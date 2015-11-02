@@ -5,6 +5,7 @@ import io.netty.util.internal.logging.InternalLogger;
 import io.netty.util.internal.logging.InternalLoggerFactory;
 
 import com.poixson.commonjava.Utils.utilsString;
+import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -17,7 +18,7 @@ public class NettyDetailedLogger extends AbstractInternalLogger {
 
 	// install factory
 	public static void Install(final xLog log) {
-		if(log == null) throw new NullPointerException("log argument is required!");
+		if(log == null) throw new RequiredArgumentException("log");
 		InternalLoggerFactory.setDefaultFactory(
 				new NettyDetailedLoggerFactory(log)
 		);

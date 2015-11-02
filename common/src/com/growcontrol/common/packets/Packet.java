@@ -7,6 +7,7 @@ import org.yaml.snakeyaml.Yaml;
 
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsObject;
+import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 import com.poixson.commonjava.xLogger.xLog;
 
 
@@ -48,13 +49,13 @@ public abstract class Packet {
 
 
 	public static String convert(final Yaml yaml, final Object json) {
-		if(yaml == null) throw new NullPointerException("yaml argument is required!");
-		if(json == null) throw new NullPointerException("json argument is required!");
+		if(yaml == null) throw new RequiredArgumentException("yaml");
+		if(json == null) throw new RequiredArgumentException("json");
 		return yaml.dump(json);
 	}
 	public static Map<String, Object> convertMap(final Yaml yaml, final String data) throws PacketException {
-		if(yaml == null)        throw new NullPointerException("yaml argument is required!");
-		if(utils.isEmpty(data)) throw new NullPointerException("data argument is required!");
+		if(yaml == null)        throw new RequiredArgumentException("yaml");
+		if(utils.isEmpty(data)) throw new RequiredArgumentException("data");
 		final Object obj;
 		try {
 			obj = yaml.load(data);
@@ -69,8 +70,8 @@ xLog.getRoot().warning("Failed to parse packet json!");
 		);
 	}
 	public static List<Object> convertList(final Yaml yaml, final String data) throws PacketException {
-		if(yaml == null)        throw new NullPointerException("yaml argument is required!");
-		if(utils.isEmpty(data)) throw new NullPointerException("data argument is required!");
+		if(yaml == null)        throw new RequiredArgumentException("yaml");
+		if(utils.isEmpty(data)) throw new RequiredArgumentException("data");
 		final Object obj;
 		try {
 			obj = yaml.load(data);

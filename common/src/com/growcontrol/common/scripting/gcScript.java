@@ -12,6 +12,7 @@ import javax.script.ScriptException;
 
 import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.xStartable;
+import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 import com.poixson.commonjava.Utils.threads.xThreadPool;
 import com.poixson.commonjava.xLogger.xLog;
 
@@ -73,13 +74,13 @@ public class gcScript implements xStartable {
 	protected static class ScriptCode_File implements ScriptCode {
 		protected final File file;
 		public ScriptCode_File(final File file) throws FileNotFoundException {
-			if(file == null)   throw new NullPointerException("file argument is required!");
+			if(file == null)   throw new RequiredArgumentException("file");
 			if(!file.isFile()) throw new FileNotFoundException("Script file not found: "+file.toString());
 			this.file = file;
 		}
 		@Override
 		public void eval(final ScriptEngine engine) throws ScriptException {
-			if(engine == null) throw new NullPointerException("engine argument is required!");
+			if(engine == null) throw new RequiredArgumentException("engine");
 			try {
 				engine.eval(new FileReader(this.file));
 			} catch (FileNotFoundException e) {
@@ -91,12 +92,12 @@ public class gcScript implements xStartable {
 	protected static class ScriptCode_Text implements ScriptCode {
 		protected final String text;
 		public ScriptCode_Text(final String text) {
-			if(utils.isEmpty(text)) throw new IllegalArgumentException("text argument is required!");
+			if(utils.isEmpty(text)) throw new RequiredArgumentException("text");
 			this.text = text;
 		}
 		@Override
 		public void eval(final ScriptEngine engine) throws ScriptException {
-			if(engine == null) throw new NullPointerException("engine argument is required!");
+			if(engine == null) throw new RequiredArgumentException("engine");
 			engine.eval(this.text);
 		}
 	}
@@ -105,7 +106,7 @@ public class gcScript implements xStartable {
 
 	// queue a file to be run
 	public void queue(final File file) throws FileNotFoundException {
-		if(file == null) throw new NullPointerException("file argument is required!");
+		if(file == null) throw new RequiredArgumentException("file");
 		if(!file.isFile()) throw new FileNotFoundException("Script file not found: "+file.toString());
 		this.queue.add(
 				new ScriptCode_File(file)
