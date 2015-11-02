@@ -29,7 +29,7 @@ import com.poixson.commonjava.xLogger.xLog;
 public class NetServer implements NetParent {
 	private static final String LOG_NAME = "NET";
 
-	public final NetServerConfig config;
+	public final NetServerConfig netConfig;
 	public final String serverKey;
 	protected volatile boolean closed = false;
 
@@ -43,12 +43,12 @@ public class NetServer implements NetParent {
 
 
 //throws UnknownHostException, SocketException, InterruptedException {
-	public NetServer(final NetServerConfig config)
+	public NetServer(final NetServerConfig netConfig)
 			throws UnknownHostException, InterruptedException {
 		if(netConfig == null)  throw new RequiredArgumentException("netConfig");
-		if(!config.enabled) throw new UnsupportedOperationException("This socket server is disabled!");
-		this.config = config;
-		this.serverKey = this.config.toString();
+		if(!netConfig.enabled) throw new UnsupportedOperationException("This socket server is disabled!");
+		this.netConfig = netConfig;
+		this.serverKey = this.netConfig.toString();
 		this.log().finer("Starting socket server..");
 		// server bootstrap
 		{
@@ -79,8 +79,8 @@ public class NetServer implements NetParent {
 		this.bootstrap.childHandler(this.initer);
 		// start listening
 		this.serverChannel = this.bootstrap.bind(
-				this.config.getInetAddress(),
-				this.config.port
+				this.netConfig.getInetAddress(),
+				this.netConfig.port
 		).sync().channel();
 		this.log().info("Socket server listening for connections..");
 	}
@@ -95,7 +95,7 @@ public class NetServer implements NetParent {
 	public boolean register(final ServerSocketState socketState) {
 		if(socketState == null) throw new RequiredArgumentException("socketState");
 		final SocketChannel channel = socketState.getChannel();
-		if(channel == null) throw new NullPointerException("Channel is null, socket may have disconnected already!");
+		if(channel == null) throw new RuntimeException("Channel is null, socket may have disconnected already!");
 		this.states.put(channel, socketState);
 		// check firewall
 		{

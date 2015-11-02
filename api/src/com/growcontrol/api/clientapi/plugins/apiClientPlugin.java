@@ -10,7 +10,7 @@ public abstract class apiClientPlugin extends xJavaPlugin {
 
 	@Override
 	public void unregister(final Class<? extends xEventListener> listenerClass) {
-		if(listenerClass == null) throw new NullPointerException("Cannot unregister null listener!");
+		if(listenerClass == null) throw new IllegalArgumentException("Cannot unregister null listener!");
 //		// command listener
 //		if(xCommandListener.class.isInstance(listenerClass)) {
 //			gcClientVars.commands()

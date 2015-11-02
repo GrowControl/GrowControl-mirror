@@ -16,8 +16,8 @@ public abstract class apiServerPlugin extends xJavaPlugin {
 
 	// register meta listener
 	public void register(final MetaAddress address, final MetaListener listener) {
-		if(address  == null) throw new NullPointerException("Cannot register null meta address!");
-		if(listener == null) throw new NullPointerException("Cannot register null meta listener!");
+		if(address  == null) throw new IllegalArgumentException("Cannot register null meta address!");
+		if(listener == null) throw new IllegalArgumentException("Cannot register null meta listener!");
 		final MetaRouter router = MetaRouter.get();
 		router.register(
 			address,
@@ -26,21 +26,21 @@ public abstract class apiServerPlugin extends xJavaPlugin {
 	}
 	// register command handler
 	public void register(final xCommandListener listener) {
-		if(listener == null) throw new NullPointerException("Cannot register null command listener!");
+		if(listener == null) throw new IllegalArgumentException("Cannot register null command listener!");
 		xApp.get().getCommandsHandler()
 			.register(listener);
 	}
 	// unregister listener type
 	@Override
 	public void unregister(final Class<? extends xEventListener> listenerClass) {
-		if(listenerClass == null) throw new NullPointerException("Cannot unregister null listener!");
+		if(listenerClass == null) throw new IllegalArgumentException("Cannot unregister null listener!");
 		// command listener
 		if(xCommandListener.class.isInstance(listenerClass)) {
 			xApp.get().getCommandsHandler()
 				.unregisterType(listenerClass);
 		// unknown
 		} else {
-			xLog.getRoot().warning("Unknown listener type, cannot unregister.");
+			xLog.getRoot().warning("Unknown listener type, cannot unregister!");
 //			throw new RuntimeException("Cannot register unknown listener type: "
 //					+listenerClass.getName());
 		}

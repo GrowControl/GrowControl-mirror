@@ -108,13 +108,13 @@ xLog.getRoot("NET").severe("Failed to create packet instance for: "+packetClass.
 xLog.getRoot("NET").severe("Failed to create packet instance for: "+packetClass.getName());
 			throw new PacketException(e);
 		}
-		if(packet == null) throw new NullPointerException("Failed to get packet instance!");
+		if(packet == null) throw new RuntimeException("Failed to get packet instance!");
 		this.send(packet);
 	}
 	public void send(final Object json) {
 		if(json == null) throw new RequiredArgumentException("json");
 		final String data = Packet.convert(this.getYaml(), json);
-		if(utils.isEmpty(data)) throw new NullPointerException("data is null or empty!");
+		if(utils.isEmpty(data)) throw new RuntimeException("Failed to parse json data!");
 		this.socketState.send(data);
 xLog.getRoot("NET").publish("");
 xLog.getRoot("NET").publish("SERVER SENDING PACKET:");

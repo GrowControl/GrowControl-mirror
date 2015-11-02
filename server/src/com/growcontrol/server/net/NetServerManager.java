@@ -62,10 +62,10 @@ public class NetServerManager implements xCloseableMany {
 
 
 
-	public static NetServer get(final NetServerConfig config) {
+	public static NetServer get(final NetServerConfig netConfig) {
 		if(netConfig == null) throw new RequiredArgumentException("netConfig");
 		try {
-			return get().getServer(config);
+			return get().getServer(netConfig);
 		} catch (UnknownHostException e) {
 			log().trace(e);
 			return null;
@@ -124,10 +124,10 @@ public class NetServerManager implements xCloseableMany {
 
 
 
-	public NetServer getServer(final NetServerConfig config)
+	public NetServer getServer(final NetServerConfig netConfig)
 			throws UnknownHostException, InterruptedException {
 		if(netConfig == null) throw new RequiredArgumentException("netConfig");
-		final String key = config.toString();
+		final String key = netConfig.toString();
 		// get existing server
 		{
 			final NetServer server = this.netServers.get(key);
@@ -148,7 +148,7 @@ public class NetServerManager implements xCloseableMany {
 			}
 			// new server
 			{
-				final NetServer server = new NetServer(config);
+				final NetServer server = new NetServer(netConfig);
 				this.netServers.put(key, server);
 				return server;
 			}
