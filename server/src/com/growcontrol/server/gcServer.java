@@ -2,9 +2,9 @@ package com.growcontrol.server;
 
 import java.io.PrintStream;
 import java.net.UnknownHostException;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
 import com.growcontrol.common.commands.gcCommonCommands;
@@ -21,6 +21,7 @@ import com.poixson.commonapp.plugin.xPluginManager;
 import com.poixson.commonjava.Failure;
 import com.poixson.commonjava.xVars;
 import com.poixson.commonjava.Utils.utils;
+import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.scheduler.ticker.xTickHandler;
 import com.poixson.commonjava.scheduler.ticker.xTickPrompt;
 import com.poixson.commonjava.xLogger.xLog;
@@ -408,145 +409,129 @@ public class gcServer extends xApp {
 	// ascii header
 	@Override
 	protected void displayLogo() {
-		final PrintStream out = AnsiConsole.out;
-		final Ansi.Color bgcolor = Ansi.Color.BLACK;
-		out.println();
+		// colors
+		final String COLOR_POIXSON_P   = "bold,green";
+		final String COLOR_POIXSON_OI  = "bold,blue";
+		final String COLOR_POIXSON_X   = "bold,green";
+		final String COLOR_POIXSON_SON = "bold,blue";
+		final String COLOR_COPY        = "bold,black";
+		final String COLOR_GROW        = "bold,green";
+		final String COLOR_CONTROL     = "bold,white";
+		final String COLOR_SOFTWARE    = "cyan";
+		final String COLOR_VERSION     = "cyan";
+		final String COLOR_GRASS       = "green";
+		final String COLOR_FLOWER_STEM     = "green";
+		final String COLOR_FLOWER_A_PEDALS = "red";
+		final String COLOR_FLOWER_A_CENTER = "red";
+		final String COLOR_FLOWER_B_PEDALS = "magenta";
+		final String COLOR_FLOWER_C_PEDALS = "bold,yellow";
+		final String COLOR_FLOWER_C_CENTER = "yellow";
+		final String COLOR_FLOWER_D_PEDALS = "bold,magenta";
+		final String COLOR_FLOWER_E_PEDALS = "bold,yellow";
+		final String COLOR_FLOWER_E_CENTER = "yellow";
+		final String COLOR_FLOWER_F_PEDALS = "blue";
+		final String COLOR_FLOWER_F_CENTER = "bold,blue";
+		final String COLOR_FLOWER_G_PEDALS = "magenta";
+		final String COLOR_FLOWER_H_PEDALS = "bold,yellow";
+		final String COLOR_FLOWER_H_CENTER = "yellow";
 		// line 1
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).bold().a("      ")
-			.fg(Ansi.Color.GREEN).a("P")
-			.fg(Ansi.Color.WHITE).a("oi")
-			.fg(Ansi.Color.GREEN).a("X")
-			.fg(Ansi.Color.WHITE).a("son")
-			.a("                          ")
-			.a("                          ")
-			.reset() );
+		final Map<Integer, String> colors1 = new LinkedHashMap<Integer, String>();
+		colors1.put(new Integer(7),  COLOR_POIXSON_P);
+		colors1.put(new Integer(8),  COLOR_POIXSON_OI);
+		colors1.put(new Integer(10), COLOR_POIXSON_X);
+		colors1.put(new Integer(11), COLOR_POIXSON_SON);
 		// line 2
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).bold().a("   ")
-			.fg(Ansi.Color.BLACK).a("©")
-			.fg(Ansi.Color.GREEN).a("GROW")
-			.fg(Ansi.Color.WHITE).a("CONTROL")
-			.boldOff().a("     ")
-			/* C */.fg(Ansi.Color.YELLOW).bold().a("_")
-			.a("                      ")
-			.a("                      ")
-			.reset() );
+		final Map<Integer, String> colors2 = new LinkedHashMap<Integer, String>();
+		colors2.put(new Integer(4),  COLOR_COPY);
+		colors2.put(new Integer(5),  COLOR_GROW);
+		colors2.put(new Integer(9),  COLOR_CONTROL);
+		colors2.put(new Integer(21), COLOR_FLOWER_C_PEDALS);
 		// line 3
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("      ")
-			.fg(Ansi.Color.CYAN).a("Server      ")
-			/* C */.fg(Ansi.Color.YELLOW).bold()
-					.a("_(_)_").boldOff()
-					.a("                          ")
-			/* G */.fg(Ansi.Color.MAGENTA).a("wWWWw   ")
-			/* H */.fg(Ansi.Color.YELLOW).bold().a("_")
-			.a("       ")
-			.reset() );
+		final Map<Integer, String> colors3 = new LinkedHashMap<Integer, String>();
+		colors3.put(new Integer(7),  COLOR_SOFTWARE);
+		colors3.put(new Integer(19), COLOR_FLOWER_C_PEDALS);
+		colors3.put(new Integer(50), COLOR_FLOWER_G_PEDALS);
+		colors3.put(new Integer(58), COLOR_FLOWER_H_PEDALS);
 		// line 4
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("                 ")
-			/* C */.fg(Ansi.Color.YELLOW).bold()
-					.a("(_)@(_)   ").boldOff()
-			/* D */.fg(Ansi.Color.MAGENTA).a("vVVVv     ")
-			/* E */.fg(Ansi.Color.YELLOW).bold()
-					.a("_     ").boldOff()
-			/* F */.fg(Ansi.Color.BLUE).a("@@@@  ")
-			/* G */.fg(Ansi.Color.MAGENTA).a("(___) ")
-			/* H */.fg(Ansi.Color.YELLOW).bold().a("_(_)_")
-			.a("     ")
-			.reset() );
+		final Map<Integer, String> colors4 = new LinkedHashMap<Integer, String>();
+		colors4.put(new Integer(4),  COLOR_VERSION);
+		colors4.put(new Integer(18), COLOR_FLOWER_C_PEDALS);
+		colors4.put(new Integer(21), COLOR_FLOWER_C_CENTER);
+		colors4.put(new Integer(22), COLOR_FLOWER_C_PEDALS);
+		colors4.put(new Integer(28), COLOR_FLOWER_D_PEDALS);
+		colors4.put(new Integer(38), COLOR_FLOWER_E_PEDALS);
+		colors4.put(new Integer(44), COLOR_FLOWER_F_PEDALS);
+		colors4.put(new Integer(50), COLOR_FLOWER_G_PEDALS);
+		colors4.put(new Integer(56), COLOR_FLOWER_H_PEDALS);
 		// line 5
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("      ")
-			/* A */.fg(Ansi.Color.RED).a("@@@@  ")
-			/* B */.fg(Ansi.Color.MAGENTA).bold()
-					.a("wWWWw  ").boldOff()
-			/* C */.fg(Ansi.Color.YELLOW).bold()
-					.a("(_)").boldOff()
-					.fg(Ansi.Color.GREEN).a("\\    ")
-			/* D */.fg(Ansi.Color.MAGENTA).a("(___)   ")
-			/* E */.fg(Ansi.Color.YELLOW).bold()
-					.a("_(_)_  ").boldOff()
-			/* F */.fg(Ansi.Color.BLUE).a("@@()@@   ")
-			/* F */.fg(Ansi.Color.MAGENTA).a("Y  ")
-			/* H */.fg(Ansi.Color.YELLOW)
-					.bold().a("(_)@(_)")
-			.a("    ")
-			.reset() );
+		final Map<Integer, String> colors5 = new LinkedHashMap<Integer, String>();
+		colors5.put(new Integer(13), COLOR_FLOWER_B_PEDALS);
+		colors5.put(new Integer(20), COLOR_FLOWER_C_PEDALS);
+		colors5.put(new Integer(23), COLOR_FLOWER_STEM);
+		colors5.put(new Integer(28), COLOR_FLOWER_D_PEDALS);
+		colors5.put(new Integer(36), COLOR_FLOWER_E_PEDALS);
+		colors5.put(new Integer(43), COLOR_FLOWER_F_PEDALS);
+		colors5.put(new Integer(45), COLOR_FLOWER_F_CENTER);
+		colors5.put(new Integer(47), COLOR_FLOWER_F_PEDALS);
+		colors5.put(new Integer(52), COLOR_FLOWER_G_PEDALS);
+		colors5.put(new Integer(55), COLOR_FLOWER_H_PEDALS);
+		colors5.put(new Integer(58), COLOR_FLOWER_H_CENTER);
+		colors5.put(new Integer(59), COLOR_FLOWER_H_PEDALS);
 		// line 6
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("     ")
-			/* A */.fg(Ansi.Color.RED).a("@@()@@ ")
-			/* B */.fg(Ansi.Color.MAGENTA).bold()
-					.a("(___)     ").boldOff()
-			/* C */.fg(Ansi.Color.GREEN).a("`|/    ")
-			/* D */.fg(Ansi.Color.MAGENTA).a("Y    ")
-			/* E */.fg(Ansi.Color.YELLOW).bold()
-					.a("(_)@(_)  ").boldOff()
-			/* F */.fg(Ansi.Color.BLUE).a("@@@@   ")
-			/* G */.fg(Ansi.Color.GREEN).a("\\|/   ")
-			/* H */.fg(Ansi.Color.YELLOW).bold()
-					.a("(_)").boldOff()
-					.fg(Ansi.Color.GREEN).a("\\")
-			.a("     ")
-			.reset() );
+		final Map<Integer, String> colors6 = new LinkedHashMap<Integer, String>();
+		colors6.put(new Integer(6),  COLOR_FLOWER_A_PEDALS);
+		colors6.put(new Integer(8),  COLOR_FLOWER_A_CENTER);
+		colors6.put(new Integer(9),  COLOR_FLOWER_A_PEDALS);
+		colors6.put(new Integer(13), COLOR_FLOWER_B_PEDALS);
+		colors6.put(new Integer(23), COLOR_FLOWER_STEM);
+		colors6.put(new Integer(30), COLOR_FLOWER_D_PEDALS);
+		colors6.put(new Integer(35), COLOR_FLOWER_E_PEDALS);
+		colors6.put(new Integer(38), COLOR_FLOWER_E_CENTER);
+		colors6.put(new Integer(39), COLOR_FLOWER_E_PEDALS);
+		colors6.put(new Integer(44), COLOR_FLOWER_F_PEDALS);
+		colors6.put(new Integer(51), COLOR_FLOWER_STEM);
+		colors6.put(new Integer(57), COLOR_FLOWER_H_PEDALS);
+		colors6.put(new Integer(60), COLOR_FLOWER_STEM);
 		// line 7
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("      ")
-			/* A */.fg(Ansi.Color.RED).a("@@@@    ")
-			/* B */.fg(Ansi.Color.MAGENTA).a("Y       ")
-			/* C */.fg(Ansi.Color.GREEN).a("\\|    ")
-			/* D */.fg(Ansi.Color.GREEN).a("\\|/    ")
-			/* E */.fg(Ansi.Color.GREEN).a("/")
-					.fg(Ansi.Color.YELLOW).bold()
-					.a("(_)    ").boldOff()
-			/* F */.fg(Ansi.Color.GREEN).a("\\|      ")
-			/* G */.fg(Ansi.Color.GREEN).a("|/      ")
-			/* H */.fg(Ansi.Color.GREEN).a("|     ")
-			.reset() );
+		final Map<Integer, String> colors7 = new LinkedHashMap<Integer, String>();
+		colors7.put(new Integer(5),  COLOR_FLOWER_A_PEDALS);
+		colors7.put(new Integer(7),  COLOR_FLOWER_A_CENTER);
+		colors7.put(new Integer(9),  COLOR_FLOWER_A_PEDALS);
+		colors7.put(new Integer(15), COLOR_FLOWER_B_PEDALS);
+		colors7.put(new Integer(23), COLOR_FLOWER_STEM);
+		colors7.put(new Integer(37), COLOR_FLOWER_E_PEDALS);
+		colors7.put(new Integer(44), COLOR_FLOWER_STEM);
 		// line 8
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("    ")
-			.fg(Ansi.Color.GREEN)
-			/* A */.a("\\  /    ")
-			/* B */.a("\\ |/       ")
-			/* C */.a("| / ")
-			/* D */.a("\\ | /  ")
-			/* E */.a("\\|/       ")
-			/* F */.a("|/    ")
-			/* G */.a("\\|      ")
-			/* H */.a("\\|/    ")
-			.reset() );
+		final Map<Integer, String> colors8 = new LinkedHashMap<Integer, String>();
+		colors8.put(new Integer(5),  COLOR_FLOWER_STEM);
+		colors8.put(new Integer(6),  COLOR_FLOWER_A_PEDALS);
+		colors8.put(new Integer(13), COLOR_FLOWER_STEM);
 		// line 9
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("    ")
-			.fg(Ansi.Color.GREEN)
-			/* A */.a("\\\\|//   ")
-			/* B */.a("\\\\|///  ")
-			/* C */.a("\\\\\\|//")
-			/* D */.a("\\\\\\|/// ")
-			/* E */.a("\\|///  ")
-			/* F */.a("\\\\\\|//  ")
-			/* G */.a("\\\\|//  ")
-			/* H */.a("\\\\\\|//   ")
-			.reset() );
+		final Map<Integer, String> colors9 = new LinkedHashMap<Integer, String>();
+		colors9.put(new Integer(5), COLOR_FLOWER_STEM);
 		// line 10
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor)
-			.fg(Ansi.Color.GREEN)
-			.a("^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/")
-			.a("^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^")
-			.reset() );
+		final Map<Integer, String> colors10 = new LinkedHashMap<Integer, String>();
+		colors10.put(new Integer(1), COLOR_GRASS);
 		// line 11
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor)
-			.fg(Ansi.Color.GREEN)
-			.a("////////////////////////////////")
-			.a("/////////////////////////////////")
-			.reset() );
+		final Map<Integer, String> colors11 = new LinkedHashMap<Integer, String>();
+		colors11.put(new Integer(1), COLOR_GRASS);
+		// build art
+		final String version = utilsString.padCenter(15, this.mvnprops.version, ' ');
+		final PrintStream out = AnsiConsole.out;
 		out.println();
-		out.println(" Copyright (C) 2007-2014 PoiXson, Mattsoft");
+		this.displayLogoLine(out, colors1, "      PoiXson                                                    "   );
+		this.displayLogoLine(out, colors2, "   ©GROWCONTROL     _                                            "   );
+		this.displayLogoLine(out, colors3, "      Server      _(_)_                          wWWWw   _       "   );
+		this.displayLogoLine(out, colors4, " "+version+" (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     "       );
+		this.displayLogoLine(out, colors5, "            wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)    "  );
+		this.displayLogoLine(out, colors6, "     @@@@   (___)     `|/    Y    (_)@(_)  @@@@   \\|/   (_)\\     " );
+		this.displayLogoLine(out, colors7, "    @@()@@    Y       \\|    \\|/    /(_)    \\|      |/      |/    ");
+		this.displayLogoLine(out, colors8, "    \\@@@@   \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/    ");
+		this.displayLogoLine(out, colors9, "    \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|//   ");
+		this.displayLogoLine(out, colors10,"^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^"    );
+		this.displayLogoLine(out, colors11,"/////////////////////////////////////////////////////////////////"    );
+		out.println();
+		out.println(" Copyright (C) 2007-2015 PoiXson, Mattsoft");
 		out.println(" - Brainchild of the one known as lorenzo -");
 		out.println(" This program comes with absolutely no warranty. This is free software");
 		out.println(" and you are welcome to modify it or redistribute it under certain");
@@ -555,20 +540,20 @@ public class gcServer extends xApp {
 		out.flush();
 	}
 
-//            A      B      C       D      E       F      G      H
-// 1 |       PoiXson                                                     |
-// 2 |    ©GROWCONTROL     _                                             |
-// 3 |       Server      _(_)_                          wWWWw   _        |
-// 4 |                  (_)@(_)   vVVVv     _     @@@@  (___) _(_)_      |
-// 5 |       @@@@  wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_)     |
-// 6 |      @@()@@ (___)     `|/    Y    (_)@(_)  @@@@   \|/   (_)\      |
-// 7 |       @@@@    Y       \|    \|/    /(_)    \|      |/      |      |
-// 8 |     \  /    \ |/       | / \ | /  \|/       |/    \|      \|/     |
-// 9 |     \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|//    |
-//10 | ^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^ |
-//11 | ///////////////////////////////////////////////////////////////// |
-//   0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8
-//   0         1         2         3         4         5         6
+//   |       A      B      C       D      E       F      G      H      |
+// 1 |      PoiXson                                                    |
+// 2 |   ©GROWCONTROL     _                                            |
+// 3 |      Server      _(_)_                          wWWWw   _       |
+// 4 | <---version---> (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     |
+// 5 |            wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_)    |
+// 6 |     @@@@   (___)     `|/    Y    (_)@(_)  @@@@   \|/   (_)\     |
+// 7 |    @@()@@    Y       \|    \|/    /(_)    \|      |/      |/    |
+// 8 |    \@@@@   \ |/       | / \ | /  \|/       |/    \|      \|/    |
+// 9 |    \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|//   |
+//10 |^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^|
+//11 |/////////////////////////////////////////////////////////////////|
+//   0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 |
+//   0         1         2         3         4         5         6     |
 
 //System.out.println("                     .==IIIIIIIIIIII=:.");
 //System.out.println("               .7IIII777777II7I7I77777III.");
