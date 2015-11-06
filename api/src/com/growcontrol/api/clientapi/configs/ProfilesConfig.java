@@ -13,8 +13,8 @@ import com.poixson.commonjava.Utils.utils;
 
 public class ProfilesConfig extends xConfig {
 
-	public final String lastProfile;
-	public final boolean autoConnect;
+	private final String  lastProfile;
+	private final boolean autoConnect;
 
 	private final Map<String, SavedProfile> profiles;
 

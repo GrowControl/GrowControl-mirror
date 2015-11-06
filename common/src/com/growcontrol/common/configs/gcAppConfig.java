@@ -11,9 +11,9 @@ import com.poixson.commonjava.xLogger.xLevel;
 
 public abstract class gcAppConfig extends xConfig {
 
-	public final String  version;
-	public final xLevel  level;
-	public final boolean debug;
+	private final String  version;
+	private final xLevel  level;
+	private final boolean debug;
 
 
 

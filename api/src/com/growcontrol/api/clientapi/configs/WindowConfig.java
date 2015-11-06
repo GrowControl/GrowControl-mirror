@@ -11,12 +11,12 @@ import com.poixson.commonjava.Utils.xHashable;
 
 public class WindowConfig extends xConfig implements xHashable {
 
-	public final String name;
+	private final String name;
 
-	public final Integer x;
-	public final Integer y;
-	public final Integer w;
-	public final Integer h;
+	private final Integer x;
+	private final Integer y;
+	private final Integer w;
+	private final Integer h;
 
 
 
@@ -108,6 +108,21 @@ public class WindowConfig extends xConfig implements xHashable {
 	@Override
 	public boolean matches(final xHashable hashable) {
 		throw new UnsupportedOperationException();
+	}
+
+
+
+	public Integer x() {
+		return this.x;
+	}
+	public Integer y() {
+		return this.y;
+	}
+	public Integer w() {
+		return this.w;
+	}
+	public Integer h() {
+		return this.h;
 	}
 
 

@@ -46,7 +46,7 @@ public class NetServer implements NetParent {
 	public NetServer(final NetServerConfig netConfig)
 			throws UnknownHostException, InterruptedException {
 		if(netConfig == null)  throw new RequiredArgumentException("netConfig");
-		if(!netConfig.enabled) throw new UnsupportedOperationException("This socket server is disabled!");
+		if(!netConfig.isEnabled()) throw new UnsupportedOperationException("This socket server is disabled!");
 		this.netConfig = netConfig;
 		this.serverKey = this.netConfig.toString();
 		this.log().finer("Starting socket server..");
@@ -80,7 +80,7 @@ public class NetServer implements NetParent {
 		// start listening
 		this.serverChannel = this.bootstrap.bind(
 				this.netConfig.getInetAddress(),
-				this.netConfig.port
+				this.netConfig.getPort()
 		).sync().channel();
 		this.log().info("Socket server listening for connections..");
 	}

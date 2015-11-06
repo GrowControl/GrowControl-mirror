@@ -14,12 +14,12 @@ import com.poixson.commonjava.Utils.xHashable;
 
 public class NetServerConfig extends xConfig implements xHashable {
 
-	public final String key;
+	private final String key;
 
-	public final boolean enabled;
-	public final boolean ssl;
-	public final String  host;
-	public final int     port;
+	private final boolean enabled;
+	private final boolean ssl;
+	private final String  host;
+	private final int     port;
 
 
 
@@ -72,11 +72,20 @@ public class NetServerConfig extends xConfig implements xHashable {
 
 
 
+	public boolean isEnabled() {
+		return this.enabled;
+	}
+	public boolean useSSL() {
+		return this.ssl;
+	}
 	public String getHost() {
 		final String host = this.host;
 		if(utils.isEmpty(host) || "*".equals(host) || "any".equalsIgnoreCase(host))
 			return null;
 		return host;
+	}
+	public int getPort() {
+		return this.port;
 	}
 	public InetAddress getInetAddress() throws UnknownHostException {
 		final String host = this.getHost();

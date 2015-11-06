@@ -191,7 +191,7 @@ public class gcServer extends xApp {
 		// start socket servers
 		final NetServerManager manager = NetServerManager.get();
 		for(final NetServerConfig config : netConfigs.values()) {
-			if(!config.enabled) continue;
+			if(!config.isEnabled()) continue;
 			try {
 				manager.getServer(config);
 			} catch (UnknownHostException e) {

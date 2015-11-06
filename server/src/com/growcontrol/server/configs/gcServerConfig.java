@@ -19,10 +19,10 @@ import com.poixson.commonjava.Utils.threads.xThreadPool;
 
 public final class gcServerConfig extends gcAppConfig {
 
-	public final boolean promptTickerEnabled;
-	public final xTime   tickInterval;
-	public final int     logicThreads;
-	public final int     socketBacklog;
+	private final boolean promptTickerEnabled;
+	private final xTime   tickInterval;
+	private final int     logicThreads;
+	private final int     socketBacklog;
 
 	private volatile Map<String, NetServerConfig> netConfigs = null;
 	private final Object netLock = new Object();

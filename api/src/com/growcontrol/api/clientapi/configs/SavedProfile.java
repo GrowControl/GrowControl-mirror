@@ -12,12 +12,12 @@ import com.poixson.commonjava.Utils.xHashable;
 
 public class SavedProfile extends xConfig implements xHashable {
 
-	public final String name;
-	public final boolean ssl;
-	public final String host;
-	public final int    port;
-	public final String user;
-	public final String pass;
+	private final String name;
+	private final boolean ssl;
+	private final String host;
+	private final int    port;
+	private final String user;
+	private final String pass;
 
 
 
@@ -49,13 +49,35 @@ public class SavedProfile extends xConfig implements xHashable {
 
 
 
+	public String getName() {
+		return this.name;
+	}
+	public boolean useSSL() {
+		return this.ssl;
+	}
+	public String getHost() {
+		return this.host;
+	}
+	public int getPort() {
+		return this.port;
+	}
+	public String getUser() {
+		return this.user;
+	}
+//TODO: secure this better
+	public String getPass() {
+		return this.pass;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return this.name;
+		return this.getName();
 	}
 	@Override
 	public String getKey() {
-		return this.name;
+		return this.getName();
 	}
 	@Override
 	public boolean matches(final xHashable hashable) {
