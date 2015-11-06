@@ -13,7 +13,6 @@ import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsNumbers;
 import com.poixson.commonjava.Utils.xTime;
 import com.poixson.commonjava.Utils.xTimeU;
-import com.poixson.commonjava.Utils.xTimeUnmodifiable;
 import com.poixson.commonjava.Utils.threads.xThreadPool;
 
 
@@ -54,7 +53,7 @@ public final class gcServerConfig extends gcAppConfig {
 				time = xTime.parse(strValue);
 			if(time == null)
 				time = gcServerDefines.DEFAULT_TICK_INTERVAL;
-			this.tickInterval = xTimeUnmodifiable.cast(time);
+			this.tickInterval = time.setFinal();
 		}
 		// logic threads
 		{
