@@ -2,7 +2,9 @@ package com.growcontrol.server;
 
 import java.io.PrintStream;
 import java.net.UnknownHostException;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.fusesource.jansi.AnsiConsole;
@@ -332,24 +334,9 @@ public class gcServer extends xApp {
 		if(configVersionDifferent)
 			log().warning(gcServerDefines.CONFIG_FILE+" for this server may need updates");
 	}
-	// log level
-	{
-		final Boolean debug = this.config.getDebug();
-		if(debug != null && debug.booleanValue())
-			xVars.debug(debug.booleanValue());
-		if(!xVars.debug()) {
-			// set log level
-			final xLevel level = this.config.getLogLevel();
-			if(level != null)
-				xLog.getRoot().setLevel(level);
-		}
-	}
-	// tick interval
-	{
-		final xTime tick = this.config.getTickInterval();
-		xTicker.get()
-			.setInterval(tick);
-	}
+
+
+
 //	// logic threads (0 uses main thread)
 //	{
 //		@SuppressWarnings("unused")

@@ -73,6 +73,7 @@ public class gcServerCommands_config implements xCommandListener {
 		final gcServerConfig config = gcServerVars.getConfig();
 //		final String[] zones = config.getZones().toArray(new String[0]);
 		this.publish();
+//TODO: config | running
 		this.log().title("Server Config");
 		this.publish(" Config Version: "+config.getVersion());
 		this.publish(" Log Level:      "+config.getLogLevel().toString());

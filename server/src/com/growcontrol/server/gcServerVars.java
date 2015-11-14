@@ -23,8 +23,8 @@ public class gcServerVars {
 
 	// handlers
 //	private static final xSystemHandler system = new xHandlerSystem();
-	private static final xCommandsHandler      commandsHandler = xCommandsHandler.get();
-//	private static final xPluginsEventHandler  pluginsHandler  = xPluginsEventHandler.get();
+	private static final xCommandsHandler commandsHandler = xCommandsHandler.get();
+//	private static final xPluginsEventHandler pluginsHandler = xPluginsEventHandler.get();
 	private static final MetaRouter router = MetaRouter.get();
 
 
