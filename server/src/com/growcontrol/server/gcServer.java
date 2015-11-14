@@ -63,20 +63,15 @@ public class gcServer extends xApp {
 	 * Handle command-line arguments.
 	 */
 	@Override
-	protected void processArgs(final String[] args) {
-		if(utils.isEmpty(args)) return;
-		for(final String arg : args) {
+	protected void processArgs(final List<String> args) {
+		final Iterator<String> it = args.iterator();
+		while(it.hasNext()) {
+			final String arg = it.next();
 			switch(arg) {
-			case "--debug":
-				xVars.debug(true);
-				break;
-			case "--internal":
-				gcServerVars.setInternal(true);
-				break;
-			default:
-				System.out.println("Unknown argument: "+arg);
-				System.exit(1);
-				break;
+//			case "--internal":
+//				gcServerVars.setInternal(true);
+//				it.remove();
+//				break;
 			}
 		}
 	}
