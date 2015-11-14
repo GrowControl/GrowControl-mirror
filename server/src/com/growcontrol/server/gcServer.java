@@ -24,6 +24,7 @@ import com.poixson.commonjava.Utils.utils;
 import com.poixson.commonjava.Utils.utilsString;
 import com.poixson.commonjava.scheduler.ticker.xTickHandler;
 import com.poixson.commonjava.scheduler.ticker.xTickPrompt;
+import com.poixson.commonjava.xLogger.xLevel;
 import com.poixson.commonjava.xLogger.xLog;
 import com.poixson.commonjava.xLogger.commands.xCommandsHandler;
 
@@ -93,7 +94,21 @@ public class gcServer extends xApp {
 	// load config
 	@xAppStep(type=StepType.STARTUP, title="Config", priority=20)
 	public void __STARTUP_config() {
-		gcServerVars.getConfig();
+		final gcServerConfig config = gcServerVars.getConfig();
+		{
+			// debug mode
+			final Boolean debug = config.getDebug();
+			if(debug != null && debug.booleanValue())
+				xVars.debug(debug.booleanValue());
+		}
+		{
+			// log level
+			if(!xVars.debug()) {
+				final xLevel lvl = config.getLogLevel();
+				if(lvl != null)
+					xLog.getRoot().setLevel(lvl);
+			}
+		}
 	}
 
 
