@@ -52,6 +52,9 @@ jar {
 	props.setProperty('org_url',    'http://poixson.com')
 	props.setProperty('issue_name', 'github')
 	props.setProperty('issue_url',  'https://github.com/GrowControl/GrowControl/issues')
+	def commitHash = "git log -n1 --format='%H'".execute().text
+	commitHash = commitHash.replaceAll("[^0-9a-fA-F]", "")
+	props.setProperty('commit',     "${commitHash}")
 	props.store(propsFile.newWriter(), null)
 }
 jar.doLast {
