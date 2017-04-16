@@ -12,6 +12,7 @@
 	<url>http://growcontrol.com</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<pxncommon-utils-version>3.6.1</pxncommon-utils-version>
 <!--		<io.netty-version>4.0.30.Final</io.netty-version> -->
 		<java-simple-serial-connector-version>2.8.0</java-simple-serial-connector-version>
 		<junit-version>4.12</junit-version>
@@ -128,9 +129,9 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>com.growcontrol</groupId>
-			<artifactId>gcCommon</artifactId>
-			<version>${project.version}</version>
+			<groupId>com.poixson</groupId>
+			<artifactId>pxnCommon</artifactId>
+			<version>${pxncommon-utils-version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
