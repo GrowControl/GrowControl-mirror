@@ -18,8 +18,8 @@ public class NetServerHandler extends SimpleChannelInboundHandler<String> {
 
 	public NetServerHandler(final NetServer server,
 			final ServerSocketState socketState) {
-		if(server == null)      throw new RequiredArgumentException("server");
-		if(socketState == null) throw new RequiredArgumentException("socketState");
+		if (server == null)      throw new RequiredArgumentException("server");
+		if (socketState == null) throw new RequiredArgumentException("socketState");
 		this.server = server;
 		this.socketState = socketState;
 	}
@@ -92,7 +92,7 @@ this.log().publish("");
 	public void exceptionCaught(final ChannelHandlerContext context,
 			final Throwable cause) throws Exception {
 		// IOException
-		if("Connection reset by peer".equals(cause.getMessage())) {
+		if ("Connection reset by peer".equals(cause.getMessage())) {
 			this.log().warning("Connection reset by peer "+context.toString());
 			return;
 		}

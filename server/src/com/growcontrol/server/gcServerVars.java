@@ -30,8 +30,9 @@ public class gcServerVars {
 
 
 	public static void init() {
-		if(!inited)
+		if (!inited) {
 			Keeper.add(new gcServerVars());
+		}
 	}
 	private gcServerVars() {
 	}
@@ -49,9 +50,9 @@ public class gcServerVars {
 
 	// server config
 	public static gcServerConfig getConfig() {
-		if(config == null) {
+		if (config == null) {
 			synchronized(configLock) {
-				if(config == null) {
+				if (config == null) {
 					try {
 						config = (gcServerConfig) xConfig.Load(
 								null,
@@ -64,11 +65,11 @@ public class gcServerVars {
 						xLog.getRoot().trace(e);
 						config = null;
 					}
-					if(config == null) {
+					if (config == null) {
 						Failure.fail("Failed to load "+gcServerDefines.CONFIG_FILE);
 						return null;
 					}
-					if(config.isFromResource())
+					if (config.isFromResource())
 						xLog.getRoot(gcServerConfig.LOG_NAME).warning("Created default "+gcServerDefines.CONFIG_FILE);
 				}
 			}

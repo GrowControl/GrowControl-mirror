@@ -55,8 +55,9 @@ public class gcServer extends xApp {
 	public gcServer() {
 		super();
 		gcServerVars.init();
-		if(xVars.debug())
+		if (xVars.debug()) {
 			this.displayColors();
+		}
 		this.displayLogo();
 	}
 
@@ -68,9 +69,9 @@ public class gcServer extends xApp {
 	@Override
 	protected void processArgs(final List<String> args) {
 		final Iterator<String> it = args.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			final String arg = it.next();
-			switch(arg) {
+			switch (arg) {
 //			case "--internal":
 //				gcServerVars.setInternal(true);
 //				it.remove();
@@ -100,15 +101,17 @@ public class gcServer extends xApp {
 		{
 			// debug mode
 			final Boolean debug = config.getDebug();
-			if(debug != null && debug.booleanValue())
+			if (debug != null && debug.booleanValue()) {
 				xVars.debug(debug.booleanValue());
+			}
 		}
 		{
 			// log level
-			if(!xVars.debug()) {
+			if (!xVars.debug()) {
 				final xLevel lvl = config.getLogLevel();
-				if(lvl != null)
+				if (lvl != null) {
 					xLog.getRoot().setLevel(lvl);
+				}
 			}
 		}
 	}
@@ -120,13 +123,13 @@ public class gcServer extends xApp {
 	public void __STARTUP_commands() {
 		final xCommandsHandler handler = gcServerVars.commands();
 		handler.register(
-				new gcCommonCommands()
+			new gcCommonCommands()
 		);
 		handler.register(
-				new gcServerCommands()
+			new gcServerCommands()
 		);
 		xLog.setCommandHandler(
-				handler
+			handler
 		);
 	}
 
@@ -139,8 +142,9 @@ public class gcServer extends xApp {
 		xLog.getConsole()
 			.Start();
 		// prompt ticker
-		if(config.getPromptTickerEnabled())
+		if (config.getPromptTickerEnabled()) {
 			new xTickPrompt();
+		}
 	}
 
 //	// io event listener
@@ -196,14 +200,14 @@ public class gcServer extends xApp {
 			Failure.fail(e.getMessage());
 			return;
 		}
-		if(utils.isEmpty(netConfigs)) {
+		if (utils.isEmpty(netConfigs)) {
 			log().warning("No socket server configs found to load");
 			return;
 		}
 		// start socket servers
 		final NetServerManager manager = NetServerManager.get();
-		for(final NetServerConfig config : netConfigs.values()) {
-			if(!config.isEnabled()) continue;
+		for (final NetServerConfig config : netConfigs.values()) {
+			if (!config.isEnabled()) continue;
 			try {
 				manager.getServer(config);
 			} catch (UnknownHostException e) {
@@ -214,11 +218,11 @@ public class gcServer extends xApp {
 			}
 		}
 //		// log configs
-//		for(final NetConfig dao : configs) {
-//			if(dao.enabled) {
+//		for (final NetConfig dao : configs) {
+//			if (dao.enabled) {
 //				this.log().getWeak("sockets").finer(
-//						dao.host+":"+Integer.toString(dao.port)+
-//						(dao.ssl ? " (ssl)" : " (raw)")
+//					dao.host+":"+Integer.toString(dao.port)+
+//					(dao.ssl ? " (ssl)" : " (raw)")
 //				);
 //			}
 //		}
@@ -245,8 +249,9 @@ public class gcServer extends xApp {
 //		getLogicQueue();
 //
 //		// start socket listener
-//		if(socket == null)
+//		if (socket == null) {
 //			socket = new pxnSocketServer();
+//		}
 //		socket.setHost();
 //		socket.setPort(ServerConfig.ListenPort());
 //		// create processor
@@ -321,18 +326,21 @@ public class gcServer extends xApp {
 		boolean configVersionDifferent = false;
 		final String configVersion = this.config.getVersion();
 		final String serverVersion = this.getVersion();
-		if(utils.notEmpty(configVersion) && utils.notEmpty(serverVersion)) {
-			if(configVersion.endsWith("x") || configVersion.endsWith("*")) {
+		if (utils.notEmpty(configVersion) && utils.notEmpty(serverVersion)) {
+			if (configVersion.endsWith("x") || configVersion.endsWith("*")) {
 				final String vers = utilsString.trims(configVersion, "x", "*");
-				if(!serverVersion.startsWith(vers))
+				if (!serverVersion.startsWith(vers)) {
 					configVersionDifferent = true;
+				}
 			} else {
-				if(!configVersion.equals(serverVersion))
+				if (!configVersion.equals(serverVersion)) {
 					configVersionDifferent = true;
+				}
 			}
 		}
-		if(configVersionDifferent)
+		if (configVersionDifferent) {
 			log().warning(gcServerDefines.CONFIG_FILE+" for this server may need updates");
+		}
 	}
 
 
@@ -358,7 +366,7 @@ public class gcServer extends xApp {
 
 
 //		pxnLogger log = pxnLog.get();
-//if(!consoleEnabled) {
+//if (!consoleEnabled) {
 //System.out.println("Console input is disabled due to noconsole command argument.");
 ////TODO: currently no way to stop the server with no console input
 //System.exit(0);
@@ -367,7 +375,7 @@ public class gcServer extends xApp {
 
 //TODO: remove this
 //log.severe("Listing Com Ports:");
-//for(Map.Entry<String, String> entry : Serial.listPorts().entrySet())
+//for (Map.Entry<String, String> entry : Serial.listPorts().entrySet())
 //log.severe(entry.getKey()+" - "+entry.getValue());
 
 

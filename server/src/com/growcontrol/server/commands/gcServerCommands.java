@@ -39,14 +39,14 @@ public final class gcServerCommands implements xCommandListener {
 			filterHandled=true,
 			filterCancelled=true)
 	public void onCommand(final xCommandEvent event) {
-		if(this.inconfig != null) {
+		if (this.inconfig != null) {
 			this.inconfig.onCommand(event);
 			return;
 		}
-		switch(event.getArg(0)) {
+		switch (event.getArg(0)) {
 		// config mode
 		case "config":
-			if(event.isHelp()) {
+			if (event.isHelp()) {
 				this._config_help(event);
 				return;
 			}
@@ -141,7 +141,7 @@ public final class gcServerCommands implements xCommandListener {
 
 	// say command
 	protected void _say(final xCommandEvent event) {
-		if(event.isHelp()) {
+		if (event.isHelp()) {
 			this._say_help(event);
 			return;
 		}
@@ -161,7 +161,7 @@ public final class gcServerCommands implements xCommandListener {
 
 
 	protected void _uptime(final xCommandEvent event) {
-		if(event.isHelp()) {
+		if (event.isHelp()) {
 			this._uptime_help(event);
 			return;
 		}
@@ -180,13 +180,13 @@ public final class gcServerCommands implements xCommandListener {
 
 
 	protected void _mem(final xCommandEvent event) {
-		if(event.isHelp()) {
+		if (event.isHelp()) {
 			this._mem_help(event);
 			return;
 		}
 		event.setHandled();
 		this.publish();
-		if("gc".equals(event.getArg(1))) {
+		if ("gc".equals(event.getArg(1))) {
 			this.publish("Performing garbage collection..");
 			System.gc();
 		}
@@ -205,7 +205,7 @@ public final class gcServerCommands implements xCommandListener {
 
 //	// get command
 //	protected void _get(final xCommandEvent event) {
-//		if(event.isHelp()) {
+//		if (event.isHelp()) {
 //			this._get_help(event);
 //			return;
 //		}
@@ -222,7 +222,7 @@ public final class gcServerCommands implements xCommandListener {
 
 	// set command (trigger event manually)
 	protected void _set(final xCommandEvent event) {
-		if(event.isHelp()) {
+		if (event.isHelp()) {
 			this._set_help(event);
 			return;
 		}
@@ -243,12 +243,12 @@ public final class gcServerCommands implements xCommandListener {
 
 
 	protected void _list(final xCommandEvent event) {
-		if(event.isHelp() || event.numArgs() < 1) {
+		if (event.isHelp() || event.numArgs() < 1) {
 			this._list_help(event);
 			return;
 		}
 		event.setHandled();
-		switch(event.getArg(1)) {
+		switch (event.getArg(1)) {
 		case "threads":
 			this.publish("THREADS... (sorry, this is unfinished)");
 			break;
@@ -258,14 +258,16 @@ public final class gcServerCommands implements xCommandListener {
 			// dests
 			this.publish("Destination Addresses");
 			this.publish("=====================");
-			for(final MetaAddress addr : router.getKnownDestinations())
+			for (final MetaAddress addr : router.getKnownDestinations()) {
 				this.publish("  "+addr.hash);
+			}
 			this.publish();
 			// sources
 			this.publish("Source Addresses");
 			this.publish("================");
-			for(final MetaAddress addr : router.getKnownSources())
+			for (final MetaAddress addr : router.getKnownSources()) {
 				this.publish("  "+addr.hash);
+			}
 			this.publish();
 			break;
 		default:
@@ -286,7 +288,7 @@ public final class gcServerCommands implements xCommandListener {
 
 //	// start/resume schedulers
 //	protected void _start(final xCommandEvent event) {
-//		if(event.isHelp()) {
+//		if (event.isHelp()) {
 //			this._start_help(event);
 //			return;
 //		}
@@ -303,7 +305,7 @@ public final class gcServerCommands implements xCommandListener {
 
 //	// pause schedulers
 //	protected void _pause(final xCommandEvent event) {
-//		if(event.isHelp()) {
+//		if (event.isHelp()) {
 //			this._pause_help(event);
 //			return;
 //		}
@@ -320,36 +322,39 @@ public final class gcServerCommands implements xCommandListener {
 
 
 //		// list plugins/devices/inputs/outputs
-//		if(command.equals("list")) {
-//			if(args.length >= 1) {
-//				if(args[0].equalsIgnoreCase("plugins")) {
+//		if (command.equals("list")) {
+//			if (args.length >= 1) {
+//				if (args[0].equalsIgnoreCase("plugins")) {
 ////					gcServerPluginLoader.listPlugins();
 //					return true;
-//				} else if(args[0].equalsIgnoreCase("devices")) {
+//				} else
+//				if (args[0].equalsIgnoreCase("devices")) {
 //					listDevices();
 //					return true;
-//				} else if(args[0].equalsIgnoreCase("outputs")) {
+//				} else
+//				if (args[0].equalsIgnoreCase("outputs")) {
 //					listOutputs();
 //					return true;
-//				} else if(args[0].equalsIgnoreCase("inputs")) {
+//				} else
+//				if (args[0].equalsIgnoreCase("inputs")) {
 //					listInputs();
 //					return true;
 //				}
 //			}
 
 //		// set input / output
-//		if(command.equals("set")) {
-////			if(gcServerPluginLoader.doOutput(args)) {
-////				String msg = ""; for(String arg : args) msg += arg+" ";
+//		if (command.equals("set")) {
+////			if (gcServerPluginLoader.doOutput(args)) {
+////				String msg = ""; for (String arg : args) msg += arg+" ";
 ////				gcServer.log.debug("set> "+msg);
 ////				return true;
 ////			}
-////			String msg = ""; for(String arg : args) msg += arg+" ";
+////			String msg = ""; for (String arg : args) msg += arg+" ";
 ////			gcServer.log.warning("Failed to find an output plugin! "+msg);
 //			return true;
 //		}
 
-//	if(command.equalsIgnoreCase("threads")) {
+//	if (command.equalsIgnoreCase("threads")) {
 //	// Find the root thread group
 //	ThreadGroup root = Thread.currentThread().getThreadGroup().getParent();
 //	while (root.getParent() != null) {
@@ -361,7 +366,8 @@ public final class gcServerCommands implements xCommandListener {
 //	visitThread(root, 0);
 //	return true;
 //}
-//else if(line.equals("list coms"))
+//else
+//if (line.equals("list coms"))
 //Serial.listPorts();
 //	// This method recursively visits all thread groups under `group'.
 //	private static void visitThread(ThreadGroup group, int level) {
@@ -370,14 +376,15 @@ public final class gcServerCommands implements xCommandListener {
 //	    Thread[] threads = new Thread[numThreads*2];
 //	    numThreads = group.enumerate(threads, false);
 //	    // Enumerate each thread in `group'
-//	    for(int i=0; i<numThreads; i++)
+//	    for (int i=0; i<numThreads; i++) {
 //	        Thread thread = threads[i];
+//		}
 //	    // Get thread subgroups of `group'
 //	    int numGroups = group.activeGroupCount();
 //	    ThreadGroup[] groups = new ThreadGroup[numGroups*2];
 //	    numGroups = group.enumerate(groups, false);
 //	    // Recursively visit each subgroup
-//	    for(int i=0; i<numGroups; i++) {
+//	    for (int i=0; i<numGroups; i++) {
 //	    	visitThread(groups[i], level+1);
 //	    }
 //	}
@@ -387,7 +394,7 @@ public final class gcServerCommands implements xCommandListener {
 	// logger
 	private volatile xLog _log = null;
 	public xLog log() {
-		if(this._log == null)
+		if (this._log == null)
 			this._log = xLog.getRoot(LOG_NAME);
 		return this._log;
 	}

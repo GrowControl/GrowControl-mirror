@@ -33,8 +33,8 @@ public final class gcServerConfig extends gcAppConfig {
 		super(datamap);
 		// prompt ticker enabled
 		this.promptTickerEnabled = this.getBool(
-				gcServerDefines.CONFIG_PROMPT_TICKER,
-				gcServerDefines.DEFAULT_PROMPT_TICKER
+			gcServerDefines.CONFIG_PROMPT_TICKER,
+			gcServerDefines.DEFAULT_PROMPT_TICKER
 		);
 		// tick interval
 		{
@@ -47,30 +47,33 @@ public final class gcServerConfig extends gcAppConfig {
 			try {
 				strValue = this.getString(gcServerDefines.CONFIG_TICK_INTERVAL);
 			} catch (xConfigException ignore) {}
-			if(longValue != null)
+			if (longValue != null) {
 				time = xTime.get(longValue.longValue(), xTimeU.MS);
-			if(time == null && utils.notEmpty(strValue))
+			}
+			if (time == null && utils.notEmpty(strValue)) {
 				time = xTime.parse(strValue);
-			if(time == null)
+			}
+			if (time == null) {
 				time = gcServerDefines.DEFAULT_TICK_INTERVAL;
+			}
 			this.tickInterval = time.setFinal();
 		}
 		// logic threads
 		{
 			final int intValue = this.getInt(
-					gcServerDefines.CONFIG_LOGIC_THREADS,
-					gcServerDefines.DEFAULT_LOGIC_THREADS
+				gcServerDefines.CONFIG_LOGIC_THREADS,
+				gcServerDefines.DEFAULT_LOGIC_THREADS
 			);
 			this.logicThreads = utilsNumbers.MinMax(
-					intValue,
-					0,
-					xThreadPool.POOL_LIMIT
+				intValue,
+				0,
+				xThreadPool.POOL_LIMIT
 			);
 		}
 		// socket backlog
 		this.socketBacklog = this.getInt(
-				gcServerDefines.CONFIG_SOCKET_BACKLOG,
-				gcServerDefines.DEFAULT_SOCKET_BACKLOG
+			gcServerDefines.CONFIG_SOCKET_BACKLOG,
+			gcServerDefines.DEFAULT_SOCKET_BACKLOG
 		);
 	}
 
@@ -98,32 +101,33 @@ public final class gcServerConfig extends gcAppConfig {
 	// socket server configs
 	public Map<String, NetServerConfig> getNetConfigs()
 			throws xConfigException {
-		if(this.netConfigs == null) {
+		if (this.netConfigs == null) {
 			synchronized(this.netLock) {
 				final List<xConfig> configList = this.getConfigList(
 						gcServerDefines.CONFIG_SOCKETS,
 						NetServerConfig.class
 				);
 				final Map<String, NetServerConfig> configMap = new HashMap<String, NetServerConfig>();
-				for(final xConfig cfg : configList) {
+				for (final xConfig cfg : configList) {
 					configMap.put(
-							((NetServerConfig) cfg).getKey(),
-							((NetServerConfig) cfg)
+						((NetServerConfig) cfg).getKey(),
+						((NetServerConfig) cfg)
 					);
 				}
 				this.netConfigs = Collections.unmodifiableMap(configMap);
 			}
 //			final Set<Object> dataset = this.getSet(
-//					Object.class,
-//					gcServerDefines.CONFIG_SOCKETS
+//				Object.class,
+//				gcServerDefines.CONFIG_SOCKETS
 //			);
 //			this.netConfigs = NetServerConfig.get(dataset);
 		}
 		return this.netConfigs;
 	}
 	public NetServerConfig getNetConfig(final String name) {
-//		if(this.netConfigs == null)
+//		if (this.netConfigs == null) {
 //			this.getNetConfigs();
+//		}
 //		return this.netConfigs.get(name);
 return null;
 	}

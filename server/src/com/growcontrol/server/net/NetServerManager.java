@@ -63,7 +63,7 @@ public class NetServerManager implements xCloseableMany {
 
 
 	public static NetServer get(final NetServerConfig netConfig) {
-		if(netConfig == null) throw new RequiredArgumentException("netConfig");
+		if (netConfig == null) throw new RequiredArgumentException("netConfig");
 		try {
 			return get().getServer(netConfig);
 		} catch (UnknownHostException e) {
@@ -75,11 +75,12 @@ public class NetServerManager implements xCloseableMany {
 		}
 	}
 	public static NetServerManager get() {
-		if(instance == null) {
+		if (instance == null) {
 			synchronized(instanceLock) {
 				try {
-					if(instance == null)
+					if (instance == null) {
 						instance = new NetServerManager();
+					}
 				} catch (SSLException e) {
 					instance = null;
 					log().trace(e);
@@ -118,32 +119,35 @@ public class NetServerManager implements xCloseableMany {
 
 
 //		this.debug = (xVars.debug() && DETAILED_LOGGING);
-//		if(this.debug)
+//		if (this.debug) {
 //			NettyDetailedLogger.Install(this.log());
+//		}
 	}
 
 
 
 	public NetServer getServer(final NetServerConfig netConfig)
 			throws UnknownHostException, InterruptedException {
-		if(netConfig == null) throw new RequiredArgumentException("netConfig");
+		if (netConfig == null) throw new RequiredArgumentException("netConfig");
 		final String key = netConfig.toString();
 		// get existing server
 		{
 			final NetServer server = this.netServers.get(key);
-			if(server != null && !server.isClosed())
+			if (server != null && !server.isClosed()) {
 				return server;
+			}
 		}
 		// new server
 		synchronized(this.netServers){
 			// check once more
 			{
 				final NetServer server = this.netServers.get(key);
-				if(server != null) {
-					if(server.isClosed())
+				if (server != null) {
+					if (server.isClosed()) {
 						this.ClearClosed();
-					else
+					} else {
 						return server;
+					}
 				}
 			}
 			// new server
@@ -159,27 +163,27 @@ public class NetServerManager implements xCloseableMany {
 
 //	@Override
 //	public void Start() {
-//		if(!this.running.compareAndSet(false, true))
+//		if (!this.running.compareAndSet(false, true))
 //			return;
 
 //		final Map<String, NetConfig> cfgs = new HashMap<String, NetConfig>();
 //		synchronized(this.tempConfigs) {
-//			for(final NetConfig cfg : this.tempConfigs) {
+//			for (final NetConfig cfg : this.tempConfigs) {
 //				final String key = cfg.toString();
-//				if(utils.isEmpty(key))    continue;
-//				if(cfgs.containsKey(key)) continue;
+//				if (utils.isEmpty(key))    continue;
+//				if (cfgs.containsKey(key)) continue;
 //				cfgs.put(key, cfg);
 //			}
 //		}
 //		synchronized(this.servers) {
 //			// stop removed servers
-//			if(!this.servers.isEmpty()) {
+//			if (!this.servers.isEmpty()) {
 //				final Iterator<Entry<String, NetServer>> it = this.servers.entrySet().iterator();
-//				while(it.hasNext()) {
+//				while (it.hasNext()) {
 //					final Entry<String, NetServer> entry = it.next();
 //					// stop no longer needed servers
 //					final NetConfig cfg = cfgs.get(entry.getKey());
-//					if(cfg == null || !cfg.enabled) {
+//					if (cfg == null || !cfg.enabled) {
 //						final NetServer server = entry.getValue();
 //						utils.safeClose(server);
 //						it.remove();
@@ -187,18 +191,18 @@ public class NetServerManager implements xCloseableMany {
 //				}
 //			}
 //			// start new servers
-//			if(cfgs.isEmpty()) {
+//			if (cfgs.isEmpty()) {
 //				this.log().warning("No socket server configs loaded.");
 //			} else {
 //				this.log().info("Starting socket servers..");
-//				for(final Entry<String, NetConfig> entry : cfgs.entrySet()) {
+//				for (final Entry<String, NetConfig> entry : cfgs.entrySet()) {
 //					final String key = entry.getKey();
 //					final NetConfig cfg = entry.getValue();
 //					// server already exists
-//					if(this.servers.containsKey(key))
+//					if (this.servers.containsKey(key))
 //						continue;
 //					// not enabled
-//					if(!cfg.enabled)
+//					if (!cfg.enabled)
 //						continue;
 //					try {
 //						final NetServer server = new NetServer(cfg);
@@ -208,7 +212,7 @@ public class NetServerManager implements xCloseableMany {
 //						this.log().trace(e);
 //						continue;
 //					} catch (SocketException e) {
-//						if("Permission denied".equals(e.getMessage()))
+//						if ("Permission denied".equals(e.getMessage()))
 //							this.log().severe("Valid port numbers are >= 1024 for non-root users");
 //						this.log().trace(e);
 //					} catch (InterruptedException e) {
@@ -221,7 +225,7 @@ public class NetServerManager implements xCloseableMany {
 //			}
 //		}
 //		// unexpected stop
-//		if(!this.running.get())
+//		if (!this.running.get())
 //			this.Stop();
 //	}
 
@@ -237,7 +241,7 @@ public class NetServerManager implements xCloseableMany {
 	}
 	@Override
 	public void CloseAll() {
-		if(this.netServers.size() == 0)
+		if (this.netServers.size() == 0)
 			return;
 		log().info("Closing socket servers..");
 		int serversCount = 0;
@@ -248,16 +252,16 @@ public class NetServerManager implements xCloseableMany {
 			{
 				final Set<ChannelFuture> futureCloses = new HashSet<ChannelFuture>();
 				final Iterator<NetServer> it = servers.iterator();
-				while(it.hasNext()) {
+				while (it.hasNext()) {
 					final NetServer server = it.next();
-					if(!server.isClosed())
+					if (!server.isClosed())
 						serversCount++;
 					futureCloses.add(
-							server.closeSoon()
+						server.closeSoon()
 					);
 				}
 				// wait for servers to stop listening
-				for(final ChannelFuture future : futureCloses) {
+				for (final ChannelFuture future : futureCloses) {
 					try {
 						future.sync();
 					} catch (InterruptedException e) {
@@ -272,7 +276,7 @@ public class NetServerManager implements xCloseableMany {
 			{
 				log().info("Closing sockets..");
 				final Iterator<NetServer> it = servers.iterator();
-				while(it.hasNext()) {
+				while (it.hasNext()) {
 					final NetServer server = it.next();
 					socketsCount += server.getSocketsCount();
 					server.CloseAll();
@@ -280,38 +284,39 @@ public class NetServerManager implements xCloseableMany {
 			}
 			this.ClearClosed();
 		}
-		if(serversCount > 0) {
+		if (serversCount > 0) {
 			log().info(
-					(new StringBuilder())
-					.append("Closed ")
-					.append(serversCount)
-					.append(" socket servers, and ")
-					.append(socketsCount)
-					.append(" sockets")
-					.toString()
+				(new StringBuilder())
+				.append("Closed ")
+				.append(serversCount)
+				.append(" socket servers, and ")
+				.append(socketsCount)
+				.append(" sockets")
+				.toString()
 			);
 		}
 		// stop thread pools
 		this.bossGroup.shutdownGracefully(
-				500L,
-				800L,
-				xTimeU.MS
+			500L,
+			800L,
+			xTimeU.MS
 		);
 		this.workGroup.shutdownGracefully(
-				500L,
-				800L,
-				xTimeU.MS
+			500L,
+			800L,
+			xTimeU.MS
 		);
 	}
 	public void ClearClosed() {
-		if(this.netServers.size() == 0)
+		if (this.netServers.size() == 0)
 			return;
 		synchronized(this.netServers) {
 			final Iterator<NetServer> it = this.netServers.values().iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				final NetServer server = it.next();
-				if(server.isClosed())
+				if (server.isClosed()) {
 					this.netServers.remove(server.getServerKey());
+				}
 			}
 		}
 	}
@@ -327,8 +332,9 @@ public class NetServerManager implements xCloseableMany {
 	// logger
 	private static volatile xLog _log = null;
 	public static xLog log() {
-		if(_log == null)
+		if (_log == null) {
 			_log = xLog.getRoot(LOG_NAME);
+		}
 		return _log;
 	}
 

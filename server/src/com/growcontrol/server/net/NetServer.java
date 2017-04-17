@@ -45,8 +45,8 @@ public class NetServer implements NetParent {
 //throws UnknownHostException, SocketException, InterruptedException {
 	public NetServer(final NetServerConfig netConfig)
 			throws UnknownHostException, InterruptedException {
-		if(netConfig == null)  throw new RequiredArgumentException("netConfig");
-		if(!netConfig.isEnabled()) throw new UnsupportedOperationException("This socket server is disabled!");
+		if (netConfig == null)  throw new RequiredArgumentException("netConfig");
+		if (!netConfig.isEnabled()) throw new UnsupportedOperationException("This socket server is disabled!");
 		this.netConfig = netConfig;
 		this.serverKey = this.netConfig.toString();
 		this.log().finer("Starting socket server..");
@@ -69,7 +69,7 @@ public class NetServer implements NetParent {
 		}
 		this.bootstrap.channel(NioServerSocketChannel.class);
 		// debug
-		if(NetServerManager.DETAILED_LOG) {
+		if (NetServerManager.DETAILED_LOG) {
 			final LoggingHandler handlerLogger = new LoggingHandler(LogLevel.INFO);
 			this.bootstrap.handler(handlerLogger);
 			this.bootstrap.childHandler(handlerLogger);
@@ -93,9 +93,9 @@ public class NetServer implements NetParent {
 	 * @return true to accept the connection or false to deny.
 	 */
 	public boolean register(final ServerSocketState socketState) {
-		if(socketState == null) throw new RequiredArgumentException("socketState");
+		if (socketState == null) throw new RequiredArgumentException("socketState");
 		final SocketChannel channel = socketState.getChannel();
-		if(channel == null) throw new RuntimeException("Channel is null, socket may have disconnected already!");
+		if (channel == null) throw new RuntimeException("Channel is null, socket may have disconnected already!");
 		this.states.put(channel, socketState);
 		// check firewall
 		{
@@ -105,7 +105,7 @@ public class NetServer implements NetParent {
 					channel.remoteAddress()
 			);
 			// default firewall action
-			if(result == null) {
+			if (result == null) {
 				this.log().finer("No matching firewall rule for this socket: "+socketState.toString());
 //TODO:
 this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall action");
@@ -113,7 +113,7 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 
 			} else
 			// allowed by firewall
-			if(result) {
+			if (result) {
 				this.log().fine("Firewall allowed connection: "+socketState.toString());
 			} else {
 				this.log().warning("Firewall blocked connection: "+socketState.toString());
@@ -129,14 +129,14 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 	 */
 	// socket disconnected
 	public void unregister(final ServerSocketState socketState) {
-		if(socketState == null) throw new RequiredArgumentException("socketState");
+		if (socketState == null) throw new RequiredArgumentException("socketState");
 		this.states.remove(socketState);
 	}
 
 
 
 	public ServerSocketState getServerSocketState(final Channel channel) {
-		if(channel == null)
+		if (channel == null)
 			return null;
 		return this.states.get(channel);
 	}
@@ -202,18 +202,18 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 	public void CloseAll() {
 		// clone states list
 		final Collection<ServerSocketState> states = this.states.values();
-		if(states.isEmpty())
+		if (states.isEmpty())
 			return;
 		this.log().info("Closing sockets..");
 		// close sockets
 		final Set<ChannelFuture> futureCloses = new HashSet<ChannelFuture>();
-		for(final ServerSocketState state : states) {
+		for (final ServerSocketState state : states) {
 			futureCloses.add(
-					state.closeSoon()
+				state.closeSoon()
 			);
 		}
 		// wait for sockets to close
-		for(final ChannelFuture future : futureCloses) {
+		for (final ChannelFuture future : futureCloses) {
 			try {
 				future.sync();
 			} catch (InterruptedException e) {
@@ -229,12 +229,12 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 				.toString()
 		);
 		final int stillConnected = this.states.size();
-		if(stillConnected > 0) {
+		if (stillConnected > 0) {
 			this.log().warning(
-					(new StringBuilder())
-					.append(stillConnected)
-					.append(" sockets still connected!")
-					.toString()
+				(new StringBuilder())
+				.append(stillConnected)
+				.append(" sockets still connected!")
+				.toString()
 			);
 		}
 	}
@@ -248,7 +248,7 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 	// logger
 	private volatile xLog _log = null;
 	public xLog log() {
-		if(this._log == null)
+		if (this._log == null)
 			this._log = xLog.getRoot(LOG_NAME)
 					.get("S|"+this.serverKey);
 		return this._log;

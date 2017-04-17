@@ -29,33 +29,34 @@ public class NetServerConfig extends xConfig implements xHashable {
 		super(datamap);
 		// enabled - default to enable if key doesn't exist
 		this.enabled =
-				this.exists(gcCommonDefines.CONFIG_SOCKET_ENABLED)
-				? this.getBool(gcCommonDefines.CONFIG_SOCKET_ENABLED, false)
-				: true;
+			this.exists(gcCommonDefines.CONFIG_SOCKET_ENABLED)
+			? this.getBool(gcCommonDefines.CONFIG_SOCKET_ENABLED, false)
+			: true;
 		// ssl
 		{
 			Boolean value = this.getBool(gcCommonDefines.CONFIG_SOCKET_SSL, false);
-			if(value == null) {
+			if (value == null) {
 				final int tmpPort = this.getInt(gcCommonDefines.CONFIG_SOCKET_PORT, -1);
-				if(tmpPort > 0) {
-					if(tmpPort == gcCommonDefines.DEFAULT_SOCKET_PORT_SSL)
+				if (tmpPort > 0) {
+					if (tmpPort == gcCommonDefines.DEFAULT_SOCKET_PORT_SSL) {
 						value = Boolean.TRUE;
+					}
 				}
 			}
 			this.ssl =
-					value == null
-					? gcCommonDefines.DEFAULT_SOCKET_SSL
-					: value.booleanValue();
+				value == null
+				? gcCommonDefines.DEFAULT_SOCKET_SSL
+				: value.booleanValue();
 		}
 		// host
 		this.host = this.getString(gcCommonDefines.CONFIG_SOCKET_HOST);
-		if(utils.isEmpty(this.host)) throw new xConfigException("Host is missing from config!");
+		if (utils.isEmpty(this.host)) throw new xConfigException("Host is missing from config!");
 		// port
 		this.port = this.getInt(
-				gcCommonDefines.CONFIG_SOCKET_PORT,
-				gcCommonDefines.DEFAULT_SOCKET_PORT(this.ssl)
+			gcCommonDefines.CONFIG_SOCKET_PORT,
+			gcCommonDefines.DEFAULT_SOCKET_PORT(this.ssl)
 		);
-		if(this.port < 1 || this.port > utilsNumbers.MAX_PORT)
+		if (this.port < 1 || this.port > utilsNumbers.MAX_PORT)
 			throw new IllegalArgumentException("Invalid port number: "+Integer.toString(this.port));
 		// key
 		this.key = this.genKey();
@@ -80,8 +81,9 @@ public class NetServerConfig extends xConfig implements xHashable {
 	}
 	public String getHost() {
 		final String host = this.host;
-		if(utils.isEmpty(host) || "*".equals(host) || "any".equalsIgnoreCase(host))
+		if (utils.isEmpty(host) || "*".equals(host) || "any".equalsIgnoreCase(host)) {
 			return null;
+		}
 		return host;
 	}
 	public int getPort() {
@@ -89,10 +91,12 @@ public class NetServerConfig extends xConfig implements xHashable {
 	}
 	public InetAddress getInetAddress() throws UnknownHostException {
 		final String host = this.getHost();
-		if(host == null)
+		if (host == null) {
 			return null;
-		if("127.0.0.1".equals(host) || "localhost".equalsIgnoreCase(host))
+		}
+		if ("127.0.0.1".equals(host) || "localhost".equalsIgnoreCase(host)) {
 			return InetAddress.getLoopbackAddress();
+		}
 		return InetAddress.getByName(host);
 	}
 
@@ -111,16 +115,20 @@ public class NetServerConfig extends xConfig implements xHashable {
 		final String host = this.getHost();
 		str.append(host == null ? "*" : host.toLowerCase());
 		str.append(":").append(this.port);
-		if(this.ssl) str.append("<ssl>");
+		if (this.ssl) {
+			str.append("<ssl>");
+		}
 		return str.toString();
 	}
 	@Override
 	public boolean matches(final xHashable hashable) {
-		if(hashable == null || !(hashable instanceof NetServerConfig) )
+		if (hashable == null || !(hashable instanceof NetServerConfig) ) {
 			return false;
+		}
 		final NetServerConfig config = (NetServerConfig) hashable;
-		if(this.enabled != config.enabled)
+		if (this.enabled != config.enabled) {
 			return false;
+		}
 		return this.getKey().equalsIgnoreCase(config.getKey());
 	}
 

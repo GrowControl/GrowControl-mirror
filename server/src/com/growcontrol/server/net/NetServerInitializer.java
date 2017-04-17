@@ -45,8 +45,8 @@ public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 		socketState.log();
 		this.log(socketState).info("Accepted connection from: "+socketState.getStateKey());
 //TODO:
-//		if(this.config.ssl) {
-//		if(this.manager.sslContext != null) {
+//		if (this.config.ssl) {
+//		if (this.manager.sslContext != null) {
 //			pipe.addLast(this.sslContext.newHandler(ch.alloc()));
 //		}
 		// check firewall
@@ -58,11 +58,11 @@ public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 					channel.remoteAddress()
 			);
 			// default firewall action
-			if(result == null) {
+			if (result == null) {
 				log.warning("No matching firewall rule for connection: "+channel.remoteAddress().toString()+" to "+channel.localAddress().toString());
 			} else
 			// firewall allowed
-			if(result.booleanValue()) {
+			if (result.booleanValue()) {
 				log.info("Firewall allowed connection from: "+channel.remoteAddress().toString()+" to "+channel.localAddress().toString());
 			// firewall blocked
 			} else {

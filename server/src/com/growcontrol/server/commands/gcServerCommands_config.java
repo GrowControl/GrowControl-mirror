@@ -33,7 +33,7 @@ public class gcServerCommands_config implements xCommandListener {
 
 	@Override
 	public void onCommand(xCommandEvent event) {
-		switch(event.getArg(0)) {
+		switch (event.getArg(0)) {
 		case "exit": {
 			this._exit(event);
 			break;
@@ -47,7 +47,7 @@ public class gcServerCommands_config implements xCommandListener {
 
 
 	protected void _exit(final xCommandEvent event) {
-		if(event.isHelp()) {
+		if (event.isHelp()) {
 			this._list_help(event);
 			return;
 		}
@@ -65,7 +65,7 @@ public class gcServerCommands_config implements xCommandListener {
 
 
 	protected void _list(final xCommandEvent event) {
-		if(event.isHelp()) {
+		if (event.isHelp()) {
 			this._list_help(event);
 			return;
 		}
@@ -82,8 +82,9 @@ public class gcServerCommands_config implements xCommandListener {
 //		this.publish(" Listen Port:    "+Integer.toString(config.getListenPort()));
 		this.publish(" Logic Threads:  "+Integer.toString(config.getLogicThreads()));
 //		this.publish(" Zones:  [ "+Integer.toString(zones.length)+" ]");
-//		for(final String zone : zones)
+//		for (final String zone : zones) {
 //			this.publish("   - "+zone);
+//		}
 		this.publish();
 	}
 	protected void _list_help(final xCommandEvent event) {
@@ -98,8 +99,9 @@ public class gcServerCommands_config implements xCommandListener {
 	// logger
 	private volatile xLog _log = null;
 	public xLog log() {
-		if(this._log == null)
+		if (this._log == null) {
 			this._log = xLog.getRoot(LOG_NAME);
+		}
 		return this._log;
 	}
 	public void publish(final String msg) {

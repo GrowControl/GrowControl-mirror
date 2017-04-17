@@ -41,7 +41,7 @@ public class ServerSocketState extends SocketState {
 
 	// socket channel
 	public SocketChannel getChannel() {
-		if(this.isClosed())
+		if (this.isClosed())
 			return null;
 		return this.channel;
 	}
@@ -82,7 +82,7 @@ xLog.getRoot("NET").trace(e);
 	}
 	@Override
 	public boolean isClosed() {
-		if(!this.channel.isOpen()) {
+		if (!this.channel.isOpen()) {
 			this.close();
 			return true;
 		}
