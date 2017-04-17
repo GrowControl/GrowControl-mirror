@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server;
 
 import java.io.PrintStream;
@@ -35,20 +36,20 @@ public class gcServer extends xApp {
 
 
 
-	/**
+	/ **
 	 * Get the server class instance.
 	 * @return
-	 */
+	 * /
 	public static gcServer get() {
 		return (gcServer) xApp.get();
 	}
 
 
 
-	/**
+	/ **
 	 * Application start entry point.
 	 * @param args Command line arguments.
-	 */
+	 * /
 	public static void main(final String[] args) {
 		initMain(args, gcServer.class);
 	}
@@ -63,9 +64,9 @@ public class gcServer extends xApp {
 
 
 
-	/**
+	/ **
 	 * Handle command-line arguments.
-	 */
+	 * /
 	@Override
 	protected void processArgs(final List<String> args) {
 		final Iterator<String> it = args.iterator();
@@ -319,7 +320,7 @@ public class gcServer extends xApp {
 
 
 
-/*
+/ *
 	private void updateConfig() {
 	// config version
 	{
@@ -361,7 +362,7 @@ public class gcServer extends xApp {
 		manager.setConfigs(this.config.getSocketConfigs());
 	}
 }
-*/
+* /
 
 
 
@@ -587,3 +588,4 @@ public class gcServer extends xApp {
 
 
 }
+*/

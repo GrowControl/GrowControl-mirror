@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server.net;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -87,11 +88,11 @@ public class NetServer implements NetParent {
 
 
 
-	/**
+	/ **
 	 * New socket connection accepted.
 	 * @param state
 	 * @return true to accept the connection or false to deny.
-	 */
+	 * /
 	public boolean register(final ServerSocketState socketState) {
 		if (socketState == null) throw new RequiredArgumentException("socketState");
 		final SocketChannel channel = socketState.getChannel();
@@ -123,10 +124,10 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 //TODO: store the socket
 		return true;
 	}
-	/**
+	/ **
 	 * Remove disconnected socket.
 	 * @param state
-	 */
+	 * /
 	// socket disconnected
 	public void unregister(final ServerSocketState socketState) {
 		if (socketState == null) throw new RequiredArgumentException("socketState");
@@ -178,9 +179,9 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 
 
 
-	/**
+	/ **
 	 * Stop listening for connections.
-	 */
+	 * /
 	@Override
 	public void close() {
 		try {
@@ -195,9 +196,9 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 		this.closed = true;
 		return this.serverChannel.close();
 	}
-	/**
+	/ **
 	 *  Disconnect all connected sockets.
-	 */
+	 * /
 	@Override
 	public void CloseAll() {
 		// clone states list
@@ -257,3 +258,4 @@ this.log().severe("THIS IS UNFINISHED: NetServer->register() default firewall ac
 
 
 }
+*/

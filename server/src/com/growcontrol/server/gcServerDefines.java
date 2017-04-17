@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server;
 
 import com.growcontrol.common.gcCommonDefines;
@@ -46,3 +47,4 @@ public final class gcServerDefines {
 
 
 }
+*/

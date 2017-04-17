@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server.commands;
 
 import com.growcontrol.server.gcServerDefines;
@@ -114,3 +115,4 @@ public class gcServerCommands_config implements xCommandListener {
 
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server.commands;
 
 import com.growcontrol.common.meta.MetaAddress;
@@ -408,3 +409,4 @@ public final class gcServerCommands implements xCommandListener {
 
 
 }
+*/

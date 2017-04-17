@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server.net;
 
 import io.netty.channel.ChannelInitializer;
@@ -94,3 +95,4 @@ public class NetServerInitializer extends ChannelInitializer<SocketChannel> {
 
 
 }
+*/

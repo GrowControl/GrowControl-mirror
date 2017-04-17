@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server.net;
 
 import io.netty.channel.ChannelFuture;
@@ -29,14 +30,14 @@ import com.poixson.commonjava.Utils.threads.xThreadFactory;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-/*
+/ *
 NetServerManager
   -> NetServer
      -> NetServerInitializer
         ServerSocketState
         -> NetServerHandler
            PacketState
- */
+ * /
 public class NetServerManager implements xCloseableMany {
 	private static final String LOG_NAME = "NET";
 
@@ -341,3 +342,4 @@ public class NetServerManager implements xCloseableMany {
 
 
 }
+*/
