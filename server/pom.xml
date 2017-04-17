@@ -76,7 +76,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.growcontrol.server.gcServer</mainClass>
+							<mainClass>com.growcontrol.server.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
