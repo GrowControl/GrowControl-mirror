@@ -303,16 +303,16 @@ System.out.println("TICKER");
 	@Override
 	protected void displayLogo() {
 		// colors
-		final String COLOR_POIXSON_P   = "bold,green";
-		final String COLOR_POIXSON_OI  = "bold,blue";
-		final String COLOR_POIXSON_X   = "bold,green";
-		final String COLOR_POIXSON_SON = "bold,blue";
-		final String COLOR_COPY        = "bold,black";
-		final String COLOR_GROW        = "bold,green";
-		final String COLOR_CONTROL     = "bold,white";
-		final String COLOR_SOFTWARE    = "cyan";
-		final String COLOR_VERSION     = "cyan";
-		final String COLOR_GRASS       = "green";
+		final String COLOR_PXN_P    = "bold,green";
+		final String COLOR_PXN_OI   = "bold,blue";
+		final String COLOR_PXN_X    = "bold,green";
+		final String COLOR_PXN_SON  = "bold,blue";
+		final String COLOR_COPY     = "bold,black";
+		final String COLOR_GROW     = "bold,green";
+		final String COLOR_CONTROL  = "bold,white";
+		final String COLOR_SOFTWARE = "cyan";
+		final String COLOR_VERSION  = "cyan";
+		final String COLOR_GRASS    = "green";
 		final String COLOR_FLOWER_STEM     = "green";
 		final String COLOR_FLOWER_A_PEDALS = "red";
 		final String COLOR_FLOWER_A_CENTER = "red";
@@ -329,10 +329,10 @@ System.out.println("TICKER");
 		final String COLOR_FLOWER_H_CENTER = "yellow";
 		// line 1
 		final Map<Integer, String> colors1 = new LinkedHashMap<Integer, String>();
-		colors1.put(new Integer(7),  COLOR_POIXSON_P);
-		colors1.put(new Integer(8),  COLOR_POIXSON_OI);
-		colors1.put(new Integer(10), COLOR_POIXSON_X);
-		colors1.put(new Integer(11), COLOR_POIXSON_SON);
+		colors1.put(new Integer(7),  COLOR_PXN_P  );
+		colors1.put(new Integer(8),  COLOR_PXN_OI );
+		colors1.put(new Integer(10), COLOR_PXN_X  );
+		colors1.put(new Integer(11), COLOR_PXN_SON);
 		// line 2
 		final Map<Integer, String> colors2 = new LinkedHashMap<Integer, String>();
 		colors2.put(new Integer(4),  COLOR_COPY);
@@ -408,69 +408,47 @@ System.out.println("TICKER");
 		// line 11
 		final Map<Integer, String> colors11 = new LinkedHashMap<Integer, String>();
 		colors11.put(new Integer(1), COLOR_GRASS);
-		// build art
-		final String version = utilsString.padCenter(15, this.mvnprops.version, ' ');
+
+		// build lines
+		final String version = StringUtils.padCenter(15, this.getVersion(), ' ');
 		final PrintStream out = AnsiConsole.out;
 		out.println();
-		this.displayLogoLine(out, colors1, "      PoiXson                                                    "   );
-		this.displayLogoLine(out, colors2, "   ©GROWCONTROL     _                                            "   );
-		this.displayLogoLine(out, colors3, "      Server      _(_)_                          wWWWw   _       "   );
-		this.displayLogoLine(out, colors4, " "+version+" (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     "       );
-		this.displayLogoLine(out, colors5, "            wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)    "  );
-		this.displayLogoLine(out, colors6, "     @@@@   (___)     `|/    Y    (_)@(_)  @@@@   \\|/   (_)\\     " );
-		this.displayLogoLine(out, colors7, "    @@()@@    Y       \\|    \\|/    /(_)    \\|      |/      |/    ");
-		this.displayLogoLine(out, colors8, "    \\@@@@   \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/    ");
-		this.displayLogoLine(out, colors9, "    \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|//   ");
-		this.displayLogoLine(out, colors10,"^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^"    );
-		this.displayLogoLine(out, colors11,"/////////////////////////////////////////////////////////////////"    );
+		DisplayLineColors(out, colors1, "      PoiXson                                                    "   );
+		DisplayLineColors(out, colors2, "   ©GROWCONTROL     _                                            "   );
+		DisplayLineColors(out, colors3, "      Server      _(_)_                          wWWWw   _       "   );
+		DisplayLineColors(out, colors4, " "+version+" (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     "       );
+		DisplayLineColors(out, colors5, "            wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)    "  );
+		DisplayLineColors(out, colors6, "     @@@@   (___)     `|/    Y    (_)@(_)  @@@@   \\|/   (_)\\     " );
+		DisplayLineColors(out, colors7, "    @@()@@    Y       \\|    \\|/    /(_)    \\|      |/      |/    ");
+		DisplayLineColors(out, colors8, "    \\@@@@   \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/    ");
+		DisplayLineColors(out, colors9, "    \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|//   ");
+		DisplayLineColors(out, colors10,"^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^"    );
+		DisplayLineColors(out, colors11,"/////////////////////////////////////////////////////////////////"    );
 		out.println();
-		out.println(" Copyright (C) 2007-2015 PoiXson, Mattsoft");
-		out.println(" - Brainchild of the one known as lorenzo -");
-		out.println(" This program comes with absolutely no warranty. This is free software");
-		out.println(" and you are welcome to modify it or redistribute it under certain");
-		out.println(" conditions. Type 'show license' for license details.");
+		out.println("    Copyright (C)2007-2017 PoiXson, Mattsoft  ");
+		out.println("   - Brainchild of the one known as lorenzo - ");
+		out.println(" This program comes with absolutely no warranty. This is free");
+		out.println(" software and you are welcome to modify it or redistribute it");
+		out.println(" under certain conditions. Type 'show license' at the command");
+		out.println(" prompt for license details, or go to www.growcontrol.com for");
+		out.println(" more information.");
 		out.println();
 		out.flush();
 	}
-
-//   |       A      B      C       D      E       F      G      H      |
-// 1 |      PoiXson                                                    |
-// 2 |   ©GROWCONTROL     _                                            |
-// 3 |      Server      _(_)_                          wWWWw   _       |
-// 4 | <---version---> (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     |
-// 5 |            wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_)    |
-// 6 |     @@@@   (___)     `|/    Y    (_)@(_)  @@@@   \|/   (_)\     |
-// 7 |    @@()@@    Y       \|    \|/    /(_)    \|      |/      |/    |
-// 8 |    \@@@@   \ |/       | / \ | /  \|/       |/    \|      \|/    |
-// 9 |    \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|//   |
+//  |       A      B      C       D      E       F      G      H      |
+//1 |      PoiXson                                                    |
+//2 |   ©GROWCONTROL     _                                            |
+//3 |      Server      _(_)_                          wWWWw   _       |
+//4 | <---version---> (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     |
+//5 |            wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_)    |
+//6 |     @@@@   (___)     `|/    Y    (_)@(_)  @@@@   \|/   (_)\     |
+//7 |    @@()@@    Y       \|    \|/    /(_)    \|      |/      |/    |
+//8 |    \@@@@   \ |/       | / \ | /  \|/       |/    \|      \|/    |
+//9 |    \\|//   \\|///  \\\|//\\\|/// \|///  \\\|//  \\|//  \\\|//   |
 //10 |^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^|
 //11 |/////////////////////////////////////////////////////////////////|
-//   0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 |
-//   0         1         2         3         4         5         6     |
-
-//System.out.println("                     .==IIIIIIIIIIII=:.");
-//System.out.println("               .7IIII777777II7I7I77777III.");
-//System.out.println(" .+?IIII7IIIIII7777I++III+I+++?+I77IIII777II");
-//System.out.println(" .II=+?7777777II?+==+====?+=++?7++++?I?I7777II");
-//System.out.println("  ~II=III+?=+=======+==III=?+==+I??+?+7???II77I.");
-//System.out.println("   +I7?==+===?=III+?I=?===+=?=?I??=?+++??III?I77=");
-//System.out.println("     I77II+=+=7=?======?=?~+=I====?7+=???+++II?7I7        .II7I7=.");
-//System.out.println("      II7I7+===I=?I+++++~=~+7~~=??I=I=+=++?7++??777...7I7I7??7++7I77IIIIIIIII");
-//System.out.println("        II7+I77I+=~?7=I~?7I=?7I~~+=++7=I===+II++77I7777I??77I++=?7I===+?7?+=7I");
-//System.out.println("          II7++~+I7I77777777777777I?=~77+=I+?=++I7777??I?+++=?I?===77I+=+7+7:");
-//System.out.println("            ~IIIII+==+~~~~+:?~=:~~+II77777??=I+?+777I??+=7?=?=II==I==I+?77=");
-//System.out.println("                IIIIII7777??+=::~?:~~~=I=I777=?I??7?+I7?7+~7777=+77777?+I");
-//System.out.println("                    :IIIIIIII7777777I:?~~~+~I77I=?I=I+77?=?::=~??+?777I");
-//System.out.println("                             IIIIIII7777+~~?~=+777?I77?~~77777II,");
-//System.out.println("                                  ~7III777?:~~?~777I~:?77II");
-//System.out.println("                                      ~III77~~~++7~I=77");
-//System.out.println("                                         :II7I:::I7:7I.");
-//System.out.println("                                           ~I77:~~:I7II");
-//System.out.println("                                            +I77:::I7II");
-//System.out.println("                                             II7,,::77II");
-//System.out.println("                            PoiXson           I7?~~,=7I");
-//System.out.println("                          ©GROWCONTROL         I7?,:III");
-//System.out.println("                                                ~III+.");
+//  0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 |
+//  0         1         2         3         4         5         6     |
 
 
 
