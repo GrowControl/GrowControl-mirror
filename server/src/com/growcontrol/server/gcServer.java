@@ -1,223 +1,199 @@
-/*
 package com.growcontrol.server;
 
 import java.io.PrintStream;
-import java.net.UnknownHostException;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.fusesource.jansi.AnsiConsole;
 
-import com.growcontrol.common.commands.gcCommonCommands;
-import com.growcontrol.common.scripting.gcScriptManager;
-import com.growcontrol.server.commands.gcServerCommands;
-import com.growcontrol.server.configs.NetServerConfig;
-import com.growcontrol.server.configs.gcServerConfig;
-import com.growcontrol.server.net.NetServerManager;
-import com.poixson.commonapp.app.xApp;
-import com.poixson.commonapp.app.annotations.xAppStep;
-import com.poixson.commonapp.app.annotations.xAppStep.StepType;
-import com.poixson.commonapp.config.xConfigException;
-import com.poixson.commonapp.plugin.xPluginManager;
-import com.poixson.commonjava.Failure;
-import com.poixson.commonjava.xVars;
-import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.Utils.utilsString;
-import com.poixson.commonjava.scheduler.ticker.xTickHandler;
-import com.poixson.commonjava.scheduler.ticker.xTickPrompt;
-import com.poixson.commonjava.xLogger.xLevel;
-import com.poixson.commonjava.xLogger.xLog;
-import com.poixson.commonjava.xLogger.commands.xCommandsHandler;
+import com.poixson.app.xApp;
+import com.poixson.app.steps.xAppStep;
+import com.poixson.app.steps.xAppStep.StepType;
+import com.poixson.utils.StringUtils;
 
 
+/*
+ * Startup sequence
+ *   55  load configs
+ *   85  command prompt
+ *  160  tick scheduler
+ *  200  event handler
+ *  250  load plugins
+ *  275  start plugins
+ *  300  sockets
+ *  350  scripts
+ * Shutdown sequence
+ *  350  stop scripts
+ *  300  stop listen sockets
+ *  275  stop plugins
+ *  200  stop event handler
+ */
 public class gcServer extends xApp {
 
 
 
-	/ **
-	 * Get the server class instance.
-	 * @return
-	 * /
 	public static gcServer get() {
 		return (gcServer) xApp.get();
 	}
 
 
 
-	/ **
-	 * Application start entry point.
-	 * @param args Command line arguments.
-	 * /
-	public static void main(final String[] args) {
-		initMain(args, gcServer.class);
-	}
 	public gcServer() {
 		super();
-		gcServerVars.init();
-		if (xVars.debug()) {
-			this.displayColors();
-		}
-		this.displayLogo();
-	}
-
-
-
-	/ **
-	 * Handle command-line arguments.
-	 * /
-	@Override
-	protected void processArgs(final List<String> args) {
-		final Iterator<String> it = args.iterator();
-		while (it.hasNext()) {
-			final String arg = it.next();
-			switch (arg) {
-//			case "--internal":
-//				gcServerVars.setInternal(true);
-//				it.remove();
-//				break;
-			}
-		}
-	}
-
-
-
-	@Override
-	public xCommandsHandler getCommandsHandler() {
-		return gcServerVars.commands();
+//		gcServerVars.init();
+//		if (xVars.debug()) {
+//			this.displayColors();
+//		}
+//		case "--internal":
+//		gcServerVars.setInternal(true);
+//		it.remove();
 	}
 
 
 
 	// ------------------------------------------------------------------------------- //
-	// startup
+	// startup steps
 
 
 
-	// load config
-	@xAppStep(type=StepType.STARTUP, title="Config", priority=20)
-	public void __STARTUP_config() {
-		final gcServerConfig config = gcServerVars.getConfig();
-		{
-			// debug mode
-			final Boolean debug = config.getDebug();
-			if (debug != null && debug.booleanValue()) {
-				xVars.debug(debug.booleanValue());
-			}
-		}
-		{
-			// log level
-			if (!xVars.debug()) {
-				final xLevel lvl = config.getLogLevel();
-				if (lvl != null) {
-					xLog.getRoot().setLevel(lvl);
-				}
-			}
-		}
+	// load configs
+	@xAppStep(type=StepType.STARTUP, title="Configs", priority=55)
+	public void __STARTUP_load_configs() {
+System.out.println("GC CONFIGS");
+//TODO:
+//		final gcServerConfig config = gcServerVars.getConfig();
+//		{
+//			// debug mode
+//			final Boolean debug = config.getDebug();
+//			if (debug != null && debug.booleanValue()) {
+//				xVars.debug(debug.booleanValue());
+//			}
+//		}
+//		{
+//			// log level
+//			if (!xVars.debug()) {
+//				final xLevel lvl = config.getLogLevel();
+//				if (lvl != null) {
+//					xLog.getRoot().setLevel(lvl);
+//				}
+//			}
+//		}
+//		// load zones
+//		synchronized(zones) {
+//			config.PopulateZones(zones);
+//			log.info("Loaded [ "+Integer.toString(this.zones.size())+" ] zones.");
+//		}
 	}
 
 
 
 	// command prompt
-	@xAppStep(type=StepType.STARTUP, title="Commands", priority=30)
-	public void __STARTUP_commands() {
-		final xCommandsHandler handler = gcServerVars.commands();
-		handler.register(
-			new gcCommonCommands()
-		);
-		handler.register(
-			new gcServerCommands()
-		);
-		xLog.setCommandHandler(
-			handler
-		);
-	}
-
-
-
-	// console input
-	@xAppStep(type=StepType.STARTUP, title="Console", priority=32)
-	public void __STARTUP_console() {
-		final gcServerConfig config = gcServerVars.getConfig();
-		xLog.getConsole()
-			.Start();
-		// prompt ticker
-		if (config.getPromptTickerEnabled()) {
-			new xTickPrompt();
-		}
-	}
-
-//	// io event listener
-//	@xAppStep(type=StepType.STARTUP, title="ioEvents", priority=40)
-//	public void _startup_ioevents_() {
-//		getLogicQueue();
-//	}
-
-
-
-	// load plugins
-	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=50)
-	public void __STARTUP_load_plugins() {
-		final xPluginManager manager = xPluginManager.get();
-		manager.setClassField("Server Main");
-		manager.loadAll();
-		manager.initAll();
-	}
-
-
-
-	// enable plugins
-	@xAppStep(type=StepType.STARTUP, title="EnablePlugins", priority=55)
-	public void __STARTUP_enable_plugins() {
-		xPluginManager.get()
-			.enableAll();
+	@xAppStep(type=StepType.STARTUP, title="CommandPrompt", priority=85)
+	public void __STARTUP_command_prompt() {
+System.out.println("PROMPT");
+//TODO:
+//		final xCommandsHandler handler = gcServerVars.commands();
+//		handler.register(
+//			new gcCommonCommands()
+//		);
+//		handler.register(
+//			new gcServerCommands()
+//		);
+//		xLog.setCommandHandler(
+//			handler
+//		);
+//		// console input
+//		final gcServerConfig config = gcServerVars.getConfig();
+//		xLog.getConsole()
+//			.Start();
+//		// prompt ticker
+//		if (config.getPromptTickerEnabled()) {
+//			new xTickPrompt();
+//		}
 	}
 
 
 
 	// tick scheduler
-	@xAppStep(type=StepType.STARTUP, title="Ticker", priority=80)
+	@xAppStep(type=StepType.STARTUP, title="Ticker", priority=160)
 	public void __STARTUP_ticker() {
-		final gcServerConfig config = gcServerVars.getConfig();
-		final xTickHandler ticker = xTickHandler.get();
-		ticker.setInterval(
-				config.getTickInterval()
-		);
-		ticker.Start();
+System.out.println("TICKER");
+//TODO:
+//		final gcServerConfig config = gcServerVars.getConfig();
+//		final xTickHandler ticker = xTickHandler.get();
+//		ticker.setInterval(
+//				config.getTickInterval()
+//		);
+//		ticker.Start();
+	}
+
+
+
+	// io event listener
+	@xAppStep(type=StepType.STARTUP, title="EventHandler", priority=200)
+	public void __STARTUP_event_handler() {
+System.out.println("EVENT HANDLER");
+//TODO:
+//		getLogicQueue();
+	}
+
+
+
+	// load plugins
+	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=250)
+	public void __STARTUP_load_plugins() {
+System.out.println("LOAD PLUGINS");
+//TODO:
+//		final xPluginManager manager = xPluginManager.get();
+//		manager.setClassField("Server Main");
+//		manager.loadAll();
+//		manager.initAll();
+	}
+
+
+
+	// enable plugins
+	@xAppStep(type=StepType.STARTUP, title="StartPlugins", priority=275)
+	public void __STARTUP_start_plugins() {
+System.out.println("START PLUGINS");
+//TODO:
+//		xPluginManager.get()
+//			.enableAll();
 	}
 
 
 
 	// sockets
-	@xAppStep(type=StepType.STARTUP, title="Sockets", priority=90)
+	@xAppStep(type=StepType.STARTUP, title="Sockets", priority=300)
 	public void __STARTUP_sockets() {
-		// load socket configs
-		final Map<String, NetServerConfig> netConfigs;
-		try {
-			netConfigs = gcServerVars.getConfig().getNetConfigs();
-		} catch (xConfigException e) {
-			this.log().trace(e);
-			Failure.fail(e.getMessage());
-			return;
-		}
-		if (utils.isEmpty(netConfigs)) {
-			log().warning("No socket server configs found to load");
-			return;
-		}
-		// start socket servers
-		final NetServerManager manager = NetServerManager.get();
-		for (final NetServerConfig config : netConfigs.values()) {
-			if (!config.isEnabled()) continue;
-			try {
-				manager.getServer(config);
-			} catch (UnknownHostException e) {
-				log().trace(e);
-			} catch (InterruptedException e) {
-				log().trace(e);
-				break;
-			}
-		}
+System.out.println("SOCKETS");
+//TODO:
+//		// load socket configs
+//		final Map<String, NetServerConfig> netConfigs;
+//		try {
+//			netConfigs = gcServerVars.getConfig().getNetConfigs();
+//		} catch (xConfigException e) {
+//			this.log().trace(e);
+//			Failure.fail(e.getMessage());
+//			return;
+//		}
+//		if (utils.isEmpty(netConfigs)) {
+//			log().warning("No socket server configs found to load");
+//			return;
+//		}
+//		// start socket servers
+//		final NetServerManager manager = NetServerManager.get();
+//		for (final NetServerConfig config : netConfigs.values()) {
+//			if (!config.isEnabled()) continue;
+//			try {
+//				manager.getServer(config);
+//			} catch (UnknownHostException e) {
+//				log().trace(e);
+//			} catch (InterruptedException e) {
+//				log().trace(e);
+//				break;
+//			}
+//		}
 //		// log configs
 //		for (final NetConfig dao : configs) {
 //			if (dao.enabled) {
@@ -227,28 +203,7 @@ public class gcServer extends xApp {
 //				);
 //			}
 //		}
-	}
 
-
-
-	// scripts
-	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=95)
-	public void __STARTUP_scripts() {
-		final gcScriptManager manager = gcScriptManager.get();
-		manager.loadAll();
-		manager.StartAll();
-	}
-
-
-
-//		// load zones
-//		synchronized(zones) {
-//			config.PopulateZones(zones);
-//			log.info("Loaded [ "+Integer.toString(this.zones.size())+" ] zones.");
-//		}
-//		// start logic thread queue
-//		getLogicQueue();
-//
 //		// start socket listener
 //		if (socket == null) {
 //			socket = new pxnSocketServer();
@@ -263,152 +218,84 @@ public class gcServer extends xApp {
 //			}
 //		});
 //		socket.Start();
-
-
-
-	// ------------------------------------------------------------------------------- //
-	// shutdown
+	}
 
 
 
 	// scripts
-	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=95)
+	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=350)
+	public void __STARTUP_scripts() {
+System.out.println("SCRIPTS");
+//TODO:
+//		final gcScriptManager manager = gcScriptManager.get();
+//		manager.loadAll();
+//		manager.StartAll();
+	}
+
+
+
+	// ------------------------------------------------------------------------------- //
+	// shutdown steps
+
+
+
+	// scripts
+	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=350)
 	public void __SHUTDOWN_scripts() {
-		gcScriptManager.get()
-			.StopAll();
+System.out.println("SCRIPTS");
+//TODO:
+//		gcScriptManager.get()
+//			.StopAll();
+//TODO: wait for scripts to finish
 	}
 
 
 
-	// sockets
-	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=90)
+	// stop listening sockets
+	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=300)
 	public void __SHUTDOWN_sockets() {
-		final NetServerManager manager = NetServerManager.get();
-		manager.CloseAll();
-	}
-
-
-
-	// stop ticker
-	@xAppStep(type=StepType.SHUTDOWN, title="Ticker", priority=80)
-	public void __SHUTDOWN_ticker() {
-		xTickHandler.get()
-			.Stop();
+System.out.println("SOCKETS");
+//TODO:
+//		final NetServerManager manager = NetServerManager.get();
+//		manager.CloseAll();
 	}
 
 
 
 	// disable plugins
-	@xAppStep(type=StepType.SHUTDOWN, title="DisablePlugins", priority=55)
-	public void __SHUTDOWN_disable_plugins() {
-		xPluginManager.get()
-			.disableAll();
+	@xAppStep(type=StepType.SHUTDOWN, title="StopPlugins", priority=275)
+	public void __SHUTDOWN_stop_plugins() {
+System.out.println("PLUGINS");
+//TODO:
+//		xPluginManager.get()
+//			.disableAll();
+//TODO: wait for plugins to stop
+//		xPluginManager.get()
+//			.unloadAll();
 	}
 
 
 
-	// unload plugins
-	@xAppStep(type=StepType.SHUTDOWN, title="UnloadPlugins", priority=50)
-	public void __SHUTDOWN_unload_plugins() {
-		xPluginManager.get()
-			.unloadAll();
+	@xAppStep(type=StepType.SHUTDOWN, title="EventHandler", priority=200)
+	public void __SHUTDOWN_event_handler() {
+System.out.println("EVENT HANDLER");
+//TODO:
+	}
+
+
+
+	// stop ticker
+	@xAppStep(type=StepType.SHUTDOWN, title="Ticker", priority=160)
+	public void __SHUTDOWN_ticker() {
+System.out.println("TICKER");
+//TODO:
+//		xTickHandler.get()
+//			.Stop();
 	}
 
 
 
 	// ------------------------------------------------------------------------------- //
-
-
-
-/ *
-	private void updateConfig() {
-	// config version
-	{
-		boolean configVersionDifferent = false;
-		final String configVersion = this.config.getVersion();
-		final String serverVersion = this.getVersion();
-		if (utils.notEmpty(configVersion) && utils.notEmpty(serverVersion)) {
-			if (configVersion.endsWith("x") || configVersion.endsWith("*")) {
-				final String vers = utilsString.trims(configVersion, "x", "*");
-				if (!serverVersion.startsWith(vers)) {
-					configVersionDifferent = true;
-				}
-			} else {
-				if (!configVersion.equals(serverVersion)) {
-					configVersionDifferent = true;
-				}
-			}
-		}
-		if (configVersionDifferent) {
-			log().warning(gcServerDefines.CONFIG_FILE+" for this server may need updates");
-		}
-	}
-
-
-
-//	// logic threads (0 uses main thread)
-//	{
-//		@SuppressWarnings("unused")
-//		final int logic = this.config.getLogicThreads();
-//		//TODO: apply this to logic thread pool
-//	}
-//	// zones
-//	{
-//		this.config.populateZones(this.zones);
-//	}
-	// sockets
-	{
-		final NetServerManager manager = NetServerManager.get();
-		manager.setConfigs(this.config.getSocketConfigs());
-	}
-}
-* /
-
-
-
-//		pxnLogger log = pxnLog.get();
-//if (!consoleEnabled) {
-//System.out.println("Console input is disabled due to noconsole command argument.");
-////TODO: currently no way to stop the server with no console input
-//System.exit(0);
-//}
-
-
-//TODO: remove this
-//log.severe("Listing Com Ports:");
-//for (Map.Entry<String, String> entry : Serial.listPorts().entrySet())
-//log.severe(entry.getKey()+" - "+entry.getValue());
-
-
-//TODO: remove temp scheduled task
-// new task (multi-threaded / repeat)
-//pxnSchedulerTask task = new pxnSchedulerTask(true, true) {
-//	@Override
-//	public void run() {
-//		pxnLog.get().Publish("333333333 tick");
-//	}
-//	@Override
-//	public String getTaskName() {
-//		return "333tickname";
-//	}
-//};
-//task.addTrigger(new triggerInterval("3s"));
-//pxnScheduler.get("gcServer").newTask(task);
-
-//System.out.println("next run: "+task.UntilNextTrigger().get(TimeU.MS));
-
-
-//	// get zones
-//	public List<String> getZones() {
-//		synchronized(zones) {
-//			return new ArrayList<String>(zones);
-//		}
-//	}
-//	public String[] getZonesArray() {
-//		synchronized(zones) {
-//			return (String[]) zones.toArray();
-//		}
-//	}
 
 
 
@@ -588,4 +475,3 @@ public class gcServer extends xApp {
 
 
 }
-*/
