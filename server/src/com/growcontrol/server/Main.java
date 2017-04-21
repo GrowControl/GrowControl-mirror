@@ -1,8 +1,9 @@
 package com.growcontrol.server;
 
-import com.poixson.app.xApp;
 import com.poixson.utils.ShellArgsTool;
 import com.poixson.utils.ThreadUtils;
+import com.poixson.utils.xVars;
+import com.poixson.utils.xLogger.xLog;
 
 
 public class Main {
@@ -14,20 +15,20 @@ public class Main {
 		final ShellArgsTool argsTool = ShellArgsTool.init(argsArray);
 		boolean hasStarted = false;
 		if (argsTool.getFlagBool(false, "-S", "--server")) {
-			xApp.StartApp(
-				gcServer.class
-			);
+			final gcServer server = new gcServer();
+			server.Start();
 			hasStarted = true;
 		}
 		// default
 		if (!hasStarted) {
-			xApp.StartApp(
-				gcServer.class
-			);
+			final gcServer server = new gcServer();
+			server.Start();
+			hasStarted = true;
 		}
-//		if (debug) {
-//			System.out.println("Initial thread returning..");
-//		}
+		if (xVars.debug()) {
+			xLog.getRoot()
+				.fine("Initial thread returning..");
+		}
 		ThreadUtils.Sleep(150L);
 	}
 
