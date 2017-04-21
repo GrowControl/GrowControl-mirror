@@ -403,7 +403,10 @@ System.out.println("TICKER");
 
 		// build lines
 		final String version = StringUtils.padCenter(15, this.getVersion(), ' ');
-		final PrintStream out = AnsiConsole.out;
+		final PrintStream out = new xLogPrintStream(
+				xLog.getRoot(),
+				null
+		);
 		out.println();
 		DisplayLineColors(out, colors1, "      PoiXson                                                    "   );
 		DisplayLineColors(out, colors2, "    GROWCONTROL     _                                            "   );
