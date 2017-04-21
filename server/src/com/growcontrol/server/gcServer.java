@@ -4,12 +4,12 @@ import java.io.PrintStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.fusesource.jansi.AnsiConsole;
-
 import com.poixson.app.xApp;
 import com.poixson.app.steps.xAppStep;
 import com.poixson.app.steps.xAppStep.StepType;
 import com.poixson.utils.StringUtils;
+import com.poixson.utils.xLogger.xLog;
+import com.poixson.utils.xLogger.xLogPrintStream;
 
 
 /*
@@ -59,7 +59,6 @@ public class gcServer extends xApp {
 	// load configs
 	@xAppStep(type=StepType.STARTUP, title="Configs", priority=55)
 	public void __STARTUP_load_configs() {
-System.out.println("GC CONFIGS");
 //TODO:
 //		final gcServerConfig config = gcServerVars.getConfig();
 //		{
@@ -90,7 +89,6 @@ System.out.println("GC CONFIGS");
 	// command prompt
 	@xAppStep(type=StepType.STARTUP, title="CommandPrompt", priority=85)
 	public void __STARTUP_command_prompt() {
-System.out.println("PROMPT");
 //TODO:
 //		final xCommandsHandler handler = gcServerVars.commands();
 //		handler.register(
@@ -117,7 +115,6 @@ System.out.println("PROMPT");
 	// tick scheduler
 	@xAppStep(type=StepType.STARTUP, title="Ticker", priority=160)
 	public void __STARTUP_ticker() {
-System.out.println("TICKER");
 //TODO:
 //		final gcServerConfig config = gcServerVars.getConfig();
 //		final xTickHandler ticker = xTickHandler.get();
@@ -132,7 +129,6 @@ System.out.println("TICKER");
 	// io event listener
 	@xAppStep(type=StepType.STARTUP, title="EventHandler", priority=200)
 	public void __STARTUP_event_handler() {
-System.out.println("EVENT HANDLER");
 //TODO:
 //		getLogicQueue();
 	}
@@ -142,7 +138,6 @@ System.out.println("EVENT HANDLER");
 	// load plugins
 	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=250)
 	public void __STARTUP_load_plugins() {
-System.out.println("LOAD PLUGINS");
 //TODO:
 //		final xPluginManager manager = xPluginManager.get();
 //		manager.setClassField("Server Main");
@@ -155,7 +150,6 @@ System.out.println("LOAD PLUGINS");
 	// enable plugins
 	@xAppStep(type=StepType.STARTUP, title="StartPlugins", priority=275)
 	public void __STARTUP_start_plugins() {
-System.out.println("START PLUGINS");
 //TODO:
 //		xPluginManager.get()
 //			.enableAll();
@@ -166,7 +160,6 @@ System.out.println("START PLUGINS");
 	// sockets
 	@xAppStep(type=StepType.STARTUP, title="Sockets", priority=300)
 	public void __STARTUP_sockets() {
-System.out.println("SOCKETS");
 //TODO:
 //		// load socket configs
 //		final Map<String, NetServerConfig> netConfigs;
@@ -225,7 +218,6 @@ System.out.println("SOCKETS");
 	// scripts
 	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=350)
 	public void __STARTUP_scripts() {
-System.out.println("SCRIPTS");
 //TODO:
 //		final gcScriptManager manager = gcScriptManager.get();
 //		manager.loadAll();
@@ -414,7 +406,7 @@ System.out.println("TICKER");
 		final PrintStream out = AnsiConsole.out;
 		out.println();
 		DisplayLineColors(out, colors1, "      PoiXson                                                    "   );
-		DisplayLineColors(out, colors2, "   ©GROWCONTROL     _                                            "   );
+		DisplayLineColors(out, colors2, "    GROWCONTROL     _                                            "   );
 		DisplayLineColors(out, colors3, "      Server      _(_)_                          wWWWw   _       "   );
 		DisplayLineColors(out, colors4, " "+version+" (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     "       );
 		DisplayLineColors(out, colors5, "            wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)    "  );
