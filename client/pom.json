@@ -1,0 +1,16 @@
+{
+	"Name": "gcClient",
+	"ArtifactId": "client",
+	"GroupId": "com.growcontrol",
+	"Version": "3.6.1",
+	"URL": "http://growcontrol.com",
+	"Github-Path": "GrowControl/GrowControl",
+	"Org-Name": "GrowControl",
+	"Deps": {
+		"gcserver": {
+			"GroupId": "com.growcontrol",
+			"ArtifactId": "server",
+			"Version": "${project.version}"
+		}
+	}
+}

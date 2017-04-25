@@ -1,0 +1,29 @@
+{
+	"Name": "gcServer",
+	"ArtifactId": "server",
+	"GroupId": "com.growcontrol",
+	"Version": "3.6.1",
+	"URL": "http://growcontrol.com",
+	"Github-Path": "GrowControl/GrowControl",
+	"Org-Name": "GrowControl",
+	"Main-Class": "com.growcontrol.server.Main",
+	"Shade": "yes",
+	"Deps": {
+		"pxncommon": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "pxncommon",
+			"Name": "pxnCommon",
+			"Version": "${project.version}"
+		},
+		"netty": {
+			"GroupId": "io.netty",
+			"ArtifactId": "netty-all",
+			"Version": "4.1.9.Final"
+		},
+		"jssc": {
+			"GroupId": "org.scream3r",
+			"ArtifactId": "jssc",
+			"Version": "2.8.0"
+		}
+	}
+}
