@@ -1,10 +1,11 @@
+<!-- Generated on: April 25, 2017 15:58 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<name>GrowControl-Client</name>
-	<artifactId>gcClient</artifactId>
+	<name>gcClient</name>
+	<artifactId>client</artifactId>
 	<groupId>com.growcontrol</groupId>
 	<version>3.6.1</version>
 	<packaging>jar</packaging>
@@ -12,6 +13,7 @@
 	<scm>
 		<url>https://github.com/GrowControl/GrowControl</url>
 		<connection>scm:git:https://github.com/GrowControl/GrowControl.git</connection>
+		<developerConnection>scm:git:git@github.com:GrowControl/GrowControl.git</developerConnection>
 	</scm>
 	<ciManagement>
 		<url>ci.poixson.com</url>
@@ -43,13 +45,13 @@
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<finalName>${project.name}-${project.version}</finalName>
 		<resources>
 			<resource>
 				<directory>resources</directory>
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		<finalName>scant-${project.artifactId}-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -105,7 +107,7 @@
 				<artifactId>maven-source-plugin</artifactId>
 				<version>${maven-source-plugin-version}</version>
 				<configuration>
-					<finalName>${project.artifactId}-${project.version}</finalName>
+					<finalName>${project.name}-source-${project.version}</finalName>
 					<attach>false</attach>
 				</configuration>
 			</plugin>
@@ -124,6 +126,8 @@
 				<version>${surefire-version}</version>
 				<configuration>
 					<useFile>false</useFile>
+					<parallel>methods</parallel>
+					<threadCount>4</threadCount>
 				</configuration>
 			</plugin>
 		</plugins>
