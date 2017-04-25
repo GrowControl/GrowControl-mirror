@@ -30,9 +30,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<pxncommon-utils-version>3.6.1</pxncommon-utils-version>
-		<io.netty-version>4.0.30.Final</io.netty-version>
-		<java-simple-serial-connector-version>2.8.0</java-simple-serial-connector-version>
+		<pxncommon-version>${project.version}</pxncommon-version>
+		<netty-version>4.0.30.Final</netty-version>
+		<jssc-version>2.8.0</jssc-version>
 
 		<maven-compiler-plugin-version>3.3</maven-compiler-plugin-version>
 		<maven-jar-plugin-version>2.6</maven-jar-plugin-version>
@@ -49,13 +49,18 @@
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>tests</testSourceDirectory>
 		<finalName>${project.name}-${project.version}</finalName>
 		<resources>
 			<resource>
 				<directory>resources</directory>
-				<filtering>true</filtering>
 			</resource>
 		</resources>
+		<testResources>
+			<testResource>
+				<directory>testresources</directory>
+			</testResource>
+		</testResources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -80,16 +85,6 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>${maven-assembly-plugin-version}</version>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>${maven-shade-plugin-version}</version>
 				<executions>
@@ -100,16 +95,13 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<finalName>${project.artifactId}-${project.version}</finalName>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>${maven-source-plugin-version}</version>
 				<configuration>
-					<finalName>${project.artifactId}-${project.version}</finalName>
+					<finalName>${project.name}-source-${project.version}</finalName>
 					<attach>false</attach>
 				</configuration>
 			</plugin>
@@ -128,6 +120,8 @@
 				<version>${surefire-version}</version>
 				<configuration>
 					<useFile>false</useFile>
+					<parallel>methods</parallel>
+					<threadCount>4</threadCount>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -136,14 +130,18 @@
 
 		<dependency>
 			<groupId>com.poixson</groupId>
-			<artifactId>pxnCommon</artifactId>
-			<version>${pxncommon-utils-version}</version>
-			<scope>compile</scope>
+			<artifactId>pxncommon</artifactId>
+			<version>${pxncommon-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>netty</groupId>
+			<artifactId>netty</artifactId>
+			<version>${netty-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.scream3r</groupId>
 			<artifactId>jssc</artifactId>
-			<version>${java-simple-serial-connector-version}</version>
+			<version>${jssc-version}</version>
 		</dependency>
 
 	</dependencies>
