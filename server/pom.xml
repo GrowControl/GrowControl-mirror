@@ -125,6 +125,9 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<dependencyReducedPomLocation>${project.basedir}/target/dependency-reduced-pom.xml</dependencyReducedPomLocation>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
