@@ -1,4 +1,4 @@
-<!-- Generated on: April 25, 2017 16:27 UTC -->
+<!-- Generated on: April 26, 2017 08:31 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -34,6 +34,8 @@
 		<netty-version>4.1.9.Final</netty-version>
 		<jssc-version>2.8.0</jssc-version>
 
+		<git-commit-id-plugin-version>2.2.2</git-commit-id-plugin-version>
+		<maven-resources-plugin-version>3.0.2</maven-resources-plugin-version>
 		<maven-compiler-plugin-version>3.3</maven-compiler-plugin-version>
 		<maven-jar-plugin-version>2.6</maven-jar-plugin-version>
 		<maven-assembly-plugin-version>2.5.5</maven-assembly-plugin-version>
@@ -54,6 +56,7 @@
 		<resources>
 			<resource>
 				<directory>resources</directory>
+				<filtering>true</filtering>
 			</resource>
 		</resources>
 		<testResources>
@@ -62,6 +65,33 @@
 			</testResource>
 		</testResources>
 		<plugins>
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<version>${git-commit-id-plugin-version}</version>
+				<executions>
+					<execution>
+						<id>get-the-git-infos</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>validate</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven-resources-plugin-version}</version>
+				<configuration>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>png</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
