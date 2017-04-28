@@ -4,11 +4,20 @@ import java.io.PrintStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.growcontrol.server.commands.gcCommandsCommon;
+import com.growcontrol.server.commands.gcCommandsServer;
 import com.poixson.app.xApp;
 import com.poixson.app.steps.xAppStep;
 import com.poixson.app.steps.xAppStep.StepType;
+import com.poixson.utils.DirsFiles;
 import com.poixson.utils.StringUtils;
+import com.poixson.utils.xVars;
+import com.poixson.utils.xLogger.jlineConsole;
+import com.poixson.utils.xLogger.xCommandHandler;
+import com.poixson.utils.xLogger.xConsole;
 import com.poixson.utils.xLogger.xLog;
+import com.poixson.utils.xLogger.xLogFormatter_Color;
+import com.poixson.utils.xLogger.xLogHandlerConsole;
 import com.poixson.utils.xLogger.xLogPrintStream;
 
 
@@ -59,6 +68,14 @@ public class gcServer extends xApp {
 	// load configs
 	@xAppStep(type=StepType.STARTUP, title="Configs", priority=55)
 	public void __STARTUP_load_configs() {
+		xVars.setJLineHistorySize(200);
+		xVars.setJLineHistoryFile(
+			DirsFiles.buildFilePath(
+				DirsFiles.cwd(),
+				"history",
+				"txt"
+			)
+		);
 //TODO:
 //		final gcServerConfig config = gcServerVars.getConfig();
 //		{
@@ -89,21 +106,29 @@ public class gcServer extends xApp {
 	// command prompt
 	@xAppStep(type=StepType.STARTUP, title="CommandPrompt", priority=85)
 	public void __STARTUP_command_prompt() {
+		// load console
+		final xConsole console = new jlineConsole();
+		xLog.setConsole(console);
+		final xLog log = xLog.getRoot();
+		log.setHandler(
+			new xLogHandlerConsole()
+		);
+		// set color format
+		log.setFormatter(
+			new xLogFormatter_Color()
+		);
+		// load command handlers
+		final xCommandHandler handler = xLog.getCommandHandler();
+		handler.register(
+			new gcCommandsCommon()
+		);
+		handler.register(
+			new gcCommandsServer()
+		);
+		// start console input
+		console.Start();
 //TODO:
-//		final xCommandsHandler handler = gcServerVars.commands();
-//		handler.register(
-//			new gcCommonCommands()
-//		);
-//		handler.register(
-//			new gcServerCommands()
-//		);
-//		xLog.setCommandHandler(
-//			handler
-//		);
-//		// console input
 //		final gcServerConfig config = gcServerVars.getConfig();
-//		xLog.getConsole()
-//			.Start();
 //		// prompt ticker
 //		if (config.getPromptTickerEnabled()) {
 //			new xTickPrompt();
