@@ -90,7 +90,8 @@ public class gcServer extends xApp {
 //			if (!xVars.debug()) {
 //				final xLevel lvl = config.getLogLevel();
 //				if (lvl != null) {
-//					xLog.getRoot().setLevel(lvl);
+//					xLog.getRoot()
+//						.setLevel(lvl);
 //				}
 //			}
 //		}
@@ -259,7 +260,6 @@ public class gcServer extends xApp {
 	// scripts
 	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=350)
 	public void __SHUTDOWN_scripts() {
-System.out.println("SCRIPTS");
 //TODO:
 //		gcScriptManager.get()
 //			.StopAll();
@@ -271,7 +271,6 @@ System.out.println("SCRIPTS");
 	// stop listening sockets
 	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=300)
 	public void __SHUTDOWN_sockets() {
-System.out.println("SOCKETS");
 //TODO:
 //		final NetServerManager manager = NetServerManager.get();
 //		manager.CloseAll();
@@ -282,7 +281,6 @@ System.out.println("SOCKETS");
 	// disable plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="StopPlugins", priority=275)
 	public void __SHUTDOWN_stop_plugins() {
-System.out.println("PLUGINS");
 //TODO:
 //		xPluginManager.get()
 //			.disableAll();
@@ -295,7 +293,6 @@ System.out.println("PLUGINS");
 
 	@xAppStep(type=StepType.SHUTDOWN, title="EventHandler", priority=200)
 	public void __SHUTDOWN_event_handler() {
-System.out.println("EVENT HANDLER");
 //TODO:
 	}
 
@@ -304,7 +301,6 @@ System.out.println("EVENT HANDLER");
 	// stop ticker
 	@xAppStep(type=StepType.SHUTDOWN, title="Ticker", priority=160)
 	public void __SHUTDOWN_ticker() {
-System.out.println("TICKER");
 //TODO:
 //		xTickHandler.get()
 //			.Stop();
