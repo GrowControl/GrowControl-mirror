@@ -1,39 +1,27 @@
-/*
 package com.growcontrol.server;
 
-import com.growcontrol.common.meta.MetaRouter;
-import com.growcontrol.server.configs.gcServerConfig;
-import com.poixson.commonapp.config.xConfig;
-import com.poixson.commonapp.config.xConfigException;
-import com.poixson.commonjava.Failure;
-import com.poixson.commonjava.Utils.Keeper;
-import com.poixson.commonjava.xLogger.xLog;
-import com.poixson.commonjava.xLogger.commands.xCommandsHandler;
+import com.poixson.utils.Keeper;
 
 
 public class gcServerVars {
-
-	private static volatile boolean inited = false;
 
 	// internal mode
 	private static volatile boolean internal = false;
 
 	// configs
-	private static gcServerConfig config = null;
-	private static final Object configLock = new Object();
+//	private static gcServerConfig config = null;
+//	private static final Object configLock = new Object();
 
 	// handlers
 //	private static final xSystemHandler system = new xHandlerSystem();
-	private static final xCommandsHandler commandsHandler = xCommandsHandler.get();
+//	private static final xCommandsHandler commandsHandler = xCommandsHandler.get();
 //	private static final xPluginsEventHandler pluginsHandler = xPluginsEventHandler.get();
-	private static final MetaRouter router = MetaRouter.get();
+//	private static final MetaRouter router = MetaRouter.get();
 
 
 
 	public static void init() {
-		if (!inited) {
-			Keeper.add(new gcServerVars());
-		}
+		Keeper.add(new gcServerVars());
 	}
 	private gcServerVars() {
 	}
@@ -48,7 +36,7 @@ public class gcServerVars {
 	}
 
 
-
+/*
 	// server config
 	public static gcServerConfig getConfig() {
 		if (config == null) {
@@ -77,7 +65,7 @@ public class gcServerVars {
 		}
 		return config;
 	}
-
+*/
 
 
 //	// system event handler
@@ -87,10 +75,10 @@ public class gcServerVars {
 
 
 
-	// command event handler
-	public static xCommandsHandler commands() {
-		return commandsHandler;
-	}
+//	// command event handler
+//	public static xCommandsHandler commands() {
+//		return commandsHandler;
+//	}
 
 
 
@@ -101,12 +89,11 @@ public class gcServerVars {
 
 
 
-	// meta event handler
-	public static MetaRouter router() {
-		return router;
-	}
+//	// meta event handler
+//	public static MetaRouter router() {
+//		return router;
+//	}
 
 
 
 }
-*/
