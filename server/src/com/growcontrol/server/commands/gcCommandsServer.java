@@ -1,23 +1,20 @@
-/*
 package com.growcontrol.server.commands;
 
-import com.growcontrol.common.meta.MetaAddress;
-import com.growcontrol.common.meta.MetaRouter;
-import com.growcontrol.common.meta.MetaType;
-import com.growcontrol.server.gcServerDefines;
-import com.poixson.commonapp.app.xApp;
-import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.xEvents.annotations.xEvent;
-import com.poixson.commonjava.xLogger.xLog;
-import com.poixson.commonjava.xLogger.commands.xCommandEvent;
-import com.poixson.commonjava.xLogger.commands.xCommandListener;
+import java.lang.ref.SoftReference;
+
+import com.poixson.app.xApp;
+import com.poixson.utils.Utils;
+import com.poixson.utils.xEvents.xEvent;
+import com.poixson.utils.xLogger.xCommandEvent;
+import com.poixson.utils.xLogger.xCommandListener;
+import com.poixson.utils.xLogger.xLog;
 
 
-public final class gcServerCommands implements xCommandListener {
-	private static final String LOG_NAME = gcServerDefines.LOG_NAME;
+public final class gcCommandsServer implements xCommandListener {
+//	private static final String LOG_NAME = gcServerDefines.LOG_NAME;
 	public static final String LISTENER_NAME = "ServerCommands";
 
-	protected volatile gcServerCommands_config inconfig = null;
+//	protected volatile gcServerCommands_config inconfig = null;
 
 
 
@@ -40,20 +37,22 @@ public final class gcServerCommands implements xCommandListener {
 			filterHandled=true,
 			filterCancelled=true)
 	public void onCommand(final xCommandEvent event) {
-		if (this.inconfig != null) {
-			this.inconfig.onCommand(event);
-			return;
-		}
+//TODO:
+//		if (this.inconfig != null) {
+//			this.inconfig.onCommand(event);
+//			return;
+//		}
 		switch (event.getArg(0)) {
-		// config mode
-		case "config":
-			if (event.isHelp()) {
-				this._config_help(event);
-				return;
-			}
-			this.inconfig = new gcServerCommands_config(this);
-			event.setHandled();
-			break;
+//TODO:
+//		// config mode
+//		case "config":
+//			if (event.isHelp()) {
+//				this._config_help(event);
+//				return;
+//			}
+//			this.inconfig = new gcServerCommands_config(this);
+//			event.setHandled();
+//			break;
 		// say a message
 		case "say":
 		case "wall":
@@ -71,10 +70,10 @@ public final class gcServerCommands implements xCommandListener {
 //		case "get":
 //			this._get(event);
 //			break;
-		// manually trigger an event
-		case "set":
-			this._set(event);
-			break;
+//		// manually trigger an event
+//		case "set":
+//			this._set(event);
+//			break;
 		case "list":
 			this._list(event);
 			break;
@@ -149,7 +148,11 @@ public final class gcServerCommands implements xCommandListener {
 		event.setHandled();
 		final StringBuilder msg = new StringBuilder();
 		msg.append(" (console) ");
-		msg.append(event.commandStr.substring(event.getArg(0).length() + 1));
+		msg.append(
+			event.commandStr.substring(
+				event.getArg(0).length() + 1
+			)
+		);
 		this.publish(msg.toString());
 	}
 	protected void _say_help(final xCommandEvent event) {
@@ -168,7 +171,10 @@ public final class gcServerCommands implements xCommandListener {
 		}
 		event.setHandled();
 		this.publish();
-		this.publish(xApp.get().getUptimeString());
+		this.publish(
+			xApp.get()
+				.getUptimeString()
+		);
 		this.publish();
 	}
 	protected void _uptime_help(final xCommandEvent event) {
@@ -191,7 +197,7 @@ public final class gcServerCommands implements xCommandListener {
 			this.publish("Performing garbage collection..");
 			System.gc();
 		}
-		utils.MemoryStats();
+		Utils.MemoryStats();
 		this.publish();
 	}
 	protected void _mem_help(final xCommandEvent event) {
@@ -222,24 +228,24 @@ public final class gcServerCommands implements xCommandListener {
 
 
 	// set command (trigger event manually)
-	protected void _set(final xCommandEvent event) {
-		if (event.isHelp()) {
-			this._set_help(event);
-			return;
-		}
-		event.setHandled();
-		final MetaAddress addr = MetaAddress.get(event.getArg(1));
-		final MetaType meta = MetaType.get(event.getArg(2));
-		this.log().stats("Setting [ "+addr.toString()+" ] to [ "+meta.toString()+" ]");
-		MetaRouter.get().route(addr, meta);
-	}
-	protected void _set_help(final xCommandEvent event) {
-		event.setHandled();
-		this.publish();
-		this.publish("Manually triggers an event.");
-		this.publish("  set <address> <value>");
-		this.publish();
-	}
+//	protected void _set(final xCommandEvent event) {
+//		if (event.isHelp()) {
+//			this._set_help(event);
+//			return;
+//		}
+//		event.setHandled();
+//		final MetaAddress addr = MetaAddress.get(event.getArg(1));
+//		final MetaType meta = MetaType.get(event.getArg(2));
+//		this.log().stats("Setting [ "+addr.toString()+" ] to [ "+meta.toString()+" ]");
+//		MetaRouter.get().route(addr, meta);
+//	}
+//	protected void _set_help(final xCommandEvent event) {
+//		event.setHandled();
+//		this.publish();
+//		this.publish("Manually triggers an event.");
+//		this.publish("  set <address> <value>");
+//		this.publish();
+//	}
 
 
 
@@ -253,24 +259,24 @@ public final class gcServerCommands implements xCommandListener {
 		case "threads":
 			this.publish("THREADS... (sorry, this is unfinished)");
 			break;
-		case "addresses":
-		case "addr":
-			final MetaRouter router = MetaRouter.get();
-			// dests
-			this.publish("Destination Addresses");
-			this.publish("=====================");
-			for (final MetaAddress addr : router.getKnownDestinations()) {
-				this.publish("  "+addr.hash);
-			}
-			this.publish();
-			// sources
-			this.publish("Source Addresses");
-			this.publish("================");
-			for (final MetaAddress addr : router.getKnownSources()) {
-				this.publish("  "+addr.hash);
-			}
-			this.publish();
-			break;
+//		case "addresses":
+//		case "addr":
+//			final MetaRouter router = MetaRouter.get();
+//			// dests
+//			this.publish("Destination Addresses");
+//			this.publish("=====================");
+//			for (final MetaAddress addr : router.getKnownDestinations()) {
+//				this.publish("  "+addr.hash);
+//			}
+//			this.publish();
+//			// sources
+//			this.publish("Source Addresses");
+//			this.publish("================");
+//			for (final MetaAddress addr : router.getKnownSources()) {
+//				this.publish("  "+addr.hash);
+//			}
+//			this.publish();
+//			break;
 		default:
 			this._list_help(event);
 			break;
@@ -281,7 +287,7 @@ public final class gcServerCommands implements xCommandListener {
 		this.publish();
 		this.publish("List something:");
 		this.publish("  threads");
-		this.publish("  addresses");
+//		this.publish("  addresses");
 		this.publish();
 	}
 
@@ -393,20 +399,27 @@ public final class gcServerCommands implements xCommandListener {
 
 
 	// logger
-	private volatile xLog _log = null;
+	private volatile SoftReference<xLog> _log = null;
 	public xLog log() {
-		if (this._log == null)
-			this._log = xLog.getRoot(LOG_NAME);
-		return this._log;
+		if (this._log != null) {
+			final xLog log = this._log.get();
+			if (log != null) {
+				return log;
+			}
+		}
+		final xLog log = xLog.getRoot();
+		this._log = new SoftReference<xLog>(log);
+		return log;
 	}
 	public void publish(final String msg) {
-		this.log().publish(msg);
+		this.log()
+			.publish(msg);
 	}
 	public void publish() {
-		this.log().publish();
+		this.log()
+			.publish();
 	}
 
 
 
 }
-*/

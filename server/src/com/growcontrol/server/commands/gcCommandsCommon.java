@@ -1,13 +1,15 @@
-package com.growcontrol.common.commands;
+package com.growcontrol.server.commands;
 
-import com.poixson.commonapp.app.xApp;
-import com.poixson.commonjava.xEvents.annotations.xEvent;
-import com.poixson.commonjava.xLogger.xLog;
-import com.poixson.commonjava.xLogger.commands.xCommandEvent;
-import com.poixson.commonjava.xLogger.commands.xCommandListener;
+import java.lang.ref.SoftReference;
+
+import com.poixson.app.xApp;
+import com.poixson.utils.xEvents.xEvent;
+import com.poixson.utils.xLogger.xCommandEvent;
+import com.poixson.utils.xLogger.xCommandListener;
+import com.poixson.utils.xLogger.xLog;
 
 
-public class gcCommonCommands implements xCommandListener {
+public class gcCommandsCommon implements xCommandListener {
 	private static final String LISTENER_NAME = "CommonCommands";
 
 
@@ -92,7 +94,8 @@ public class gcCommonCommands implements xCommandListener {
 			return;
 		}
 		event.setHandled();
-		xApp.get().Stop();
+		xApp.get()
+			.Stop();
 	}
 	protected void _shutdown_help(final xCommandEvent event) {
 		event.setHandled();
@@ -176,17 +179,25 @@ public class gcCommonCommands implements xCommandListener {
 
 
 	// logger
-	private volatile xLog _log = null;
+	private volatile SoftReference<xLog> _log = null;
 	public xLog log() {
-		if(this._log == null)
-			this._log = xLog.getRoot();
-		return this._log;
+		if (this._log != null) {
+			final xLog log = this._log.get();
+			if (log != null) {
+				return log;
+			}
+		}
+		final xLog log = xLog.getRoot();
+		this._log = new SoftReference<xLog>(log);
+		return log;
 	}
 	public void publish(final String msg) {
-		this.log().publish(msg);
+		this.log()
+			.publish(msg);
 	}
 	public void publish() {
-		this.log().publish();
+		this.log()
+			.publish();
 	}
 
 

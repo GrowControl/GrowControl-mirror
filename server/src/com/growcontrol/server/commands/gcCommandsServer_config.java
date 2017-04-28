@@ -98,18 +98,25 @@ public class gcServerCommands_config implements xCommandListener {
 
 
 	// logger
-	private volatile xLog _log = null;
+	private volatile SoftReference<xLog> _log = null;
 	public xLog log() {
-		if (this._log == null) {
-			this._log = xLog.getRoot(LOG_NAME);
+		if (this._log != null) {
+			final xLog log = this._log.get();
+			if (log != null) {
+				return log;
+			}
 		}
-		return this._log;
+		final xLog log = xLog.getRoot();
+		this._log = new SoftReference<xLog>(log);
+		return log;
 	}
 	public void publish(final String msg) {
-		this.log().publish(msg);
+		this.log()
+			.publish(msg);
 	}
 	public void publish() {
-		this.log().publish();
+		this.log()
+			.publish();
 	}
 
 
