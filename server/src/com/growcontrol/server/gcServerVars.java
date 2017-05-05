@@ -5,8 +5,6 @@ import com.poixson.utils.Keeper;
 
 public class gcServerVars {
 
-	// internal mode
-	private static volatile boolean internal = false;
 
 	// configs
 //	private static gcServerConfig config = null;
@@ -28,12 +26,40 @@ public class gcServerVars {
 
 
 
-	public static boolean isInternal() {
-		return internal;
+	// ------------------------------------------------------------------------------- //
+	// app mode
+
+
+
+	public static enum APP_MODE {
+		SERVER_ONLY  ( (byte)1 ),
+		CLIENT_ONLY  ( (byte)2 ),
+		SERVER_CLIENT( (byte)3 ),
+		INTERNAL     ( (byte)4 );
+		private final byte mode;
+		APP_MODE(final byte mode) {
+			this.mode = mode;
+		}
+		public byte getValue() {
+			return this.mode;
+		}
+		public boolean equals(final APP_MODE compare) {
+			if (compare == null)
+				return false;
+			return (
+				this.getValue() == compare.getValue()
+			);
+		}
 	}
-	public static void setInternal(final boolean value) {
-		internal = value;
+	private static volatile APP_MODE appMode = null;
+
+	public static APP_MODE getAppMode() {
+		return appMode;
 	}
+	public static void setAppMode(final APP_MODE mode) {
+		appMode = mode;
+	}
+
 
 
 /*
