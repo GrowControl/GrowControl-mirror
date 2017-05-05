@@ -40,4 +40,24 @@ public class Main {
 
 
 
+	public static void StopServer() {
+		final gcServerVars.APP_MODE appMode =
+				gcServerVars.getAppMode();
+		final boolean isServerOnly =
+			gcServerVars.APP_MODE.SERVER_ONLY.equals(appMode);
+		if (isServerOnly) {
+			final Thread stopThread =
+				new Thread() {
+					@Override
+					public void run() {
+						ThreadUtils.Sleep(250L);
+						System.exit(0);
+					}
+				};
+			stopThread.start();
+		}
+	}
+
+
+
 }

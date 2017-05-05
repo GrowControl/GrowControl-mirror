@@ -36,6 +36,7 @@ import com.poixson.utils.xLogger.xLogPrintStream;
  *  300  stop listen sockets
  *  275  stop plugins
  *  200  stop event handler
+ *    1  exit if no client running
  */
 public class gcServer extends xApp {
 
@@ -304,6 +305,14 @@ public class gcServer extends xApp {
 //TODO:
 //		xTickHandler.get()
 //			.Stop();
+	}
+
+
+
+	// exit if no client running
+	@xAppStep(type=StepType.SHUTDOWN, title="exit", priority=2)
+	public void __SHUTDOWN_exit() {
+		Main.StopServer();
 	}
 
 
