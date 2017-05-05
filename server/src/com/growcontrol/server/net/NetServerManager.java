@@ -41,8 +41,6 @@ NetServerManager
 public class NetServerManager implements xCloseableMany {
 	private static final String LOG_NAME = "NET";
 
-	public static final boolean DETAILED_LOG = false;
-
 	// manager instance
 	private static volatile NetServerManager instance = null;
 	private static final Object instanceLock = new Object();
@@ -119,8 +117,7 @@ public class NetServerManager implements xCloseableMany {
 //		);
 
 
-//		this.debug = (xVars.debug() && DETAILED_LOGGING);
-//		if (this.debug) {
+//		if (this.log().isLoggable(xLevel.DETAIL)) {
 //			NettyDetailedLogger.Install(this.log());
 //		}
 	}

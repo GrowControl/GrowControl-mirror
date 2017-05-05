@@ -70,7 +70,7 @@ public class NetServer implements NetParent {
 		}
 		this.bootstrap.channel(NioServerSocketChannel.class);
 		// debug
-		if (NetServerManager.DETAILED_LOG) {
+		if (this.log().isLoggable(xLevel.DETAIL)) {
 			final LoggingHandler handlerLogger = new LoggingHandler(LogLevel.INFO);
 			this.bootstrap.handler(handlerLogger);
 			this.bootstrap.childHandler(handlerLogger);

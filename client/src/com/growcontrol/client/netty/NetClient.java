@@ -67,7 +67,7 @@ public class NetClient implements NetParent {
 		this.bootstrap.channel(NioSocketChannel.class);
 		this.bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
 		// debug
-		if(NetClientManager.DETAILED_LOG) {
+		if(this.log().isLoggable(xLevel.DETAIL)) {
 			final LoggingHandler handlerLogger = new LoggingHandler(LogLevel.INFO);
 			this.bootstrap.handler(handlerLogger);
 //			this.bootstrap.childHandler(handlerLogger);
