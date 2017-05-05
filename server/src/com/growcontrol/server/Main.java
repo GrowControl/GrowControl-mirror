@@ -15,12 +15,18 @@ public class Main {
 		final ShellArgsTool argsTool = ShellArgsTool.init(argsArray);
 		boolean hasStarted = false;
 		if (argsTool.getFlagBool(false, "-S", "--server")) {
+			gcServerVars.setAppMode(
+				gcServerVars.APP_MODE.SERVER_ONLY
+			);
 			final gcServer server = new gcServer();
 			server.Start();
 			hasStarted = true;
 		}
 		// default
 		if (!hasStarted) {
+			gcServerVars.setAppMode(
+				gcServerVars.APP_MODE.SERVER_ONLY
+			);
 			final gcServer server = new gcServer();
 			server.Start();
 			hasStarted = true;

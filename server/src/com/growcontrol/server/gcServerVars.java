@@ -5,6 +5,8 @@ import com.poixson.utils.Keeper;
 
 public class gcServerVars {
 
+//	// internal mode
+//	private static volatile boolean internal = false;
 
 	// configs
 //	private static gcServerConfig config = null;
@@ -91,7 +93,7 @@ public class gcServerVars {
 		}
 		return config;
 	}
-*/
+
 
 
 //	// system event handler
@@ -119,6 +121,7 @@ public class gcServerVars {
 //	public static MetaRouter router() {
 //		return router;
 //	}
+*/
 
 
 

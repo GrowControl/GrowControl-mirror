@@ -12,7 +12,7 @@ import com.poixson.app.steps.xAppStep.StepType;
 import com.poixson.utils.DirsFiles;
 import com.poixson.utils.StringUtils;
 import com.poixson.utils.xVars;
-import com.poixson.utils.xLogger.jlineConsole;
+import com.poixson.utils.xLogger.jLineConsole;
 import com.poixson.utils.xLogger.xCommandHandler;
 import com.poixson.utils.xLogger.xConsole;
 import com.poixson.utils.xLogger.xLog;
@@ -108,7 +108,7 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.STARTUP, title="CommandPrompt", priority=85)
 	public void __STARTUP_command_prompt() {
 		// load console
-		final xConsole console = new jlineConsole();
+		final xConsole console = new jLineConsole();
 		xLog.setConsole(console);
 		final xLog log = xLog.getRoot();
 		log.setHandler(
@@ -118,7 +118,7 @@ public class gcServer extends xApp {
 		log.setFormatter(
 			new xLogFormatter_Color()
 		);
-		// load command handlers
+		// load commands
 		final xCommandHandler handler = xLog.getCommandHandler();
 		handler.register(
 			new gcCommandsCommon()

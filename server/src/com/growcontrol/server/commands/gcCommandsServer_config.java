@@ -54,7 +54,7 @@ public class gcServerCommands_config implements xCommandListener {
 		}
 		event.setHandled();
 		this.parent.inconfig = null;
-//		xLog.getConsole().setPrompt(" "+jlineConsole.DEFAULT_PROMPT);
+//		xLog.getConsole().setPrompt(" "+jLineConsole.DEFAULT_PROMPT);
 	}
 	protected void _exit_help(final xCommandEvent event) {
 		event.setHandled();
