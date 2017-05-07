@@ -10,6 +10,7 @@ import com.poixson.app.xApp;
 import com.poixson.app.steps.xAppStep;
 import com.poixson.app.steps.xAppStep.StepType;
 import com.poixson.utils.DirsFiles;
+import com.poixson.utils.Failure;
 import com.poixson.utils.StringUtils;
 import com.poixson.utils.xVars;
 import com.poixson.utils.xLogger.jLineConsole;
@@ -69,14 +70,18 @@ public class gcServer extends xApp {
 	// load configs
 	@xAppStep(type=StepType.STARTUP, title="Configs", priority=55)
 	public void __STARTUP_load_configs() {
-		xVars.setJLineHistorySize(200);
-		xVars.setJLineHistoryFile(
-			DirsFiles.buildFilePath(
-				DirsFiles.cwd(),
-				"history",
-				"txt"
-			)
-		);
+		try {
+			xVars.setJLineHistorySize(200);
+			xVars.setJLineHistoryFile(
+				DirsFiles.buildFilePath(
+					DirsFiles.cwd(),
+					"history",
+					"txt"
+				)
+			);
+		} catch (Exception e) {
+			Failure.fail(e);
+		}
 //TODO:
 //		final gcServerConfig config = gcServerVars.getConfig();
 //		{
@@ -108,27 +113,31 @@ public class gcServer extends xApp {
 	// command prompt
 	@xAppStep(type=StepType.STARTUP, title="CommandPrompt", priority=85)
 	public void __STARTUP_command_prompt() {
-		// load console
-		final xConsole console = new jLineConsole();
-		xLog.setConsole(console);
-		final xLog log = xLog.getRoot();
-		log.setHandler(
-			new xLogHandlerConsole()
-		);
-		// set color format
-		log.setFormatter(
-			new xLogFormatter_Color()
-		);
-		// load commands
-		final xCommandHandler handler = xLog.getCommandHandler();
-		handler.register(
-			new gcCommandsCommon()
-		);
-		handler.register(
-			new gcCommandsServer()
-		);
-		// start console input
-		console.Start();
+		try {
+			// load console
+			final xConsole console = new jLineConsole();
+			xLog.setConsole(console);
+			final xLog log = xLog.getRoot();
+			log.setHandler(
+				new xLogHandlerConsole()
+			);
+			// set color format
+			log.setFormatter(
+				new xLogFormatter_Color()
+			);
+			// load commands
+			final xCommandHandler handler = xLog.getCommandHandler();
+			handler.register(
+				new gcCommandsCommon()
+			);
+			handler.register(
+				new gcCommandsServer()
+			);
+			// start console input
+			console.Start();
+		} catch (Exception e) {
+			Failure.fail(e);
+		}
 //TODO:
 //		final gcServerConfig config = gcServerVars.getConfig();
 //		// prompt ticker
@@ -157,6 +166,11 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.STARTUP, title="EventHandler", priority=200)
 	public void __STARTUP_event_handler() {
 //TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
+//TODO:
 //		getLogicQueue();
 	}
 
@@ -165,6 +179,11 @@ public class gcServer extends xApp {
 	// load plugins
 	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=250)
 	public void __STARTUP_load_plugins() {
+//TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 //TODO:
 //		final xPluginManager manager = xPluginManager.get();
 //		manager.setClassField("Server Main");
@@ -177,6 +196,11 @@ public class gcServer extends xApp {
 	// enable plugins
 	@xAppStep(type=StepType.STARTUP, title="StartPlugins", priority=275)
 	public void __STARTUP_start_plugins() {
+//TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 //TODO:
 //		xPluginManager.get()
 //			.enableAll();
@@ -246,6 +270,11 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=350)
 	public void __STARTUP_scripts() {
 //TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
+//TODO:
 //		final gcScriptManager manager = gcScriptManager.get();
 //		manager.loadAll();
 //		manager.StartAll();
@@ -262,6 +291,11 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=350)
 	public void __SHUTDOWN_scripts() {
 //TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
+//TODO:
 //		gcScriptManager.get()
 //			.StopAll();
 //TODO: wait for scripts to finish
@@ -273,6 +307,11 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=300)
 	public void __SHUTDOWN_sockets() {
 //TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
+//TODO:
 //		final NetServerManager manager = NetServerManager.get();
 //		manager.CloseAll();
 	}
@@ -282,6 +321,11 @@ public class gcServer extends xApp {
 	// disable plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="StopPlugins", priority=275)
 	public void __SHUTDOWN_stop_plugins() {
+//TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 //TODO:
 //		xPluginManager.get()
 //			.disableAll();
@@ -295,6 +339,10 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.SHUTDOWN, title="EventHandler", priority=200)
 	public void __SHUTDOWN_event_handler() {
 //TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 	}
 
 
@@ -303,6 +351,10 @@ public class gcServer extends xApp {
 	@xAppStep(type=StepType.SHUTDOWN, title="Ticker", priority=160)
 	public void __SHUTDOWN_ticker() {
 //TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 //		xTickHandler.get()
 //			.Stop();
 	}
@@ -312,7 +364,11 @@ public class gcServer extends xApp {
 	// exit if no client running
 	@xAppStep(type=StepType.SHUTDOWN, title="exit", priority=2)
 	public void __SHUTDOWN_exit() {
-		Main.StopServer();
+		try {
+			Main.StopServer();
+		} catch (Exception e) {
+			Failure.fail(e);
+		}
 	}
 
 
