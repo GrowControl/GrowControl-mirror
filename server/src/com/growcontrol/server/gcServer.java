@@ -26,6 +26,7 @@ import com.poixson.utils.xLogger.xLogPrintStream;
  * Startup sequence
  *   55  load configs
  *   85  command prompt
+ *  165  prompt ticker
  *  200  event handler
  *  250  load plugins
  *  275  start plugins
@@ -36,6 +37,7 @@ import com.poixson.utils.xLogger.xLogPrintStream;
  *  300  stop listen sockets
  *  275  stop plugins
  *  200  stop event handler
+ *  165  stop prompt ticker
  *    1  exit if no client running
  */
 public class gcServer extends xApp {
@@ -137,12 +139,31 @@ public class gcServer extends xApp {
 		} catch (Exception e) {
 			Failure.fail(e);
 		}
+	}
+
+
+
+	// prompt ticker
+	@xAppStep(type=StepType.STARTUP, title="PromptTicker", priority=165)
+	public void __STARTUP_prompt_ticker() {
+//TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 //TODO:
 //		final gcServerConfig config = gcServerVars.getConfig();
 //		// prompt ticker
 //		if (config.getPromptTickerEnabled()) {
 //			new xTickPrompt();
 //		}
+//TODO:
+//		final gcServerConfig config = gcServerVars.getConfig();
+//		final xTickHandler ticker = xTickHandler.get();
+//		ticker.setInterval(
+//				config.getTickInterval()
+//		);
+//		ticker.Start();
 	}
 
 
@@ -323,6 +344,18 @@ public class gcServer extends xApp {
 
 	@xAppStep(type=StepType.SHUTDOWN, title="EventHandler", priority=200)
 	public void __SHUTDOWN_event_handler() {
+//TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
+	}
+
+
+
+	// prompt ticker
+	@xAppStep(type=StepType.SHUTDOWN, title="PromptTicker", priority=165)
+	public void __SHUTDOWN_prompt_ticker() {
 //TODO:
 //		try {
 //		} catch (Exception e) {
