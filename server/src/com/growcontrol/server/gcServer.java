@@ -26,7 +26,6 @@ import com.poixson.utils.xLogger.xLogPrintStream;
  * Startup sequence
  *   55  load configs
  *   85  command prompt
- *  160  tick scheduler
  *  200  event handler
  *  250  load plugins
  *  275  start plugins
@@ -144,20 +143,6 @@ public class gcServer extends xApp {
 //		if (config.getPromptTickerEnabled()) {
 //			new xTickPrompt();
 //		}
-	}
-
-
-
-	// tick scheduler
-	@xAppStep(type=StepType.STARTUP, title="Ticker", priority=160)
-	public void __STARTUP_ticker() {
-//TODO:
-//		final gcServerConfig config = gcServerVars.getConfig();
-//		final xTickHandler ticker = xTickHandler.get();
-//		ticker.setInterval(
-//				config.getTickInterval()
-//		);
-//		ticker.Start();
 	}
 
 
@@ -343,20 +328,6 @@ public class gcServer extends xApp {
 //		} catch (Exception e) {
 //			Failure.fail(e);
 //		}
-	}
-
-
-
-	// stop ticker
-	@xAppStep(type=StepType.SHUTDOWN, title="Ticker", priority=160)
-	public void __SHUTDOWN_ticker() {
-//TODO:
-//		try {
-//		} catch (Exception e) {
-//			Failure.fail(e);
-//		}
-//		xTickHandler.get()
-//			.Stop();
 	}
 
 
