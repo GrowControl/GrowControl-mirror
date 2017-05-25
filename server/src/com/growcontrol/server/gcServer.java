@@ -17,8 +17,6 @@ import com.poixson.utils.xLogger.jLineConsole;
 import com.poixson.utils.xLogger.xCommandHandler;
 import com.poixson.utils.xLogger.xConsole;
 import com.poixson.utils.xLogger.xLog;
-import com.poixson.utils.xLogger.xLogFormatter_Color;
-import com.poixson.utils.xLogger.xLogHandlerConsole;
 import com.poixson.utils.xLogger.xLogPrintStream;
 
 
@@ -118,14 +116,6 @@ public class gcServer extends xApp {
 			// load console
 			final xConsole console = new jLineConsole();
 			xLog.setConsole(console);
-			final xLog log = xLog.getRoot();
-			log.setHandler(
-				new xLogHandlerConsole()
-			);
-			// set color format
-			log.setFormatter(
-				new xLogFormatter_Color()
-			);
 			// load commands
 			final xCommandHandler handler = xLog.getCommandHandler();
 			handler.register(
