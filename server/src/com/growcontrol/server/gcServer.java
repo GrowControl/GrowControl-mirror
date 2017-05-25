@@ -9,8 +9,8 @@ import com.growcontrol.server.commands.gcCommandsServer;
 import com.poixson.app.xApp;
 import com.poixson.app.steps.xAppStep;
 import com.poixson.app.steps.xAppStep.StepType;
-import com.poixson.utils.DirsFiles;
 import com.poixson.utils.Failure;
+import com.poixson.utils.FileUtils;
 import com.poixson.utils.StringUtils;
 import com.poixson.utils.xVars;
 import com.poixson.utils.xLogger.jLineConsole;
@@ -74,8 +74,8 @@ public class gcServer extends xApp {
 		try {
 			xVars.setJLineHistorySize(200);
 			xVars.setJLineHistoryFile(
-				DirsFiles.buildFilePath(
-					DirsFiles.cwd(),
+				FileUtils.BuildFilePath(
+					FileUtils.cwd(),
 					"history",
 					"txt"
 				)
