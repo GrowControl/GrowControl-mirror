@@ -7,6 +7,12 @@
 	"Github-Path": "GrowControl/GrowControl",
 	"Org-Name": "GrowControl",
 	"Deps": {
+		"pxncommon": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "pxncommon",
+			"Name": "pxnCommon",
+			"Version": "${project.version}"
+		},
 		"gcserver": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "server",

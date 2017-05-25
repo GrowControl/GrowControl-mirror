@@ -1,4 +1,4 @@
-<!-- Generated on: May 5, 2017 10:02 UTC -->
+<!-- Generated on: May 25, 2017 17:32 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -30,6 +30,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+		<pxncommon-version>${project.version}</pxncommon-version>
 		<gcserver-version>${project.version}</gcserver-version>
 
 		<git-commit-id-plugin-version>2.2.2</git-commit-id-plugin-version>
@@ -134,6 +135,11 @@
 	</build>
 	<dependencies>
 
+		<dependency>
+			<groupId>com.poixson</groupId>
+			<artifactId>pxncommon</artifactId>
+			<version>${pxncommon-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>com.growcontrol</groupId>
 			<artifactId>server</artifactId>
