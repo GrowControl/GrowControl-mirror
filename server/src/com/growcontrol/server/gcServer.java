@@ -25,7 +25,7 @@ import com.poixson.utils.xLogger.xLogPrintStream;
  *   55  load configs
  *   85  command prompt
  *  165  prompt ticker
- *  200  event handler
+ *  200  start meta event handler
  *  250  load plugins
  *  275  start plugins
  *  300  sockets
@@ -34,7 +34,7 @@ import com.poixson.utils.xLogger.xLogPrintStream;
  *  350  stop scripts
  *  300  stop listen sockets
  *  275  stop plugins
- *  200  stop event handler
+ *  200  stop meta event handler
  *  165  stop prompt ticker
  *    1  exit if no client running
  */
@@ -158,9 +158,9 @@ public class gcServer extends xApp {
 
 
 
-	// io event listener
-	@xAppStep(type=StepType.STARTUP, title="EventHandler", priority=200)
-	public void __STARTUP_event_handler() {
+	// meta io event listener
+	@xAppStep(type=StepType.STARTUP, title="MetaEventHandler", priority=200)
+	public void __STARTUP_meta_event_handler() {
 //TODO:
 //		try {
 //		} catch (Exception e) {
@@ -299,7 +299,7 @@ public class gcServer extends xApp {
 
 
 
-	// stop listening sockets
+	// close sockets
 	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=300)
 	public void __SHUTDOWN_sockets() {
 //TODO:
@@ -332,8 +332,9 @@ public class gcServer extends xApp {
 
 
 
-	@xAppStep(type=StepType.SHUTDOWN, title="EventHandler", priority=200)
-	public void __SHUTDOWN_event_handler() {
+	// meta io event listener
+	@xAppStep(type=StepType.SHUTDOWN, title="MetaEventHandler", priority=200)
+	public void __SHUTDOWN_meta_event_handler() {
 //TODO:
 //		try {
 //		} catch (Exception e) {
@@ -379,7 +380,6 @@ public class gcServer extends xApp {
 		final String COLOR_PXN_OI   = "bold,blue";
 		final String COLOR_PXN_X    = "bold,green";
 		final String COLOR_PXN_SON  = "bold,blue";
-		final String COLOR_COPY     = "bold,black";
 		final String COLOR_GROW     = "bold,green";
 		final String COLOR_CONTROL  = "bold,white";
 		final String COLOR_SOFTWARE = "cyan";
@@ -407,7 +407,6 @@ public class gcServer extends xApp {
 		colors1.put(new Integer(11), COLOR_PXN_SON);
 		// line 2
 		final Map<Integer, String> colors2 = new LinkedHashMap<Integer, String>();
-		colors2.put(new Integer(4),  COLOR_COPY);
 		colors2.put(new Integer(5),  COLOR_GROW);
 		colors2.put(new Integer(9),  COLOR_CONTROL);
 		colors2.put(new Integer(21), COLOR_FLOWER_C_PEDALS);
@@ -483,10 +482,7 @@ public class gcServer extends xApp {
 
 		// build lines
 		final String version = StringUtils.padCenter(15, this.getVersion(), ' ');
-		final PrintStream out = new xLogPrintStream(
-				xLog.getRoot(),
-				null
-		);
+		final PrintStream out = new xLogPrintStream();
 		out.println();
 		DisplayLineColors(out, colors1, "      PoiXson                                                    "   );
 		DisplayLineColors(out, colors2, "    GROWCONTROL     _                                            "   );
