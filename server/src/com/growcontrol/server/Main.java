@@ -1,5 +1,6 @@
 package com.growcontrol.server;
 
+import com.growcontrol.server.gcServerVars.APP_MODE;
 import com.poixson.utils.ShellArgsTool;
 import com.poixson.utils.ThreadUtils;
 import com.poixson.utils.xVars;
@@ -14,22 +15,36 @@ public class Main {
 		// process shell arguments
 		final ShellArgsTool argsTool = ShellArgsTool.init(argsArray);
 		boolean hasStarted = false;
-		if (argsTool.getFlagBool(false, "-S", "--server")) {
-			gcServerVars.setAppMode(
-				gcServerVars.APP_MODE.SERVER_ONLY
-			);
-			final gcServer server = new gcServer();
-			server.Start();
-			hasStarted = true;
+		// debug flag
+		if (argsTool.getFlagBool(false, "-d", "--debug")) {
+			xVars.debug(true);
 		}
-		// default
-		if (!hasStarted) {
-			gcServerVars.setAppMode(
-				gcServerVars.APP_MODE.SERVER_ONLY
-			);
-			final gcServer server = new gcServer();
-			server.Start();
-			hasStarted = true;
+		// app mode flags
+		{
+			final boolean serverMode =
+				argsTool.getFlagBool(false,  "-S", "--server");
+			// server only mode
+			if (serverMode) {
+				gcServerVars.setAppMode(
+					APP_MODE.SERVER_ONLY
+				);
+			}
+		}
+		// start app mode
+		{
+			final APP_MODE appMode =
+				gcServerVars.getAppMode();
+			gcServer server = null;
+			switch (appMode) {
+			case SERVER_ONLY:
+				server = new gcServer();
+				server.Start();
+				break;
+			default:
+				server = new gcServer();
+				server.Start();
+				break;
+			}
 		}
 		if (xVars.debug()) {
 			xLog.getRoot()
@@ -41,10 +56,10 @@ public class Main {
 
 
 	public static void StopServer() {
-		final gcServerVars.APP_MODE appMode =
+		final APP_MODE appMode =
 				gcServerVars.getAppMode();
 		final boolean isServerOnly =
-			gcServerVars.APP_MODE.SERVER_ONLY.equals(appMode);
+			APP_MODE.SERVER_ONLY.equals(appMode);
 		if (isServerOnly) {
 			final Thread stopThread =
 				new Thread() {
