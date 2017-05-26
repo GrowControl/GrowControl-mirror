@@ -1,27 +1,37 @@
 package com.growcontrol.client;
 
 import java.io.PrintStream;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
-
-import com.growcontrol.client.gui.guiManager;
-import com.growcontrol.client.gui.guiManager.GUI_MODE;
-import com.poixson.commonapp.app.xApp;
-import com.poixson.commonapp.app.annotations.xAppStep;
-import com.poixson.commonapp.app.annotations.xAppStep.StepType;
-import com.poixson.commonapp.plugin.xPluginManager;
-import com.poixson.commonjava.xVars;
-import com.poixson.commonjava.Utils.utils;
+import com.poixson.app.xApp;
+import com.poixson.app.steps.xAppStep;
+import com.poixson.app.steps.xAppStep.StepType;
+import com.poixson.utils.StringUtils;
+import com.poixson.utils.xLogger.xLog;
+import com.poixson.utils.xLogger.xLogPrintStream;
 
 
-public class gcClient extends xApp {
+/*
+ * Startup sequence
+ *   55  load configs
+ *  100  load gui
+ *  250  load plugins
+ *  275  start plugins
+ *  300  sockets
+ *  400  show login window
+ * Shutdown sequence
+ *  400  close gui windows
+ *  300  stop listen sockets
+ *  275  stop plugins
+ */
+public abstract class gcClient extends xApp {
 
 
 
 	/**
 	 * Get the client class instance.
-	 * @return client instance object.
+	 * @return gcClient instance object.
 	 */
 	public static gcClient get() {
 		return (gcClient) xApp.get();
@@ -29,26 +39,19 @@ public class gcClient extends xApp {
 
 
 
-	/**
-	 * Application start entry point.
-	 * @param args Command line arguments.
-	 */
-	public static void main(final String[] args) {
-		initMain(args, gcClient.class);
-	}
 	public gcClient() {
 		super();
 		gcClientVars.init();
-		if(xVars.debug())
-			this.displayColors();
-		this.displayLogo();
+//		if(xVars.debug())
+//			this.displayColors();
 	}
+
 
 
 
 	/**
 	 * Handle command-line arguments.
-	 */
+	 * /
 	@Override
 	protected void processArgs(final String[] args) {
 		if(utils.isEmpty(args)) return;
@@ -64,52 +67,59 @@ public class gcClient extends xApp {
 			}
 		}
 	}
+*/
 
 
 
 	// ------------------------------------------------------------------------------- //
-	// startup
+	// startup steps
 
 
 
-	// load config
-	@xAppStep(type=StepType.STARTUP, title="Config", priority=20)
-	public void __STARTUP_config() {
+	// load configs
+	@xAppStep(type=StepType.STARTUP, title="Configs", priority=55)
+	public void __STARTUP_load_configs() {
 		gcClientVars.getConfig();
 	}
 
 
 
-	// start gui
-	@xAppStep(type=StepType.STARTUP, title="GUI", priority=40)
+	// load gui
+	@xAppStep(type=StepType.STARTUP, title="GUI", priority=100)
 	public void __STARTUP_gui() {
 		guiManager.get();
 	}
 
 
 
-	// load plugins
-	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=50)
-	public void __STARTUP_load_plugins() {
+//TODO: move this to gcServerManager
+//	// load plugins
+//	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=250)
+//	public void __STARTUP_load_plugins() {
 		final xPluginManager manager = xPluginManager.get();
 		manager.setClassField("Client Main");
 		manager.loadAll();
 		manager.initAll();
 	}
+//	}
 
 
 
-	// enable plugins
-	@xAppStep(type=StepType.STARTUP, title="EnablePlugins", priority=55)
-	public void __STARTUP_enable_plugins() {
-		xPluginManager.get()
-			.enableAll();
+
+	// sockets
+	@xAppStep(type=StepType.STARTUP, title="Sockets", priority=300)
+	public void __STARTUP_sockets() {
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 	}
 
 
 
+//TODO: move this to gui manager?
 //	// scripts
-//	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=95)
+//	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=350)
 //	public void __STARTUP_scripts() {
 //		final gcScriptManager manager = gcScriptManager.get();
 //		manager.loadAll();
@@ -119,7 +129,7 @@ public class gcClient extends xApp {
 
 
 	// show login window
-	@xAppStep(type=StepType.STARTUP, title="LoginWindow", priority=98)
+	@xAppStep(type=StepType.STARTUP, title="LoginWindow", priority=400)
 	public void __STARTUP_login_window() {
 		guiManager.get()
 			.Show(GUI_MODE.LOGIN);
@@ -136,13 +146,13 @@ public class gcClient extends xApp {
 
 
 	// ------------------------------------------------------------------------------- //
-	// shutdown
+	// shutdown steps
 
 
 
-	// close windows
-	@xAppStep(type=StepType.SHUTDOWN, title="CloseWindows", priority=98)
-	public void __SHUTDOWN_close_windows() {
+	// close gui windows
+	@xAppStep(type=StepType.SHUTDOWN, title="CloseWindows", priority=400)
+	public void __SHUTDOWN_close_gui_windows() {
 		final guiManager manager = guiManager.peak();
 		if(manager != null)
 			manager.shutdown();
@@ -152,8 +162,9 @@ public class gcClient extends xApp {
 
 
 
+//TODO: move this to gui manager?
 //	// scripts
-//	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=95)
+//	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=350)
 //	public void __SHUTDOWN_scripts() {
 //		gcScriptManager.get()
 //			.StopAll();
@@ -161,8 +172,8 @@ public class gcClient extends xApp {
 
 
 
-	// sockets
-	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=90)
+	// close sockets
+	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=300)
 	public void __SHUTDOWN_sockets() {
 //TODO:
 	}
@@ -170,20 +181,14 @@ public class gcClient extends xApp {
 
 
 	// disable plugins
-	@xAppStep(type=StepType.SHUTDOWN, title="DisablePlugins", priority=55)
-	public void __SHUTDOWN_disable_plugins() {
+	@xAppStep(type=StepType.SHUTDOWN, title="StopPlugins", priority=275)
+	public void __SHUTDOWN_stop_plugins() {
 		xPluginManager.get()
 			.disableAll();
 	}
 
 
 
-	// unload plugins
-	@xAppStep(type=StepType.SHUTDOWN, title="UnloadPlugins", priority=50)
-	public void __SHUTDOWN_unload_plugins() {
-		xPluginManager.get()
-			.unloadAll();
-	}
 
 
 
