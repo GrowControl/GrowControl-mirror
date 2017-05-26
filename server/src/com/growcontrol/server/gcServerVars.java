@@ -58,6 +58,9 @@ public class gcServerVars {
 	public static APP_MODE getAppMode() {
 		return appMode;
 	}
+	public static APP_MODE peakAppMode() {
+		return appMode;
+	}
 	public static void setAppMode(final APP_MODE mode) {
 		appMode = mode;
 	}
