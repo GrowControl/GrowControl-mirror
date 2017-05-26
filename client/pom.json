@@ -6,12 +6,14 @@
 	"URL": "http://growcontrol.com",
 	"Github-Path": "GrowControl/GrowControl",
 	"Org-Name": "GrowControl",
+	"Shade": "yes",
 	"Deps": {
 		"pxncommon": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "pxncommon",
 			"Name": "pxnCommon",
-			"Version": "${project.version}"
+			"Version": "${project.version}",
+			"Scope": "provided"
 		},
 		"gcserver": {
 			"GroupId": "com.growcontrol",
