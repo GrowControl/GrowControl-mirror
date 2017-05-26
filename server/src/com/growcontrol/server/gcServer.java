@@ -376,6 +376,8 @@ public class gcServer extends xApp {
 	@Override
 	protected void displayLogo() {
 		// colors
+//TODO:
+//		final Ansi.Color bgcolor = Ansi.Color.BLACK;
 		final String COLOR_PXN_P    = "bold,green";
 		final String COLOR_PXN_OI   = "bold,blue";
 		final String COLOR_PXN_X    = "bold,green";
@@ -482,19 +484,23 @@ public class gcServer extends xApp {
 
 		// build lines
 		final String version = StringUtils.padCenter(15, this.getVersion(), ' ');
-		final PrintStream out = new xLogPrintStream();
+		final PrintStream out =
+			new xLogPrintStream(
+				xLog.getRoot(),
+				null
+			);
 		out.println();
-		DisplayLineColors(out, colors1, "      PoiXson                                                    "   );
-		DisplayLineColors(out, colors2, "    GROWCONTROL     _                                            "   );
-		DisplayLineColors(out, colors3, "      Server      _(_)_                          wWWWw   _       "   );
-		DisplayLineColors(out, colors4, " "+version+" (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     "       );
-		DisplayLineColors(out, colors5, "            wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)    "  );
-		DisplayLineColors(out, colors6, "     @@@@   (___)     `|/    Y    (_)@(_)  @@@@   \\|/   (_)\\     " );
-		DisplayLineColors(out, colors7, "    @@()@@    Y       \\|    \\|/    /(_)    \\|      |/      |/    ");
-		DisplayLineColors(out, colors8, "    \\@@@@   \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/    ");
+		DisplayLineColors(out, colors1, "      PoiXson                                                    "                   );
+		DisplayLineColors(out, colors2, "    GROWCONTROL     _                                            "                   );
+		DisplayLineColors(out, colors3, "      Server      _(_)_                          wWWWw   _       "                   );
+		DisplayLineColors(out, colors4, " "+version+" (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     "                       );
+		DisplayLineColors(out, colors5, "            wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)    "                  );
+		DisplayLineColors(out, colors6, "     @@@@   (___)     `|/    Y    (_)@(_)  @@@@   \\|/   (_)\\     "                 );
+		DisplayLineColors(out, colors7, "    @@()@@    Y       \\|    \\|/    /(_)    \\|      |/      |/    "                );
+		DisplayLineColors(out, colors8, "    \\@@@@   \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/    "             );
 		DisplayLineColors(out, colors9, "    \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|//   ");
-		DisplayLineColors(out, colors10,"^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^"    );
-		DisplayLineColors(out, colors11,"/////////////////////////////////////////////////////////////////"    );
+		DisplayLineColors(out, colors10,"^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^"                   );
+		DisplayLineColors(out, colors11,"/////////////////////////////////////////////////////////////////"                   );
 		out.println();
 		out.println("    Copyright (C)2007-2017 PoiXson, Mattsoft  ");
 		out.println("   - Brainchild of the one known as lorenzo - ");
@@ -508,7 +514,7 @@ public class gcServer extends xApp {
 	}
 //  |       A      B      C       D      E       F      G      H      |
 //1 |      PoiXson                                                    |
-//2 |   ©GROWCONTROL     _                                            |
+//2 |    GROWCONTROL     _                                            |
 //3 |      Server      _(_)_                          wWWWw   _       |
 //4 | <---version---> (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     |
 //5 |            wWWWw  (_)\    (___)   _(_)_  @@()@@   Y  (_)@(_)    |
