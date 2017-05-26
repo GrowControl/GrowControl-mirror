@@ -1,6 +1,7 @@
 package com.growcontrol.server;
 
 import com.growcontrol.server.gcServerVars.APP_MODE;
+import com.poixson.utils.Keeper;
 import com.poixson.utils.ShellArgsTool;
 import com.poixson.utils.ThreadUtils;
 import com.poixson.utils.xVars;
@@ -8,6 +9,9 @@ import com.poixson.utils.xLogger.xLog;
 
 
 public class Main {
+
+	@SuppressWarnings("unused")
+	private final Keeper keeper = Keeper.get();
 
 
 
