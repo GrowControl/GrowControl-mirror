@@ -9,9 +9,9 @@
 	"Main-Class": "com.growcontrol.server.Main",
 	"Shade": "yes",
 	"Deps": {
-		"pxncommon": {
+		"pxnCommon": {
 			"GroupId": "com.poixson",
-			"ArtifactId": "pxncommon",
+			"ArtifactId": "common",
 			"Name": "pxnCommon",
 			"Version": "${project.version}"
 		},

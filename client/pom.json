@@ -8,16 +8,17 @@
 	"Org-Name": "GrowControl",
 	"Shade": "yes",
 	"Deps": {
-		"pxncommon": {
+		"pxnCommon": {
 			"GroupId": "com.poixson",
-			"ArtifactId": "pxncommon",
+			"ArtifactId": "common",
 			"Name": "pxnCommon",
 			"Version": "${project.version}",
 			"Scope": "provided"
 		},
-		"gcserver": {
+		"gcServer": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "server",
+			"Name": "gcServer",
 			"Version": "${project.version}"
 		}
 	}
