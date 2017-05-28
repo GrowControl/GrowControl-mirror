@@ -1,4 +1,4 @@
-<!-- Generated on: May 26, 2017 18:13 UTC -->
+<!-- Generated on: May 28, 2017 11:22 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -134,15 +134,24 @@
 				<artifactId>maven-source-plugin</artifactId>
 				<version>${maven-source-plugin-version}</version>
 				<configuration>
-					<finalName>${project.name}-source-${project.version}</finalName>
+					<finalName>${project.name}-${project.version}</finalName>
 					<attach>false</attach>
 				</configuration>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<version>${maven-eclipse-plugin-version}</version>
 				<configuration>
+					<projectNameTemplate>${project.name}</projectNameTemplate>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
