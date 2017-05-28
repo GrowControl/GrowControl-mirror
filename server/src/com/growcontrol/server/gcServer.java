@@ -376,8 +376,7 @@ public class gcServer extends xApp {
 	@Override
 	protected void displayLogo() {
 		// colors
-//TODO:
-//		final Ansi.Color bgcolor = Ansi.Color.BLACK;
+		final String COLOR_BG = "black";
 		final String COLOR_PXN_P    = "bold,green";
 		final String COLOR_PXN_OI   = "bold,blue";
 		final String COLOR_PXN_X    = "bold,green";
@@ -490,17 +489,17 @@ public class gcServer extends xApp {
 				null
 			);
 		out.println();
-		DisplayLineColors(out, colors1, "      PoiXson                                                    "                   );
-		DisplayLineColors(out, colors2, "    GROWCONTROL     _                                            "                   );
-		DisplayLineColors(out, colors3, "      Server      _(_)_                          wWWWw   _       "                   );
-		DisplayLineColors(out, colors4, " "+version+" (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     "                       );
-		DisplayLineColors(out, colors5, "            wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)    "                  );
-		DisplayLineColors(out, colors6, "     @@@@   (___)     `|/    Y    (_)@(_)  @@@@   \\|/   (_)\\     "                 );
-		DisplayLineColors(out, colors7, "    @@()@@    Y       \\|    \\|/    /(_)    \\|      |/      |/    "                );
-		DisplayLineColors(out, colors8, "    \\@@@@   \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/    "             );
-		DisplayLineColors(out, colors9, "    \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|//   ");
-		DisplayLineColors(out, colors10,"^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^"                   );
-		DisplayLineColors(out, colors11,"/////////////////////////////////////////////////////////////////"                   );
+		DisplayLineColors(out, COLOR_BG, colors1, "      PoiXson                                                    "                   );
+		DisplayLineColors(out, COLOR_BG, colors2, "    GROWCONTROL     _                                            "                   );
+		DisplayLineColors(out, COLOR_BG, colors3, "      Server      _(_)_                          wWWWw   _       "                   );
+		DisplayLineColors(out, COLOR_BG, colors4, " "+version+" (_)@(_)   vVVVv     _     @@@@  (___) _(_)_     "                       );
+		DisplayLineColors(out, COLOR_BG, colors5, "            wWWWw  (_)\\    (___)   _(_)_  @@()@@   Y  (_)@(_)    "                  );
+		DisplayLineColors(out, COLOR_BG, colors6, "     @@@@   (___)     `|/    Y    (_)@(_)  @@@@   \\|/   (_)\\     "                 );
+		DisplayLineColors(out, COLOR_BG, colors7, "    @@()@@    Y       \\|    \\|/    /(_)    \\|      |/      |/    "                );
+		DisplayLineColors(out, COLOR_BG, colors8, "    \\@@@@   \\ |/       | / \\ | /  \\|/       |/    \\|      \\|/    "             );
+		DisplayLineColors(out, COLOR_BG, colors9, "    \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|//   ");
+		DisplayLineColors(out, COLOR_BG, colors10,"^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^"                   );
+		DisplayLineColors(out, COLOR_BG, colors11,"/////////////////////////////////////////////////////////////////"                   );
 		out.println();
 		out.println("    Copyright (C)2007-2017 PoiXson, Mattsoft  ");
 		out.println("   - Brainchild of the one known as lorenzo - ");
