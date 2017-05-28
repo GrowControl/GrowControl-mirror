@@ -318,155 +318,130 @@ public abstract class gcClient extends xApp {
 	// ascii header
 	@Override
 	protected void displayLogo() {
-		final PrintStream out = AnsiConsole.out;
-		final Ansi.Color bgcolor = Ansi.Color.BLACK;
-		out.println();
+		// colors
+		final String COLOR_BG = "black";
+		final String COLOR_PXN_P    = "bold,green";
+		final String COLOR_PXN_OI   = "bold,blue";
+		final String COLOR_PXN_X    = "bold,green";
+		final String COLOR_PXN_SON  = "bold,blue";
+		final String COLOR_GROW     = "bold,green";
+		final String COLOR_CONTROL  = "bold,white";
+		final String COLOR_SOFTWARE = "cyan";
+		final String COLOR_VERSION  = "cyan";
+		final String COLOR_GRASS    = "green";
+		final String COLOR_FLOWER_STEM     = "green";
+		final String COLOR_FLOWER_A_PEDALS = "blue";
+		final String COLOR_FLOWER_B_PEDALS = "bold,red";
+		final String COLOR_FLOWER_C_PEDALS = "magenta";
+		final String COLOR_FLOWER_D_PEDALS = "red";
+		final String COLOR_FLOWER_E_PEDALS = "yellow";
+		final String COLOR_FLOWER_F_PEDALS = "bold,white";
+		final String COLOR_FLOWER_G_PEDALS = "yellow";
+		final String COLOR_FLOWER_H_PEDALS = "bold,white";
 		// line 1
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).bold().a("      ")
-			.fg(Ansi.Color.GREEN).a("P")
-			.fg(Ansi.Color.WHITE).a("oi")
-			.fg(Ansi.Color.GREEN).a("X")
-			.fg(Ansi.Color.WHITE).a("son")
-			.a("                          ")
-			.a("                          ")
-			.reset() );
+		final Map<Integer, String> colors1 = new LinkedHashMap<Integer, String>();
+		colors1.put(new Integer(7),  COLOR_PXN_P  );
+		colors1.put(new Integer(8),  COLOR_PXN_OI );
+		colors1.put(new Integer(10), COLOR_PXN_X  );
+		colors1.put(new Integer(11), COLOR_PXN_SON);
+		colors1.put(new Integer(18), COLOR_VERSION);
 		// line 2
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).bold().a("   ")
-			.fg(Ansi.Color.BLACK).a("©")
-			.fg(Ansi.Color.GREEN).a("GROW")
-			.fg(Ansi.Color.WHITE).a("CONTROL")
-			.boldOff().a("   ")
-			/* C */.fg(Ansi.Color.MAGENTA).a("_ _        ")
-			/* E */.fg(Ansi.Color.YELLOW).a(",`--',")
-					.a("                     ")
-			/* H */.fg(Ansi.Color.WHITE).a("\" ' \"    ")
-			.reset() );
+		final Map<Integer, String> colors2 = new LinkedHashMap<Integer, String>();
+		colors2.put(new Integer(5),  COLOR_GROW           );
+		colors2.put(new Integer(9),  COLOR_CONTROL        );
+		colors2.put(new Integer(19), COLOR_FLOWER_C_PEDALS); // Flower C
+		colors2.put(new Integer(30), COLOR_FLOWER_E_PEDALS); // Flower E
+		colors2.put(new Integer(57), COLOR_FLOWER_H_PEDALS); // Flower H
 		// line 3
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("   ")
-			/* A */.fg(Ansi.Color.BLUE).a("_  ")
-					.fg(Ansi.Color.CYAN).a("Client     ")
-			/* C */.fg(Ansi.Color.MAGENTA).a("(_\\_)      ")
-			/* E */.fg(Ansi.Color.YELLOW).a(". ")
-					.bold().a("_\\/_ ").boldOff().a(".")
-					.a("                  ")
-			/* H */.fg(Ansi.Color.WHITE).a("\" \\ | / \"  ")
-			.reset() );
+		final Map<Integer, String> colors3 = new LinkedHashMap<Integer, String>();
+		colors3.put(new Integer(4),  COLOR_FLOWER_A_PEDALS); // Flower A
+		colors3.put(new Integer(7),  COLOR_SOFTWARE       );
+		colors3.put(new Integer(18), COLOR_FLOWER_C_PEDALS); // Flower C
+		colors3.put(new Integer(29), COLOR_FLOWER_E_PEDALS); // Flower E
+		colors3.put(new Integer(55), COLOR_FLOWER_H_PEDALS); // Flower H
 		// line 4
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a(" ")
-			/* A */.fg(Ansi.Color.BLUE).a("_(_)_          ")
-			/* C */.fg(Ansi.Color.MAGENTA).a("(__")
-					.a("<").a("_{)     ")
-			/* E */.fg(Ansi.Color.YELLOW).a("`. ")
-					.bold().a("/\\ ").boldOff().a(".'   ")
-			/* F */.fg(Ansi.Color.WHITE).a(".\\|/.         ")
-			/* H */.fg(Ansi.Color.WHITE).a("' --")
-					.bold().a("(:)").boldOff().a("-- ' ")
-			.reset() );
+		final Map<Integer, String> colors4 = new LinkedHashMap<Integer, String>();
+		colors4.put(new Integer(2),  COLOR_FLOWER_A_PEDALS); // Flower A
+		colors4.put(new Integer(17), COLOR_FLOWER_C_PEDALS); // Flower C
+		colors4.put(new Integer(29), COLOR_FLOWER_E_PEDALS); // Flower E
+		colors4.put(new Integer(40), COLOR_FLOWER_F_PEDALS); // Flower F
+		colors4.put(new Integer(55), COLOR_FLOWER_H_PEDALS); // Flower H
 		// line 5
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor)
-			/* A */.fg(Ansi.Color.BLUE).a("(_)")
-					.bold().a("@").boldOff().a("(_)          ")
-			/* C */.fg(Ansi.Color.MAGENTA).a("{_/_}        ")
-			/* E */.fg(Ansi.Color.YELLOW).a("\"")
-					.fg(Ansi.Color.GREEN).a("||")
-					.fg(Ansi.Color.YELLOW).a("\"     ")
-			/* F */.fg(Ansi.Color.WHITE).a("-")
-					.bold().a("(:)").boldOff().a("-          ")
-			/* H */.fg(Ansi.Color.WHITE).a("\" / | \\ \"  ")
-			.reset() );
+		final Map<Integer, String> colors5 = new LinkedHashMap<Integer, String>();
+		colors5.put(new Integer(1),  COLOR_FLOWER_A_PEDALS); // Flower A
+		colors5.put(new Integer(18), COLOR_FLOWER_C_PEDALS); // Flower C
+		colors5.put(new Integer(31), COLOR_FLOWER_E_PEDALS); // Flower E
+		colors5.put(new Integer(32), COLOR_FLOWER_STEM    );
+		colors5.put(new Integer(34), COLOR_FLOWER_E_PEDALS);
+		colors5.put(new Integer(40), COLOR_FLOWER_F_PEDALS); // Flower F
+		colors5.put(new Integer(56), COLOR_FLOWER_H_PEDALS); // Flower H
 		// line 6
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("  ")
-			/* A */.fg(Ansi.Color.BLUE).a("(_)")
-					.fg(Ansi.Color.GREEN).a("\\.         ")
-			/* C */.fg(Ansi.Color.GREEN).a("|\\ |           ")
-			/* E */.fg(Ansi.Color.GREEN).a("|| /\\   ")
-			/* F */.fg(Ansi.Color.WHITE).a("\"/")
-					.fg(Ansi.Color.GREEN).a("|")
-					.fg(Ansi.Color.WHITE).a("\\\"           ")
-			/* H */.fg(Ansi.Color.WHITE).a("\" '")
-					.fg(Ansi.Color.GREEN).a("|")
-					.fg(Ansi.Color.WHITE).a("' \"   ")
-			.reset() );
+		final Map<Integer, String> colors6 = new LinkedHashMap<Integer, String>();
+		colors6.put(new Integer(3),  COLOR_FLOWER_A_PEDALS); // Flower A
+		colors6.put(new Integer(7),  COLOR_FLOWER_STEM    );
+		colors6.put(new Integer(40), COLOR_FLOWER_F_PEDALS); // Flower F
+		colors6.put(new Integer(57), COLOR_FLOWER_H_PEDALS); // Flower H
+		colors6.put(new Integer(59), COLOR_FLOWER_STEM    );
+		colors6.put(new Integer(60), COLOR_FLOWER_H_PEDALS);
 		// line 7
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("    ")
-			/* A */.fg(Ansi.Color.GREEN).a(". |/| ")
-			/* B */.fg(Ansi.Color.RED).a(".vVv.  ")
-			/* C */.fg(Ansi.Color.GREEN).a("\\\\| /| ")
-			/* D */.fg(Ansi.Color.RED).a("\\V/  ")
-			/* E */.fg(Ansi.Color.GREEN).a("/\\||//\\)   ")
-			/* F */.fg(Ansi.Color.GREEN).a("'|'    ")
-			/* G */.fg(Ansi.Color.GREEN).a("`")
-					.fg(Ansi.Color.YELLOW).bold().a("@")
-					.fg(Ansi.Color.GREEN).boldOff().a("'   ")
-			/* H */.fg(Ansi.Color.GREEN).a("|\\   |      ")
-			.reset() );
+		final Map<Integer, String> colors7 = new LinkedHashMap<Integer, String>();
+		colors7.put(new Integer(5),  COLOR_FLOWER_STEM    ); // Flower A
+		colors7.put(new Integer(11), COLOR_FLOWER_B_PEDALS); // Flower B
+		colors7.put(new Integer(18), COLOR_FLOWER_STEM    ); // Flower C
+		colors7.put(new Integer(25), COLOR_FLOWER_D_PEDALS); // Flower D
+		colors7.put(new Integer(30), COLOR_FLOWER_STEM    ); // Flower E
+		colors7.put(new Integer(41), COLOR_FLOWER_F_PEDALS); // Flower F
+		colors7.put(new Integer(42), COLOR_FLOWER_STEM    );
+		colors7.put(new Integer(43), COLOR_FLOWER_F_PEDALS);
+		colors7.put(new Integer(48), COLOR_FLOWER_G_PEDALS); // Flower G
+		colors7.put(new Integer(54), COLOR_FLOWER_STEM    ); // Flower H
 		// line 8
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("    ")
-			/* A */.fg(Ansi.Color.GREEN).a("|\\|/   ")
-			/* B */.fg(Ansi.Color.GREEN).a("\\")
-					.fg(Ansi.Color.RED).a("#")
-					.fg(Ansi.Color.GREEN).a("/    ")
-			/* C */.fg(Ansi.Color.GREEN).a("\\|//  ")
-			/* D */.fg(Ansi.Color.GREEN).a("`")
-					.bold().a("|").boldOff().a("/ ")
-			/* E */.fg(Ansi.Color.GREEN).a("(/\\||/    ")
-			/* F */.fg(Ansi.Color.GREEN).a(".\\ | ,   ")
-			/* G */.fg(Ansi.Color.GREEN).a("\\")
-					.bold().a("|").boldOff().a("/   ")
-			/* H */.fg(Ansi.Color.GREEN).a("/_ \\ |  /`| ")
-			.reset() );
+		final Map<Integer, String> colors8 = new LinkedHashMap<Integer, String>();
+		colors8.put(new Integer(5), COLOR_FLOWER_STEM);
 		// line 9
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor).a("     ")
-			.fg(Ansi.Color.GREEN)
-			/* A */.a("\\|   ")
-			/* B */.a("\\\\")
-					.bold().a("|")
-					.boldOff().a("//    ")
-			/* C */.a("|/  ")
-			/* D */.a("\\\\")
-					.bold().a("|").boldOff().a("//   ")
-			/* E */.a("||     ")
-			/* F */.a("/-\\|/_\\ ")
-			/* G */.a("\\\\")
-					.bold().a("|").boldOff().a("//,   ")
-			/* H */.a("/-\\|/_//  ")
-			.reset() );
+		final Map<Integer, String> colors9 = new LinkedHashMap<Integer, String>();
+		colors9.put(new Integer(6), COLOR_FLOWER_STEM);
 		// line 10
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor)
-			.fg(Ansi.Color.GREEN)
-			.a("^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/")
-			.a("^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^")
-			.reset() );
+		final Map<Integer, String> colors10 = new LinkedHashMap<Integer, String>();
+		colors10.put(new Integer(1), COLOR_GRASS);
 		// line 11
-		out.println(Ansi.ansi()
-			.a(" ").bg(bgcolor)
-			.fg(Ansi.Color.GREEN)
-			.a("////////////////////////////////")
-			.a("/////////////////////////////////")
-			.reset() );
+		final Map<Integer, String> colors11 = new LinkedHashMap<Integer, String>();
+		colors11.put(new Integer(1), COLOR_GRASS);
+
+		// build lines
+		final String version = StringUtils.padCenter(15, this.getVersion(), ' ');
+		final PrintStream out =
+			new xLogPrintStream(
+				xLog.getRoot(),
+				null
+			);
 		out.println();
-		out.println(" Copyright (C) 2007-2014 PoiXson, Mattsoft");
-		out.println(" - Brainchild of the one known as lorenzo -");
-		out.println(" This program comes with absolutely no warranty. This is free software");
-		out.println(" and you are welcome to modify it or redistribute it under certain");
-		out.println(" conditions. Type 'show license' for license details.");
+		DisplayLineColors(out, COLOR_BG, colors1, "      PoiXson    "+version+"                                 "              );
+		DisplayLineColors(out, COLOR_BG, colors2, "    GROWCONTROL   _ _        ,`--',                     \" ' \"    "        );
+		DisplayLineColors(out, COLOR_BG, colors3, "   _  Client     (_\\_)      . _\\/_ .                  \" \\ | / \"  "     );
+		DisplayLineColors(out, COLOR_BG, colors4, " _(_)_          (__<_{)     `. /\\ .'   .\\|/.         ' --(:)-- ' "        );
+		DisplayLineColors(out, COLOR_BG, colors5, "(_)@(_)          {_/_}        \"||\"     -(:)-          \" / | \\ \"  "     );
+		DisplayLineColors(out, COLOR_BG, colors6, "  (_)\\.         |\\ |           || /\\   \"/|\\\"           \" '|' \"   "  );
+		DisplayLineColors(out, COLOR_BG, colors7, "    . |/| .vVv.  \\\\| /| \\V/  /\\||//\\)   '|'    `@'   |\\   |      "    );
+		DisplayLineColors(out, COLOR_BG, colors8, "    |\\|/   \\#/    \\|//  `|/ (/\\||/    .\\ | ,   \\|/   /_ \\ |  /`| "   );
+		DisplayLineColors(out, COLOR_BG, colors9, "     \\|   \\\\|//    |/  \\\\|//   ||     /-\\|/_\\ \\\\|//,   /-\\|/_//  ");
+		DisplayLineColors(out, COLOR_BG, colors10,"^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^"          );
+		DisplayLineColors(out, COLOR_BG, colors11,"/////////////////////////////////////////////////////////////////"          );
+		out.println();
+		out.println("    Copyright (C)2007-2017 PoiXson, Mattsoft  ");
+		out.println("   - Brainchild of the one known as lorenzo - ");
+		out.println(" This program comes with absolutely no warranty. This is free");
+		out.println(" software and you are welcome to modify it or redistribute it");
+		out.println(" under certain conditions. Type 'show license' at the command");
+		out.println(" prompt for license details, or go to www.growcontrol.com for");
+		out.println(" more information.");
 		out.println();
 		out.flush();
 	}
 
 //         A       B      C     D     E         F      G         H
 // 1 |       PoiXson                                                     |
-// 2 |    ©GROWCONTROL   _ _        ,`--',                     " ' "     |
+// 2 |     GROWCONTROL   _ _        ,`--',                     " ' "     |
 // 3 |    _  Client     (_\_)      . _\/_ .                  " \ | / "   |
 // 4 |  _(_)_          (__<_{)     `. /\ .'   .\|/.         ' --(:)-- '  |
 // 5 | (_)@(_)          {_/_}        "||"     -(:)-          " / | \ "   |
