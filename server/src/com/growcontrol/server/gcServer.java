@@ -408,18 +408,18 @@ public class gcServer extends xApp {
 		colors1.put(new Integer(11), COLOR_PXN_SON);
 		// line 2
 		final Map<Integer, String> colors2 = new LinkedHashMap<Integer, String>();
-		colors2.put(new Integer(5),  COLOR_GROW);
-		colors2.put(new Integer(9),  COLOR_CONTROL);
+		colors2.put(new Integer(5),  COLOR_GROW           );
+		colors2.put(new Integer(9),  COLOR_CONTROL        );
 		colors2.put(new Integer(21), COLOR_FLOWER_C_PEDALS);
 		// line 3
 		final Map<Integer, String> colors3 = new LinkedHashMap<Integer, String>();
-		colors3.put(new Integer(7),  COLOR_SOFTWARE);
+		colors3.put(new Integer(7),  COLOR_SOFTWARE       );
 		colors3.put(new Integer(19), COLOR_FLOWER_C_PEDALS);
 		colors3.put(new Integer(50), COLOR_FLOWER_G_PEDALS);
 		colors3.put(new Integer(58), COLOR_FLOWER_H_PEDALS);
 		// line 4
 		final Map<Integer, String> colors4 = new LinkedHashMap<Integer, String>();
-		colors4.put(new Integer(4),  COLOR_VERSION);
+		colors4.put(new Integer(4),  COLOR_VERSION        );
 		colors4.put(new Integer(18), COLOR_FLOWER_C_PEDALS);
 		colors4.put(new Integer(21), COLOR_FLOWER_C_CENTER);
 		colors4.put(new Integer(22), COLOR_FLOWER_C_PEDALS);
@@ -432,7 +432,7 @@ public class gcServer extends xApp {
 		final Map<Integer, String> colors5 = new LinkedHashMap<Integer, String>();
 		colors5.put(new Integer(13), COLOR_FLOWER_B_PEDALS);
 		colors5.put(new Integer(20), COLOR_FLOWER_C_PEDALS);
-		colors5.put(new Integer(23), COLOR_FLOWER_STEM);
+		colors5.put(new Integer(23), COLOR_FLOWER_STEM    );
 		colors5.put(new Integer(28), COLOR_FLOWER_D_PEDALS);
 		colors5.put(new Integer(36), COLOR_FLOWER_E_PEDALS);
 		colors5.put(new Integer(43), COLOR_FLOWER_F_PEDALS);
@@ -448,29 +448,29 @@ public class gcServer extends xApp {
 		colors6.put(new Integer(8),  COLOR_FLOWER_A_CENTER);
 		colors6.put(new Integer(9),  COLOR_FLOWER_A_PEDALS);
 		colors6.put(new Integer(13), COLOR_FLOWER_B_PEDALS);
-		colors6.put(new Integer(23), COLOR_FLOWER_STEM);
+		colors6.put(new Integer(23), COLOR_FLOWER_STEM    );
 		colors6.put(new Integer(30), COLOR_FLOWER_D_PEDALS);
 		colors6.put(new Integer(35), COLOR_FLOWER_E_PEDALS);
 		colors6.put(new Integer(38), COLOR_FLOWER_E_CENTER);
 		colors6.put(new Integer(39), COLOR_FLOWER_E_PEDALS);
 		colors6.put(new Integer(44), COLOR_FLOWER_F_PEDALS);
-		colors6.put(new Integer(51), COLOR_FLOWER_STEM);
+		colors6.put(new Integer(51), COLOR_FLOWER_STEM    );
 		colors6.put(new Integer(57), COLOR_FLOWER_H_PEDALS);
-		colors6.put(new Integer(60), COLOR_FLOWER_STEM);
+		colors6.put(new Integer(60), COLOR_FLOWER_STEM    );
 		// line 7
 		final Map<Integer, String> colors7 = new LinkedHashMap<Integer, String>();
 		colors7.put(new Integer(5),  COLOR_FLOWER_A_PEDALS);
 		colors7.put(new Integer(7),  COLOR_FLOWER_A_CENTER);
 		colors7.put(new Integer(9),  COLOR_FLOWER_A_PEDALS);
 		colors7.put(new Integer(15), COLOR_FLOWER_B_PEDALS);
-		colors7.put(new Integer(23), COLOR_FLOWER_STEM);
+		colors7.put(new Integer(23), COLOR_FLOWER_STEM    );
 		colors7.put(new Integer(37), COLOR_FLOWER_E_PEDALS);
-		colors7.put(new Integer(44), COLOR_FLOWER_STEM);
+		colors7.put(new Integer(44), COLOR_FLOWER_STEM    );
 		// line 8
 		final Map<Integer, String> colors8 = new LinkedHashMap<Integer, String>();
-		colors8.put(new Integer(5),  COLOR_FLOWER_STEM);
+		colors8.put(new Integer(5),  COLOR_FLOWER_STEM    );
 		colors8.put(new Integer(6),  COLOR_FLOWER_A_PEDALS);
-		colors8.put(new Integer(13), COLOR_FLOWER_STEM);
+		colors8.put(new Integer(13), COLOR_FLOWER_STEM    );
 		// line 9
 		final Map<Integer, String> colors9 = new LinkedHashMap<Integer, String>();
 		colors9.put(new Integer(5), COLOR_FLOWER_STEM);

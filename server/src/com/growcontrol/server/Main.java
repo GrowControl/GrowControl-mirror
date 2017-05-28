@@ -18,7 +18,6 @@ public class Main {
 	public static void main(final String[] argsArray) {
 		// process shell arguments
 		final ShellArgsTool argsTool = ShellArgsTool.init(argsArray);
-		boolean hasStarted = false;
 		// debug flag
 		if (argsTool.getFlagBool(false, "-d", "--debug")) {
 			xVars.debug(true);

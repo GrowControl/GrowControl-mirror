@@ -23,8 +23,7 @@ public class gcServerVars {
 	public static void init() {
 		Keeper.add(new gcServerVars());
 	}
-	private gcServerVars() {
-	}
+	private gcServerVars() {}
 
 
 
