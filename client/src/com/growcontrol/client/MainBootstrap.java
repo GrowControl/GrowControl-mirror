@@ -15,7 +15,12 @@ import com.poixson.utils.xLogger.xLog;
 //TODO: http://blog.markturansky.com/archives/21
 public abstract class MainBootstrap {
 
+	// keep things in memory
 	private static Keeper keeper;
+
+	// app instances
+	private gcServer server = null;
+	private gcClient client = null;
 
 
 
@@ -71,8 +76,6 @@ public abstract class MainBootstrap {
 //TODO:
 throw new RuntimeException("UNFINISHED MODE");
 			} else {
-				gcServer server = null;
-				gcClient client = null;
 				switch (appMode) {
 				case INTERNAL:
 //TODO:
@@ -81,31 +84,31 @@ throw new RuntimeException("UNFINISHED MODE");
 throw new RuntimeException("UNFINISHED MODE");
 				case SERVER_CLIENT:
 					try {
-						server = new gcServer();
-						server.Start();
+						this.server = new gcServer();
+						this.server.Start();
 					} catch (Exception e) {
 						Failure.fail(e);
 					}
 					ThreadUtils.Sleep(100L);
 					try {
-						client = this.newClient();
-						client.Start();
+						this.client = this.newClient();
+						this.client.Start();
 					} catch (Exception e) {
 						Failure.fail(e);
 					}
 					break;
 				case SERVER_ONLY:
 					try {
-						server = new gcServer();
-						server.Start();
+						this.server = new gcServer();
+						this.server.Start();
 					} catch (Exception e) {
 						Failure.fail(e);
 					}
 					break;
 				case CLIENT_ONLY:
 					try {
-						client = this.newClient();
-						client.Start();
+						this.client = this.newClient();
+						this.client.Start();
 					} catch (Exception e) {
 						Failure.fail(e);
 					}

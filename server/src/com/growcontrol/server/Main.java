@@ -10,8 +10,12 @@ import com.poixson.utils.xLogger.xLog;
 
 public class Main {
 
+	// keep things in memory
 	@SuppressWarnings("unused")
-	private final Keeper keeper = Keeper.get();
+	private static final Keeper keeper = Keeper.get();
+
+	// app instance
+	private static gcServer server = null;
 
 
 
@@ -34,26 +38,28 @@ public class Main {
 			}
 		}
 		// start app mode
-		{
-			final APP_MODE appMode =
-				gcServerVars.getAppMode();
-			gcServer server = null;
-			switch (appMode) {
-			case SERVER_ONLY:
-				server = new gcServer();
-				server.Start();
-				break;
-			default:
-				server = new gcServer();
-				server.Start();
-				break;
-			}
-		}
+		server = new gcServer();
+		server.Start();
+//		{
+//			final APP_MODE appMode =
+//				gcServerVars.getAppMode();
+//			gcServer server = null;
+//			switch (appMode) {
+//			case SERVER_ONLY:
+//				server = new gcServer();
+//				server.Start();
+//				break;
+//			default:
+//				server = new gcServer();
+//				server.Start();
+//				break;
+//			}
+//		}
 		if (xVars.debug()) {
 			xLog.getRoot()
 				.fine("Initial thread returning..");
 		}
-		ThreadUtils.Sleep(150L);
+		ThreadUtils.Sleep(100L);
 	}
 
 
