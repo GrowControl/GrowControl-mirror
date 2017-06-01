@@ -38,7 +38,7 @@ public class guiManager {
 		}
 		return manager;
 	}
-	public static guiManager peak() {
+	public static guiManager peek() {
 		return manager;
 	}
 
