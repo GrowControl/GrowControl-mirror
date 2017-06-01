@@ -70,7 +70,7 @@ public class LookAndFeelExample extends JFrame implements ActionListener {
 	 * Create the GUI and show it. For thread safety, this method should be
 	 * invoked from the event dispatch thread.
 	 */
-	private static void createAndShowGUI() {
+	static void createAndShowGUI() {
 		// Set the look and feel
 		try {
 			String lafName = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";

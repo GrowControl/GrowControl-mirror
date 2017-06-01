@@ -141,6 +141,8 @@ public class CheckboxTree extends JTree {
 	 */
 	private class SpaceListener extends KeyAdapter {
 
+		SpaceListener() {}
+
 		@Override
 		public void keyPressed(KeyEvent e) {
 			if (!isEnabled())

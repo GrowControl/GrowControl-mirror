@@ -86,7 +86,7 @@ public class DefaultTreeCheckingModel implements TreeCheckingModel {
 		ALL_CHECKED, ALL_UNCHECKED, HALF_CHECKED, NO_CHILDREN
 	}
 
-	private class PropagateCheckingListener implements TreeModelListener {
+	class PropagateCheckingListener implements TreeModelListener {
 
 		/**
 		 * Updates the tree greyness in case of nodes changes.

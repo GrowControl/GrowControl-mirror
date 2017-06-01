@@ -41,6 +41,8 @@ public class CheckboxTreeExample extends JFrame {
 
 	private class RefreshListener implements KeyListener {
 
+	RefreshListener() {}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		TreePath p = CheckboxTreeExample.this.checkboxTree.getSelectionPath();
@@ -89,7 +91,7 @@ public class CheckboxTreeExample extends JFrame {
 		test.setVisible(true);
 	}
 
-	private CheckboxTree checkboxTree = null;
+	CheckboxTree checkboxTree = null;
 
 	private javax.swing.JPanel jContentPane = null;
 

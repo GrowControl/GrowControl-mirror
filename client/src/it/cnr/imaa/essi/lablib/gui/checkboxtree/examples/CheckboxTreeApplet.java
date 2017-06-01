@@ -44,7 +44,7 @@ import javax.swing.tree.TreeSelectionModel;
 public class CheckboxTreeApplet extends JApplet {
 	private static final long serialVersionUID = 1L;
 
-	private void createGUI() {
+	void createGUI() {
 		final CheckboxTree tree = new CheckboxTree();
 		tree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
 
