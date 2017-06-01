@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client;
 
 
@@ -46,3 +47,4 @@ public final class gcClientDefines {
 
 
 }
+*/

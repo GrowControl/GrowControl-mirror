@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client.gui.login;
 
 import java.awt.BorderLayout;
@@ -346,11 +347,11 @@ public class gcWindowLogin extends xWindow {
 
 
 
-	/**
+	/ **
 	 * Displays a card in the login window.
 	 * @param card Card name to display.
 	 * @thread-safe
-	 */
+	 * /
 	public void Update(final String state) {
 		if(utils.isEmpty(state)) throw new NullPointerException("state argument is required!");
 		if(guiUtils.forceDispatchThread(this, "ShowCard", state)) return;
@@ -593,3 +594,4 @@ gcServerManager.get().Start();
 
 
 }
+*/

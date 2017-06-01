@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client.ConnectState;
 
 
@@ -45,3 +46,4 @@ public abstract class ConnectState {
 
 
 }
+*/

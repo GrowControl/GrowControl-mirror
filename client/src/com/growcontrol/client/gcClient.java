@@ -41,7 +41,8 @@ public abstract class gcClient extends xApp {
 
 	public gcClient() {
 		super();
-		gcClientVars.init();
+//TODO:
+//		gcClientVars.init();
 //		if(xVars.debug())
 //			this.displayColors();
 	}
@@ -79,7 +80,8 @@ public abstract class gcClient extends xApp {
 	// load configs
 	@xAppStep(type=StepType.STARTUP, title="Configs", priority=55)
 	public void __STARTUP_load_configs() {
-		gcClientVars.getConfig();
+//TODO:
+//		gcClientVars.getConfig();
 	}
 
 
@@ -87,7 +89,8 @@ public abstract class gcClient extends xApp {
 	// load gui
 	@xAppStep(type=StepType.STARTUP, title="GUI", priority=100)
 	public void __STARTUP_gui() {
-		guiManager.get();
+//TODO:
+//		guiManager.get();
 	}
 
 
@@ -96,11 +99,10 @@ public abstract class gcClient extends xApp {
 //	// load plugins
 //	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=250)
 //	public void __STARTUP_load_plugins() {
-		final xPluginManager manager = xPluginManager.get();
-		manager.setClassField("Client Main");
-		manager.loadAll();
-		manager.initAll();
-	}
+//		final xPluginManager manager = xPluginManager.get();
+//		manager.setClassField("Client Main");
+//		manager.loadAll();
+//		manager.initAll();
 //	}
 
 
@@ -109,6 +111,7 @@ public abstract class gcClient extends xApp {
 	// sockets
 	@xAppStep(type=StepType.STARTUP, title="Sockets", priority=300)
 	public void __STARTUP_sockets() {
+//TODO:
 //		try {
 //		} catch (Exception e) {
 //			Failure.fail(e);
@@ -131,8 +134,9 @@ public abstract class gcClient extends xApp {
 	// show login window
 	@xAppStep(type=StepType.STARTUP, title="LoginWindow", priority=400)
 	public void __STARTUP_login_window() {
-		guiManager.get()
-			.Show(GUI_MODE.LOGIN);
+//TODO:
+//		guiManager.get()
+//			.Show(GUI_MODE.LOGIN);
 	}
 
 
@@ -153,9 +157,10 @@ public abstract class gcClient extends xApp {
 	// close gui windows
 	@xAppStep(type=StepType.SHUTDOWN, title="CloseWindows", priority=400)
 	public void __SHUTDOWN_close_gui_windows() {
-		final guiManager manager = guiManager.peak();
-		if(manager != null)
-			manager.shutdown();
+//TODO:
+//		final guiManager manager = guiManager.peek();
+//		if(manager != null)
+//			manager.shutdown();
 //TODO:
 //		guiManager.Shutdown();
 	}
@@ -183,8 +188,9 @@ public abstract class gcClient extends xApp {
 	// disable plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="StopPlugins", priority=275)
 	public void __SHUTDOWN_stop_plugins() {
-		xPluginManager.get()
-			.disableAll();
+//TODO:
+//		xPluginManager.get()
+//			.disableAll();
 	}
 
 

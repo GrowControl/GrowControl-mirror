@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client.netty;
 
 import io.netty.bootstrap.Bootstrap;
@@ -92,10 +93,10 @@ public class NetClient implements NetParent {
 
 
 
-	/**
+	/ **
 	 * New socket connection established.
 	 * @param state
-	 */
+	 * /
 	public void register(final ClientSocketState socketState) {
 		if(socketState == null) throw new NullPointerException("socketState argument is required!");
 		final SocketChannel channel = socketState.getChannel();
@@ -103,10 +104,10 @@ public class NetClient implements NetParent {
 		this.states.put(channel, socketState);
 //TODO: store the socket
 	}
-	/**
+	/ **
 	 * Remove disconnected socket.
 	 * @param state
-	 */
+	 * /
 	// socket disconnected
 	public void unregister(final ClientSocketState socketState) {
 		if(socketState == null) throw new NullPointerException("socketState argument is required!");
@@ -151,9 +152,9 @@ public class NetClient implements NetParent {
 
 
 
-	/**
+	/ **
 	 * Close the connection.
-	 */
+	 * /
 	@Override
 	public void close() {
 		throw new UnsupportedOperationException();
@@ -170,9 +171,9 @@ public class NetClient implements NetParent {
 //		this.closed = true;
 //		return this.clientChannel.close();
 	}
-	/**
+	/ **
 	 * Disconnect all connected sockets.
-	 */
+	 * /
 	@Override
 	public void CloseAll() {
 		// clone states list
@@ -232,3 +233,4 @@ public class NetClient implements NetParent {
 
 
 }
+*/

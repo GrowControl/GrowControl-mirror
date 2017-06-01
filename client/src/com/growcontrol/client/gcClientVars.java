@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client;
 
 import com.growcontrol.client.configs.ProfilesConfig;
@@ -95,3 +96,4 @@ public class gcClientVars {
 
 
 }
+*/

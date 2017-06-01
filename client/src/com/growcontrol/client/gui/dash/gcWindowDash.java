@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client.gui.dash;
 
 import com.growcontrol.client.gui.guiManager;
@@ -44,3 +45,4 @@ public class gcWindowDash extends xWindow {
 
 
 }
+*/

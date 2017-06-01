@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.api.clientapi.plugins;
 
 import com.poixson.commonapp.plugin.xJavaPlugin;
@@ -25,3 +26,4 @@ public abstract class apiClientPlugin extends xJavaPlugin {
 
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client.ConnectState;
 
 
@@ -108,3 +109,4 @@ public class gcConnectState extends ConnectState {
 
 
 }
+*/

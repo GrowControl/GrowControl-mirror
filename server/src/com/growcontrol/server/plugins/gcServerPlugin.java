@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.api.serverapi.plugins;
 
 import com.growcontrol.common.meta.MetaAddress;
@@ -49,3 +50,4 @@ public abstract class apiServerPlugin extends xJavaPlugin {
 
 
 }
+*/
