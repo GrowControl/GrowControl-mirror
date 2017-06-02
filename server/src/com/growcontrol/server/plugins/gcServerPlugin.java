@@ -1,20 +1,40 @@
+package com.growcontrol.server.plugins;
+
+import com.poixson.app.plugin.xJavaPlugin;
+import com.poixson.app.plugin.xPluginManager;
+import com.poixson.app.plugin.xPluginYML;
+
+
+public abstract class gcServerPlugin extends xJavaPlugin {
+
+
+
+	public gcServerPlugin(final xPluginManager<?> manager, final xPluginYML yml) {
+		super(manager, yml);
+	}
+
+
+
+	@Override
+	protected void onInit() {
+		super.onInit();
+	}
+	@Override
+	protected void onUnload() {
+		super.onUnload();
+	}
+
+
+
+	@Override
+	protected abstract void onEnable();
+	@Override
+	protected abstract void onDisable();
+
+
+
+//TODO:
 /*
-package com.growcontrol.api.serverapi.plugins;
-
-import com.growcontrol.common.meta.MetaAddress;
-import com.growcontrol.common.meta.MetaListener;
-import com.growcontrol.common.meta.MetaRouter;
-import com.poixson.commonapp.app.xApp;
-import com.poixson.commonapp.plugin.xJavaPlugin;
-import com.poixson.commonjava.xEvents.xEventListener;
-import com.poixson.commonjava.xLogger.xLog;
-import com.poixson.commonjava.xLogger.commands.xCommandListener;
-
-
-public abstract class apiServerPlugin extends xJavaPlugin {
-
-
-
 	// register meta listener
 	public void register(final MetaAddress address, final MetaListener listener) {
 		if(address  == null) throw new IllegalArgumentException("Cannot register null meta address!");
@@ -46,8 +66,8 @@ public abstract class apiServerPlugin extends xJavaPlugin {
 //					+listenerClass.getName());
 		}
 	}
+*/
 
 
 
 }
-*/
