@@ -1,16 +1,20 @@
-/*
 package com.growcontrol.client;
 
-import com.growcontrol.client.configs.ProfilesConfig;
-import com.growcontrol.client.configs.gcClientConfig;
-import com.poixson.commonapp.config.xConfigLoader;
-import com.poixson.commonjava.Failure;
-import com.poixson.commonjava.Utils.Keeper;
-import com.poixson.commonjava.xLogger.xLog;
+import com.poixson.utils.Keeper;
 
 
 public class gcClientVars {
 
+
+
+	public static void init() {
+		Keeper.add(new gcClientVars());
+	}
+	private gcClientVars() {}
+
+
+
+/*
 	private static volatile boolean inited = false;
 
 	// configs
@@ -92,8 +96,8 @@ public class gcClientVars {
 //	public static xPluginsEventHandler plugins() {
 //		return pluginsHandler;
 //	}
+*/
 
 
 
 }
-*/

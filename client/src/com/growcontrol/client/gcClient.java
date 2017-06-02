@@ -41,8 +41,7 @@ public abstract class gcClient extends xApp {
 
 	public gcClient() {
 		super();
-//TODO:
-//		gcClientVars.init();
+		gcClientVars.init();
 //		if(xVars.debug())
 //			this.displayColors();
 	}
