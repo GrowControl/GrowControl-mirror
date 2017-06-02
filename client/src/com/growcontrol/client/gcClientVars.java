@@ -1,5 +1,7 @@
 package com.growcontrol.client;
 
+import com.growcontrol.client.plugins.gcClientPlugin;
+import com.poixson.app.plugin.xPluginManager;
 import com.poixson.utils.Keeper;
 
 
@@ -11,6 +13,22 @@ public class gcClientVars {
 		Keeper.add(new gcClientVars());
 	}
 	private gcClientVars() {}
+
+
+
+	// ------------------------------------------------------------------------------- //
+	// plugin manager
+
+
+
+	private static volatile xPluginManager<gcClientPlugin> pluginManager = null;
+
+	public static xPluginManager<gcClientPlugin> getPluginManager() {
+		return pluginManager;
+	}
+	public static void setPluginManager(final xPluginManager<gcClientPlugin> manager) {
+		pluginManager = manager;
+	}
 
 
 
