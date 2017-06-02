@@ -1,50 +1,52 @@
-/*
 package com.growcontrol.server;
 
-import com.growcontrol.common.gcCommonDefines;
-import com.poixson.commonapp.appDefines;
-import com.poixson.commonjava.Utils.xTime;
+import com.poixson.utils.Keeper;
 
 
 public final class gcServerDefines {
 	private gcServerDefines() {}
+	{ Keeper.add(new gcServerDefines()); }
 
 
 
-	// logger name
-	public static final String LOG_NAME = gcCommonDefines.LOG_NAME_SERVER;
+	// plugin.yml
+	public static final String CONFIG_PLUGIN_CLASS_KEY_SERVER = "Server Main Class";
 
 
 
-	// defaults
-	public static final xTime   DEFAULT_TICK_INTERVAL = appDefines.DEFAULT_TICK_INTERVAL;
-	public static final int     DEFAULT_LOGIC_THREADS = 0;
-	public static final boolean DEFAULT_PROMPT_TICKER = false;
+//TODO:
+//	// logger name
+//	public static final String LOG_NAME = gcCommonDefines.LOG_NAME_SERVER;
 
-	// socket defaults
-	public static final int DEFAULT_SOCKET_BACKLOG  = 10;
+//TODO:
+//	// defaults
+//	public static final xTime   DEFAULT_TICK_INTERVAL = appDefines.DEFAULT_TICK_INTERVAL;
+//	public static final int     DEFAULT_LOGIC_THREADS = 0;
+//	public static final boolean DEFAULT_PROMPT_TICKER = false;
 
+//TODO:
+//	// socket defaults
+//	public static final int DEFAULT_SOCKET_BACKLOG  = 10;
 
+//TODO:
+//	// server config
+//	public static final String CONFIG_FILE = "server.yml";
 
-	// server config
-	public static final String CONFIG_FILE = "server.yml";
+//TODO:
+//	// config keys
+//	public static final String CONFIG_TICK_INTERVAL = "Tick Interval";
+//	public static final String CONFIG_LOGIC_THREADS = "Logic Threads";
+//	public static final String CONFIG_PROMPT_TICKER = "Prompt Ticker";
 
-	// config keys
-	public static final String CONFIG_TICK_INTERVAL = "Tick Interval";
-	public static final String CONFIG_LOGIC_THREADS = "Logic Threads";
-	public static final String CONFIG_PROMPT_TICKER = "Prompt Ticker";
-
-
-
-	// socket config keys
-	public static final String CONFIG_SOCKET_BACKLOG = "Socket Backlog";
-	public static final String CONFIG_SOCKETS        = "Sockets";
-		public static final String CONFIG_SOCKET_ENABLE = "Enable";
-		public static final String CONFIG_SOCKET_SSL    = "SSL";
-		public static final String CONFIG_SOCKET_HOST   = "Host";
-		public static final String CONFIG_SOCKET_PORT   = "Port";
+//TODO:
+//	// socket config keys
+//	public static final String CONFIG_SOCKET_BACKLOG = "Socket Backlog";
+//	public static final String CONFIG_SOCKETS        = "Sockets";
+//		public static final String CONFIG_SOCKET_ENABLE = "Enable";
+//		public static final String CONFIG_SOCKET_SSL    = "SSL";
+//		public static final String CONFIG_SOCKET_HOST   = "Host";
+//		public static final String CONFIG_SOCKET_PORT   = "Port";
 
 
 
 }
-*/
