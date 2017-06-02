@@ -4,9 +4,13 @@ import java.io.PrintStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.growcontrol.client.plugins.gcClientPlugin;
 import com.poixson.app.xApp;
+import com.poixson.app.plugin.xPluginLoader_Dir;
+import com.poixson.app.plugin.xPluginManager;
 import com.poixson.app.steps.xAppStep;
 import com.poixson.app.steps.xAppStep.StepType;
+import com.poixson.utils.Failure;
 import com.poixson.utils.StringUtils;
 import com.poixson.utils.xLogger.xLog;
 import com.poixson.utils.xLogger.xLogPrintStream;
@@ -95,14 +99,41 @@ public abstract class gcClient extends xApp {
 
 
 //TODO: move this to gcServerManager
-//	// load plugins
-//	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=250)
-//	public void __STARTUP_load_plugins() {
-//		final xPluginManager manager = xPluginManager.get();
-//		manager.setClassField("Client Main");
-//		manager.loadAll();
-//		manager.initAll();
-//	}
+	// load plugins
+	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=250)
+	public void __STARTUP_load_plugins() {
+		try {
+			final xPluginManager<gcClientPlugin> manager =
+				new xPluginManager<gcClientPlugin>();
+			final xPluginLoader_Dir<gcClientPlugin> loader =
+				new xPluginLoader_Dir<gcClientPlugin>(manager);
+			loader.setPluginMainClassKey(
+				gcClientDefines.CONFIG_PLUGIN_CLASS_KEY_CLIENT
+			);
+			// store plugin manager
+			gcClientVars.setPluginManager(manager);
+			loader.LoadFromDir();
+		} catch (Exception e) {
+			Failure.fail(e);
+		}
+	}
+
+
+
+	// start plugins
+	@xAppStep(type=StepType.STARTUP, title="StartPlugins", priority=275)
+	public void __STARTUP_start_plugins() {
+		try {
+			final xPluginManager<gcClientPlugin> manager =
+				gcClientVars.getPluginManager();
+			if (manager == null) {
+				Failure.fail("Plugin manager failed to load!");
+			}
+			manager.enableAll();
+		} catch (Exception e) {
+			Failure.fail(e);
+		}
+	}
 
 
 
@@ -187,13 +218,16 @@ public abstract class gcClient extends xApp {
 	// disable plugins
 	@xAppStep(type=StepType.SHUTDOWN, title="StopPlugins", priority=275)
 	public void __SHUTDOWN_stop_plugins() {
-//TODO:
-//		xPluginManager.get()
-//			.disableAll();
+		try {
+			final xPluginManager<gcClientPlugin> manager =
+				gcClientVars.getPluginManager();
+			manager.disableAll();
+			//TODO: wait for plugins to stop
+			manager.unloadAll();
+		} catch (Exception e) {
+			Failure.fail(e);
+		}
 	}
-
-
-
 
 
 
