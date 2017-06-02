@@ -6,7 +6,10 @@ import java.util.Map;
 
 import com.growcontrol.server.commands.gcCommandsCommon;
 import com.growcontrol.server.commands.gcCommandsServer;
+import com.growcontrol.server.plugins.gcServerPlugin;
 import com.poixson.app.xApp;
+import com.poixson.app.plugin.xPluginLoader_Dir;
+import com.poixson.app.plugin.xPluginManager;
 import com.poixson.app.steps.xAppStep;
 import com.poixson.app.steps.xAppStep.StepType;
 import com.poixson.utils.Failure;
@@ -42,6 +45,10 @@ public class gcServer extends xApp {
 
 
 
+	/**
+	 * Get the server class instance.
+	 * @return gcServer instance object.
+	 */
 	public static gcServer get() {
 		return (gcServer) xApp.get();
 	}
@@ -175,31 +182,37 @@ public class gcServer extends xApp {
 	// load plugins
 	@xAppStep(type=StepType.STARTUP, title="LoadPlugins", priority=250)
 	public void __STARTUP_load_plugins() {
-//TODO:
-//		try {
-//		} catch (Exception e) {
-//			Failure.fail(e);
-//		}
-//TODO:
-//		final xPluginManager manager = xPluginManager.get();
-//		manager.setClassField("Server Main");
-//		manager.loadAll();
-//		manager.initAll();
+		try {
+			final xPluginManager<gcServerPlugin> manager =
+				new xPluginManager<gcServerPlugin>();
+			final xPluginLoader_Dir<gcServerPlugin> loader =
+				new xPluginLoader_Dir<gcServerPlugin>(manager);
+			loader.setPluginMainClassKey(
+				gcServerDefines.CONFIG_PLUGIN_CLASS_KEY_SERVER
+			);
+			// store plugin manager
+			gcServerVars.setPluginManager(manager);
+			loader.LoadFromDir();
+		} catch (Exception e) {
+			Failure.fail(e);
+		}
 	}
 
 
 
-	// enable plugins
+	// start plugins
 	@xAppStep(type=StepType.STARTUP, title="StartPlugins", priority=275)
 	public void __STARTUP_start_plugins() {
-//TODO:
-//		try {
-//		} catch (Exception e) {
-//			Failure.fail(e);
-//		}
-//TODO:
-//		xPluginManager.get()
-//			.enableAll();
+		try {
+			final xPluginManager<gcServerPlugin> manager =
+				gcServerVars.getPluginManager();
+			if (manager == null) {
+				Failure.fail("Plugin manager failed to load!");
+			}
+			manager.enableAll();
+		} catch (Exception e) {
+			Failure.fail(e);
+		}
 	}
 
 
