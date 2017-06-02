@@ -84,6 +84,11 @@ public abstract class gcClient extends xApp {
 	@xAppStep(type=StepType.STARTUP, title="Configs", priority=55)
 	public void __STARTUP_load_configs() {
 //TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
+//TODO:
 //		gcClientVars.getConfig();
 	}
 
@@ -92,6 +97,11 @@ public abstract class gcClient extends xApp {
 	// load gui
 	@xAppStep(type=StepType.STARTUP, title="GUI", priority=100)
 	public void __STARTUP_gui() {
+//TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 //TODO:
 //		guiManager.get();
 	}
@@ -151,19 +161,29 @@ public abstract class gcClient extends xApp {
 
 
 //TODO: move this to gui manager?
-//	// scripts
-//	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=350)
-//	public void __STARTUP_scripts() {
+	// scripts
+	@xAppStep(type=StepType.STARTUP, title="Scripts", priority=350)
+	public void __STARTUP_scripts() {
+//TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 //		final gcScriptManager manager = gcScriptManager.get();
 //		manager.loadAll();
 //		manager.StartAll();
-//	}
+	}
 
 
 
 	// show login window
 	@xAppStep(type=StepType.STARTUP, title="LoginWindow", priority=400)
 	public void __STARTUP_login_window() {
+//TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 //TODO:
 //		guiManager.get()
 //			.Show(GUI_MODE.LOGIN);
@@ -188,6 +208,11 @@ public abstract class gcClient extends xApp {
 	@xAppStep(type=StepType.SHUTDOWN, title="CloseWindows", priority=400)
 	public void __SHUTDOWN_close_gui_windows() {
 //TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
+//TODO:
 //		final guiManager manager = guiManager.peek();
 //		if(manager != null)
 //			manager.shutdown();
@@ -198,12 +223,17 @@ public abstract class gcClient extends xApp {
 
 
 //TODO: move this to gui manager?
-//	// scripts
-//	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=350)
-//	public void __SHUTDOWN_scripts() {
+	// scripts
+	@xAppStep(type=StepType.SHUTDOWN, title="Scripts", priority=350)
+	public void __SHUTDOWN_scripts() {
+//TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 //		gcScriptManager.get()
 //			.StopAll();
-//	}
+	}
 
 
 
@@ -211,6 +241,10 @@ public abstract class gcClient extends xApp {
 	@xAppStep(type=StepType.SHUTDOWN, title="Sockets", priority=300)
 	public void __SHUTDOWN_sockets() {
 //TODO:
+//		try {
+//		} catch (Exception e) {
+//			Failure.fail(e);
+//		}
 	}
 
 
@@ -269,7 +303,6 @@ public abstract class gcClient extends xApp {
 			}
 		}
 	}
-*/
 
 
 
@@ -351,6 +384,7 @@ public abstract class gcClient extends xApp {
 //			return (String[]) zones.toArray();
 //		}
 //	}
+*/
 
 
 
