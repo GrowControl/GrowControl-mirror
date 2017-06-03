@@ -6,13 +6,8 @@ import com.poixson.utils.Keeper;
 
 
 public class gcClientVars {
-
-
-
-	public static void init() {
-		Keeper.add(new gcClientVars());
-	}
 	private gcClientVars() {}
+	{ Keeper.add(new gcClientVars()); }
 
 
 
@@ -33,8 +28,6 @@ public class gcClientVars {
 
 
 /*
-	private static volatile boolean inited = false;
-
 	// configs
 	private static final Object configLock = new Object();
 	private static gcClientConfig config         = null;
@@ -43,15 +36,6 @@ public class gcClientVars {
 	// handlers
 	//private static final xHandlerSystem  system  = new xHandlerSystem();
 //	private static final xPluginsEventHandler pluginsHandler = xPluginsEventHandler.get();
-
-
-
-	public static void init() {
-		if(!inited)
-			Keeper.add(new gcClientVars());
-	}
-	private gcClientVars() {
-	}
 
 
 

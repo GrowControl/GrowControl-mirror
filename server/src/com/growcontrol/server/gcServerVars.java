@@ -6,6 +6,10 @@ import com.poixson.utils.Keeper;
 
 
 public class gcServerVars {
+	private gcServerVars() {}
+	{ Keeper.add(new gcServerVars()); }
+
+
 
 //	// internal mode
 //	private static volatile boolean internal = false;
@@ -19,13 +23,6 @@ public class gcServerVars {
 //	private static final xCommandsHandler commandsHandler = xCommandsHandler.get();
 //	private static final xPluginsEventHandler pluginsHandler = xPluginsEventHandler.get();
 //	private static final MetaRouter router = MetaRouter.get();
-
-
-
-	public static void init() {
-		Keeper.add(new gcServerVars());
-	}
-	private gcServerVars() {}
 
 
 

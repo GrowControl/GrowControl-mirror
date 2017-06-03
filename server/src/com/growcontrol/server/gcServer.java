@@ -57,7 +57,6 @@ public class gcServer extends xApp {
 
 	public gcServer() {
 		super();
-		gcServerVars.init();
 //		if (xVars.debug()) {
 //			this.displayColors();
 //		}
