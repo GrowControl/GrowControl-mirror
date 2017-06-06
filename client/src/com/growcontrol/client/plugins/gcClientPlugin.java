@@ -1,17 +1,13 @@
 package com.growcontrol.client.plugins;
 
 import com.poixson.app.plugin.xJavaPlugin;
-import com.poixson.app.plugin.xPluginManager;
-import com.poixson.app.plugin.xPluginYML;
 
 
 public abstract class gcClientPlugin extends xJavaPlugin {
 
 
 
-	public gcClientPlugin(final xPluginManager<?> manager, final xPluginYML yml) {
-		super(manager, yml);
-	}
+	public gcClientPlugin() {}
 
 
 

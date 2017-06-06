@@ -1,17 +1,13 @@
 package com.growcontrol.server.plugins;
 
 import com.poixson.app.plugin.xJavaPlugin;
-import com.poixson.app.plugin.xPluginManager;
-import com.poixson.app.plugin.xPluginYML;
 
 
 public abstract class gcServerPlugin extends xJavaPlugin {
 
 
 
-	public gcServerPlugin(final xPluginManager<?> manager, final xPluginYML yml) {
-		super(manager, yml);
-	}
+	public gcServerPlugin() {}
 
 
 
