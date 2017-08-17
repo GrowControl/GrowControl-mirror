@@ -78,10 +78,9 @@ public class gcServer extends xApp {
 		try {
 			xVars.setJLineHistorySize(200);
 			xVars.setJLineHistoryFile(
-				FileUtils.BuildFilePath(
+				FileUtils.MergePaths(
 					FileUtils.cwd(),
-					"history",
-					"txt"
+					"history.txt"
 				)
 			);
 		} catch (Exception e) {
