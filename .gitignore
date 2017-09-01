@@ -24,6 +24,7 @@ coverage/
 rpmbuild-root/
 out/
 build/
+libraries/
 
 composer.phar
 auth.json
