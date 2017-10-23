@@ -19,11 +19,6 @@
 			"GroupId": "io.netty",
 			"ArtifactId": "netty-all",
 			"Version": "4.1.9.Final"
-		},
-		"jssc": {
-			"GroupId": "org.scream3r",
-			"ArtifactId": "jssc",
-			"Version": "2.8.0"
 		}
 	}
 }
