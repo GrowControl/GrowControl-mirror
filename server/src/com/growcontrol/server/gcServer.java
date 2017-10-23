@@ -491,7 +491,7 @@ public class gcServer extends xApp {
 		colors11.put(new Integer(1), COLOR_GRASS);
 
 		// build lines
-		final String version = StringUtils.padCenter(15, this.getVersion(), ' ');
+		final String version = StringUtils.PadCenter(15, this.getVersion(), ' ');
 		final PrintStream out =
 			new xLogPrintStream(
 				xLog.getRoot(),
