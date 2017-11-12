@@ -1,4 +1,5 @@
 .git/
+_/
 
 debug
 DEBUG
@@ -34,6 +35,8 @@ auth.json
 .buildpath
 .gradle/
 .settings/
+maven-eclipse.xml
+.externalToolBuilders/
 
 *.class
 *.iml
