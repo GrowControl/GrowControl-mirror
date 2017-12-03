@@ -130,7 +130,7 @@ public class gcServer extends xApp {
 				new gcCommandsServer()
 			);
 			// start console input
-			console.Start();
+			console.start();
 		} catch (Exception e) {
 			Failure.fail(e);
 		}

@@ -95,7 +95,7 @@ public class gcCommandsCommon implements xCommandListener {
 		}
 		event.setHandled();
 		xApp.get()
-			.Stop();
+			.stop();
 	}
 	protected void _shutdown_help(final xCommandEvent event) {
 		event.setHandled();

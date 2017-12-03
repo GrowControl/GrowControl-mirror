@@ -38,7 +38,7 @@ public abstract class MainBootstrap {
 //TODO: detect gui/shell
 	public void doMain(final String[] argsArray) {
 		// process shell arguments
-		final ShellArgsTool argsTool = ShellArgsTool.init(argsArray);
+		final ShellArgsTool argsTool = ShellArgsTool.Init(argsArray);
 		// app mode flags
 		{
 			final boolean internalMode =
@@ -85,14 +85,14 @@ throw new RuntimeException("UNFINISHED MODE");
 				case SERVER_CLIENT:
 					try {
 						this.server = new gcServer();
-						this.server.Start();
+						this.server.start();
 					} catch (Exception e) {
 						Failure.fail(e);
 					}
 					ThreadUtils.Sleep(100L);
 					try {
 						this.client = this.newClient();
-						this.client.Start();
+						this.client.start();
 					} catch (Exception e) {
 						Failure.fail(e);
 					}
@@ -100,7 +100,7 @@ throw new RuntimeException("UNFINISHED MODE");
 				case SERVER_ONLY:
 					try {
 						this.server = new gcServer();
-						this.server.Start();
+						this.server.start();
 					} catch (Exception e) {
 						Failure.fail(e);
 					}
@@ -108,7 +108,7 @@ throw new RuntimeException("UNFINISHED MODE");
 				case CLIENT_ONLY:
 					try {
 						this.client = this.newClient();
-						this.client.Start();
+						this.client.start();
 					} catch (Exception e) {
 						Failure.fail(e);
 					}

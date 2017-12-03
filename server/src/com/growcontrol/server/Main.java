@@ -21,7 +21,7 @@ public class Main {
 
 	public static void main(final String[] argsArray) {
 		// process shell arguments
-		final ShellArgsTool argsTool = ShellArgsTool.init(argsArray);
+		final ShellArgsTool argsTool = ShellArgsTool.Init(argsArray);
 		// app mode flags
 		{
 			final boolean serverMode =
@@ -35,7 +35,7 @@ public class Main {
 		}
 		// start app mode
 		server = new gcServer();
-		server.Start();
+		server.start();
 //		{
 //			final APP_MODE appMode =
 //				gcServerVars.getAppMode();
