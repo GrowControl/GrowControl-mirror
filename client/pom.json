@@ -2,7 +2,7 @@
 	"Name": "gcClient",
 	"ArtifactId": "client",
 	"GroupId": "com.growcontrol",
-	"Version": "3.6.1",
+	"Version": "3.6.2",
 	"URL": "http://growcontrol.com",
 	"Github-Path": "GrowControl/GrowControl",
 	"Org-Name": "GrowControl",

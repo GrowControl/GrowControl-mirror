@@ -7,7 +7,7 @@
 	<name>GrowControl-All</name>
 	<artifactId>gc-all</artifactId>
 	<groupId>com.growcontrol</groupId>
-	<version>3.6.1</version>
+	<version>3.6.2</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>server</module>
