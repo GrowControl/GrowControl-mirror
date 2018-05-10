@@ -1,4 +1,4 @@
-<!-- Generated on: October 23, 2017 03:31 UTC -->
+<!-- Generated on: May 10, 2018 23:39 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -32,8 +32,13 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<pxnCommon-version>${project.version}</pxnCommon-version>
-		<netty-version>4.1.16.Final</netty-version>
+		<pxnCommon-Core-version>${project.version}</pxnCommon-Core-version>
+		<pxnCommon-App-version>${project.version}</pxnCommon-App-version>
+		<pxnCommon-Shell-version>${project.version}</pxnCommon-Shell-version>
+		<pxnCommon-Config-version>${project.version}</pxnCommon-Config-version>
+		<pxnCommon-Plugin-version>${project.version}</pxnCommon-Plugin-version>
+		<pxnCommon-Scheduler-version>${project.version}</pxnCommon-Scheduler-version>
+		<pxnCommon-Net-version>${project.version}</pxnCommon-Net-version>
 
 		<git-commit-id-plugin-version>2.2.2</git-commit-id-plugin-version>
 
@@ -98,7 +103,6 @@
 						<nonFilteredFileExtension>png</nonFilteredFileExtension>
 						<nonFilteredFileExtension>so</nonFilteredFileExtension>
 						<nonFilteredFileExtension>dll</nonFilteredFileExtension>
-						<nonFilteredFileExtension>jnilib</nonFilteredFileExtension>
 					</nonFilteredFileExtensions>
 				</configuration>
 			</plugin>
@@ -182,13 +186,38 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.poixson</groupId>
-			<artifactId>common</artifactId>
-			<version>${pxnCommon-version}</version>
+			<artifactId>common-core</artifactId>
+			<version>${pxnCommon-Core-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-all</artifactId>
-			<version>${netty-version}</version>
+			<groupId>com.poixson</groupId>
+			<artifactId>common-app</artifactId>
+			<version>${pxnCommon-App-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.poixson</groupId>
+			<artifactId>common-shell</artifactId>
+			<version>${pxnCommon-Shell-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.poixson</groupId>
+			<artifactId>common-config</artifactId>
+			<version>${pxnCommon-Config-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.poixson</groupId>
+			<artifactId>common-plugin</artifactId>
+			<version>${pxnCommon-Plugin-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.poixson</groupId>
+			<artifactId>common-sched</artifactId>
+			<version>${pxnCommon-Scheduler-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.poixson</groupId>
+			<artifactId>common-net</artifactId>
+			<version>${pxnCommon-Net-version}</version>
 		</dependency>
 
 	</dependencies>

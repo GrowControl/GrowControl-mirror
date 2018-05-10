@@ -9,16 +9,47 @@
 	"Main-Class": "com.growcontrol.server.Main",
 	"Shade": "yes",
 	"Deps": {
-		"pxnCommon": {
+		"pxnCommon-Core": {
 			"GroupId": "com.poixson",
-			"ArtifactId": "common",
-			"Name": "pxnCommon",
+			"ArtifactId": "common-core",
+			"Name": "pxnCommon-Core",
 			"Version": "${project.version}"
 		},
-		"netty": {
-			"GroupId": "io.netty",
-			"ArtifactId": "netty-all",
-			"Version": "4.1.16.Final"
+		"pxnCommon-App": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-app",
+			"Name": "pxnCommon-App",
+			"Version": "${project.version}"
+		},
+		"pxnCommon-Shell": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-shell",
+			"Name": "pxnCommon-Shell",
+			"Version": "${project.version}"
+		},
+		"pxnCommon-Config": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-config",
+			"Name": "pxnCommon-Config",
+			"Version": "${project.version}"
+		},
+		"pxnCommon-Plugin": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-plugin",
+			"Name": "pxnCommon-Plugin",
+			"Version": "${project.version}"
+		},
+		"pxnCommon-Scheduler": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-sched",
+			"Name": "pxnCommon-Scheduler",
+			"Version": "${project.version}"
+		},
+		"pxnCommon-Net": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-net",
+			"Name": "pxnCommon-Net",
+			"Version": "${project.version}"
 		}
 	}
 }
