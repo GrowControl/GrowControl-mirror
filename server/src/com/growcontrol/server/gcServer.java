@@ -1,26 +1,10 @@
 package com.growcontrol.server;
 
-import java.io.PrintStream;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
-import com.growcontrol.server.commands.gcCommandsCommon;
-import com.growcontrol.server.commands.gcCommandsServer;
-import com.growcontrol.server.plugins.gcServerPlugin;
-import com.poixson.app.xApp;
-import com.poixson.app.plugin.xPluginLoader_Dir;
-import com.poixson.app.plugin.xPluginManager;
-import com.poixson.app.steps.xAppStep;
-import com.poixson.app.steps.xAppStep.StepType;
-import com.poixson.utils.Failure;
-import com.poixson.utils.FileUtils;
-import com.poixson.utils.StringUtils;
-import com.poixson.utils.xVars;
-import com.poixson.utils.xLogger.jLineConsole;
-import com.poixson.utils.xLogger.xCommandHandler;
-import com.poixson.utils.xLogger.xConsole;
-import com.poixson.utils.xLogger.xLog;
-import com.poixson.utils.xLogger.xLogPrintStream;
+import com.poixson.app.xAppStandard;
+import com.poixson.app.xAppStep.StepType;
+import com.poixson.app.steps.xAppSteps_Console;
 
 
 /*
@@ -41,7 +25,10 @@ import com.poixson.utils.xLogger.xLogPrintStream;
  *  165  stop prompt ticker
  *    1  exit if no client running
  */
-public class gcServer extends xApp {
+public class gcServer extends xAppStandard {
+
+	private static final AtomicReference<gcServer> instance =
+			new AtomicReference<gcServer>(null);
 
 
 
@@ -50,13 +37,15 @@ public class gcServer extends xApp {
 	 * @return gcServer instance object.
 	 */
 	public static gcServer get() {
-		return (gcServer) xApp.get();
+		return instance.get();
 	}
 
 
 
 	public gcServer() {
 		super();
+		if ( ! instance.compareAndSet(null, this) )
+			throw new RuntimeException("gcServer instance already exists! Cannot create a second instance.");
 //		if (xVars.debug()) {
 //			this.displayColors();
 //		}
@@ -67,11 +56,22 @@ public class gcServer extends xApp {
 
 
 
+	@Override
+	protected Object[] getStepObjects(final StepType type) {
+		return new Object[] {
+			new gcServerLogo(),
+			new xAppSteps_Console()
+		};
+	}
+
+
+
 	// ------------------------------------------------------------------------------- //
 	// startup steps
 
 
 
+/*
 	// load configs
 	@xAppStep(type=StepType.STARTUP, title="Configs", priority=55)
 	public void __STARTUP_load_configs() {
@@ -534,6 +534,7 @@ public class gcServer extends xApp {
 //11 |/////////////////////////////////////////////////////////////////|
 //  0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 |
 //  0         1         2         3         4         5         6     |
+*/
 
 
 

@@ -1,8 +1,6 @@
 package com.growcontrol.server;
 
-import com.growcontrol.server.plugins.gcServerPlugin;
-import com.poixson.app.plugin.xPluginManager;
-import com.poixson.utils.Keeper;
+import com.poixson.tools.Keeper;
 
 
 public class gcServerVars {
@@ -70,6 +68,7 @@ public class gcServerVars {
 
 
 
+/*
 	private static volatile xPluginManager<gcServerPlugin> pluginManager = null;
 
 	public static xPluginManager<gcServerPlugin> getPluginManager() {
@@ -78,6 +77,7 @@ public class gcServerVars {
 	public static void setPluginManager(final xPluginManager<gcServerPlugin> manager) {
 		pluginManager = manager;
 	}
+*/
 
 
 

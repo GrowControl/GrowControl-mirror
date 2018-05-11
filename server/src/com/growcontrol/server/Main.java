@@ -1,11 +1,11 @@
 package com.growcontrol.server;
 
 import com.growcontrol.server.gcServerVars.APP_MODE;
-import com.poixson.utils.Keeper;
-import com.poixson.utils.ShellArgsTool;
+import com.poixson.app.xVars;
+import com.poixson.logger.xLog;
+import com.poixson.tools.Keeper;
+import com.poixson.tools.ShellArgs;
 import com.poixson.utils.ThreadUtils;
-import com.poixson.utils.xVars;
-import com.poixson.utils.xLogger.xLog;
 
 
 public class Main {
@@ -21,13 +21,11 @@ public class Main {
 
 	public static void main(final String[] argsArray) {
 		// process shell arguments
-		final ShellArgsTool argsTool = ShellArgsTool.Init(argsArray);
+		final ShellArgs argsTool = ShellArgs.Init(argsArray);
 		// app mode flags
 		{
-			final boolean serverMode =
-				argsTool.getFlagBool(false,  "-S", "--server");
 			// server only mode
-			if (serverMode) {
+			if ( argsTool.getFlagBool(false,  "-S", "--server") ) {
 				gcServerVars.setAppMode(
 					APP_MODE.SERVER_ONLY
 				);
@@ -51,7 +49,7 @@ public class Main {
 //				break;
 //			}
 //		}
-		if (xVars.debug()) {
+		if (xVars.isDebug()) {
 			xLog.getRoot()
 				.fine("Initial thread returning..");
 		}
