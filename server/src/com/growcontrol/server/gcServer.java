@@ -2,9 +2,13 @@ package com.growcontrol.server;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.poixson.app.xApp;
 import com.poixson.app.xAppStandard;
+import com.poixson.app.xAppStep;
 import com.poixson.app.xAppStep.StepType;
+import com.poixson.app.commands.groups.Commands_Standard;
 import com.poixson.app.steps.xAppSteps_Console;
+import com.poixson.utils.ShellUtils;
 
 
 /*
@@ -60,7 +64,7 @@ public class gcServer extends xAppStandard {
 	protected Object[] getStepObjects(final StepType type) {
 		return new Object[] {
 			new gcServerLogo(),
-			new xAppSteps_Console()
+			xAppSteps_Console.get()
 		};
 	}
 
@@ -68,6 +72,16 @@ public class gcServer extends xAppStandard {
 
 	// ------------------------------------------------------------------------------- //
 	// startup steps
+
+
+
+	// standard commands
+	@xAppStep( Type=StepType.STARTUP, Title="Commands", StepValue=91 )
+	public void __STARTUP_commands(final xApp app) {
+		ShellUtils.RegisterCommands(
+			new Commands_Standard()
+		);
+	}
 
 
 
