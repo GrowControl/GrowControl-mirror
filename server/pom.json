@@ -50,6 +50,17 @@
 			"ArtifactId": "common-net",
 			"Name": "pxnCommon-Net",
 			"Version": "${project.version}"
+		},
+		"jcl": {
+			"GroupId": "org.xeustechnologies",
+			"ArtifactId": "jcl-core",
+			"Version": "2.8"
+		},
+		"snakeyaml": {
+			"GroupId": "org.yaml",
+			"ArtifactId": "snakeyaml",
+			"Name": "SnakeYAML",
+			"Version": "1.21"
 		}
 	}
 }

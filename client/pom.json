@@ -55,6 +55,19 @@
 			"ArtifactId": "server",
 			"Name": "gcServer",
 			"Version": "${project.version}"
+		},
+		"jcl": {
+			"GroupId": "org.xeustechnologies",
+			"ArtifactId": "jcl-core",
+			"Version": "2.8",
+			"Scope": "provided"
+		},
+		"snakeyaml": {
+			"GroupId": "org.yaml",
+			"ArtifactId": "snakeyaml",
+			"Name": "SnakeYAML",
+			"Version": "1.21",
+			"Scope": "provided"
 		}
 	}
 }
