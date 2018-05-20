@@ -1,4 +1,4 @@
-<!-- Generated on: May 18, 2018 12:23 UTC -->
+<!-- Generated on: May 20, 2018 08:23 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -43,16 +43,12 @@
 		<snakeyaml-version>1.21</snakeyaml-version>
 
 		<git-commit-id-plugin-version>2.2.2</git-commit-id-plugin-version>
-
 		<maven-resources-plugin-version>3.0.2</maven-resources-plugin-version>
 		<maven-compiler-plugin-version>3.3</maven-compiler-plugin-version>
 		<maven-jar-plugin-version>2.6</maven-jar-plugin-version>
-
 		<maven-assembly-plugin-version>2.5.5</maven-assembly-plugin-version>
 		<maven-shade-plugin-version>2.4.1</maven-shade-plugin-version>
-
 		<maven-source-plugin-version>2.4</maven-source-plugin-version>
-
 		<maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
 
 		<junit-version>4.12</junit-version>
