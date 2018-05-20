@@ -1,0 +1,50 @@
+# https://help.github.com/articles/dealing-with-line-endings/
+* text eol=lf
+
+.gitignore text
+.gitattributes text
+README text
+build.gradle text
+settings.gradle text
+*.properties text
+
+*.md text
+*.txt text
+*.php text
+*.pl text
+*.conf text
+*.config text
+*.sample text
+*.example text
+*.spec text
+*.htm text
+*.html text
+*.xhtml text
+*.xml text
+*.js text
+*.css text
+*.json text
+*.yml text
+*.yaml text
+*.svg text
+*.sh text
+*.bat text
+
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.jar binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.bin binary
+*.rpm binary
+*.exe binary
+*.dll binary
+*.class binary
+*.so binary
+*.o binary
+*.obj binary
+*.map binary
