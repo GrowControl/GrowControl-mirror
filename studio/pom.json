@@ -1,0 +1,81 @@
+{
+	"Name": "gcStudio",
+	"ArtifactId": "studio",
+	"GroupId": "com.growcontrol.client",
+	"Version": "3.6.2",
+	"URL": "http://growcontrol.com",
+	"Github-Path": "GrowControl/gcStudio",
+	"Org-Name": "GrowControl",
+	"Main-Class": "com.growcontrol.client.studio.Main",
+	"Shade": "yes",
+	"Deps": {
+		"pxnCommon-Core": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-core",
+			"Name": "pxnCommon-Core",
+			"Version": "${project.version}",
+			"Scope": "provided"
+		},
+		"pxnCommon-App": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-app",
+			"Name": "pxnCommon-App",
+			"Version": "${project.version}",
+			"Scope": "provided"
+		},
+		"pxnCommon-Config": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-config",
+			"Name": "pxnCommon-Config",
+			"Version": "${project.version}",
+			"Scope": "provided"
+		},
+		"pxnCommon-Plugin": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-plugin",
+			"Name": "pxnCommon-Plugin",
+			"Version": "${project.version}",
+			"Scope": "provided"
+		},
+		"pxnCommon-Scheduler": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-sched",
+			"Name": "pxnCommon-Scheduler",
+			"Version": "${project.version}",
+			"Scope": "provided"
+		},
+		"pxnCommon-Net": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-net",
+			"Name": "pxnCommon-Net",
+			"Version": "${project.version}",
+			"Scope": "provided"
+		},
+		"gcServer": {
+			"GroupId": "com.growcontrol",
+			"ArtifactId": "server",
+			"Name": "gcServer",
+			"Version": "${project.version}",
+			"Scope": "provided"
+		},
+		"gcClient": {
+			"GroupId": "com.growcontrol",
+			"ArtifactId": "server",
+			"Name": "gcServer",
+			"Version": "${project.version}"
+		},
+		"jcl": {
+			"GroupId": "org.xeustechnologies",
+			"ArtifactId": "jcl-core",
+			"Version": "2.8",
+			"Scope": "provided"
+		},
+		"snakeyaml": {
+			"GroupId": "org.yaml",
+			"ArtifactId": "snakeyaml",
+			"Name": "SnakeYAML",
+			"Version": "1.21",
+			"Scope": "provided"
+		}
+	}
+}

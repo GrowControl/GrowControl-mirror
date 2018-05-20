@@ -12,6 +12,7 @@
 	<modules>
 		<module>server</module>
 		<module>client</module>
+		<module>studio</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
