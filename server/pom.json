@@ -27,6 +27,12 @@
 			"Name": "pxnCommon-Shell",
 			"Version": "${project.version}"
 		},
+		"pxnCommon-Loggers": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-loggers",
+			"Name": "pxnCommon-Loggers",
+			"Version": "${project.version}"
+		},
 		"pxnCommon-Config": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-config",
