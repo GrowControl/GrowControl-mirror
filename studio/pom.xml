@@ -1,4 +1,4 @@
-<!-- Generated on: May 20, 2018 08:23 UTC -->
+<!-- Generated on: June 14, 2018 17:32 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -227,7 +227,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.growcontrol</groupId>
-			<artifactId>server</artifactId>
+			<artifactId>client</artifactId>
 			<version>${gcClient-version}</version>
 		</dependency>
 		<dependency>
