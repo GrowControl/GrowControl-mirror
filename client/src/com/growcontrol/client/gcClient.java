@@ -33,7 +33,10 @@ import com.poixson.app.steps.xAppStandard;
  *   10  garbage collect     - xApp
  *    1  exit
  */
-public abstract class gcClient extends xApp {
+public abstract class gcClient extends xAppStandard {
+
+	private static final AtomicReference<gcClient> instance =
+			new AtomicReference<gcClient>(null);
 
 
 
@@ -42,21 +45,31 @@ public abstract class gcClient extends xApp {
 	 * @return gcClient instance object.
 	 */
 	public static gcClient get() {
-		return (gcClient) xApp.get();
+		return instance.get();
 	}
 
 
 
 	public gcClient() {
 		super();
-//		if(xVars.debug())
-//			this.displayColors();
+		if ( ! instance.compareAndSet(null, this) )
+			throw new RuntimeException("gcClient instance already exists! Cannot create a second instance.");
 	}
 
 
 
+	@Override
+	protected Object[] getStepObjects(final StepType type) {
+		return new Object[] {
+			new gcClientLogo(),
+			gcClientPluginManager.get()
+		};
+	}
 
-	/**
+
+
+/*
+	/ **
 	 * Handle command-line arguments.
 	 * /
 	@Override
@@ -74,7 +87,7 @@ public abstract class gcClient extends xApp {
 			}
 		}
 	}
-*/
+* /
 
 
 
@@ -272,7 +285,7 @@ public abstract class gcClient extends xApp {
 
 
 
-/*
+/ *
 	protected void updateConfig() {
 		// config version
 		{

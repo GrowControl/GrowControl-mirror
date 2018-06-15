@@ -58,13 +58,14 @@ public class gcServer extends xAppStandard {
 		super();
 		if ( ! instance.compareAndSet(null, this) )
 			throw new RuntimeException("gcServer instance already exists! Cannot create a second instance.");
-//		if (xVars.debug()) {
-//			this.displayColors();
-//		}
-//		case "--internal":
-//		gcServerVars.setInternal(true);
-//		it.remove();
 	}
+//TODO: is this useful?
+//	if (xVars.debug()) {
+//		this.displayColors();
+//	}
+//	case "--internal":
+//	gcServerVars.setInternal(true);
+//	it.remove();
 
 
 
@@ -72,7 +73,8 @@ public class gcServer extends xAppStandard {
 	protected Object[] getStepObjects(final StepType type) {
 		return new Object[] {
 			new gcServerLogo(),
-			xAppSteps_Console.get()
+			xAppSteps_Console.get(),
+			gcServerPluginManager.get()
 		};
 	}
 
@@ -83,6 +85,7 @@ public class gcServer extends xAppStandard {
 
 
 
+/*
 	// standard commands
 	@xAppStep( Type=StepType.STARTUP, Title="Commands", StepValue=91 )
 	public void __STARTUP_commands(final xApp app) {
@@ -93,7 +96,7 @@ public class gcServer extends xAppStandard {
 
 
 
-/*
+/ *
 	// load configs
 	@xAppStep(type=StepType.STARTUP, title="Configs", priority=55)
 	public void __STARTUP_load_configs() {
