@@ -26,6 +26,7 @@ rpmbuild-root/
 out/
 build/
 libraries/
+*-temp/
 
 composer.phar
 auth.json
