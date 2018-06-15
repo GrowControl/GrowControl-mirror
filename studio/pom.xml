@@ -1,4 +1,4 @@
-<!-- Generated on: June 14, 2018 17:32 UTC -->
+<!-- Generated on: June 15, 2018 01:50 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -34,6 +34,8 @@
 
 		<pxnCommon-Core-version>${project.version}</pxnCommon-Core-version>
 		<pxnCommon-App-version>${project.version}</pxnCommon-App-version>
+		<pxnCommon-Shell-version>${project.version}</pxnCommon-Shell-version>
+		<pxnCommon-Loggers-version>${project.version}</pxnCommon-Loggers-version>
 		<pxnCommon-Config-version>${project.version}</pxnCommon-Config-version>
 		<pxnCommon-Plugin-version>${project.version}</pxnCommon-Plugin-version>
 		<pxnCommon-Scheduler-version>${project.version}</pxnCommon-Scheduler-version>
@@ -193,6 +195,18 @@
 			<groupId>com.poixson</groupId>
 			<artifactId>common-app</artifactId>
 			<version>${pxnCommon-App-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.poixson</groupId>
+			<artifactId>common-shell</artifactId>
+			<version>${pxnCommon-Shell-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.poixson</groupId>
+			<artifactId>common-loggers</artifactId>
+			<version>${pxnCommon-Loggers-version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
