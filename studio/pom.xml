@@ -6,22 +6,22 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>gcStudio</name>
 	<artifactId>studio</artifactId>
-	<groupId>com.growcontrol.client</groupId>
+	<groupId>com.growcontrol</groupId>
 	<version>3.6.2</version>
 	<packaging>jar</packaging>
 	<url>http://growcontrol.com</url>
 
 	<scm>
-		<url>https://github.com/GrowControl/gcStudio</url>
-		<connection>scm:git:https://github.com/GrowControl/gcStudio.git</connection>
-		<developerConnection>scm:git:git@github.com:GrowControl/gcStudio.git</developerConnection>
+		<url>https://github.com/GrowControl/GrowControl</url>
+		<connection>scm:git:https://github.com/GrowControl/GrowControl.git</connection>
+		<developerConnection>scm:git:git@github.com:GrowControl/GrowControl.git</developerConnection>
 	</scm>
 	<ciManagement>
 		<url>ci.poixson.com</url>
 		<system>pxnci</system>
 	</ciManagement>
 	<issueManagement>
-		<url>https://github.com/GrowControl/gcStudio/issues</url>
+		<url>https://github.com/GrowControl/GrowControl/issues</url>
 		<system>github</system>
 	</issueManagement>
 

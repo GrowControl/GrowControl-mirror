@@ -1,10 +1,10 @@
 {
 	"Name": "gcStudio",
 	"ArtifactId": "studio",
-	"GroupId": "com.growcontrol.client",
+	"GroupId": "com.growcontrol",
 	"Version": "3.6.2",
 	"URL": "http://growcontrol.com",
-	"Github-Path": "GrowControl/gcStudio",
+	"Github-Path": "GrowControl/GrowControl",
 	"Org-Name": "GrowControl",
 	"Main-Class": "com.growcontrol.client.studio.Main",
 	"Shade": "yes",
