@@ -2,32 +2,40 @@ package com.growcontrol.server;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.poixson.app.xApp;
-import com.poixson.app.xAppStandard;
-import com.poixson.app.xAppStep;
+import com.growcontrol.server.plugins.gcServerPluginManager;
 import com.poixson.app.xAppStep.StepType;
-import com.poixson.app.commands.groups.Commands_Standard;
+import com.poixson.app.steps.xAppStandard;
 import com.poixson.app.steps.xAppSteps_Console;
-import com.poixson.utils.ShellUtils;
 
 
 /*
  * Startup sequence
- *   55  load configs
- *   85  command prompt
- *  165  prompt ticker
- *  200  start meta event handler
- *  250  load plugins
- *  275  start plugins
- *  300  sockets
- *  350  scripts
+ *   10  prevent root        - xAppSteps_Tool
+ *   50  load configs        - xAppSteps_Config
+ *   70  lock file           - xAppSteps_LockFile
+ *   80  display logo        - xAppSteps_Logo
+ *   85  sync clock          - xAppStandard
+ *  100  prepare commands    - xCommandHandler
+ *  105  start console input - xAppSteps_Console
+ *  200  startup time        - xAppStandard
+ *  300  start event router
+ *  405  load plugins        - gcServerPluginManager
+ *  410  start plugins       - gcServerPluginManager
+ *  450  start scripts
+ *  500  start sockets
+ *
  * Shutdown sequence
- *  350  stop scripts
- *  300  stop listen sockets
- *  275  stop plugins
- *  200  stop meta event handler
- *  165  stop prompt ticker
- *    1  exit if no client running
+ *  500  stop listen sockets
+ *  450  stop scripts
+ *  410  stop plugins        - gcServerPluginManager
+ *  405  unload plugins      - gcServerPluginManager
+ *  300  stop event router
+ *  150  stop schedulers     - xAppSteps_Scheduler
+ *  105  stop console input  - xAppSteps_Console
+ *  100  stop thread pools   - xAppStandard
+ *   60  display uptime      - xAppStandard
+ *   10  garbage collect     - xApp
+ *    1  exit
  */
 public class gcServer extends xAppStandard {
 

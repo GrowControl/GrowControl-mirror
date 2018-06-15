@@ -1,33 +1,37 @@
 package com.growcontrol.client;
 
-import java.io.PrintStream;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
-import com.growcontrol.client.plugins.gcClientPlugin;
-import com.poixson.app.xApp;
-import com.poixson.app.plugin.xPluginLoader_Dir;
-import com.poixson.app.plugin.xPluginManager;
-import com.poixson.app.steps.xAppStep;
-import com.poixson.app.steps.xAppStep.StepType;
-import com.poixson.utils.Failure;
-import com.poixson.utils.StringUtils;
-import com.poixson.utils.xLogger.xLog;
-import com.poixson.utils.xLogger.xLogPrintStream;
+import com.growcontrol.client.plugins.gcClientPluginManager;
+import com.poixson.app.xAppStep.StepType;
+import com.poixson.app.steps.xAppStandard;
 
 
 /*
  * Startup sequence
- *   55  load configs
- *  100  load gui
- *  250  load plugins
- *  275  start plugins
- *  300  sockets
- *  400  show login window
+ *   10  prevent root        - xAppSteps_Tool
+ *   50  load configs        - xAppSteps_Config
+ *   70  lock file           - xAppSteps_LockFile
+ *   80  display logo        - xAppSteps_Logo
+ *   85  sync clock          - xAppStandard
+ *  105  load gui
+ *  200  startup time        - xAppStandard
+ *  405  load plugins        - gcClientPluginManager
+ *  410  start plugins       - gcClientPluginManager
+ *  450  start scripts
+ *  500  start sockets
+ *
  * Shutdown sequence
- *  400  close gui windows
- *  300  stop listen sockets
- *  275  stop plugins
+ *  500  stop listen sockets
+ *  450  stop scripts
+ *  410  stop plugins        - gcClientPluginManager
+ *  405  unload plugins      - gcClientPluginManager
+ *  150  stop schedulers     - xAppSteps_Scheduler
+ *  105  close gui windows
+ *  100  stop thread pools   - xAppStandard
+ *   60  display uptime      - xAppStandard
+ *   10  garbage collect     - xApp
+ *    1  exit
  */
 public abstract class gcClient extends xApp {
 
