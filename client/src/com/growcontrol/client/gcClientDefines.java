@@ -1,16 +1,16 @@
 package com.growcontrol.client;
 
-import com.poixson.utils.Keeper;
+import com.poixson.tools.Keeper;
 
 
 public final class gcClientDefines {
 	private gcClientDefines() {}
-	{ Keeper.add(new gcClientDefines()); }
+	static { Keeper.add(new gcClientDefines()); }
 
 
 
-	// plugin.yml
-	public static final String CONFIG_PLUGIN_CLASS_KEY_CLIENT = "Client Main Class";
+	// plugin.yml keys
+	public static final String CONFIG_PLUGIN_CLASS_KEY_CLIENT = "Client Main";
 
 
 

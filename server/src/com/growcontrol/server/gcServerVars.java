@@ -5,10 +5,11 @@ import com.poixson.tools.Keeper;
 
 public class gcServerVars {
 	private gcServerVars() {}
-	{ Keeper.add(new gcServerVars()); }
+	static { Keeper.add(new gcServerVars()); }
 
 
 
+/*
 //	// internal mode
 //	private static volatile boolean internal = false;
 
@@ -63,25 +64,6 @@ public class gcServerVars {
 
 
 
-	// ------------------------------------------------------------------------------- //
-	// plugin manager
-
-
-
-/*
-	private static volatile xPluginManager<gcServerPlugin> pluginManager = null;
-
-	public static xPluginManager<gcServerPlugin> getPluginManager() {
-		return pluginManager;
-	}
-	public static void setPluginManager(final xPluginManager<gcServerPlugin> manager) {
-		pluginManager = manager;
-	}
-*/
-
-
-
-/*
 	// server config
 	public static gcServerConfig getConfig() {
 		if (config == null) {

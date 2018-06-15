@@ -1,4 +1,3 @@
-/*
 package com.growcontrol.server;
 
 import com.poixson.tools.Keeper;
@@ -6,12 +5,12 @@ import com.poixson.tools.Keeper;
 
 public final class gcServerDefines {
 	private gcServerDefines() {}
-	{ Keeper.add(new gcServerDefines()); }
+	static { Keeper.add(new gcServerDefines()); }
 
 
 
 	// plugin.yml
-	public static final String CONFIG_PLUGIN_CLASS_KEY_SERVER = "Server Main Class";
+	public static final String CONFIG_PLUGIN_CLASS_KEY_SERVER = "Server Main";
 
 
 
@@ -51,4 +50,3 @@ public final class gcServerDefines {
 
 
 }
-*/
