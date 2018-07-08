@@ -1,37 +1,20 @@
-/*
 package com.growcontrol.server.plugins;
 
-import com.poixson.app.plugin.xJavaPlugin;
+import com.poixson.plugins.xJavaPlugin;
 
 
 public abstract class gcServerPlugin extends xJavaPlugin {
 
 
 
-	public gcServerPlugin() {}
-
-
-
-	@Override
-	protected void onInit() {
-		super.onInit();
+	public gcServerPlugin() {
+		super();
 	}
-	@Override
-	protected void onUnload() {
-		super.onUnload();
-	}
-
-
-
-	@Override
-	protected abstract void onEnable();
-	@Override
-	protected abstract void onDisable();
 
 
 
 //TODO:
-/ *
+/*
 	// register meta listener
 	public void register(final MetaAddress address, final MetaListener listener) {
 		if(address  == null) throw new IllegalArgumentException("Cannot register null meta address!");
@@ -63,9 +46,8 @@ public abstract class gcServerPlugin extends xJavaPlugin {
 //					+listenerClass.getName());
 		}
 	}
-* /
+*/
 
 
 
 }
-*/

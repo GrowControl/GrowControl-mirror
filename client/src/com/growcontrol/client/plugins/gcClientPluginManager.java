@@ -1,62 +1,90 @@
-/*
-package com.growcontrol.client.clientPlugin;
+package com.growcontrol.client.plugins;
 
-import com.growcontrol.gcCommon.pxnPlugin.pxnPluginManager;
+import java.util.concurrent.atomic.AtomicReference;
+
+import com.growcontrol.client.gcClientDefines;
+import com.poixson.app.xAppStep;
+import com.poixson.app.xAppStep.StepType;
+import com.poixson.plugins.xPluginManager;
+import com.poixson.plugins.loaders.xPluginLoader_Dir;
+import com.poixson.tools.Keeper;
 
 
-public class gcClientPluginManager extends pxnPluginManager {
+public class gcClientPluginManager extends xPluginManager<gcClientPlugin> {
+	private static final String LOG_NAME = "gcClientPlugin";
 
-	// main class field names for plugin.yml
-	public final String mainClass_Server = "Server Main";
-	public final String mainClass_Client = "Client Main";
+	private static final AtomicReference<gcClientPluginManager> instance =
+			new AtomicReference<gcClientPluginManager>(null);
+
 
 
 	public static gcClientPluginManager get() {
-		return get(null);
-	}
-	public static gcClientPluginManager get(String pluginsPath) {
-		if(manager == null) {
-			synchronized(lock) {
-				if(manager == null)
-					if(pluginsPath != null && !pluginsPath.isEmpty())
-						manager = new gcClientPluginManager(pluginsPath);
-			}
+		// existing instance
+		{
+			final gcClientPluginManager manager = instance.get();
+			if (manager != null)
+				return manager;
 		}
-		return (gcClientPluginManager) manager;
+		// new instance
+		{
+			final gcClientPluginManager manager = new gcClientPluginManager();
+			if (instance.compareAndSet(null, manager))
+				return manager;
+			return instance.get();
+		}
 	}
-	protected gcClientPluginManager(String pluginsPath) {
-		super(pluginsPath);
+	protected gcClientPluginManager() {
+		super(LOG_NAME);
+		// plugin loaders
+		{
+			final xPluginLoader_Dir<gcClientPlugin> loader =
+				new xPluginLoader_Dir<gcClientPlugin>(
+					this,
+					gcClientDefines.CONFIG_PLUGIN_CLASS_KEY_CLIENT
+				);
+			this.addLoader(loader);
+		}
+		Keeper.add(this);
 	}
 
 
-	// load jars from dir
-	@Override
-	public void LoadPluginsDir() {
-		LoadPluginsDir(new String[] {
-			mainClass_Client
-		});
-	}
-	// init client plugin instances
-	@Override
-	public void InitPlugins() {
-		InitPlugins(mainClass_Client);
+
+	// ------------------------------------------------------------------------------- //
+	// load/unload plugins
+
+
+
+	@xAppStep( Type=StepType.START, Title="Plugins-Load", StepValue=400 )
+	public void START_load_plugins() {
+		super.start();
 	}
 
 
-//	// client gui frames for plugins
-//	public gcPluginFrame newFrame(String title) {
-//		gcPluginFrame frame = new gcPluginFrame(title);
-//		addFrame(frame);
-//		return frame;
-//	}
-//	public void addFrame(gcPluginFrame frame) {
-//		frames.add(frame);
-//	}
-//	// add frame to dashboard
-//	public void addFrame(gcPluginFrame frame) {
-//		Main.getClient().getConnectState().getFrame("dashboard");
-//	}
+
+	@xAppStep( Type=StepType.STOP, Title="Plugins-Unload", StepValue=400 )
+	public void STOP_unload_plugins() {
+		super.stop();
+	}
+
+
+
+//TODO:
+/*
+	// client gui frames for plugins
+	public gcPluginFrame newFrame(String title) {
+		gcPluginFrame frame = new gcPluginFrame(title);
+		addFrame(frame);
+		return frame;
+	}
+	public void addFrame(gcPluginFrame frame) {
+		frames.add(frame);
+	}
+	// add frame to dashboard
+	public void addFrame(gcPluginFrame frame) {
+		Main.getClient().getConnectState().getFrame("dashboard");
+	}
+*/
+
 
 
 }
-*/

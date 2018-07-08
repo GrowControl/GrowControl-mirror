@@ -1,31 +1,15 @@
 package com.growcontrol.client.plugins;
 
-import com.poixson.app.plugin.xJavaPlugin;
+import com.poixson.plugins.xJavaPlugin;
 
 
 public abstract class gcClientPlugin extends xJavaPlugin {
 
 
 
-	public gcClientPlugin() {}
-
-
-
-	@Override
-	protected void onInit() {
-		super.onInit();
+	public gcClientPlugin() {
+		super();
 	}
-	@Override
-	protected void onUnload() {
-		super.onUnload();
-	}
-
-
-
-	@Override
-	protected abstract void onEnable();
-	@Override
-	protected abstract void onDisable();
 
 
 
