@@ -12,13 +12,6 @@
 	"Main-Class": "com.growcontrol.launcher.Main",
 	"Shade": "yes",
 	"Deps": {
-		"pxnCommon": {
-			"GroupId": "com.poixson",
-			"ArtifactId": "common",
-			"Name": "pxnCommon",
-			"Version": "${project.version}",
-			"Scope": "provided"
-		},
 		"gcServer": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "server",

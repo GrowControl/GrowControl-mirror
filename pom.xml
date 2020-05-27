@@ -10,9 +10,12 @@
 	<version>3.6.2</version>
 	<packaging>pom</packaging>
 	<modules>
+		<module>common</module>
 		<module>server</module>
 		<module>client</module>
 		<module>studio</module>
+		<module>lab</module>
+		<module>launcher</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

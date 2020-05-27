@@ -1,4 +1,4 @@
-<!-- Generated on: May 27, 2020 05:09 UTC -->
+<!-- Generated on: May 27, 2020 05:40 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -132,6 +132,14 @@
 				</executions>
 				<configuration>
 					<dependencyReducedPomLocation>${project.basedir}/target/dependency-reduced-pom.xml</dependencyReducedPomLocation>
+					<filters>
+						<filter>
+							<artifact>com.growcontrol:server</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+					</filters>
 				</configuration>
 			</plugin>
 			<!-- Source Plugin -->

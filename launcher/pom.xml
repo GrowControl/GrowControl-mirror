@@ -1,4 +1,4 @@
-<!-- Generated on: May 27, 2020 05:13 UTC -->
+<!-- Generated on: May 27, 2020 05:46 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -28,7 +28,6 @@
 
 
 <!-- Dependencies -->
-		<pxnCommon-version>${project.version}</pxnCommon-version>
 		<gcServer-version>${project.version}</gcServer-version>
 		<gcClient-version>${project.version}</gcClient-version>
 
@@ -132,6 +131,20 @@
 				</executions>
 				<configuration>
 					<dependencyReducedPomLocation>${project.basedir}/target/dependency-reduced-pom.xml</dependencyReducedPomLocation>
+					<filters>
+						<filter>
+							<artifact>com.growcontrol:server</artifact>
+							<includes>
+								<include>com/growcontrol/**</include>
+							</includes>
+						</filter>
+						<filter>
+							<artifact>com.growcontrol:client</artifact>
+							<includes>
+								<include>com/growcontrol/**</include>
+							</includes>
+						</filter>
+					</filters>
 				</configuration>
 			</plugin>
 			<!-- Source Plugin -->
@@ -179,12 +192,6 @@
 	</build>
 	<dependencies>
 
-		<dependency>
-			<groupId>com.poixson</groupId>
-			<artifactId>common</artifactId>
-			<version>${pxnCommon-version}</version>
-			<scope>provided</scope>
-		</dependency>
 		<dependency>
 			<groupId>com.growcontrol</groupId>
 			<artifactId>server</artifactId>

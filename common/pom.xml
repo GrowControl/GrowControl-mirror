@@ -106,6 +106,38 @@
 				</executions>
 				<configuration>
 					<finalName>${project.artifactId}-${project.version}</finalName>
+					<filters>
+						<filter>
+							<artifact>com.poixson:common-core</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>com.poixson:common-config</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>com.poixson:common-net</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>io.netty:netty-all</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.yaml:snakeyaml</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+					</filters>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -131,7 +163,19 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.poixson</groupId>
-			<artifactId>pxnCommon</artifactId>
+			<artifactId>common-core</artifactId>
+			<version>${pxnCommon-version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.poixson</groupId>
+			<artifactId>common-config</artifactId>
+			<version>${pxnCommon-version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.poixson</groupId>
+			<artifactId>common-net</artifactId>
 			<version>${pxnCommon-version}</version>
 			<scope>compile</scope>
 		</dependency>
