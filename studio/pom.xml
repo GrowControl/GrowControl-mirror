@@ -1,4 +1,4 @@
-<!-- Generated on: June 15, 2018 04:40 UTC -->
+<!-- Generated on: May 27, 2020 05:16 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -7,21 +7,21 @@
 	<name>gcStudio</name>
 	<artifactId>studio</artifactId>
 	<groupId>com.growcontrol</groupId>
-	<version>3.6.2</version>
+	<version>4.0.0</version>
 	<packaging>jar</packaging>
-	<url>http://growcontrol.com</url>
+	<url>https://growcontrol.com</url>
 	<scm>
 		<url>git.poixson.com/summary/gc!GrowControl.git</url>
 		<connection>scm:git:https://lorenzop@git.poixson.com/r/gc/GrowControl.git</connection>
 		<developerConnection>scm:git:git.poixson.com/summary/gc!GrowControl.git</developerConnection>
 	</scm>
 	<issueManagement>
-		<url>http://git.poixson.com/tickets/gc!GrowControl.git</url>
-		<system>http://git.poixson.com/tickets/gc!GrowControl.git</system>
+		<url>https://git.poixson.com/tickets/gc!GrowControl.git</url>
+		<system>https://git.poixson.com/tickets/gc!GrowControl.git</system>
 	</issueManagement>
 	<organization>
 		<name>GrowControl</name>
-		<url>http://growcontrol.com</url>
+		<url>https://growcontrol.com</url>
 	</organization>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,21 +39,21 @@
 		<gcServer-version>${project.version}</gcServer-version>
 		<gcClient-version>${project.version}</gcClient-version>
 		<jcl-version>2.8</jcl-version>
-		<snakeyaml-version>1.21</snakeyaml-version>
+		<snakeyaml-version>1.26</snakeyaml-version>
 
 		<!-- MVN Plugins -->
-		<git-commit-id-plugin-version>2.2.2</git-commit-id-plugin-version>
-		<maven-resources-plugin-version>3.0.2</maven-resources-plugin-version>
-		<maven-compiler-plugin-version>3.3</maven-compiler-plugin-version>
-		<maven-jar-plugin-version>2.6</maven-jar-plugin-version>
-		<maven-assembly-plugin-version>2.5.5</maven-assembly-plugin-version>
-		<maven-shade-plugin-version>2.4.1</maven-shade-plugin-version>
-		<maven-source-plugin-version>2.4</maven-source-plugin-version>
+		<git-commit-id-plugin-version>4.0.0</git-commit-id-plugin-version>
+		<maven-resources-plugin-version>3.1.0</maven-resources-plugin-version>
+		<maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
+		<maven-jar-plugin-version>3.2.0</maven-jar-plugin-version>
+		<maven-assembly-plugin-version>3.3.0</maven-assembly-plugin-version>
+		<maven-shade-plugin-version>3.2.3</maven-shade-plugin-version>
+		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
 		<maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
-		<junit-version>4.12</junit-version>
-		<surefire-version>2.18.1</surefire-version>
+		<junit-version>4.13</junit-version>
+		<surefire-version>3.0.0-M4</surefire-version>
 		<cobertura-version>2.7</cobertura-version>
-		<project-info-reports-version>2.8</project-info-reports-version>
+		<project-info-reports-version>3.0.0</project-info-reports-version>
 
 	</properties>
 	<build>
