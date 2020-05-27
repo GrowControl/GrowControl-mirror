@@ -2,12 +2,12 @@
 	"Name": "gcServer",
 	"ArtifactId": "server",
 	"GroupId": "com.growcontrol",
-	"Version": "3.6.2",
-	"URL": "http://growcontrol.com",
+	"Version": "4.0.0",
+	"URL": "https://growcontrol.com",
 	"Hub-Path": "git.poixson.com/summary/gc!GrowControl.git",
 	"SCM-Path": "https://lorenzop@git.poixson.com/r/gc/GrowControl.git",
 	"Dev-Path": "ssh://lorenzop@git.poixson.com/gc/GrowControl.git",
-	"Tickets": "http://git.poixson.com/tickets/gc!GrowControl.git",
+	"Tickets": "https://git.poixson.com/tickets/gc!GrowControl.git",
 	"Org-Name": "GrowControl",
 	"Main-Class": "com.growcontrol.server.Main",
 	"Shade": "yes",
@@ -69,7 +69,7 @@
 			"GroupId": "org.yaml",
 			"ArtifactId": "snakeyaml",
 			"Name": "SnakeYAML",
-			"Version": "1.21"
+			"Version": "1.26"
 		}
 	}
 }
