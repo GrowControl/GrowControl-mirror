@@ -15,13 +15,11 @@
 		"gcServer": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "server",
-			"Name": "gcServer",
 			"Version": "${project.version}"
 		},
 		"gcClient": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "client",
-			"Name": "gcClient",
 			"Version": "${project.version}"
 		}
 	}

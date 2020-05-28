@@ -1,4 +1,4 @@
-<!-- Generated on: May 27, 2020 06:00 UTC -->
+<!-- Generated on: May 28, 2020 23:30 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -39,7 +39,7 @@
 		<gcServer-version>${project.version}</gcServer-version>
 		<gcClient-version>${project.version}</gcClient-version>
 		<jcl-version>2.8</jcl-version>
-		<snakeyaml-version>1.26</snakeyaml-version>
+		<SnakeYAML-version>1.26</SnakeYAML-version>
 
 		<!-- MVN Plugins -->
 		<git-commit-id-plugin-version>4.0.0</git-commit-id-plugin-version>
@@ -265,7 +265,7 @@
 		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
-			<version>${snakeyaml-version}</version>
+			<version>${SnakeYAML-version}</version>
 			<scope>provided</scope>
 		</dependency>
 

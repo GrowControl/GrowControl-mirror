@@ -15,49 +15,41 @@
 		"pxnCommon-Core": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-core",
-			"Name": "pxnCommon-Core",
 			"Version": "${project.version}"
 		},
 		"pxnCommon-App": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-app",
-			"Name": "pxnCommon-App",
 			"Version": "${project.version}"
 		},
 		"pxnCommon-Shell": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-shell",
-			"Name": "pxnCommon-Shell",
 			"Version": "${project.version}"
 		},
 		"pxnCommon-Loggers": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-loggers",
-			"Name": "pxnCommon-Loggers",
 			"Version": "${project.version}"
 		},
 		"pxnCommon-Config": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-config",
-			"Name": "pxnCommon-Config",
 			"Version": "${project.version}"
 		},
 		"pxnCommon-Plugin": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-plugin",
-			"Name": "pxnCommon-Plugin",
 			"Version": "${project.version}"
 		},
 		"pxnCommon-Scheduler": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-sched",
-			"Name": "pxnCommon-Scheduler",
 			"Version": "${project.version}"
 		},
 		"pxnCommon-Net": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-net",
-			"Name": "pxnCommon-Net",
 			"Version": "${project.version}"
 		},
 		"jcl": {
@@ -65,10 +57,9 @@
 			"ArtifactId": "jcl-core",
 			"Version": "2.8"
 		},
-		"snakeyaml": {
+		"SnakeYAML": {
 			"GroupId": "org.yaml",
 			"ArtifactId": "snakeyaml",
-			"Name": "SnakeYAML",
 			"Version": "1.26"
 		}
 	}

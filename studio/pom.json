@@ -15,70 +15,60 @@
 		"pxnCommon-Core": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-core",
-			"Name": "pxnCommon-Core",
 			"Version": "${project.version}",
 			"Scope": "provided"
 		},
 		"pxnCommon-App": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-app",
-			"Name": "pxnCommon-App",
 			"Version": "${project.version}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Shell": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-shell",
-			"Name": "pxnCommon-Shell",
 			"Version": "${project.version}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Loggers": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-loggers",
-			"Name": "pxnCommon-Loggers",
 			"Version": "${project.version}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Config": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-config",
-			"Name": "pxnCommon-Config",
 			"Version": "${project.version}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Plugin": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-plugin",
-			"Name": "pxnCommon-Plugin",
 			"Version": "${project.version}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Scheduler": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-sched",
-			"Name": "pxnCommon-Scheduler",
 			"Version": "${project.version}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Net": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-net",
-			"Name": "pxnCommon-Net",
 			"Version": "${project.version}",
 			"Scope": "provided"
 		},
 		"gcServer": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "server",
-			"Name": "gcServer",
 			"Version": "${project.version}",
 			"Scope": "provided"
 		},
 		"gcClient": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "client",
-			"Name": "gcClient",
 			"Version": "${project.version}"
 		},
 		"jcl": {
@@ -87,10 +77,9 @@
 			"Version": "2.8",
 			"Scope": "provided"
 		},
-		"snakeyaml": {
+		"SnakeYAML": {
 			"GroupId": "org.yaml",
 			"ArtifactId": "snakeyaml",
-			"Name": "SnakeYAML",
 			"Version": "1.26",
 			"Scope": "provided"
 		}
