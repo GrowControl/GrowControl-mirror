@@ -52,6 +52,11 @@
 			"ArtifactId": "common-net",
 			"Version": "${project.version}"
 		},
+		"gcCommon": {
+			"GroupId": "com.growcontrol",
+			"ArtifactId": "gccommon",
+			"Version": "${project.version}"
+		},
 		"jcl": {
 			"GroupId": "org.xeustechnologies",
 			"ArtifactId": "jcl-core",

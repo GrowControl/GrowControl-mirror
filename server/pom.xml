@@ -36,6 +36,7 @@
 		<pxnCommon-Plugin-version>${project.version}</pxnCommon-Plugin-version>
 		<pxnCommon-Scheduler-version>${project.version}</pxnCommon-Scheduler-version>
 		<pxnCommon-Net-version>${project.version}</pxnCommon-Net-version>
+		<gcCommon-version>${project.version}</gcCommon-version>
 		<jcl-version>2.8</jcl-version>
 		<SnakeYAML-version>1.26</SnakeYAML-version>
 
@@ -147,6 +148,13 @@
 							</excludes>
 						</filter>
 						<filter>
+							<artifact>com.growcontrol:gccommon</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+								<exclude>app.properties</exclude>
+							</excludes>
+						</filter>
+						<filter>
 							<artifact>org.fusesource.jansi:jansi</artifact>
 							<excludes>
 								<exclude>META-INF/MANIFEST.MF</exclude>
@@ -178,6 +186,12 @@
 						</filter>
 						<filter>
 							<artifact>org.quartz-scheduler:quartz</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>io.netty:netty-all</artifact>
 							<excludes>
 								<exclude>META-INF/MANIFEST.MF</exclude>
 							</excludes>
@@ -305,6 +319,11 @@
 			<groupId>com.poixson</groupId>
 			<artifactId>common-net</artifactId>
 			<version>${pxnCommon-Net-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.growcontrol</groupId>
+			<artifactId>gccommon</artifactId>
+			<version>${gcCommon-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.xeustechnologies</groupId>
