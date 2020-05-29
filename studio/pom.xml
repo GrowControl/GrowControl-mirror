@@ -1,4 +1,4 @@
-<!-- Generated on: May 28, 2020 23:30 UTC -->
+<!-- Generated on: May 29, 2020 00:04 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -26,8 +26,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-
-<!-- Dependencies -->
+		<!-- Dependencies -->
 		<pxnCommon-Core-version>${project.version}</pxnCommon-Core-version>
 		<pxnCommon-App-version>${project.version}</pxnCommon-App-version>
 		<pxnCommon-Shell-version>${project.version}</pxnCommon-Shell-version>

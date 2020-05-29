@@ -1,4 +1,4 @@
-<!-- Generated on: May 27, 2020 05:46 UTC -->
+<!-- Generated on: May 29, 2020 00:05 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -26,8 +26,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-
-<!-- Dependencies -->
+		<!-- Dependencies -->
 		<gcServer-version>${project.version}</gcServer-version>
 		<gcClient-version>${project.version}</gcClient-version>
 
