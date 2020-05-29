@@ -135,13 +135,13 @@
 						<filter>
 							<artifact>com.growcontrol:server</artifact>
 							<includes>
-								<include>com/growcontrol/**</include>
+								<include>com/growcontrol/server/**</include>
 							</includes>
 						</filter>
 						<filter>
 							<artifact>com.growcontrol:client</artifact>
 							<includes>
-								<include>com/growcontrol/**</include>
+								<include>com/growcontrol/client/**</include>
 							</includes>
 						</filter>
 					</filters>
