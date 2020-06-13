@@ -4,7 +4,7 @@
                              http://maven.apache.org/maven-v4_0_0.xsd">
 <!-- http://maven-repository.com/ -->
 	<modelVersion>4.0.0</modelVersion>
-	<name>GrowControl-Common</name>
+	<name>gcCommon</name>
 	<artifactId>gccommon</artifactId>
 	<groupId>com.growcontrol</groupId>
 	<version>4.0.0</version>
