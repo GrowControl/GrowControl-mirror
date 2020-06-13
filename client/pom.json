@@ -9,73 +9,46 @@
 	"Dev-Path": "ssh://lorenzop@git.poixson.com/gc/GrowControl.git",
 	"Tickets": "https://git.poixson.com/tickets/gc!GrowControl.git",
 	"Org-Name": "GrowControl",
-	"Shade": "yes",
 	"Deps": {
 		"pxnCommon-Core": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-core",
-			"Version": "${project.version}",
-			"Scope": "provided"
+			"Version": "${project.version}"
 		},
 		"pxnCommon-App": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-app",
-			"Version": "${project.version}",
-			"Scope": "provided"
-		},
-		"pxnCommon-Shell": {
-			"GroupId": "com.poixson",
-			"ArtifactId": "common-shell",
-			"Version": "${project.version}",
-			"Scope": "provided"
+			"Version": "${project.version}"
 		},
 		"pxnCommon-Loggers": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-loggers",
-			"Version": "${project.version}",
-			"Scope": "provided"
+			"Version": "${project.version}"
 		},
 		"pxnCommon-Config": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-config",
-			"Version": "${project.version}",
-			"Scope": "provided"
+			"Version": "${project.version}"
 		},
 		"pxnCommon-Plugin": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-plugin",
-			"Version": "${project.version}",
-			"Scope": "provided"
+			"Version": "${project.version}"
 		},
 		"pxnCommon-Scheduler": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-sched",
-			"Version": "${project.version}",
-			"Scope": "provided"
+			"Version": "${project.version}"
 		},
 		"pxnCommon-Net": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-net",
-			"Version": "${project.version}",
-			"Scope": "provided"
+			"Version": "${project.version}"
 		},
 		"gcServer": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "server",
 			"Version": "${project.version}"
 		},
-		"jcl": {
-			"GroupId": "org.xeustechnologies",
-			"ArtifactId": "jcl-core",
-			"Version": "2.8",
-			"Scope": "provided"
-		},
-		"SnakeYAML": {
-			"GroupId": "org.yaml",
-			"ArtifactId": "snakeyaml",
-			"Name": "SnakeYAML",
-			"Version": "1.26",
-			"Scope": "provided"
-		}
 	}
 }

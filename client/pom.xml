@@ -1,4 +1,4 @@
-<!-- Generated on: May 29, 2020 00:04 UTC -->
+<!-- Generated on: June 1, 2020 00:25 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
@@ -44,8 +44,6 @@
 		<maven-resources-plugin-version>3.1.0</maven-resources-plugin-version>
 		<maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
 		<maven-jar-plugin-version>3.2.0</maven-jar-plugin-version>
-		<maven-assembly-plugin-version>3.3.0</maven-assembly-plugin-version>
-		<maven-shade-plugin-version>3.2.3</maven-shade-plugin-version>
 		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
 		<maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
 		<junit-version>4.13</junit-version>
@@ -116,31 +114,6 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>${maven-jar-plugin-version}</version>
 			</plugin>
-			<!-- Shade Plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>${maven-shade-plugin-version}</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<dependencyReducedPomLocation>${project.basedir}/target/dependency-reduced-pom.xml</dependencyReducedPomLocation>
-					<filters>
-						<filter>
-							<artifact>com.growcontrol:server</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-					</filters>
-				</configuration>
-			</plugin>
 			<!-- Source Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -190,49 +163,41 @@
 			<groupId>com.poixson</groupId>
 			<artifactId>common-core</artifactId>
 			<version>${pxnCommon-Core-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-app</artifactId>
 			<version>${pxnCommon-App-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-shell</artifactId>
 			<version>${pxnCommon-Shell-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-loggers</artifactId>
 			<version>${pxnCommon-Loggers-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-config</artifactId>
 			<version>${pxnCommon-Config-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-plugin</artifactId>
 			<version>${pxnCommon-Plugin-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-sched</artifactId>
 			<version>${pxnCommon-Scheduler-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-net</artifactId>
 			<version>${pxnCommon-Net-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.growcontrol</groupId>
@@ -243,13 +208,11 @@
 			<groupId>org.xeustechnologies</groupId>
 			<artifactId>jcl-core</artifactId>
 			<version>${jcl-version}</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
 			<version>${SnakeYAML-version}</version>
-			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
