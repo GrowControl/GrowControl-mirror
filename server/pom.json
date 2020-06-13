@@ -66,6 +66,11 @@
 			"GroupId": "org.yaml",
 			"ArtifactId": "snakeyaml",
 			"Version": "1.26"
+		},
+		"MQTT": {
+			"GroupId": "org.eclipse.paho",
+			"ArtifactId": "org.eclipse.paho.client.mqttv3",
+			"Version": "1.2.4"
 		}
 	}
 }
