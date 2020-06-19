@@ -51,7 +51,7 @@
 		},
 		"pxnCommon-Scheduler": {
 			"GroupId": "com.poixson",
-			"ArtifactId": "common-sched",
+			"ArtifactId": "common-scheduler",
 			"Version": "${pxnVersion}",
 			"Scope": "provided"
 		},
