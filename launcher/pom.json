@@ -3,6 +3,9 @@
 	"ArtifactId": "launcher",
 	"GroupId": "com.growcontrol",
 	"Version": "4.0.0",
+	"Props": {
+		"pxnVersion": "4.0.0"
+	},
 	"URL": "https://growcontrol.com",
 	"GitBlit-Host": "git.poixson.com",
 	"GitBlit-Repo": "gc!GrowControl",
@@ -10,6 +13,12 @@
 	"Main-Class": "com.growcontrol.launcher.Main",
 	"Shade": "yes",
 	"Deps": {
+		"pxnCommon-Core": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-core",
+			"Version": "${pxnVersion}",
+			"Scope": "provided"
+		},
 		"gcServer": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "server",

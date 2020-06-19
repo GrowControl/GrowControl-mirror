@@ -3,6 +3,9 @@
 	"ArtifactId": "lab",
 	"GroupId": "com.growcontrol",
 	"Version": "4.0.0",
+	"Props": {
+		"pxnVersion": "4.0.0"
+	},
 	"URL": "https://growcontrol.com",
 	"GitBlit-Host": "git.poixson.com",
 	"GitBlit-Repo": "gc!GrowControl",
@@ -13,49 +16,49 @@
 		"pxnCommon-Core": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-core",
-			"Version": "${project.version}",
+			"Version": "${pxnVersion}",
 			"Scope": "provided"
 		},
 		"pxnCommon-App": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-app",
-			"Version": "${project.version}",
+			"Version": "${pxnVersion}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Shell": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-shell",
-			"Version": "${project.version}",
+			"Version": "${pxnVersion}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Loggers": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-loggers",
-			"Version": "${project.version}",
+			"Version": "${pxnVersion}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Config": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-config",
-			"Version": "${project.version}",
+			"Version": "${pxnVersion}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Plugin": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-plugin",
-			"Version": "${project.version}",
+			"Version": "${pxnVersion}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Scheduler": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-sched",
-			"Version": "${project.version}",
+			"Version": "${pxnVersion}",
 			"Scope": "provided"
 		},
 		"pxnCommon-Net": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-net",
-			"Version": "${project.version}",
+			"Version": "${pxnVersion}",
 			"Scope": "provided"
 		},
 		"gcServer": {
