@@ -61,12 +61,6 @@
 			"Version": "${pxnVersion}",
 			"Scope": "provided"
 		},
-		"gcServer": {
-			"GroupId": "com.growcontrol",
-			"ArtifactId": "server",
-			"Version": "${project.version}",
-			"Scope": "provided"
-		},
 		"gcClient": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "client",
