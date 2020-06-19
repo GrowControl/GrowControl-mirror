@@ -68,10 +68,10 @@
 			"ArtifactId": "snakeyaml",
 			"Version": "1.26"
 		},
-		"MQTT": {
-			"GroupId": "org.eclipse.paho",
-			"ArtifactId": "org.eclipse.paho.client.mqttv3",
-			"Version": "1.2.4"
+		"HiveMQ": {
+			"GroupId": "com.hivemq",
+			"ArtifactId": "hivemq-mqtt-client",
+			"Version": "1.2.0"
 		}
 	}
 }
