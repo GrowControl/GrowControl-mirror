@@ -45,6 +45,11 @@
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-net",
 			"Version": "${pxnVersion}"
+		},
+		"gcCommon": {
+			"GroupId": "com.growcontrol",
+			"ArtifactId": "gccommon",
+			"Version": "${project.version}"
 		}
 	}
 }
