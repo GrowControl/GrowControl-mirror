@@ -6,10 +6,10 @@
 	"Props": {
 		"pxnVersion": "4.0.0"
 	},
+	"Org-Name": "GrowControl",
 	"URL": "https://growcontrol.com",
 	"GitBlit-Host": "git.poixson.com",
 	"GitBlit-Repo": "gc!GrowControl",
-	"Org-Name": "GrowControl",
 	"Deps": {
 		"pxnCommon-Core": {
 			"GroupId": "com.poixson",

@@ -6,10 +6,10 @@
 	"Props": {
 		"pxnVersion": "4.0.0"
 	},
+	"Org-Name": "GrowControl",
 	"URL": "https://growcontrol.com",
 	"GitBlit-Host": "git.poixson.com",
 	"GitBlit-Repo": "gc!GrowControl",
-	"Org-Name": "GrowControl",
 	"Main-Class": "com.growcontrol.launcher.Main",
 	"Shade": "yes",
 	"Deps": {
@@ -22,12 +22,14 @@
 		"gcServer": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "server",
-			"Version": "${project.version}"
+			"Version": "${project.version}",
+			"Scope": "provided"
 		},
 		"gcClient": {
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "client",
-			"Version": "${project.version}"
+			"Version": "${project.version}",
+			"Scope": "provided"
 		}
 	}
 }

@@ -10,10 +10,10 @@
 		"jcl": "2.8",
 		"SnakeYAML": "1.26"
 	},
+	"Org-Name": "GrowControl",
 	"URL": "https://growcontrol.com",
 	"GitBlit-Host": "git.poixson.com",
 	"GitBlit-Repo": "gc!GrowControl",
-	"Org-Name": "GrowControl",
 	"Main-Class": "com.growcontrol.server.Main",
 	"Shade": "yes",
 	"Shade-Filters": [
@@ -99,16 +99,11 @@
 		},
 		"jcl": {
 			"GroupId": "org.xeustechnologies",
-			"ArtifactId": "jcl-core",
+			"ArtifactId": "jcl-core"
 		},
 		"SnakeYAML": {
 			"GroupId": "org.yaml",
-			"ArtifactId": "snakeyaml",
-		},
-		"HiveMQ": {
-			"GroupId": "com.hivemq",
-			"ArtifactId": "hivemq-mqtt-client",
-			"Version": "1.2.0"
+			"ArtifactId": "snakeyaml"
 		}
 	}
 }

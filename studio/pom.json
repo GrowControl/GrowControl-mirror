@@ -10,10 +10,10 @@
 		"jcl": "2.8",
 		"SnakeYAML": "1.26"
 	},
+	"Org-Name": "GrowControl",
 	"URL": "https://growcontrol.com",
 	"GitBlit-Host": "git.poixson.com",
 	"GitBlit-Repo": "gc!GrowControl",
-	"Org-Name": "GrowControl",
 	"Main-Class": "com.growcontrol.client.studio.Main",
 	"Shade": "yes",
 	"Shade-Filters": [
