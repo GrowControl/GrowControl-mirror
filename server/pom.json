@@ -6,6 +6,10 @@
 	"Props": {
 		"pxnVersion": "4.0.0"
 	},
+	"Versions": {
+		"jcl": "2.8",
+		"SnakeYAML": "1.26"
+	},
 	"URL": "https://growcontrol.com",
 	"GitBlit-Host": "git.poixson.com",
 	"GitBlit-Repo": "gc!GrowControl",
@@ -61,12 +65,10 @@
 		"jcl": {
 			"GroupId": "org.xeustechnologies",
 			"ArtifactId": "jcl-core",
-			"Version": "2.8"
 		},
 		"SnakeYAML": {
 			"GroupId": "org.yaml",
 			"ArtifactId": "snakeyaml",
-			"Version": "1.26"
 		},
 		"HiveMQ": {
 			"GroupId": "com.hivemq",
