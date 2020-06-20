@@ -1,8 +1,7 @@
-<!-- Generated on: June 13, 2020 20:31 UTC -->
+<!-- Generated on: June 20, 2020 11:29 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<name>gcServer</name>
 	<artifactId>server</artifactId>
@@ -11,13 +10,13 @@
 	<packaging>jar</packaging>
 	<url>https://growcontrol.com</url>
 	<scm>
-		<url>git.poixson.com/summary/gc!GrowControl.git</url>
-		<connection>scm:git:https://lorenzop@git.poixson.com/r/gc/GrowControl.git</connection>
-		<developerConnection>scm:git:git.poixson.com/summary/gc!GrowControl.git</developerConnection>
+		<url>https://git.poixson.com/summary/gc!GrowControl.git</url>
+		<connection>scm:git:https://git.poixson.com/r/gc!GrowControl.git</connection>
+		<developerConnection>scm:git:ssh://git.poixson.com/gc!GrowControl.git</developerConnection>
 	</scm>
 	<issueManagement>
+		<system>git.poixson.com</system>
 		<url>https://git.poixson.com/tickets/gc!GrowControl.git</url>
-		<system>https://git.poixson.com/tickets/gc!GrowControl.git</system>
 	</issueManagement>
 	<organization>
 		<name>GrowControl</name>
@@ -26,20 +25,20 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+		<pxnVersion>4.0.0</pxnVersion>
+
 		<!-- Dependencies -->
-		<pxnCommon-Core-version>${project.version}</pxnCommon-Core-version>
-		<pxnCommon-App-version>${project.version}</pxnCommon-App-version>
-		<pxnCommon-Shell-version>${project.version}</pxnCommon-Shell-version>
-		<pxnCommon-Loggers-version>${project.version}</pxnCommon-Loggers-version>
-		<pxnCommon-Config-version>${project.version}</pxnCommon-Config-version>
-		<pxnCommon-Plugin-version>${project.version}</pxnCommon-Plugin-version>
-		<pxnCommon-Scheduler-version>${project.version}</pxnCommon-Scheduler-version>
-		<pxnCommon-Net-version>${project.version}</pxnCommon-Net-version>
+		<pxnCommon-Core-version>${pxnVersion}</pxnCommon-Core-version>
+		<pxnCommon-App-version>${pxnVersion}</pxnCommon-App-version>
+		<pxnCommon-Shell-version>${pxnVersion}</pxnCommon-Shell-version>
+		<pxnCommon-Loggers-version>${pxnVersion}</pxnCommon-Loggers-version>
+		<pxnCommon-Config-version>${pxnVersion}</pxnCommon-Config-version>
+		<pxnCommon-Plugin-version>${pxnVersion}</pxnCommon-Plugin-version>
+		<pxnCommon-Scheduler-version>${pxnVersion}</pxnCommon-Scheduler-version>
+		<pxnCommon-Net-version>${pxnVersion}</pxnCommon-Net-version>
 		<gcCommon-version>${project.version}</gcCommon-version>
 		<jcl-version>2.8</jcl-version>
 		<SnakeYAML-version>1.26</SnakeYAML-version>
-		<MQTT-version>1.2.4</MQTT-version>
-		<junit-version>4.13</junit-version>
 
 		<!-- MVN Plugins -->
 		<git-commit-id-plugin-version>4.0.0</git-commit-id-plugin-version>
@@ -50,9 +49,6 @@
 		<maven-shade-plugin-version>3.2.3</maven-shade-plugin-version>
 		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
 		<maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
-		<surefire-version>3.0.0-M4</surefire-version>
-		<cobertura-version>2.7</cobertura-version>
-		<project-info-reports-version>3.0.0</project-info-reports-version>
 
 	</properties>
 	<build>
@@ -71,26 +67,7 @@
 			</testResource>
 		</testResources>
 		<plugins>
-
-			<!-- Commit-ID Plugin -->
-			<plugin>
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
-				<version>${git-commit-id-plugin-version}</version>
-				<executions>
-					<execution>
-						<id>get-the-git-infos</id>
-						<goals>
-							<goal>revision</goal>
-						</goals>
-						<phase>validate</phase>
-					</execution>
-				</executions>
-				<configuration>
-					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-				</configuration>
-			</plugin>
-			<!-- MVN Plugins -->
+			<!-- Resource Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -103,6 +80,7 @@
 					</nonFilteredFileExtensions>
 				</configuration>
 			</plugin>
+			<!-- Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -112,6 +90,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<!-- Jar Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -123,116 +102,6 @@
 							<mainClass>com.growcontrol.server.Main</mainClass>
 						</manifest>
 					</archive>
-				</configuration>
-			</plugin>
-			<!-- Shade Plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>${maven-shade-plugin-version}</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<dependencyReducedPomLocation>${project.basedir}/target/dependency-reduced-pom.xml</dependencyReducedPomLocation>
-					<filters>
-						<filter>
-							<artifact>com.poixson:*</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>com.growcontrol:gccommon</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-								<exclude>app.properties</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>org.fusesource.jansi:jansi</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>org.xeustechnologies:jcl-core</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>org.yaml:snakeyaml</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>org.slf4j:slf4j-api</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>org.jline:jline</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>org.quartz-scheduler:quartz</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>io.netty:netty-all</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>*:HikariCP-java7</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>*:c3p0</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>*:cglib-nodep</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>*:mchange-commons-java</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>*:object-cloner</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>*:objenesis</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-					</filters>
 				</configuration>
 			</plugin>
 			<!-- Source Plugin -->
@@ -253,6 +122,140 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Shade Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>${maven-shade-plugin-version}</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<dependencyReducedPomLocation>${project.basedir}/target/dependency-reduced-pom.xml</dependencyReducedPomLocation>
+					<filters>
+						<filter>
+							<artifact>com.growcontrol:gccommon</artifact>
+							<excludes>
+								<exclude>app.properties</exclude>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>io.netty:netty-*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+								<exclude>META-INF/io.netty.versions.properties</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>com.poixson:*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.yaml:snakeyaml:</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.xeustechnologies:jcl-core</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.quartz-scheduler:quartz</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.fusesource.jansi:jansi</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.jline:jline</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.slf4j:*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.kamranzafar.commons:*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>com.mchange:*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>com.zaxxer:*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>cglib:*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.objenesis:objenesis</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+					</filters>
+				</configuration>
+			</plugin>
+			<!-- Assembly Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${maven-assembly-plugin-version}</version>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+			</plugin>
+			<!-- Commit-ID Plugin -->
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<version>${git-commit-id-plugin-version}</version>
+				<executions>
+					<execution>
+						<id>get-the-git-infos</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>validate</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+				</configuration>
+			</plugin>
 			<!-- Eclipse Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -264,112 +267,74 @@
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
-			<!-- jUnit Plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${surefire-version}</version>
-				<configuration>
-					<useFile>false</useFile>
-					<parallel>methods</parallel>
-					<threadCount>4</threadCount>
-				</configuration>
-			</plugin>
-
 		</plugins>
 	</build>
 	<dependencies>
-
+		<!-- pxnCommon-Core -->
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-core</artifactId>
 			<version>${pxnCommon-Core-version}</version>
 		</dependency>
+		<!-- pxnCommon-App -->
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-app</artifactId>
 			<version>${pxnCommon-App-version}</version>
 		</dependency>
+		<!-- pxnCommon-Shell -->
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-shell</artifactId>
 			<version>${pxnCommon-Shell-version}</version>
 		</dependency>
+		<!-- pxnCommon-Loggers -->
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-loggers</artifactId>
 			<version>${pxnCommon-Loggers-version}</version>
 		</dependency>
+		<!-- pxnCommon-Config -->
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-config</artifactId>
 			<version>${pxnCommon-Config-version}</version>
 		</dependency>
+		<!-- pxnCommon-Plugin -->
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-plugin</artifactId>
 			<version>${pxnCommon-Plugin-version}</version>
 		</dependency>
+		<!-- pxnCommon-Scheduler -->
 		<dependency>
 			<groupId>com.poixson</groupId>
-			<artifactId>common-sched</artifactId>
+			<artifactId>common-scheduler</artifactId>
 			<version>${pxnCommon-Scheduler-version}</version>
 		</dependency>
+		<!-- pxnCommon-Net -->
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-net</artifactId>
 			<version>${pxnCommon-Net-version}</version>
 		</dependency>
+		<!-- gcCommon -->
 		<dependency>
 			<groupId>com.growcontrol</groupId>
 			<artifactId>gccommon</artifactId>
 			<version>${gcCommon-version}</version>
 		</dependency>
+		<!-- jcl -->
 		<dependency>
 			<groupId>org.xeustechnologies</groupId>
 			<artifactId>jcl-core</artifactId>
 			<version>${jcl-version}</version>
 		</dependency>
+		<!-- SnakeYAML -->
 		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
 			<version>${SnakeYAML-version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.paho</groupId>
-			<artifactId>org.eclipse.paho.client.mqttv3</artifactId>
-			<version>${MQTT-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit-version}</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>${project-info-reports-version}</version>
-				<configuration>
-					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>${cobertura-version}</version>
-				<configuration>
-					<formats>
-						<format>html</format>
-						<format>xml</format>
-					</formats>
-				</configuration>
-			</plugin>
-		</plugins>
-	</reporting>
 </project>
