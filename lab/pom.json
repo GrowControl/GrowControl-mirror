@@ -16,6 +16,16 @@
 	"Org-Name": "GrowControl",
 	"Main-Class": "com.growcontrol.client.studio.Main",
 	"Shade": "yes",
+	"Shade-Filters": [
+		{
+			"GroupArtifact": "com.growcontrol:studio",
+			"Excludes": [
+				"app.properties",
+				"images/treeicon.ico",
+				"META-INF/MANIFEST.MF"
+			]
+		}
+	],
 	"Deps": {
 		"pxnCommon-Core": {
 			"GroupId": "com.poixson",

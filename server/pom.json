@@ -16,6 +16,41 @@
 	"Org-Name": "GrowControl",
 	"Main-Class": "com.growcontrol.server.Main",
 	"Shade": "yes",
+	"Shade-Filters": [
+		{
+			"GroupArtifact": "com.growcontrol:gccommon",
+			"Excludes": [
+				"app.properties",
+				"META-INF/MANIFEST.MF"
+			]
+		},
+		{
+			"GroupArtifact": "io.netty:netty-*",
+			"Excludes": [
+				"META-INF/MANIFEST.MF",
+				"META-INF/io.netty.versions.properties"
+			]
+		},
+		{
+			"GroupArtifact": [
+				"com.poixson:*",
+				"org.yaml:snakeyaml:",
+				"org.xeustechnologies:jcl-core",
+				"org.quartz-scheduler:quartz",
+				"org.fusesource.jansi:jansi",
+				"org.jline:jline",
+				"org.slf4j:*",
+				"org.kamranzafar.commons:*",
+				"com.mchange:*",
+				"com.zaxxer:*",
+				"cglib:*",
+				"org.objenesis:objenesis"
+			],
+			"Excludes": [
+				"META-INF/MANIFEST.MF"
+			]
+		}
+	],
 	"Deps": {
 		"pxnCommon-Core": {
 			"GroupId": "com.poixson",
