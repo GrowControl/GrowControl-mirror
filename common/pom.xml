@@ -1,8 +1,7 @@
+<!-- Generated on: June 20, 2020 11:29 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             http://maven.apache.org/maven-v4_0_0.xsd">
-<!-- http://maven-repository.com/ -->
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<name>gcCommon</name>
 	<artifactId>gccommon</artifactId>
@@ -10,47 +9,77 @@
 	<version>4.0.0</version>
 	<packaging>jar</packaging>
 	<url>https://growcontrol.com</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<pxnCommon-version>4.0.0</pxnCommon-version>
-		<io.netty-version>4.1.50.Final</io.netty-version>
-		<junit-version>4.13</junit-version>
-		<maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
-		<surefire-version>3.0.0-M4</surefire-version>
-		<maven-jar-plugin-version>3.2.0</maven-jar-plugin-version>
-		<maven-assembly-plugin-version>3.3.0</maven-assembly-plugin-version>
-		<maven-shade-plugin-version>3.2.3</maven-shade-plugin-version>
-		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
-		<maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
-		<project-info-reports-version>3.0.0</project-info-reports-version>
-		<cobertura-version>2.7</cobertura-version>
-	</properties>
 	<scm>
-		<url>https://github.com/GrowControl/GrowControl</url>
-		<connection>scm:git:https://github.com/GrowControl/GrowControl.git</connection>
+		<url>https://git.poixson.com/summary/gc!GrowControl.git</url>
+		<connection>scm:git:https://git.poixson.com/r/gc!GrowControl.git</connection>
+		<developerConnection>scm:git:ssh://git.poixson.com/gc!GrowControl.git</developerConnection>
 	</scm>
+	<issueManagement>
+		<system>git.poixson.com</system>
+		<url>https://git.poixson.com/tickets/gc!GrowControl.git</url>
+	</issueManagement>
 	<organization>
 		<name>GrowControl</name>
-		<url>http://growcontrol.com</url>
+		<url>https://growcontrol.com</url>
 	</organization>
-	<issueManagement>
-		<url>https://github.com/GrowControl/GrowControl/issues</url>
-		<system>github</system>
-	</issueManagement>
-	<ciManagement>
-		<url>ci.poixson.com</url>
-		<system>pxnci</system>
-	</ciManagement>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<pxnVersion>4.0.0</pxnVersion>
+		<Netty-Version>4.1.48.Final</Netty-Version>
+
+		<!-- Dependencies -->
+		<pxnCommon-Core-version>${pxnVersion}</pxnCommon-Core-version>
+		<pxnCommon-Config-version>${pxnVersion}</pxnCommon-Config-version>
+		<pxnCommon-Net-version>${pxnVersion}</pxnCommon-Net-version>
+		<Netty-Common-version>${Netty-Version}</Netty-Common-version>
+		<Netty-Handler-version>${Netty-Version}</Netty-Handler-version>
+		<Netty-Codec-version>${Netty-Version}</Netty-Codec-version>
+		<SnakeYAML-version>1.26</SnakeYAML-version>
+		<jUnit-version>4.13</jUnit-version>
+
+		<!-- MVN Plugins -->
+		<git-commit-id-plugin-version>4.0.0</git-commit-id-plugin-version>
+		<maven-resources-plugin-version>3.1.0</maven-resources-plugin-version>
+		<maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
+		<maven-jar-plugin-version>3.2.0</maven-jar-plugin-version>
+		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
+		<maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
+		<surefire-version>3.0.0-M4</surefire-version>
+		<cobertura-version>2.7</cobertura-version>
+		<project-info-reports-version>3.0.0</project-info-reports-version>
+
+	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<finalName>${project.artifactId}-${project.version}</finalName>
+		<testSourceDirectory>tests</testSourceDirectory>
+		<finalName>${project.name}-${project.version}</finalName>
 		<resources>
 			<resource>
 				<directory>resources</directory>
 				<filtering>true</filtering>
 			</resource>
 		</resources>
+		<testResources>
+			<testResource>
+				<directory>testresources</directory>
+			</testResource>
+		</testResources>
 		<plugins>
+			<!-- Resource Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven-resources-plugin-version}</version>
+				<configuration>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>png</nonFilteredFileExtension>
+						<nonFilteredFileExtension>so</nonFilteredFileExtension>
+						<nonFilteredFileExtension>dll</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
+			<!-- Compiler Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -60,82 +89,126 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<!-- Jar Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin-version}</version>
+			</plugin>
+			<!-- Source Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin-version}</version>
+				<configuration>
+					<finalName>${project.name}-${project.version}</finalName>
+					<attach>false</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Commit-ID Plugin -->
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<version>${git-commit-id-plugin-version}</version>
+				<executions>
+					<execution>
+						<id>get-the-git-infos</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>validate</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+				</configuration>
+			</plugin>
+			<!-- Eclipse Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${maven-eclipse-plugin-version}</version>
+				<configuration>
+					<projectNameTemplate>${project.name}</projectNameTemplate>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+			<!-- jUnit Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${surefire-version}</version>
 				<configuration>
 					<useFile>false</useFile>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>${maven-jar-plugin-version}</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>${maven-assembly-plugin-version}</version>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>${maven-source-plugin-version}</version>
-				<configuration>
-					<finalName>${project.artifactId}-${project.version}</finalName>
-					<attach>false</attach>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>${maven-eclipse-plugin-version}</version>
-				<configuration>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>true</downloadJavadocs>
+					<parallel>methods</parallel>
+					<threadCount>4</threadCount>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
+		<!-- pxnCommon-Core -->
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-core</artifactId>
-			<version>${pxnCommon-version}</version>
-			<scope>compile</scope>
+			<version>${pxnCommon-Core-version}</version>
 		</dependency>
+		<!-- pxnCommon-Config -->
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-config</artifactId>
-			<version>${pxnCommon-version}</version>
-			<scope>compile</scope>
+			<version>${pxnCommon-Config-version}</version>
 		</dependency>
+		<!-- pxnCommon-Net -->
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-net</artifactId>
-			<version>${pxnCommon-version}</version>
-			<scope>compile</scope>
+			<version>${pxnCommon-Net-version}</version>
 		</dependency>
+		<!-- Netty-Common -->
 		<dependency>
 			<groupId>io.netty</groupId>
-			<artifactId>netty-all</artifactId>
-			<version>${io.netty-version}</version>
+			<artifactId>netty-common</artifactId>
+			<version>${Netty-Common-version}</version>
 		</dependency>
+		<!-- Netty-Handler -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-handler</artifactId>
+			<version>${Netty-Handler-version}</version>
+		</dependency>
+		<!-- Netty-Codec -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-codec</artifactId>
+			<version>${Netty-Codec-version}</version>
+		</dependency>
+		<!-- SnakeYAML -->
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>${SnakeYAML-version}</version>
+		</dependency>
+		<!-- jUnit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit-version}</version>
+			<version>${jUnit-version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<reporting>
 		<plugins>
+			<!-- Reports Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
@@ -144,6 +217,7 @@
 					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
 				</configuration>
 			</plugin>
+			<!-- Cobertura Plugin -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
