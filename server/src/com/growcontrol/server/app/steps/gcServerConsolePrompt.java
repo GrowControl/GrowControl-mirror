@@ -1,4 +1,4 @@
-package com.poixson.app.steps;
+package com.growcontrol.server.app.steps;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -37,7 +37,7 @@ import com.poixson.utils.ThreadUtils;
 import com.poixson.utils.Utils;
 
 
-public class xAppSteps_Console implements xConsole {
+public class gcServerConsolePrompt {
 	protected static final String THREAD_NAME = "Console-Input";
 
 	protected static final AtomicReference<xAppSteps_Console> instance =
