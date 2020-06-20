@@ -2,6 +2,7 @@ package com.growcontrol.server;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.growcontrol.server.app.steps.gcServerLogo;
 import com.growcontrol.server.plugins.gcServerPluginManager;
 import com.poixson.app.xAppStep.StepType;
 import com.poixson.app.steps.xAppStandard;

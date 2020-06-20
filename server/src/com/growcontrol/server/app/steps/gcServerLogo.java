@@ -1,4 +1,4 @@
-package com.growcontrol.server;
+package com.growcontrol.server.app.steps;
 
 import com.poixson.app.xApp;
 import com.poixson.app.steps.xAppSteps_Logo;
