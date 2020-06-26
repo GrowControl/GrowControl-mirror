@@ -20,6 +20,11 @@
 			"ArtifactId": "common-core",
 			"Version": "${pxnVersion}"
 		},
+		"pxnCommon-App": {
+			"GroupId": "com.poixson",
+			"ArtifactId": "common-app",
+			"Version": "${pxnVersion}"
+		},
 		"pxnCommon-Config": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-config",

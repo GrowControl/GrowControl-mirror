@@ -30,6 +30,7 @@
 
 		<!-- Dependencies -->
 		<pxnCommon-Core-version>${pxnVersion}</pxnCommon-Core-version>
+		<pxnCommon-App-version>${pxnVersion}</pxnCommon-App-version>
 		<pxnCommon-Config-version>${pxnVersion}</pxnCommon-Config-version>
 		<pxnCommon-Net-version>${pxnVersion}</pxnCommon-Net-version>
 		<Netty-Common-version>${Netty-Version}</Netty-Common-version>
@@ -161,6 +162,12 @@
 			<groupId>com.poixson</groupId>
 			<artifactId>common-core</artifactId>
 			<version>${pxnCommon-Core-version}</version>
+		</dependency>
+		<!-- pxnCommon-App -->
+		<dependency>
+			<groupId>com.poixson</groupId>
+			<artifactId>common-app</artifactId>
+			<version>${pxnCommon-App-version}</version>
 		</dependency>
 		<!-- pxnCommon-Config -->
 		<dependency>
