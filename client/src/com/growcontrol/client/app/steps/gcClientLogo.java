@@ -1,5 +1,6 @@
-package com.growcontrol.client;
+package com.growcontrol.client.app.steps;
 
+import com.growcontrol.client.gcClient;
 import com.poixson.app.xApp;
 import com.poixson.app.steps.xAppSteps_Logo;
 import com.poixson.logger.xLog;
@@ -8,6 +9,12 @@ import com.poixson.utils.StringUtils;
 
 
 public class gcClientLogo extends xAppSteps_Logo {
+
+
+
+	public gcClientLogo(final gcClient client) {
+		super(client);
+	}
 
 
 
