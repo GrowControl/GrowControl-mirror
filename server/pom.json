@@ -4,11 +4,13 @@
 	"GroupId": "com.growcontrol",
 	"Version": "4.0.0",
 	"Props": {
-		"pxnVersion": "4.0.0"
+		"pxnVersion": "4.0.0",
+		"Netty-Version": "4.1.48.Final"
 	},
 	"Versions": {
-		"jcl": "2.8",
-		"SnakeYAML": "1.26"
+		"jLine": "3.15.0",
+		"SnakeYAML": "1.26",
+		"jcl": "2.8"
 	},
 	"Org-Name": "GrowControl",
 	"URL": "https://growcontrol.com",
@@ -18,10 +20,13 @@
 	"Shade": "yes",
 	"Shade-Filters": [
 		{
-			"GroupArtifact": "com.growcontrol:gccommon",
+			"GroupArtifact": [
+				"com.growcontrol:gccommon",
+				"com.poixson:common-*"
+			],
 			"Excludes": [
-				"app.properties",
-				"META-INF/MANIFEST.MF"
+				"META-INF/MANIFEST.MF",
+				"app.properties"
 			]
 		},
 		{
@@ -32,19 +37,24 @@
 			]
 		},
 		{
+			"GroupArtifact": "org.jline:*",
+			"Excludes": [
+				"META-INF/MANIFEST.MF",
+				"org/jline/utils/Log.class"
+			]
+		},
+		{
 			"GroupArtifact": [
-				"com.poixson:*",
-				"org.yaml:snakeyaml:",
-				"org.xeustechnologies:jcl-core",
+				"org.yaml:snakeyaml",
 				"org.quartz-scheduler:quartz",
+				"org.xeustechnologies:jcl-core",
 				"org.fusesource.jansi:jansi",
-				"org.jline:jline",
 				"org.slf4j:*",
 				"org.kamranzafar.commons:*",
+				"org.objenesis:objenesis",
 				"com.mchange:*",
 				"com.zaxxer:*",
-				"cglib:*",
-				"org.objenesis:objenesis"
+				"cglib:*"
 			],
 			"Excludes": [
 				"META-INF/MANIFEST.MF"
@@ -97,13 +107,32 @@
 			"ArtifactId": "gccommon",
 			"Version": "${project.version}"
 		},
-		"jcl": {
-			"GroupId": "org.xeustechnologies",
-			"ArtifactId": "jcl-core"
+		"jLine": {
+			"GroupId": "org.jline",
+			"ArtifactId": "jline"
 		},
 		"SnakeYAML": {
 			"GroupId": "org.yaml",
 			"ArtifactId": "snakeyaml"
+		},
+		"jcl": {
+			"GroupId": "org.xeustechnologies",
+			"ArtifactId": "jcl-core"
+		},
+		"Netty-Common": {
+			"GroupId": "io.netty",
+			"ArtifactId": "netty-common",
+			"Version": "${Netty-Version}"
+		},
+		"Netty-Handler": {
+			"GroupId": "io.netty",
+			"ArtifactId": "netty-handler",
+			"Version": "${Netty-Version}"
+		},
+		"Netty-Codec": {
+			"GroupId": "io.netty",
+			"ArtifactId": "netty-codec",
+			"Version": "${Netty-Version}"
 		}
 	}
 }

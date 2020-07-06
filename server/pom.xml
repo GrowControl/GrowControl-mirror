@@ -1,4 +1,4 @@
-<!-- Generated on: June 20, 2020 11:29 UTC -->
+<!-- Generated on: July 6, 2020 12:31 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -26,6 +26,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<pxnVersion>4.0.0</pxnVersion>
+		<Netty-Version>4.1.48.Final</Netty-Version>
 
 		<!-- Dependencies -->
 		<pxnCommon-Core-version>${pxnVersion}</pxnCommon-Core-version>
@@ -37,8 +38,12 @@
 		<pxnCommon-Scheduler-version>${pxnVersion}</pxnCommon-Scheduler-version>
 		<pxnCommon-Net-version>${pxnVersion}</pxnCommon-Net-version>
 		<gcCommon-version>${project.version}</gcCommon-version>
-		<jcl-version>2.8</jcl-version>
+		<jLine-version>3.15.0</jLine-version>
 		<SnakeYAML-version>1.26</SnakeYAML-version>
+		<jcl-version>2.8</jcl-version>
+		<Netty-Common-version>${Netty-Version}</Netty-Common-version>
+		<Netty-Handler-version>${Netty-Version}</Netty-Handler-version>
+		<Netty-Codec-version>${Netty-Version}</Netty-Codec-version>
 
 		<!-- MVN Plugins -->
 		<git-commit-id-plugin-version>4.0.0</git-commit-id-plugin-version>
@@ -141,8 +146,15 @@
 						<filter>
 							<artifact>com.growcontrol:gccommon</artifact>
 							<excludes>
-								<exclude>app.properties</exclude>
 								<exclude>META-INF/MANIFEST.MF</exclude>
+								<exclude>app.properties</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>com.poixson:common-*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+								<exclude>app.properties</exclude>
 							</excludes>
 						</filter>
 						<filter>
@@ -153,19 +165,14 @@
 							</excludes>
 						</filter>
 						<filter>
-							<artifact>com.poixson:*</artifact>
+							<artifact>org.jline:*</artifact>
 							<excludes>
 								<exclude>META-INF/MANIFEST.MF</exclude>
+								<exclude>org/jline/utils/Log.class</exclude>
 							</excludes>
 						</filter>
 						<filter>
-							<artifact>org.yaml:snakeyaml:</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>org.xeustechnologies:jcl-core</artifact>
+							<artifact>org.yaml:snakeyaml</artifact>
 							<excludes>
 								<exclude>META-INF/MANIFEST.MF</exclude>
 							</excludes>
@@ -177,13 +184,13 @@
 							</excludes>
 						</filter>
 						<filter>
-							<artifact>org.fusesource.jansi:jansi</artifact>
+							<artifact>org.xeustechnologies:jcl-core</artifact>
 							<excludes>
 								<exclude>META-INF/MANIFEST.MF</exclude>
 							</excludes>
 						</filter>
 						<filter>
-							<artifact>org.jline:jline</artifact>
+							<artifact>org.fusesource.jansi:jansi</artifact>
 							<excludes>
 								<exclude>META-INF/MANIFEST.MF</exclude>
 							</excludes>
@@ -196,6 +203,12 @@
 						</filter>
 						<filter>
 							<artifact>org.kamranzafar.commons:*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.objenesis:objenesis</artifact>
 							<excludes>
 								<exclude>META-INF/MANIFEST.MF</exclude>
 							</excludes>
@@ -214,12 +227,6 @@
 						</filter>
 						<filter>
 							<artifact>cglib:*</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
-						<filter>
-							<artifact>org.objenesis:objenesis</artifact>
 							<excludes>
 								<exclude>META-INF/MANIFEST.MF</exclude>
 							</excludes>
@@ -324,17 +331,41 @@
 			<artifactId>gccommon</artifactId>
 			<version>${gcCommon-version}</version>
 		</dependency>
-		<!-- jcl -->
+		<!-- jLine -->
 		<dependency>
-			<groupId>org.xeustechnologies</groupId>
-			<artifactId>jcl-core</artifactId>
-			<version>${jcl-version}</version>
+			<groupId>org.jline</groupId>
+			<artifactId>jline</artifactId>
+			<version>${jLine-version}</version>
 		</dependency>
 		<!-- SnakeYAML -->
 		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
 			<version>${SnakeYAML-version}</version>
+		</dependency>
+		<!-- jcl -->
+		<dependency>
+			<groupId>org.xeustechnologies</groupId>
+			<artifactId>jcl-core</artifactId>
+			<version>${jcl-version}</version>
+		</dependency>
+		<!-- Netty-Common -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-common</artifactId>
+			<version>${Netty-Common-version}</version>
+		</dependency>
+		<!-- Netty-Handler -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-handler</artifactId>
+			<version>${Netty-Handler-version}</version>
+		</dependency>
+		<!-- Netty-Codec -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-codec</artifactId>
+			<version>${Netty-Codec-version}</version>
 		</dependency>
 	</dependencies>
 </project>
