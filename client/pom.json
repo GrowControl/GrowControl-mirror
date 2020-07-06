@@ -4,12 +4,55 @@
 	"GroupId": "com.growcontrol",
 	"Version": "4.0.0",
 	"Props": {
-		"pxnVersion": "4.0.0"
+		"pxnVersion": "4.0.0",
+		"Netty-Version": "4.1.48.Final"
+	},
+	"Versions": {
+		"MigLayout": "5.2",
+		"SnakeYAML": "1.26",
+		"jcl": "2.8"
 	},
 	"Org-Name": "GrowControl",
 	"URL": "https://growcontrol.com",
 	"GitBlit-Host": "git.poixson.com",
 	"GitBlit-Repo": "gc!GrowControl",
+	"Shade": "yes",
+	"Shade-Filters": [
+		{
+			"GroupArtifact": [
+				"com.growcontrol:gccommon",
+				"com.poixson:common-*"
+			],
+			"Excludes": [
+				"META-INF/MANIFEST.MF",
+				"app.properties"
+			]
+		},
+		{
+			"GroupArtifact": "io.netty:netty-*",
+			"Excludes": [
+				"META-INF/MANIFEST.MF",
+				"META-INF/io.netty.versions.properties"
+			]
+		},
+		{
+			"GroupArtifact": [
+				"org.yaml:snakeyaml",
+				"org.quartz-scheduler:quartz",
+				"org.xeustechnologies:jcl-core",
+				"org.fusesource.jansi:jansi",
+				"org.slf4j:*",
+				"org.kamranzafar.commons:*",
+				"org.objenesis:objenesis",
+				"com.mchange:*",
+				"com.zaxxer:*",
+				"cglib:*"
+			],
+			"Excludes": [
+				"META-INF/MANIFEST.MF"
+			]
+		}
+	],
 	"Deps": {
 		"pxnCommon-Core": {
 			"GroupId": "com.poixson",
@@ -50,6 +93,33 @@
 			"GroupId": "com.growcontrol",
 			"ArtifactId": "gccommon",
 			"Version": "${project.version}"
+		},
+		"MigLayout": {
+			"GroupId": "com.miglayout",
+			"ArtifactId": "miglayout-swing"
+		},
+		"SnakeYAML": {
+			"GroupId": "org.yaml",
+			"ArtifactId": "snakeyaml"
+		},
+		"jcl": {
+			"GroupId": "org.xeustechnologies",
+			"ArtifactId": "jcl-core"
+		},
+		"Netty-Common": {
+			"GroupId": "io.netty",
+			"ArtifactId": "netty-common",
+			"Version": "${Netty-Version}"
+		},
+		"Netty-Handler": {
+			"GroupId": "io.netty",
+			"ArtifactId": "netty-handler",
+			"Version": "${Netty-Version}"
+		},
+		"Netty-Codec": {
+			"GroupId": "io.netty",
+			"ArtifactId": "netty-codec",
+			"Version": "${Netty-Version}"
 		}
 	}
 }
