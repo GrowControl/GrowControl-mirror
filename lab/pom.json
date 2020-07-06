@@ -7,14 +7,13 @@
 		"pxnVersion": "4.0.0"
 	},
 	"Versions": {
-		"jcl": "2.8",
 		"SnakeYAML": "1.26"
 	},
 	"Org-Name": "GrowControl",
 	"URL": "https://growcontrol.com",
 	"GitBlit-Host": "git.poixson.com",
 	"GitBlit-Repo": "gc!GrowControl",
-	"Main-Class": "com.growcontrol.client.studio.Main",
+	"Main-Class": "com.growcontrol.client.lab.Main",
 	"Shade": "yes",
 	"Shade-Filters": [
 		{
@@ -27,6 +26,17 @@
 		}
 	],
 	"Deps": {
+		"gcClient": {
+			"GroupId": "com.growcontrol",
+			"ArtifactId": "client",
+			"Version": "${project.version}",
+			"Scope": "provided"
+		},
+		"gcStudio": {
+			"GroupId": "com.growcontrol",
+			"ArtifactId": "studio",
+			"Version": "${project.version}"
+		},
 		"pxnCommon-Core": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-core",
@@ -73,22 +83,6 @@
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-net",
 			"Version": "${pxnVersion}",
-			"Scope": "provided"
-		},
-		"gcClient": {
-			"GroupId": "com.growcontrol",
-			"ArtifactId": "client",
-			"Version": "${project.version}",
-			"Scope": "provided"
-		},
-		"gcStudio": {
-			"GroupId": "com.growcontrol",
-			"ArtifactId": "studio",
-			"Version": "${project.version}"
-		},
-		"jcl": {
-			"GroupId": "org.xeustechnologies",
-			"ArtifactId": "jcl-core",
 			"Scope": "provided"
 		},
 		"SnakeYAML": {

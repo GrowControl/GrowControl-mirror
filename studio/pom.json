@@ -7,7 +7,6 @@
 		"pxnVersion": "4.0.0"
 	},
 	"Versions": {
-		"jcl": "2.8",
 		"SnakeYAML": "1.26"
 	},
 	"Org-Name": "GrowControl",
@@ -29,16 +28,14 @@
 			"Excludes": [
 				"META-INF/MANIFEST.MF"
 			]
-		},
-		{
-			"GroupArtifact": "io.netty:netty-*",
-			"Excludes": [
-				"META-INF/MANIFEST.MF",
-				"META-INF/io.netty.versions.properties"
-			]
 		}
 	],
 	"Deps": {
+		"gcClient": {
+			"GroupId": "com.growcontrol",
+			"ArtifactId": "client",
+			"Version": "${project.version}"
+		},
 		"pxnCommon-Core": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-core",
@@ -85,16 +82,6 @@
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-net",
 			"Version": "${pxnVersion}",
-			"Scope": "provided"
-		},
-		"gcClient": {
-			"GroupId": "com.growcontrol",
-			"ArtifactId": "client",
-			"Version": "${project.version}"
-		},
-		"jcl": {
-			"GroupId": "org.xeustechnologies",
-			"ArtifactId": "jcl-core",
 			"Scope": "provided"
 		},
 		"SnakeYAML": {

@@ -1,4 +1,4 @@
-<!-- Generated on: June 20, 2020 11:29 UTC -->
+<!-- Generated on: July 6, 2020 12:30 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -28,6 +28,7 @@
 		<pxnVersion>4.0.0</pxnVersion>
 
 		<!-- Dependencies -->
+		<gcClient-version>${project.version}</gcClient-version>
 		<pxnCommon-Core-version>${pxnVersion}</pxnCommon-Core-version>
 		<pxnCommon-App-version>${pxnVersion}</pxnCommon-App-version>
 		<pxnCommon-Shell-version>${pxnVersion}</pxnCommon-Shell-version>
@@ -36,8 +37,6 @@
 		<pxnCommon-Plugin-version>${pxnVersion}</pxnCommon-Plugin-version>
 		<pxnCommon-Scheduler-version>${pxnVersion}</pxnCommon-Scheduler-version>
 		<pxnCommon-Net-version>${pxnVersion}</pxnCommon-Net-version>
-		<gcClient-version>${project.version}</gcClient-version>
-		<jcl-version>2.8</jcl-version>
 		<SnakeYAML-version>1.26</SnakeYAML-version>
 
 		<!-- MVN Plugins -->
@@ -151,13 +150,6 @@
 								<exclude>META-INF/MANIFEST.MF</exclude>
 							</excludes>
 						</filter>
-						<filter>
-							<artifact>io.netty:netty-*</artifact>
-							<excludes>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-								<exclude>META-INF/io.netty.versions.properties</exclude>
-							</excludes>
-						</filter>
 					</filters>
 				</configuration>
 			</plugin>
@@ -204,6 +196,12 @@
 		</plugins>
 	</build>
 	<dependencies>
+		<!-- gcClient -->
+		<dependency>
+			<groupId>com.growcontrol</groupId>
+			<artifactId>client</artifactId>
+			<version>${gcClient-version}</version>
+		</dependency>
 		<!-- pxnCommon-Core -->
 		<dependency>
 			<groupId>com.poixson</groupId>
@@ -258,19 +256,6 @@
 			<groupId>com.poixson</groupId>
 			<artifactId>common-net</artifactId>
 			<version>${pxnCommon-Net-version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- gcClient -->
-		<dependency>
-			<groupId>com.growcontrol</groupId>
-			<artifactId>client</artifactId>
-			<version>${gcClient-version}</version>
-		</dependency>
-		<!-- jcl -->
-		<dependency>
-			<groupId>org.xeustechnologies</groupId>
-			<artifactId>jcl-core</artifactId>
-			<version>${jcl-version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- SnakeYAML -->
