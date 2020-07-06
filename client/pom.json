@@ -37,6 +37,7 @@
 		},
 		{
 			"GroupArtifact": [
+				"com.miglayout:miglayout-*",
 				"org.yaml:snakeyaml",
 				"org.quartz-scheduler:quartz",
 				"org.xeustechnologies:jcl-core",
