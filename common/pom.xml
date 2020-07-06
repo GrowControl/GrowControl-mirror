@@ -1,4 +1,4 @@
-<!-- Generated on: June 25, 2020 08:44 UTC -->
+<!-- Generated on: July 6, 2020 12:23 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -26,17 +26,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<pxnVersion>4.0.0</pxnVersion>
-		<Netty-Version>4.1.48.Final</Netty-Version>
 
 		<!-- Dependencies -->
 		<pxnCommon-Core-version>${pxnVersion}</pxnCommon-Core-version>
 		<pxnCommon-App-version>${pxnVersion}</pxnCommon-App-version>
-		<pxnCommon-Config-version>${pxnVersion}</pxnCommon-Config-version>
 		<pxnCommon-Net-version>${pxnVersion}</pxnCommon-Net-version>
-		<Netty-Common-version>${Netty-Version}</Netty-Common-version>
-		<Netty-Handler-version>${Netty-Version}</Netty-Handler-version>
-		<Netty-Codec-version>${Netty-Version}</Netty-Codec-version>
-		<SnakeYAML-version>1.26</SnakeYAML-version>
 		<jUnit-version>4.13</jUnit-version>
 
 		<!-- MVN Plugins -->
@@ -179,41 +173,11 @@
 			<artifactId>common-app</artifactId>
 			<version>${pxnCommon-App-version}</version>
 		</dependency>
-		<!-- pxnCommon-Config -->
-		<dependency>
-			<groupId>com.poixson</groupId>
-			<artifactId>common-config</artifactId>
-			<version>${pxnCommon-Config-version}</version>
-		</dependency>
 		<!-- pxnCommon-Net -->
 		<dependency>
 			<groupId>com.poixson</groupId>
 			<artifactId>common-net</artifactId>
 			<version>${pxnCommon-Net-version}</version>
-		</dependency>
-		<!-- Netty-Common -->
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-common</artifactId>
-			<version>${Netty-Common-version}</version>
-		</dependency>
-		<!-- Netty-Handler -->
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-handler</artifactId>
-			<version>${Netty-Handler-version}</version>
-		</dependency>
-		<!-- Netty-Codec -->
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-codec</artifactId>
-			<version>${Netty-Codec-version}</version>
-		</dependency>
-		<!-- SnakeYAML -->
-		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>${SnakeYAML-version}</version>
 		</dependency>
 		<!-- jUnit -->
 		<dependency>

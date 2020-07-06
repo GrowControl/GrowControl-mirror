@@ -4,11 +4,7 @@
 	"GroupId": "com.growcontrol",
 	"Version": "4.0.0",
 	"Props": {
-		"pxnVersion": "4.0.0",
-		"Netty-Version": "4.1.48.Final"
-	},
-	"Versions": {
-		"SnakeYAML": "1.26"
+		"pxnVersion": "4.0.0"
 	},
 	"Org-Name": "GrowControl",
 	"URL": "https://growcontrol.com",
@@ -25,34 +21,10 @@
 			"ArtifactId": "common-app",
 			"Version": "${pxnVersion}"
 		},
-		"pxnCommon-Config": {
-			"GroupId": "com.poixson",
-			"ArtifactId": "common-config",
-			"Version": "${pxnVersion}"
-		},
 		"pxnCommon-Net": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-net",
 			"Version": "${pxnVersion}"
-		},
-		"Netty-Common": {
-			"GroupId": "io.netty",
-			"ArtifactId": "netty-common",
-			"Version": "${Netty-Version}"
-		},
-		"Netty-Handler": {
-			"GroupId": "io.netty",
-			"ArtifactId": "netty-handler",
-			"Version": "${Netty-Version}"
-		},
-		"Netty-Codec": {
-			"GroupId": "io.netty",
-			"ArtifactId": "netty-codec",
-			"Version": "${Netty-Version}"
-		},
-		"SnakeYAML": {
-			"GroupId": "org.yaml",
-			"ArtifactId": "snakeyaml"
 		}
 	}
 }
