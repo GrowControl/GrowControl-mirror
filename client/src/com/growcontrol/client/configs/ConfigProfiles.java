@@ -10,7 +10,7 @@ import com.poixson.commonapp.config.xConfig;
 import com.poixson.commonjava.Utils.utils;
 
 
-public class ProfilesConfig extends xConfig {
+public class ConfigProfiles extends xConfig {
 
 	private volatile LinkedHashMap<String, SavedProfile> profiles = null;
 	private final Object profilesLock = new Object();

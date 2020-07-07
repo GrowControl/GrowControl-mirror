@@ -14,7 +14,7 @@ import com.poixson.commonjava.Utils.xHashable;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public class SavedProfile implements xHashable {
+public class ConfigProfileDAO extends xConfig {
 
 	public final String name;
 

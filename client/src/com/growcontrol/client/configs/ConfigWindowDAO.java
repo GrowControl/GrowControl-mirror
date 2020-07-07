@@ -13,7 +13,7 @@ import com.poixson.commonjava.Utils.xHashable;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-public class WindowConfig implements xHashable {
+public class ConfigWindowDAO extends xConfig {
 
 	public final String name;
 
