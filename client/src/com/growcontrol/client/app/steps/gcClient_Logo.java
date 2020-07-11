@@ -1,11 +1,9 @@
 package com.growcontrol.client.app.steps;
 
 import com.growcontrol.client.gcClient;
-import com.poixson.app.xApp;
 import com.poixson.app.steps.xAppSteps_Logo;
 import com.poixson.logger.xLog;
 import com.poixson.tools.AsciiArtBuilder;
-import com.poixson.utils.StringUtils;
 
 
 public class gcClient_Logo extends xAppSteps_Logo {
@@ -18,28 +16,23 @@ public class gcClient_Logo extends xAppSteps_Logo {
 
 
 
-//       A       B      C      D     E         F      G         H
-//1 |       PoiXson   <---version--->                                   |
-//2 |     GROWCONTROL   _ _        ,`--',                     " ' "     |
-//3 |    _  Client     (_\_)      . _\/_ .                  " \ | / "   |
-//4 |  _(_)_          (__<_{)     `. /\ .'   .\|/.         ' --(:)-- '  |
-//5 | (_)@(_)          {_/_}        "||"     -(:)-          " / | \ "   |
-//6 |   (_)\.         |\ |           || /\   "/|\"           " '|' "    |
-//7 |     . |/| .vVv.  \\| /| \V/  /\||//\)   '|'    `@'   |\   |       |
-//8 |     |\|/   \#/    \|//  `|/ (/\||/    .\ | ,   \|/   /_ \ |  /`|  |
-//9 |      \|   \\|//    |/  \\|//   ||     /-\|/_\ \\|//,   /-\|/_//   |
+// 1 |       PoiXson   <---version--->                                   |
+// 2 |     GROWCONTROL   _ _        ,`--',                     " ' "     |
+// 3 |    _  Client     (_\_)      . _\/_ .                  " \ | / "   |
+// 4 |  _(_)_          (__<_{)     `. /\ .'   .\|/.         ' --(:)-- '  |
+// 5 | (_)@(_)          {_/_}        "||"     -(:)-          " / | \ "   |
+// 6 |   (_)\.         |\ |           || /\   "/|\"           " '|' "    |
+// 7 |     . |/| .vVv.  \\| /| \V/  /\||//\)   '|'    `@'   |\   |       |
+// 8 |     |\|/   \#/    \|//  `|/ (/\||/    .\ | ,   \|/   /_ \ |  /`|  |
+// 9 |      \|   \\|//    |/  \\|//   ||     /-\|/_\ \\|//,   /-\|/_//   |
 //10 | ^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^/^ |
 //11 | ///////////////////////////////////////////////////////////////// |
-//0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8
-//0         1         2         3         4         5         6
+//   0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8
+//             1         2         3         4         5         6
 	@Override
-	protected void displayLogo(final xApp app, final xLog log) {
-		final String version =
-			StringUtils.PadCenter(
-				VERSION_SPACE,
-				app.getVersion(),
-				' '
-			);
+	protected void displayLogo() {
+		final xLog log = this.log();
+		final String version = this.getAppVersionPadded();
 		// define colors
 		final String COLOR_BG = "black";
 		final String COLOR_PXN_P    = "bold,green";
@@ -60,7 +53,7 @@ public class gcClient_Logo extends xAppSteps_Logo {
 		final String COLOR_FLOWER_F_PEDALS = "bold,white";
 		final String COLOR_FLOWER_G_PEDALS = "yellow";
 		final String COLOR_FLOWER_H_PEDALS = "bold,white";
-		// display ascii art
+		// ascii art
 		final AsciiArtBuilder art =
 			new AsciiArtBuilder(
 				"      PoiXson   "+version+"                                  ",
@@ -135,10 +128,8 @@ public class gcClient_Logo extends xAppSteps_Logo {
 		art.setColor(COLOR_GRASS,            0,  9);
 		// line 11   color                   x   y
 		art.setColor(COLOR_GRASS,            0, 10);
-		// display ascii art
-		for (final String line : art.build()) {
-			log.publish(line);
-		}
+		// display generated art
+		log.publish(art.build());
 	}
 
 
