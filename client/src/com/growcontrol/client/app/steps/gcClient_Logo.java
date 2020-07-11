@@ -8,12 +8,12 @@ import com.poixson.tools.AsciiArtBuilder;
 import com.poixson.utils.StringUtils;
 
 
-public class gcClientLogo extends xAppSteps_Logo {
+public class gcClient_Logo extends xAppSteps_Logo {
 
 
 
-	public gcClientLogo(final gcClient client) {
-		super(client);
+	public gcClient_Logo(final gcClient app) {
+		super(app);
 	}
 
 

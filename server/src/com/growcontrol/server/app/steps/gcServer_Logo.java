@@ -1,13 +1,19 @@
 package com.growcontrol.server.app.steps;
 
-import com.poixson.app.xApp;
+import com.growcontrol.server.gcServer;
 import com.poixson.app.steps.xAppSteps_Logo;
 import com.poixson.logger.xLog;
 import com.poixson.tools.AsciiArtBuilder;
 import com.poixson.utils.StringUtils;
 
 
-public class gcServerLogo extends xAppSteps_Logo {
+public class gcServer_Logo extends xAppSteps_Logo {
+
+
+
+	public gcServer_Logo(final gcServer app) {
+		super(app);
+	}
 
 
 
