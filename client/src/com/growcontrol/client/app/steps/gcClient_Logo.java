@@ -30,8 +30,7 @@ public class gcClient_Logo extends xAppSteps_Logo {
 //   0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8
 //             1         2         3         4         5         6
 	@Override
-	protected void displayLogo() {
-		final xLog log = this.log();
+	protected void displayLogo(final xLog log) {
 		final String version = this.getAppVersionPadded();
 		// define colors
 		final String COLOR_BG = "black";
