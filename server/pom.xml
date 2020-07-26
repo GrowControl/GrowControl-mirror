@@ -1,4 +1,4 @@
-<!-- Generated on: July 6, 2020 12:31 UTC -->
+<!-- Generated on: July 26, 2020 08:18 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -32,7 +32,6 @@
 		<pxnCommon-Core-version>${pxnVersion}</pxnCommon-Core-version>
 		<pxnCommon-App-version>${pxnVersion}</pxnCommon-App-version>
 		<pxnCommon-Shell-version>${pxnVersion}</pxnCommon-Shell-version>
-		<pxnCommon-Loggers-version>${pxnVersion}</pxnCommon-Loggers-version>
 		<pxnCommon-Config-version>${pxnVersion}</pxnCommon-Config-version>
 		<pxnCommon-Plugin-version>${pxnVersion}</pxnCommon-Plugin-version>
 		<pxnCommon-Scheduler-version>${pxnVersion}</pxnCommon-Scheduler-version>
@@ -41,6 +40,7 @@
 		<jLine-version>3.15.0</jLine-version>
 		<SnakeYAML-version>1.26</SnakeYAML-version>
 		<jcl-version>2.8</jcl-version>
+		<slf4j-version>1.7.30</slf4j-version>
 		<Netty-Common-version>${Netty-Version}</Netty-Common-version>
 		<Netty-Handler-version>${Netty-Version}</Netty-Handler-version>
 		<Netty-Codec-version>${Netty-Version}</Netty-Codec-version>
@@ -168,7 +168,6 @@
 							<artifact>org.jline:*</artifact>
 							<excludes>
 								<exclude>META-INF/MANIFEST.MF</exclude>
-								<exclude>org/jline/utils/Log.class</exclude>
 							</excludes>
 						</filter>
 						<filter>
@@ -295,12 +294,6 @@
 			<artifactId>common-shell</artifactId>
 			<version>${pxnCommon-Shell-version}</version>
 		</dependency>
-		<!-- pxnCommon-Loggers -->
-		<dependency>
-			<groupId>com.poixson</groupId>
-			<artifactId>common-loggers</artifactId>
-			<version>${pxnCommon-Loggers-version}</version>
-		</dependency>
 		<!-- pxnCommon-Config -->
 		<dependency>
 			<groupId>com.poixson</groupId>
@@ -348,6 +341,12 @@
 			<groupId>org.xeustechnologies</groupId>
 			<artifactId>jcl-core</artifactId>
 			<version>${jcl-version}</version>
+		</dependency>
+		<!-- slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-version}</version>
 		</dependency>
 		<!-- Netty-Common -->
 		<dependency>

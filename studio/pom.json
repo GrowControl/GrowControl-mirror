@@ -54,12 +54,6 @@
 			"Version": "${pxnVersion}",
 			"Scope": "provided"
 		},
-		"pxnCommon-Loggers": {
-			"GroupId": "com.poixson",
-			"ArtifactId": "common-loggers",
-			"Version": "${pxnVersion}",
-			"Scope": "provided"
-		},
 		"pxnCommon-Config": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-config",

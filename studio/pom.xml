@@ -32,7 +32,6 @@
 		<pxnCommon-Core-version>${pxnVersion}</pxnCommon-Core-version>
 		<pxnCommon-App-version>${pxnVersion}</pxnCommon-App-version>
 		<pxnCommon-Shell-version>${pxnVersion}</pxnCommon-Shell-version>
-		<pxnCommon-Loggers-version>${pxnVersion}</pxnCommon-Loggers-version>
 		<pxnCommon-Config-version>${pxnVersion}</pxnCommon-Config-version>
 		<pxnCommon-Plugin-version>${pxnVersion}</pxnCommon-Plugin-version>
 		<pxnCommon-Scheduler-version>${pxnVersion}</pxnCommon-Scheduler-version>
@@ -221,13 +220,6 @@
 			<groupId>com.poixson</groupId>
 			<artifactId>common-shell</artifactId>
 			<version>${pxnCommon-Shell-version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- pxnCommon-Loggers -->
-		<dependency>
-			<groupId>com.poixson</groupId>
-			<artifactId>common-loggers</artifactId>
-			<version>${pxnCommon-Loggers-version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- pxnCommon-Config -->

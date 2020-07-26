@@ -10,7 +10,8 @@
 	"Versions": {
 		"MigLayout": "5.2",
 		"SnakeYAML": "1.26",
-		"jcl": "2.8"
+		"jcl": "2.8",
+		"slf4j": "1.7.30"
 	},
 	"Org-Name": "GrowControl",
 	"URL": "https://growcontrol.com",
@@ -65,11 +66,6 @@
 			"ArtifactId": "common-app",
 			"Version": "${pxnVersion}"
 		},
-		"pxnCommon-Loggers": {
-			"GroupId": "com.poixson",
-			"ArtifactId": "common-loggers",
-			"Version": "${pxnVersion}"
-		},
 		"pxnCommon-Config": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-config",
@@ -106,6 +102,10 @@
 		"jcl": {
 			"GroupId": "org.xeustechnologies",
 			"ArtifactId": "jcl-core"
+		},
+		"slf4j": {
+			"GroupId": "org.slf4j",
+			"ArtifactId": "slf4j-api"
 		},
 		"Netty-Common": {
 			"GroupId": "io.netty",

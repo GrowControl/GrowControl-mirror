@@ -10,7 +10,8 @@
 	"Versions": {
 		"jLine": "3.15.0",
 		"SnakeYAML": "1.26",
-		"jcl": "2.8"
+		"jcl": "2.8",
+		"slf4j": "1.7.30"
 	},
 	"Org-Name": "GrowControl",
 	"URL": "https://growcontrol.com",
@@ -37,14 +38,8 @@
 			]
 		},
 		{
-			"GroupArtifact": "org.jline:*",
-			"Excludes": [
-				"META-INF/MANIFEST.MF",
-				"org/jline/utils/Log.class"
-			]
-		},
-		{
 			"GroupArtifact": [
+				"org.jline:*",
 				"org.yaml:snakeyaml",
 				"org.quartz-scheduler:quartz",
 				"org.xeustechnologies:jcl-core",
@@ -75,11 +70,6 @@
 		"pxnCommon-Shell": {
 			"GroupId": "com.poixson",
 			"ArtifactId": "common-shell",
-			"Version": "${pxnVersion}"
-		},
-		"pxnCommon-Loggers": {
-			"GroupId": "com.poixson",
-			"ArtifactId": "common-loggers",
 			"Version": "${pxnVersion}"
 		},
 		"pxnCommon-Config": {
@@ -118,6 +108,10 @@
 		"jcl": {
 			"GroupId": "org.xeustechnologies",
 			"ArtifactId": "jcl-core"
+		},
+		"slf4j": {
+			"GroupId": "org.slf4j",
+			"ArtifactId": "slf4j-api"
 		},
 		"Netty-Common": {
 			"GroupId": "io.netty",
