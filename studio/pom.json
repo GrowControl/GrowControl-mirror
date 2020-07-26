@@ -19,12 +19,33 @@
 		{
 			"GroupArtifact": "com.growcontrol:gccommon",
 			"Excludes": [
-				"app.properties",
-				"META-INF/MANIFEST.MF"
+				"META-INF/MANIFEST.MF",
+				"app.properties"
 			]
 		},
 		{
 			"GroupArtifact": "com.growcontrol:client",
+			"Excludes": [
+				"META-INF/MANIFEST.MF",
+				"META-INF/LICENSE",
+				"META-INF/NOTICE",
+				"org/objenesis/**"
+			]
+		},
+		{
+			"GroupArtifact": "com.miglayout:miglayout-*",
+			"Excludes": [
+				"META-INF/MANIFEST.MF",
+				"net/miginfocom/**"
+			]
+		},
+		{
+			"GroupArtifact": [
+				"org.slf4j:*",
+				"org.objenesis:objenesis",
+				"io.netty:netty-*",
+				"cglib:*"
+			],
 			"Excludes": [
 				"META-INF/MANIFEST.MF"
 			]

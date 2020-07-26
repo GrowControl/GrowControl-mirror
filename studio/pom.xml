@@ -1,4 +1,4 @@
-<!-- Generated on: July 6, 2020 12:30 UTC -->
+<!-- Generated on: July 26, 2020 07:55 UTC -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -139,12 +139,46 @@
 						<filter>
 							<artifact>com.growcontrol:gccommon</artifact>
 							<excludes>
-								<exclude>app.properties</exclude>
 								<exclude>META-INF/MANIFEST.MF</exclude>
+								<exclude>app.properties</exclude>
 							</excludes>
 						</filter>
 						<filter>
 							<artifact>com.growcontrol:client</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+								<exclude>META-INF/LICENSE</exclude>
+								<exclude>META-INF/NOTICE</exclude>
+								<exclude>org/objenesis/**</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>com.miglayout:miglayout-*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+								<exclude>net/miginfocom/**</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.slf4j:*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>org.objenesis:objenesis</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>io.netty:netty-*</artifact>
+							<excludes>
+								<exclude>META-INF/MANIFEST.MF</exclude>
+							</excludes>
+						</filter>
+						<filter>
+							<artifact>cglib:*</artifact>
 							<excludes>
 								<exclude>META-INF/MANIFEST.MF</exclude>
 							</excludes>
