@@ -48,3 +48,5 @@ settings.gradle text
 *.o binary
 *.obj binary
 *.map binary
+*.woff binary
+*.woff2 binary
