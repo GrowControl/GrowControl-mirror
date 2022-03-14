@@ -10,17 +10,17 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree;
 
 import javax.swing.tree.TreePath;
 
-/**
+/ **
  * Convenience class representing an empty tree checking model (cf. the Null
  * Object pattern), whose paths are always enabled, unchecked and ungreyed. This
  * class is a singleton.
  * @author Lorenzo Bigagli
- */
+ * /
 public class NullTreeCheckingModel implements TreeCheckingModel {
 
 	private final static NullTreeCheckingModel singleton;
@@ -36,223 +36,224 @@ public class NullTreeCheckingModel implements TreeCheckingModel {
 		return singleton;
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#addCheckingPath
 	 * (javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void addCheckingPath(TreePath path) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#addCheckingPaths
 	 * (javax.swing.tree.TreePath[])
-	 */
+	 * /
 	@Override
 	public void addCheckingPaths(TreePath[] paths) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#
 	 * addTreeCheckingListener
 	 * (it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingListener)
-	 */
+	 * /
 	@Override
 	public void addTreeCheckingListener(TreeCheckingListener tcl) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#clearChecking
 	 * ()
-	 */
+	 * /
 	@Override
 	public void clearChecking() {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#getCheckingMode
 	 * ()
-	 */
+	 * /
 	@Override
 	public CheckingMode getCheckingMode() {
 		return null;
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#getCheckingPaths
 	 * ()
-	 */
+	 * /
 	@Override
 	public TreePath[] getCheckingPaths() {
 		return null;
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#getCheckingRoots
 	 * ()
-	 */
+	 * /
 	@Override
 	public TreePath[] getCheckingRoots() {
 		return null;
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#getGreyingPaths
 	 * ()
-	 */
+	 * /
 	@Override
 	public TreePath[] getGreyingPaths() {
 		return null;
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#isPathChecked
 	 * (javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public boolean isPathChecked(TreePath path) {
 		return false;
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#isPathEnabled
 	 * (javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public boolean isPathEnabled(TreePath path) {
 		return true;
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#isPathGreyed
 	 * (javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public boolean isPathGreyed(TreePath path) {
 		return false;
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#removeCheckingPath
 	 * (javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void removeCheckingPath(TreePath path) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#
 	 * removeCheckingPaths(javax.swing.tree.TreePath[])
-	 */
+	 * /
 	@Override
 	public void removeCheckingPaths(TreePath[] paths) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#
 	 * removeTreeCheckingListener
 	 * (it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingListener)
-	 */
+	 * /
 	@Override
 	public void removeTreeCheckingListener(TreeCheckingListener tcl) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#setCheckingMode
 	 * (it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel.CheckingMode)
-	 */
+	 * /
 	@Override
 	public void setCheckingMode(CheckingMode mode) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#setCheckingPath
 	 * (javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void setCheckingPath(TreePath path) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#setCheckingPaths
 	 * (javax.swing.tree.TreePath[])
-	 */
+	 * /
 	@Override
 	public void setCheckingPaths(TreePath[] paths) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#setPathEnabled
 	 * (javax.swing.tree.TreePath, boolean)
-	 */
+	 * /
 	@Override
 	public void setPathEnabled(TreePath path, boolean enable) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#setPathsEnabled
 	 * (javax.swing.tree.TreePath[], boolean)
-	 */
+	 * /
 	@Override
 	public void setPathsEnabled(TreePath[] paths, boolean enable) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @see
 	 * it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel#toggleCheckingPath
 	 * (javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void toggleCheckingPath(TreePath pathForRow) {
 		// nothing to do (cf. the Null Object pattern)
 	}
 
 }
+*/

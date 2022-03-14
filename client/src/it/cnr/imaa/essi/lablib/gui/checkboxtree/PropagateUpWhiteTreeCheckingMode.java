@@ -10,19 +10,19 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree;
 
 import javax.swing.tree.TreePath;
 
-/**
+/ **
  * PropagateUpWhiteTreeCheckingMode define a TreeCheckingMode with down
  * recursion of the check when nodes are clicked and up only when uncheck. The
  * check is propagated, like the Propagate mode to descendants. If a user
  * unchecks a checkbox the uncheck will also be propagated to ancestors.
  *
  * @author Boldrini
- */
+ * /
 public class PropagateUpWhiteTreeCheckingMode extends TreeCheckingMode {
 
 	PropagateUpWhiteTreeCheckingMode(DefaultTreeCheckingModel model) {
@@ -55,11 +55,11 @@ public class PropagateUpWhiteTreeCheckingMode extends TreeCheckingMode {
 		}
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterChildrenInserted(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterChildrenInserted(TreePath parent) {
 		if (this.model.isPathChecked(parent))
@@ -68,11 +68,11 @@ public class PropagateUpWhiteTreeCheckingMode extends TreeCheckingMode {
 			uncheckPath(parent);
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterChildrenRemoved(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterChildrenRemoved(TreePath parent) {
 		if (!this.model.isPathChecked(parent)) {
@@ -88,11 +88,11 @@ public class PropagateUpWhiteTreeCheckingMode extends TreeCheckingMode {
 		this.model.updateAncestorsGreyness(parent);
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterStructureChanged(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterStructureChanged(TreePath parent) {
 		if (this.model.isPathChecked(parent))
@@ -102,3 +102,4 @@ public class PropagateUpWhiteTreeCheckingMode extends TreeCheckingMode {
 	}
 
 }
+*/

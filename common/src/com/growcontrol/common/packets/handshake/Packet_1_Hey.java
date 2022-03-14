@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.common.packets.handshake;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import com.growcontrol.common.packets.PacketProperties;
 import com.growcontrol.common.packets.PacketState;
 
 
-/*
+/ *
  * Description: Confirm this is a gc server
  * Direction:   server to client
  * JSON:
@@ -17,7 +18,7 @@ import com.growcontrol.common.packets.PacketState;
  *     packet: hey,
  *     version: <server-version>
  * }
- */
+ * /
 @PacketProperties(
 		name      = "hey",
 		stateful  = true,
@@ -58,3 +59,4 @@ System.out.println();
 
 
 }
+*/

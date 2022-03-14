@@ -10,12 +10,12 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree;
 
 import javax.swing.tree.TreePath;
 
-/**
+/ **
  * The model for checking/unchecking the nodes of a CheckboxTree. Alterations of
  * a node state may propagate on descendants/ascendants, according to the
  * behavior of the model. Several default behavioral modes are defined. The
@@ -25,7 +25,7 @@ import javax.swing.tree.TreePath;
  *
  * @author bigagli
  * @author boldrini
- */
+ * /
 public abstract class TreeCheckingMode {
 
 	protected DefaultTreeCheckingModel model;
@@ -37,38 +37,39 @@ public abstract class TreeCheckingMode {
 		this.model = model;
 	}
 
-	/**
+	/ **
 	 * Checks the specified path and propagates the checking according to the strategy
 	 * @param path the path to be added.
-	 */
+	 * /
 
 	public abstract void checkPath(TreePath path);
 
-	/**
+	/ **
 	 * Unchecks the specified path and propagates the checking according to the strategy
 	 * @param path the path to be removed.
-	 */
+	 * /
 	public abstract void uncheckPath(TreePath path);
 
-	/**
+	/ **
 	 * Update the check of the given path after the insertion of some of its
 	 * children, according to the strategy
 	 * @param path
-	 */
+	 * /
 	public abstract void updateCheckAfterChildrenInserted(TreePath path);
 
-	/**
+	/ **
 	 * Update the check of the given path after the removal of some of its
 	 * children, according to the strategy
 	 * @param path
-	 */
+	 * /
 	public abstract void updateCheckAfterChildrenRemoved(TreePath path);
 
-	/**
+	/ **
 	 * Update the check of the given path after the structure change, according
 	 * to the strategy
 	 * @param path
-	 */
+	 * /
 	public abstract void updateCheckAfterStructureChanged(TreePath path);
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.common.packets;
 
 import java.util.List;
@@ -11,11 +12,11 @@ import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
 import com.poixson.commonjava.xLogger.xLog;
 
 
-/*
+/ *
 SocketState (NetServer, SocketChannel, PacketState)
   -> PacketState (PacketDAO[], NetParent)
      -> PacketDAO (PacketState, Packet, PacketProperties, PacketDirection)
-*/
+* /
 public abstract class Packet {
 
 	protected volatile PacketDAO dao = null;
@@ -88,3 +89,4 @@ xLog.getRoot().warning("Failed to parse packet json!");
 
 
 }
+*/

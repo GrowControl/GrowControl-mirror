@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server.plugins;
 
 import com.poixson.plugins.xJavaPlugin;
@@ -14,7 +15,7 @@ public abstract class gcServerPlugin extends xJavaPlugin {
 
 
 //TODO:
-/*
+/ *
 	// register meta listener
 	public void register(final MetaAddress address, final MetaListener listener) {
 		if(address  == null) throw new IllegalArgumentException("Cannot register null meta address!");
@@ -46,8 +47,9 @@ public abstract class gcServerPlugin extends xJavaPlugin {
 //					+listenerClass.getName());
 		}
 	}
-*/
+* /
 
 
 
 }
+*/

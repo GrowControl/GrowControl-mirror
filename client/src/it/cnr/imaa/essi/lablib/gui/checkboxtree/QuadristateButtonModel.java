@@ -10,17 +10,17 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree;
 
 import javax.swing.DefaultButtonModel;
 
-/**
+/ **
  * The model for a quadristate CheckBox. Available states are UNCHECKED,
  * CHECKED, GREY_CHECKED, GREY_UNCHECKED
  *
  * @author boldrini
- */
+ * /
 public class QuadristateButtonModel extends DefaultButtonModel {
 	private static final long serialVersionUID = 1L;
 
@@ -36,12 +36,12 @@ public class QuadristateButtonModel extends DefaultButtonModel {
 		setState(State.UNCHECKED);
 	}
 
-	/**
+	/ **
 	 * The current state is embedded in the selection / armed state of the
 	 * model. We return the CHECKED state when the checkbox is selected but not
 	 * armed, GREY_CHECKED state when the checkbox is selected and armed (grey)
 	 * and UNCHECKED when the checkbox is deselected.
-	 */
+	 * /
 	public State getState() {
 		if (isSelected() && !isArmed()) {
 			// CHECKED
@@ -67,9 +67,9 @@ public class QuadristateButtonModel extends DefaultButtonModel {
 //		setState(State.UNCHECKED);
 //	}
 
-	/**
+	/ **
 	 * We rotate between UNCHECKED, CHECKED, GREY_UNCHECKED, GREY_CHECKED.
-	 */
+	 * /
 	public void nextState() {
 		switch (getState()) {
 		case UNCHECKED:
@@ -87,7 +87,7 @@ public class QuadristateButtonModel extends DefaultButtonModel {
 		}
 	}
 
-	/** Filter: No one may change the armed status except us. */
+	/ ** Filter: No one may change the armed status except us. * /
 	@Override
 		public void setArmed(boolean b) {
 	}
@@ -118,3 +118,4 @@ public class QuadristateButtonModel extends DefaultButtonModel {
 	}
 
 }
+*/

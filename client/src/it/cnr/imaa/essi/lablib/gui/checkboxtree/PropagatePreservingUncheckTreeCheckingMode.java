@@ -10,12 +10,12 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree;
 
 import javax.swing.tree.TreePath;
 
-/**
+/ **
  * PropagatePreservingUncheckTreeCheckingMode define a TreeCheckingMode with
  * down and up recursion of the check when nodes are clicked. It propagates the
  * change not only to descendants but also to ancestors. With regard to
@@ -24,7 +24,7 @@ import javax.swing.tree.TreePath;
  * and only if all of its children are unchecked.
  *
  * @author Boldrini
- */
+ * /
 public class PropagatePreservingUncheckTreeCheckingMode extends TreeCheckingMode {
 
 	PropagatePreservingUncheckTreeCheckingMode(DefaultTreeCheckingModel model) {
@@ -93,12 +93,12 @@ public class PropagatePreservingUncheckTreeCheckingMode extends TreeCheckingMode
 		}
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 *
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterChildrenInserted(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterChildrenInserted(TreePath parent) {
 		if (this.model.isPathChecked(parent))
@@ -107,12 +107,12 @@ public class PropagatePreservingUncheckTreeCheckingMode extends TreeCheckingMode
 			this.model.uncheckSubTree(parent);
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 *
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterChildrenRemoved(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterChildrenRemoved(TreePath parent) {
 		if (this.model.isPathChecked(parent)) {
@@ -128,12 +128,12 @@ public class PropagatePreservingUncheckTreeCheckingMode extends TreeCheckingMode
 		this.model.updateAncestorsGreyness(parent);
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 *
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterStructureChanged(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterStructureChanged(TreePath parent) {
 		if (this.model.isPathChecked(parent))
@@ -143,3 +143,4 @@ public class PropagatePreservingUncheckTreeCheckingMode extends TreeCheckingMode
 	}
 
 }
+*/

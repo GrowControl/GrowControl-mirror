@@ -10,7 +10,7 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree;
 
 import it.cnr.imaa.essi.lablib.gui.checkboxtree.QuadristateButtonModel.State;
@@ -28,7 +28,7 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreePath;
 
-/**
+/ **
  * A renderer for the CheckboxTree. This implementation decorates a
  * DefaultTreeCellRenderer (i.e. a JLabel) with a checkbox, by adding a
  * QuadristateCheckbox to the former onto a JPanel. Both can be overridden by
@@ -37,13 +37,13 @@ import javax.swing.tree.TreePath;
  *
  * @author boldrini
  * @author bigagli
- */
+ * /
 public class DefaultCheckboxTreeCellRenderer extends JPanel implements CheckboxTreeCellRenderer {
 	private static final long serialVersionUID = 1L;
 
-	/**
+	/ **
 	 * Loads an ImageIcon from the file iconFile, searching it in the classpath.
-	 */
+	 * /
 	protected static ImageIcon loadIcon(String iconFile) {
 		try {
 			return new ImageIcon(DefaultCheckboxTreeCellRenderer.class.getClassLoader().getResource(iconFile));
@@ -76,21 +76,21 @@ public class DefaultCheckboxTreeCellRenderer extends JPanel implements CheckboxT
 //	}
 
 	public DefaultCheckboxTreeCellRenderer() {
-		/* this method was as follows (see ticket #6):
+		/ * this method was as follows (see ticket #6):
 		 * this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		 * add(this.checkBox);
 		 * add(this.label);
 		 * this.checkBox.setBackground(UIManager.getColor("Tree.textBackground"));
 		 * this.setBackground(UIManager.getColor("Tree.textBackground")); 
-		 */
+		 * /
 		// CHECK: a user suggested BorderLayout appears to work better than FlowLayout with most L&Fs
 		this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 		this.setOpaque(false);
 		add(this.checkBox);
 		add(this.label);
-		/*
+		/ *
 		 * label.setOpaque(false); seems not work...
-		 */
+		 * /
 		this.label.setBackgroundNonSelectionColor(new Color(0, 0, 0, 0));
 	}
 
@@ -101,16 +101,16 @@ public class DefaultCheckboxTreeCellRenderer extends JPanel implements CheckboxT
 		return new Dimension(d_check.width + d_label.width, (d_check.height < d_label.height ? d_label.height : d_check.height));
 	}
 
-	/**
+	/ **
 	 * Decorates this renderer based on the passed in components.
-	 */
+	 * /
 	@Override
 	public Component getTreeCellRendererComponent(JTree tree, Object object,
 			boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
-		/*
+		/ *
 		 * most of the rendering is delegated to the wrapped
 		 * DefaultTreeCellRenderer, the rest depends on the TreeCheckingModel
-		 */
+		 * /
 		this.label.getTreeCellRendererComponent(tree, object, selected, expanded, leaf, row, hasFocus);
 		if (tree instanceof CheckboxTree) {
 			TreePath path = tree.getPathForRow(row);
@@ -134,12 +134,12 @@ public class DefaultCheckboxTreeCellRenderer extends JPanel implements CheckboxT
 		return this;
 	}
 
-	/**
+	/ **
 	 * Checks if the (x,y) coordinates are on the Checkbox.
 	 * @return boolean
 	 * @param x
 	 * @param y
-	 */
+	 * /
 	@Override
 	public boolean isOnHotspot(int x, int y) {
 		return this.checkBox.contains(x, y);
@@ -152,25 +152,26 @@ public class DefaultCheckboxTreeCellRenderer extends JPanel implements CheckboxT
 		super.setBackground(color);
 	}
 
-	/**
+	/ **
 	 * Sets the icon used to represent non-leaf nodes that are not expanded.
-	 */
+	 * /
 	public void setClosedIcon(Icon newIcon) {
 		this.label.setClosedIcon(newIcon);
 	}
 
-	/**
+	/ **
 	 * Sets the icon used to represent leaf nodes.
-	 */
+	 * /
 	public void setLeafIcon(Icon newIcon) {
 		this.label.setLeafIcon(newIcon);
 	}
 
-	/**
+	/ **
 	 * Sets the icon used to represent non-leaf nodes that are expanded.
-	 */
+	 * /
 	public void setOpenIcon(Icon newIcon) {
 		this.label.setOpenIcon(newIcon);
 	}
 
 }
+*/

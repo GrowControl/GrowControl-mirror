@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.common;
 
 import com.poixson.commonjava.xLogger.xLevel;
@@ -49,3 +50,4 @@ public final class gcCommonDefines {
 
 
 }
+*/

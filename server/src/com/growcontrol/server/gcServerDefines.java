@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server;
 
 import com.poixson.tools.Keeper;
@@ -50,3 +51,4 @@ public final class gcServerDefines {
 
 
 }
+*/

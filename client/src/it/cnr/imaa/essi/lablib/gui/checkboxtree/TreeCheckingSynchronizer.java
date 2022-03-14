@@ -1,3 +1,4 @@
+/*
 package it.cnr.imaa.essi.lablib.gui.checkboxtree;
 
 import javax.swing.tree.TreePath;
@@ -31,3 +32,4 @@ public class TreeCheckingSynchronizer implements TreeCheckingListener {
 	}
 
 }
+*/

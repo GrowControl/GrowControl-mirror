@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.common.packets;
 
 
@@ -16,3 +17,4 @@ public class PacketException extends Exception {
 
 
 }
+*/

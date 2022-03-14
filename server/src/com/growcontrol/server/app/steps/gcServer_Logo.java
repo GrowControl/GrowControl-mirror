@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server.app.steps;
 
 import com.growcontrol.server.gcServer;
@@ -150,3 +151,4 @@ public class gcServer_Logo extends xAppSteps_Logo {
 
 
 }
+*/

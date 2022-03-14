@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.common.meta.metaTypes;
 
 import com.growcontrol.common.meta.MetaType;
@@ -79,3 +80,4 @@ public class MetaTrigger extends MetaType {
 
 
 }
+*/

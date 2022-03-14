@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.common.meta;
 
 import java.io.Serializable;
@@ -69,3 +70,4 @@ public abstract class MetaType implements Serializable {
 
 
 }
+*/

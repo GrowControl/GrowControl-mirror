@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client.plugins;
 
 import java.util.concurrent.atomic.AtomicReference;
@@ -69,7 +70,7 @@ public class gcClientPluginManager extends xPluginManager<gcClientPlugin> {
 
 
 //TODO:
-/*
+/ *
 	// client gui frames for plugins
 	public gcPluginFrame newFrame(String title) {
 		gcPluginFrame frame = new gcPluginFrame(title);
@@ -83,8 +84,9 @@ public class gcClientPluginManager extends xPluginManager<gcClientPlugin> {
 	public void addFrame(gcPluginFrame frame) {
 		Main.getClient().getConnectState().getFrame("dashboard");
 	}
-*/
+* /
 
 
 
 }
+*/

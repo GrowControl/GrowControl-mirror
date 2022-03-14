@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.common.packets;
 
 import java.lang.annotation.ElementType;
@@ -19,3 +20,4 @@ public @interface PacketProperties {
 
 
 }
+*/

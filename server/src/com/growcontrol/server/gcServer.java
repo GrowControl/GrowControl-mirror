@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.server;
 
 import java.util.concurrent.atomic.AtomicReference;
@@ -9,7 +10,7 @@ import com.poixson.app.steps.xAppStandard;
 import com.poixson.app.steps.xAppSteps_Console;
 
 
-/*
+/ *
  * Startup sequence
  *   10  prevent root        - xAppSteps_Tool
  *   50  load configs        - xAppSteps_Config
@@ -37,7 +38,7 @@ import com.poixson.app.steps.xAppSteps_Console;
  *   60  display uptime      - xAppStandard
  *   10  garbage collect     - xApp
  *    1  exit
- */
+ * /
 public class gcServer extends xAppStandard {
 
 	private static final AtomicReference<gcServer> instance =
@@ -45,10 +46,10 @@ public class gcServer extends xAppStandard {
 
 
 
-	/**
+	/ **
 	 * Get the server class instance.
 	 * @return gcServer instance object.
-	 */
+	 * /
 	public static gcServer get() {
 		return instance.get();
 	}
@@ -86,7 +87,7 @@ public class gcServer extends xAppStandard {
 
 
 
-/*
+/ *
 	// standard commands
 	@xAppStep( Type=StepType.STARTUP, Title="Commands", StepValue=91 )
 	public void __STARTUP_commands(final xApp app) {
@@ -400,8 +401,9 @@ public class gcServer extends xAppStandard {
 			Failure.fail(e);
 		}
 	}
-*/
+* /
 
 
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client.plugins;
 
 import com.poixson.plugins.xJavaPlugin;
@@ -14,7 +15,7 @@ public abstract class gcClientPlugin extends xJavaPlugin {
 
 
 //TODO:
-/*
+/ *
 	@Override
 	public void unregister(final Class<? extends xEventListener> listenerClass) {
 		if(listenerClass == null) throw new IllegalArgumentException("Cannot unregister null listener!");
@@ -28,8 +29,9 @@ public abstract class gcClientPlugin extends xJavaPlugin {
 					+listenerClass.getName());
 //		}
 	}
-*/
+* /
 
 
 
 }
+*/

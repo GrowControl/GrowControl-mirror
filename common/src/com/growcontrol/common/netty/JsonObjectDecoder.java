@@ -12,7 +12,7 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations
  * under the License.
- */
+ * /
 package com.growcontrol.common.netty;
 
 import io.netty.buffer.ByteBuf;
@@ -27,14 +27,14 @@ import io.netty.handler.codec.TooLongFrameException;
 import java.util.List;
 
 
-/**
+/ **
  * Splits a byte stream of JSON objects and arrays into individual objects/arrays and passes them up the
  * {@link ChannelPipeline}.
  *
  * This class does not do any real parsing or validation. A sequence of bytes is considered a JSON object/array
  * if it contains a matching number of opening and closing braces/brackets. It's up to a subsequent
  * {@link ChannelHandler} to parse the JSON text into a more usable form i.e. a POJO.
- */
+ * /
 public class JsonObjectDecoder extends ByteToMessageDecoder {
 
 	private static final int MB = 1024 * 1024; // 1 MB
@@ -63,7 +63,7 @@ public class JsonObjectDecoder extends ByteToMessageDecoder {
 	public JsonObjectDecoder(final boolean streamArrayElements) {
 		this(MB, streamArrayElements);
 	}
-	/**
+	/ **
 	 * @param maxObjectLength   maximum number of bytes a JSON object/array may use (including braces and all).
 	 * Objects exceeding this length are dropped and an {@link TooLongFrameException}
 	 * is thrown.
@@ -71,7 +71,7 @@ public class JsonObjectDecoder extends ByteToMessageDecoder {
 	 *  is passed through the pipeline individually and immediately after it was fully
 	 *  received, allowing for arrays with "infinitely" many elements.
 	 *
-	 */
+	 * /
 	public JsonObjectDecoder(final int maxObjectLength, final boolean streamArrayElements) {
 		if(maxObjectLength < 1)
 			throw new IllegalArgumentException("maxObjectLength must be a positive int");
@@ -97,7 +97,7 @@ public class JsonObjectDecoder extends ByteToMessageDecoder {
 			reset();
 			throw new TooLongFrameException("object length exceeds "+this.maxObjectLength+": "+wrtIdx+" bytes discarded");
 		}
-		for(/* use current idx */; idx < wrtIdx; idx++) {
+		for(/ * use current idx * /; idx < wrtIdx; idx++) {
 			final byte c = in.getByte(idx);
 			if(this.state == ST_DECODING_NORMAL) {
 				decodeByte(c, in, idx);
@@ -162,9 +162,9 @@ public class JsonObjectDecoder extends ByteToMessageDecoder {
 
 
 
-	/**
+	/ **
 	 * Override this method if you want to filter the json objects/arrays that get passed through the pipeline.
-	 */
+	 * /
 	protected ByteBuf extractObject(final ChannelHandlerContext ctx,
 			final ByteBuf buffer, final int index, final int length) {
 		return buffer.slice(index, length).retain();
@@ -214,3 +214,4 @@ public class JsonObjectDecoder extends ByteToMessageDecoder {
 
 
 }
+*/

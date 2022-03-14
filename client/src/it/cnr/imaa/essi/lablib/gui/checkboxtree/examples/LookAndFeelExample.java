@@ -10,7 +10,7 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree.examples;
 
 import it.cnr.imaa.essi.lablib.gui.checkboxtree.CheckboxTree;
@@ -38,12 +38,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-/**
+/ **
  * An example showcase for the various look and feels. There are issues with
  * dynamically changing the L&F of a CheckboxTree.
  * @author bigagli
  * @author boldrini
- */
+ * /
 public class LookAndFeelExample extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
@@ -66,10 +66,10 @@ public class LookAndFeelExample extends JFrame implements ActionListener {
 		});
 	}
 
-	/**
+	/ **
 	 * Create the GUI and show it. For thread safety, this method should be
 	 * invoked from the event dispatch thread.
-	 */
+	 * /
 	static void createAndShowGUI() {
 		// Set the look and feel
 		try {
@@ -95,9 +95,9 @@ public class LookAndFeelExample extends JFrame implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	/**
+	/ **
 	 * Creates the frame.
-	 */
+	 * /
 	public LookAndFeelExample() {
 		this.setContentPane(getJContentPane());
 		this.setTitle("CheckboxTree");
@@ -105,10 +105,10 @@ public class LookAndFeelExample extends JFrame implements ActionListener {
 		this.setJMenuBar(getLAFMenuBar());
 	}
 
-	/**
+	/ **
 	 * This method initializes jContentPane
 	 * @return javax.swing.JPanel
-	 */
+	 * /
 	private JPanel getJContentPane() {
 		if (this.jContentPane == null) {
 			this.jContentPane = new JPanel();
@@ -118,10 +118,10 @@ public class LookAndFeelExample extends JFrame implements ActionListener {
 		return this.jContentPane;
 	}
 
-	/**
+	/ **
 	 * This method initializes the CheckboxTree
 	 * @return it.cnr.imaa.essi.lablib.gui.checkboxtree.CheckboxTree
-	 */
+	 * /
 	private JScrollPane getCheckboxTree() {
 		if (this.checkboxTree == null) {
 			this.checkboxTree = new CheckboxTree();
@@ -221,3 +221,4 @@ public class LookAndFeelExample extends JFrame implements ActionListener {
 	}
 
 }
+*/

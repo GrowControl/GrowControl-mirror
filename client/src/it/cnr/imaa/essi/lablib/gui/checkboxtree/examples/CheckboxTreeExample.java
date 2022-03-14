@@ -10,7 +10,7 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree.examples;
 
 import it.cnr.imaa.essi.lablib.gui.checkboxtree.CheckboxTree;
@@ -30,12 +30,12 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
-/**
+/ **
  * A simple example of the CheckboxTree with key listeners: 'a' for add a node
  * 'r' for remove 'SPACE' toggles the checking of the given node.
  * @author bigagli
  * @author boldrini
- */
+ * /
 public class CheckboxTreeExample extends JFrame {
 	private static final long serialVersionUID = 1L;
 
@@ -95,9 +95,9 @@ public class CheckboxTreeExample extends JFrame {
 
 	private javax.swing.JPanel jContentPane = null;
 
-	/**
+	/ **
 	 * This is the default constructor
-	 */
+	 * /
 	public CheckboxTreeExample() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(300, 600);
@@ -105,9 +105,9 @@ public class CheckboxTreeExample extends JFrame {
 		this.setTitle("CheckboxTree");
 	}
 
-	/**
+	/ **
 	 * Initialize the tree.
-	 */
+	 * /
 	private JScrollPane getCheckboxTree() {
 		if (this.checkboxTree == null) {
 			this.checkboxTree = new CheckboxTree();
@@ -141,10 +141,10 @@ public class CheckboxTreeExample extends JFrame {
 		return new JScrollPane(this.checkboxTree);
 	}
 
-	/**
+	/ **
 	 * This method initializes jContentPane
 	 * @return javax.swing.JPanel
-	 */
+	 * /
 	private JPanel getJContentPane() {
 		if (this.jContentPane == null) {
 			this.jContentPane = new JPanel();
@@ -155,3 +155,4 @@ public class CheckboxTreeExample extends JFrame {
 	}
 
 }
+*/

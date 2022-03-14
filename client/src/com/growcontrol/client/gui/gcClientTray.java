@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client.gui;
 
 import java.awt.Font;
@@ -47,3 +48,4 @@ public class gcClientTray extends xSystemTray {
 
 
 }
+*/

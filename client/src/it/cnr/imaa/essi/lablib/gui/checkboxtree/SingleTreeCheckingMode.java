@@ -10,19 +10,19 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree;
 
 import javax.swing.tree.TreePath;
 
-/**
+/ **
  * SingleTreeCheckingMode defines a TreeCheckingMode without recursion. In this
  * simple mode the check state always changes only the current node: no
  * recursion. Also, only a single node of the tree is allowed to have a check at
  * a given time.
  *
  * @author Boldrini
- */
+ * /
 public class SingleTreeCheckingMode extends TreeCheckingMode {
 
 	SingleTreeCheckingMode(DefaultTreeCheckingModel model) {
@@ -44,33 +44,33 @@ public class SingleTreeCheckingMode extends TreeCheckingMode {
 		this.model.updateAncestorsGreyness(path);
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterChildrenInserted(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterChildrenInserted(TreePath parent) {
 		this.model.updatePathGreyness(parent);
 		this.model.updateAncestorsGreyness(parent);
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterChildrenRemoved(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterChildrenRemoved(TreePath parent) {
 		this.model.updatePathGreyness(parent);
 		this.model.updateAncestorsGreyness(parent);
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterStructureChanged(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterStructureChanged(TreePath parent) {
 		this.model.updatePathGreyness(parent);
@@ -78,3 +78,4 @@ public class SingleTreeCheckingMode extends TreeCheckingMode {
 	}
 
 }
+*/

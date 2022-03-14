@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client;
 
 import java.util.concurrent.atomic.AtomicReference;
@@ -8,7 +9,7 @@ import com.poixson.app.xAppStep.StepType;
 import com.poixson.app.steps.xAppStandard;
 
 
-/*
+/ *
  * Startup sequence
  *   10  prevent root        - xAppSteps_Tool
  *   50  load configs        - xAppSteps_Config
@@ -33,7 +34,7 @@ import com.poixson.app.steps.xAppStandard;
  *   60  display uptime      - xAppStandard
  *   10  garbage collect     - xApp
  *    1  exit
- */
+ * /
 public abstract class gcClient extends xAppStandard {
 
 	private static final AtomicReference<gcClient> instance =
@@ -41,10 +42,10 @@ public abstract class gcClient extends xAppStandard {
 
 
 
-	/**
+	/ **
 	 * Get the client class instance.
 	 * @return gcClient instance object.
-	 */
+	 * /
 	public static gcClient get() {
 		return instance.get();
 	}
@@ -69,7 +70,7 @@ public abstract class gcClient extends xAppStandard {
 
 
 
-/*
+/ *
 	/ **
 	 * Handle command-line arguments.
 	 * /
@@ -401,8 +402,9 @@ public abstract class gcClient extends xAppStandard {
 //			return (String[]) zones.toArray();
 //		}
 //	}
-*/
+* /
 
 
 
 }
+*/

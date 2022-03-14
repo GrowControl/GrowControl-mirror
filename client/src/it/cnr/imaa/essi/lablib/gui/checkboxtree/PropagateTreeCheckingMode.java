@@ -10,12 +10,12 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree;
 
 import javax.swing.tree.TreePath;
 
-/**
+/ **
  * PropagateTreeCheckingMode define a TreeCheckingMode with down recursion of
  * the check when nodes are clicked. It toggles the just-clicked checkbox and
  * propagates the change down. In other words, if the clicked checkbox is
@@ -23,7 +23,7 @@ import javax.swing.tree.TreePath;
  * will be unchecked.
  *
  * @author Boldrini
- */
+ * /
 public class PropagateTreeCheckingMode extends TreeCheckingMode {
 
 	PropagateTreeCheckingMode(DefaultTreeCheckingModel model) {
@@ -44,11 +44,11 @@ public class PropagateTreeCheckingMode extends TreeCheckingMode {
 		this.model.updateAncestorsGreyness(path);
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterChildrenInserted(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterChildrenInserted(TreePath parent) {
 		if (this.model.isPathChecked(parent))
@@ -57,22 +57,22 @@ public class PropagateTreeCheckingMode extends TreeCheckingMode {
 			this.model.uncheckSubTree(parent);
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterChildrenRemoved(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterChildrenRemoved(TreePath parent) {
 		this.model.updatePathGreyness(parent);
 		this.model.updateAncestorsGreyness(parent);
 	}
 
-	/*
+	/ *
 	 * (non-Javadoc)
 	 * @seeit.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingMode#
 	 * updateCheckAfterStructureChanged(javax.swing.tree.TreePath)
-	 */
+	 * /
 	@Override
 	public void updateCheckAfterStructureChanged(TreePath parent) {
 		if (this.model.isPathChecked(parent))
@@ -82,3 +82,4 @@ public class PropagateTreeCheckingMode extends TreeCheckingMode {
 	}
 
 }
+*/

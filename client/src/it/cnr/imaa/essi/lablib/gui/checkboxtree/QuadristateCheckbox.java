@@ -10,7 +10,7 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree;
 
 import it.cnr.imaa.essi.lablib.gui.checkboxtree.QuadristateButtonModel.State;
@@ -27,7 +27,7 @@ import javax.swing.JCheckBox;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.ActionMapUIResource;
 
-/**
+/ **
  * Checkbox with four states. Available states are UNCHECKED, CHECKED,
  * GREY_CHECKED, GREY_UNCHECKED. The rendering is obtained via a visualization
  * hack. The checkbox exploits the different rendering (greyed) of checkbox
@@ -42,7 +42,7 @@ import javax.swing.plaf.ActionMapUIResource;
  *
  * @author boldrini
  * @author bigagli
- */
+ * /
 
 public class QuadristateCheckbox extends JCheckBox {
 	private static final long serialVersionUID = 1L;
@@ -85,7 +85,7 @@ public class QuadristateCheckbox extends JCheckBox {
 		this(text, null, initial);
 	}
 
-	/* No one may add mouse listeners, not even Swing! */
+	/ * No one may add mouse listeners, not even Swing! * /
 	@Override
 	public void addMouseListener(MouseListener l) {
 	}
@@ -95,9 +95,9 @@ public class QuadristateCheckbox extends JCheckBox {
 		return (QuadristateButtonModel) super.getModel();
 	}
 
-	/**
+	/ **
 	 * Return the current state, which is determined by the selection status of the model.
-	 */
+	 * /
 	public State getState() {
 		return getModel().getState();
 	}
@@ -118,12 +118,13 @@ public class QuadristateCheckbox extends JCheckBox {
 		super.setModel(model);
 	}
 
-	/**
+	/ **
 	 * Set the new state to either CHECKED, UNCHECKED or GREY_CHECKED. If state
 	 * == null, it is treated as GREY_CHECKED.
-	 */
+	 * /
 	public void setState(State state) {
 		getModel().setState(state);
 	}
 
 }
+*/

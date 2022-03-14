@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.common.packets.list;
 
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import com.growcontrol.common.packets.PacketDirection;
 import com.growcontrol.common.packets.PacketProperties;
 
 
-/*
+/ *
  * Description: 
  * Direction: client to server
  * JSON:
@@ -16,7 +17,7 @@ import com.growcontrol.common.packets.PacketProperties;
  *     packet: list,
  *     what: <plugins|zones|..>
  * }
- */
+ * /
 @PacketProperties(
 		name      = "list",
 		stateful  = false,
@@ -53,3 +54,4 @@ System.out.println();
 
 
 }
+*/

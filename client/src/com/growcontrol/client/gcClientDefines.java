@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.client;
 
 import com.poixson.tools.Keeper;
@@ -53,3 +54,4 @@ public final class gcClientDefines {
 
 
 }
+*/

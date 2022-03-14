@@ -10,7 +10,7 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree.examples;
 
 import it.cnr.imaa.essi.lablib.gui.checkboxtree.CheckboxTree;
@@ -30,10 +30,10 @@ import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.tree.TreePath;
 
-/**
+/ **
  * Example showing the implementation of a CheckboxTree with RadioButton-style checkboxes.
  * @author bigagli
- */
+ * /
 public class RadioButtonTreeCellRenderer extends JPanel implements CheckboxTreeCellRenderer {
 	private static final long serialVersionUID = 1L;
 
@@ -88,3 +88,4 @@ public class RadioButtonTreeCellRenderer extends JPanel implements CheckboxTreeC
 	}
 
 }
+*/

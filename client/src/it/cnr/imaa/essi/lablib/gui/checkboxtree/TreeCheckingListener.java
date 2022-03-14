@@ -10,25 +10,26 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree;
 
 import java.util.EventListener;
 
-/**
+/ **
  * The listener notified when the checking in a TreeCheckingModel changes.
  * 
  * @see it.cnr.imaa.essi.lablib.gui.checkboxtree.TreeCheckingModel
  * @see it.cnr.imaa.essi.lablib.gui.checkboxtree.CheckboxTree
  * @author Enrico Boldrini
- */
+ * /
 public interface TreeCheckingListener extends EventListener {
 
-	/**
+	/ **
 	 * Called whenever the value of the checking changes.
 	 * 
 	 * @param e the event that characterizes the change.
-	 */
+	 * /
 	void valueChanged(TreeCheckingEvent e);
 
 }
+*/

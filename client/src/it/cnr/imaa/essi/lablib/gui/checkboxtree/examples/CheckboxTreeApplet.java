@@ -10,7 +10,7 @@
  * General Public License along with CheckboxTree; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
  * 02110-1301, USA
- */
+ * /
 package it.cnr.imaa.essi.lablib.gui.checkboxtree.examples;
 
 import it.cnr.imaa.essi.lablib.gui.checkboxtree.CheckboxTree;
@@ -38,9 +38,9 @@ import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-/**
+/ **
  * @author boldrini
- */
+ * /
 public class CheckboxTreeApplet extends JApplet {
 	private static final long serialVersionUID = 1L;
 
@@ -198,3 +198,4 @@ public class CheckboxTreeApplet extends JApplet {
 	}
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.growcontrol.common.packets.handshake;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import com.growcontrol.common.packets.PacketProperties;
 import com.growcontrol.common.packets.PacketState;
 
 
-/*
+/ *
  * Description: Protocol initializer
  * Direction:   client to server
  * JSON:
@@ -17,7 +18,7 @@ import com.growcontrol.common.packets.PacketState;
  *     packet: hello,
  *     version: <client-version>
  * }
- */
+ * /
 @PacketProperties(
 		name      = "hello",
 		stateful  = true,
@@ -63,3 +64,4 @@ System.out.println();
 
 
 }
+*/
