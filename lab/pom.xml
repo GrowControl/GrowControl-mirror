@@ -1,75 +1,72 @@
-<!-- Generated on: July 26, 2020 07:55 UTC -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated: Sun Mar 13 11:19:27 PM EDT 2022 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<name>gcLab</name>
 	<artifactId>lab</artifactId>
 	<groupId>com.growcontrol</groupId>
-	<version>4.0.0</version>
+	<version>4.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<url>https://growcontrol.com</url>
-	<scm>
-		<url>https://git.poixson.com/summary/gc!GrowControl.git</url>
-		<connection>scm:git:https://git.poixson.com/r/gc!GrowControl.git</connection>
-		<developerConnection>scm:git:ssh://git.poixson.com/gc!GrowControl.git</developerConnection>
-	</scm>
-	<issueManagement>
-		<system>git.poixson.com</system>
-		<url>https://git.poixson.com/tickets/gc!GrowControl.git</url>
-	</issueManagement>
+	<description>Basic client for Grow Control</description>
 	<organization>
-		<name>GrowControl</name>
-		<url>https://growcontrol.com</url>
+		<name>PoiXson</name>
+		<url>https://poixson.com</url>
 	</organization>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 
-		<pxnVersion>4.0.0</pxnVersion>
-
-		<!-- Dependencies -->
-		<gcClient-version>${project.version}</gcClient-version>
-		<gcStudio-version>${project.version}</gcStudio-version>
-		<pxnCommon-Core-version>${pxnVersion}</pxnCommon-Core-version>
-		<pxnCommon-App-version>${pxnVersion}</pxnCommon-App-version>
-		<pxnCommon-Shell-version>${pxnVersion}</pxnCommon-Shell-version>
-		<pxnCommon-Config-version>${pxnVersion}</pxnCommon-Config-version>
-		<pxnCommon-Plugin-version>${pxnVersion}</pxnCommon-Plugin-version>
-		<pxnCommon-Scheduler-version>${pxnVersion}</pxnCommon-Scheduler-version>
-		<pxnCommon-Net-version>${pxnVersion}</pxnCommon-Net-version>
-		<SnakeYAML-version>1.26</SnakeYAML-version>
-
-		<!-- MVN Plugins -->
-		<git-commit-id-plugin-version>4.0.0</git-commit-id-plugin-version>
-		<maven-resources-plugin-version>3.1.0</maven-resources-plugin-version>
+		<!-- Maven Plugins -->
+		<maven-resources-plugin-version>3.2.0</maven-resources-plugin-version>
 		<maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
 		<maven-jar-plugin-version>3.2.0</maven-jar-plugin-version>
-		<maven-assembly-plugin-version>3.3.0</maven-assembly-plugin-version>
-		<maven-shade-plugin-version>3.2.3</maven-shade-plugin-version>
 		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
 		<maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
+		<git-commit-id-version>4.9.10</git-commit-id-version>
+		<maven-shade-plugin-version>3.2.4</maven-shade-plugin-version>
+
+		<!-- Dependencies -->
+		<common-core-version>4.0.0-SNAPSHOT</common-core-version>
+		<client-version>4.0.0-SNAPSHOT</client-version>
 
 	</properties>
+	<scm>
+		<url>https://git.poixson.com/summary/gc!GrowControl.git</url>
+		<connection>scm:git:https://git.poixson.com/r/gc!GrowControl.git</connection>
+		<developerConnection>scm:ssh://git.poixson.com/gc!GrowControl.git</developerConnection>
+	</scm>
+	<issueManagement>
+		<system>pxngit</system>
+		<url>https://git.poixson.com/tickets/gc!GrowControl.git</url>
+	</issueManagement>
+	<ciManagement>
+		<system>pxnJenkins</system>
+		<url>https://ci.poixson.com</url>
+	</ciManagement>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<testSourceDirectory>tests</testSourceDirectory>
+		<directory>target/</directory>
+		<sourceDirectory>src/</sourceDirectory>
+		<outputDirectory>target/classes/</outputDirectory>
 		<finalName>${project.name}-${project.version}</finalName>
 		<resources>
 			<resource>
-				<directory>resources</directory>
+				<directory>resources/</directory>
 				<filtering>true</filtering>
+				<includes>
+					<include>plugin.yml</include>
+				</includes>
 			</resource>
 		</resources>
-		<testResources>
-			<testResource>
-				<directory>testresources</directory>
-			</testResource>
-		</testResources>
 		<plugins>
+
 			<!-- Resource Plugin -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
 				<version>${maven-resources-plugin-version}</version>
 				<configuration>
 					<nonFilteredFileExtensions>
@@ -85,10 +82,11 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin-version}</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>11</source>
+					<target>11</target>
 				</configuration>
 			</plugin>
+
 			<!-- Jar Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -98,11 +96,12 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.growcontrol.client.lab.Main</mainClass>
+							<mainClass>com.growcontrol.lab.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
 			</plugin>
+
 			<!-- Source Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -121,6 +120,38 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Eclipse Plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${maven-eclipse-plugin-version}</version>
+				<configuration>
+					<projectNameTemplate>${project.name}</projectNameTemplate>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+
+			<!-- Commit-ID Plugin -->
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<version>${git-commit-id-version}</version>
+				<executions>
+					<execution>
+						<id>get-the-git-infos</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>validate</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<dotGitDirectory>.git/</dotGitDirectory>
+				</configuration>
+			</plugin>
+
 			<!-- Shade Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -137,128 +168,22 @@
 				<configuration>
 					<dependencyReducedPomLocation>${project.basedir}/target/dependency-reduced-pom.xml</dependencyReducedPomLocation>
 					<filters>
-						<filter>
-							<artifact>com.growcontrol:studio</artifact>
-							<excludes>
-								<exclude>app.properties</exclude>
-								<exclude>images/treeicon.ico</exclude>
-								<exclude>META-INF/MANIFEST.MF</exclude>
-							</excludes>
-						</filter>
 					</filters>
 				</configuration>
 			</plugin>
-			<!-- Assembly Plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>${maven-assembly-plugin-version}</version>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-			</plugin>
-			<!-- Commit-ID Plugin -->
-			<plugin>
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
-				<version>${git-commit-id-plugin-version}</version>
-				<executions>
-					<execution>
-						<id>get-the-git-infos</id>
-						<goals>
-							<goal>revision</goal>
-						</goals>
-						<phase>validate</phase>
-					</execution>
-				</executions>
-				<configuration>
-					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-				</configuration>
-			</plugin>
-			<!-- Eclipse Plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>${maven-eclipse-plugin-version}</version>
-				<configuration>
-					<projectNameTemplate>${project.name}</projectNameTemplate>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>true</downloadJavadocs>
-				</configuration>
-			</plugin>
+
 		</plugins>
 	</build>
 	<dependencies>
-		<!-- gcClient -->
 		<dependency>
-			<groupId>com.growcontrol</groupId>
-			<artifactId>client</artifactId>
-			<version>${gcClient-version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- gcStudio -->
-		<dependency>
-			<groupId>com.growcontrol</groupId>
-			<artifactId>studio</artifactId>
-			<version>${gcStudio-version}</version>
-		</dependency>
-		<!-- pxnCommon-Core -->
-		<dependency>
-			<groupId>com.poixson</groupId>
 			<artifactId>common-core</artifactId>
-			<version>${pxnCommon-Core-version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- pxnCommon-App -->
-		<dependency>
 			<groupId>com.poixson</groupId>
-			<artifactId>common-app</artifactId>
-			<version>${pxnCommon-App-version}</version>
-			<scope>provided</scope>
+			<version>${common-core-version}</version>
 		</dependency>
-		<!-- pxnCommon-Shell -->
 		<dependency>
-			<groupId>com.poixson</groupId>
-			<artifactId>common-shell</artifactId>
-			<version>${pxnCommon-Shell-version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- pxnCommon-Config -->
-		<dependency>
-			<groupId>com.poixson</groupId>
-			<artifactId>common-config</artifactId>
-			<version>${pxnCommon-Config-version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- pxnCommon-Plugin -->
-		<dependency>
-			<groupId>com.poixson</groupId>
-			<artifactId>common-plugin</artifactId>
-			<version>${pxnCommon-Plugin-version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- pxnCommon-Scheduler -->
-		<dependency>
-			<groupId>com.poixson</groupId>
-			<artifactId>common-scheduler</artifactId>
-			<version>${pxnCommon-Scheduler-version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- pxnCommon-Net -->
-		<dependency>
-			<groupId>com.poixson</groupId>
-			<artifactId>common-net</artifactId>
-			<version>${pxnCommon-Net-version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!-- SnakeYAML -->
-		<dependency>
-			<groupId>org.yaml</groupId>
-			<artifactId>snakeyaml</artifactId>
-			<version>${SnakeYAML-version}</version>
-			<scope>provided</scope>
+			<artifactId>client</artifactId>
+			<groupId>com.growcontrol</groupId>
+			<version>${client-version}</version>
 		</dependency>
 	</dependencies>
 </project>

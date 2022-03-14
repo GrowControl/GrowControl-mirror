@@ -1,71 +1,71 @@
-<!-- Generated on: July 28, 2020 12:13 UTC -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated: Sun Mar 13 11:18:31 PM EDT 2022 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<name>gcCommon</name>
-	<artifactId>gccommon</artifactId>
+	<artifactId>common</artifactId>
 	<groupId>com.growcontrol</groupId>
-	<version>4.0.0</version>
+	<version>4.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<url>https://growcontrol.com</url>
-	<scm>
-		<url>https://git.poixson.com/summary/gc!GrowControl.git</url>
-		<connection>scm:git:https://git.poixson.com/r/gc!GrowControl.git</connection>
-		<developerConnection>scm:git:ssh://git.poixson.com/gc!GrowControl.git</developerConnection>
-	</scm>
-	<issueManagement>
-		<system>git.poixson.com</system>
-		<url>https://git.poixson.com/tickets/gc!GrowControl.git</url>
-	</issueManagement>
+	<description>Common tools and utilities for Grow Control</description>
 	<organization>
-		<name>GrowControl</name>
-		<url>https://growcontrol.com</url>
+		<name>PoiXson</name>
+		<url>https://poixson.com</url>
 	</organization>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 
-		<pxnVersion>4.0.0</pxnVersion>
-
-		<!-- Dependencies -->
-		<pxnCommon-Core-version>${pxnVersion}</pxnCommon-Core-version>
-		<pxnCommon-App-version>${pxnVersion}</pxnCommon-App-version>
-		<pxnCommon-Net-version>${pxnVersion}</pxnCommon-Net-version>
-		<jUnit-version>4.13</jUnit-version>
-
-		<!-- MVN Plugins -->
-		<git-commit-id-plugin-version>4.0.0</git-commit-id-plugin-version>
-		<maven-resources-plugin-version>3.1.0</maven-resources-plugin-version>
+		<!-- Maven Plugins -->
+		<maven-resources-plugin-version>3.2.0</maven-resources-plugin-version>
 		<maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
 		<maven-jar-plugin-version>3.2.0</maven-jar-plugin-version>
 		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
 		<maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
-		<surefire-version>3.0.0-M4</surefire-version>
-		<cobertura-version>2.7</cobertura-version>
-		<project-info-reports-version>3.0.0</project-info-reports-version>
-		<jxr-version>3.0.0</jxr-version>
+		<git-commit-id-version>4.9.10</git-commit-id-version>
+
+		<!-- Dependencies -->
+		<common-core-version>4.0.0-SNAPSHOT</common-core-version>
+		<common-app-version>4.0.0-SNAPSHOT</common-app-version>
 
 	</properties>
+	<scm>
+		<url>https://git.poixson.com/summary/gc!GrowControl.git</url>
+		<connection>scm:git:https://git.poixson.com/r/gc!GrowControl.git</connection>
+		<developerConnection>scm:ssh://git.poixson.com/gc!GrowControl.git</developerConnection>
+	</scm>
+	<issueManagement>
+		<system>pxngit</system>
+		<url>https://git.poixson.com/tickets/gc!GrowControl.git</url>
+	</issueManagement>
+	<ciManagement>
+		<system>pxnJenkins</system>
+		<url>https://ci.poixson.com</url>
+	</ciManagement>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<testSourceDirectory>tests</testSourceDirectory>
+		<directory>target/</directory>
+		<sourceDirectory>src/</sourceDirectory>
+		<outputDirectory>target/classes/</outputDirectory>
 		<finalName>${project.name}-${project.version}</finalName>
 		<resources>
 			<resource>
-				<directory>resources</directory>
+				<directory>resources/</directory>
 				<filtering>true</filtering>
+				<includes>
+					<include>plugin.yml</include>
+				</includes>
 			</resource>
 		</resources>
-		<testResources>
-			<testResource>
-				<directory>testresources</directory>
-			</testResource>
-		</testResources>
 		<plugins>
+
 			<!-- Resource Plugin -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
 				<version>${maven-resources-plugin-version}</version>
 				<configuration>
 					<nonFilteredFileExtensions>
@@ -81,16 +81,18 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin-version}</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>11</source>
+					<target>11</target>
 				</configuration>
 			</plugin>
+
 			<!-- Jar Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>${maven-jar-plugin-version}</version>
 			</plugin>
+
 			<!-- Source Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -109,24 +111,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Commit-ID Plugin -->
-			<plugin>
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
-				<version>${git-commit-id-plugin-version}</version>
-				<executions>
-					<execution>
-						<id>get-the-git-infos</id>
-						<goals>
-							<goal>revision</goal>
-						</goals>
-						<phase>validate</phase>
-					</execution>
-				</executions>
-				<configuration>
-					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-				</configuration>
-			</plugin>
+
 			<!-- Eclipse Plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -138,85 +123,40 @@
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
-			<!-- jUnit Plugin -->
+
+			<!-- Commit-ID Plugin -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${surefire-version}</version>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<version>${git-commit-id-version}</version>
+				<executions>
+					<execution>
+						<id>get-the-git-infos</id>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+						<phase>validate</phase>
+					</execution>
+				</executions>
 				<configuration>
-					<useFile>false</useFile>
-					<parallel>methods</parallel>
-					<threadCount>4</threadCount>
-					<trimStackTrace>false</trimStackTrace>
+					<dotGitDirectory>.git/</dotGitDirectory>
 				</configuration>
 			</plugin>
-			<!-- Cobertura Plugin -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>${cobertura-version}</version>
-				<configuration>
-					<quiet>true</quiet>
-				</configuration>
-			</plugin>
+
 		</plugins>
 	</build>
 	<dependencies>
-		<!-- pxnCommon-Core -->
 		<dependency>
-			<groupId>com.poixson</groupId>
 			<artifactId>common-core</artifactId>
-			<version>${pxnCommon-Core-version}</version>
-		</dependency>
-		<!-- pxnCommon-App -->
-		<dependency>
 			<groupId>com.poixson</groupId>
+			<version>${common-core-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<artifactId>common-app</artifactId>
-			<version>${pxnCommon-App-version}</version>
-		</dependency>
-		<!-- pxnCommon-Net -->
-		<dependency>
 			<groupId>com.poixson</groupId>
-			<artifactId>common-net</artifactId>
-			<version>${pxnCommon-Net-version}</version>
-		</dependency>
-		<!-- jUnit -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${jUnit-version}</version>
-			<scope>test</scope>
+			<version>${common-app-version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	<reporting>
-		<plugins>
-			<!-- Reports Plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>${project-info-reports-version}</version>
-				<configuration>
-					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-				</configuration>
-			</plugin>
-			<!-- Cobertura Plugin -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>${cobertura-version}</version>
-				<configuration>
-					<formats>
-						<format>html</format>
-						<format>xml</format>
-					</formats>
-				</configuration>
-			</plugin>
-			<!-- Cross-Reference Plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>${jxr-version}</version>
-			</plugin>
-		</plugins>
-	</reporting>
 </project>
