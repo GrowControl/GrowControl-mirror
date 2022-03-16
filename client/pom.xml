@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated: Sun Mar 13 11:19:20 PM EDT 2022 -->
+<!-- Generated: Mon Mar 14 03:01:17 PM EDT 2022 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -29,6 +29,9 @@
 		<git-commit-id-version>4.9.10</git-commit-id-version>
 
 		<!-- Dependencies -->
+		<common-core-version>4.0.0-SNAPSHOT</common-core-version>
+		<common-logger-version>4.0.0-SNAPSHOT</common-logger-version>
+		<common-app-version>4.0.0-SNAPSHOT</common-app-version>
 		<common-version>4.0.0-SNAPSHOT</common-version>
 		<server-version>4.0.0-SNAPSHOT</server-version>
 
@@ -146,6 +149,24 @@
 		</plugins>
 	</build>
 	<dependencies>
+		<dependency>
+			<artifactId>common-core</artifactId>
+			<groupId>com.poixson</groupId>
+			<version>${common-core-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<artifactId>common-logger</artifactId>
+			<groupId>com.poixson</groupId>
+			<version>${common-logger-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<artifactId>common-app</artifactId>
+			<groupId>com.poixson</groupId>
+			<version>${common-app-version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<artifactId>common</artifactId>
 			<groupId>com.growcontrol</groupId>
