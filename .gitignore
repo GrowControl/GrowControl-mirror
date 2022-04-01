@@ -28,6 +28,7 @@ cache/
 .twig_cache/
 .backups/
 *.lock
+!Cargo.lock
 !composer.lock
 
 bin/
