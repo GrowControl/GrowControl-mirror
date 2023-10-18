@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated: Mon Mar 14 03:01:12 PM EDT 2022 -->
+<!-- Generated: Thu Oct 12 10:41:23 PM EDT 2023 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<name>gcServer</name>
 	<artifactId>server</artifactId>
 	<groupId>com.growcontrol</groupId>
-	<version>4.0.0-SNAPSHOT</version>
+	<version>3.3.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<url>https://growcontrol.com</url>
-	<description>Server control center for Grow Control</description>
+	<description>Grow Control background service</description>
 	<organization>
 		<name>PoiXson</name>
 		<url>https://poixson.com</url>
 	</organization>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>17</java.version>
+		<maven.compiler.release>17</maven.compiler.release>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 
 		<!-- Maven Plugins -->
-		<maven-resources-plugin-version>3.2.0</maven-resources-plugin-version>
-		<maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
-		<maven-jar-plugin-version>3.2.0</maven-jar-plugin-version>
-		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
+		<maven-resources-plugin-version>3.3.1</maven-resources-plugin-version>
+		<maven-compiler-plugin-version>3.11.0</maven-compiler-plugin-version>
+		<maven-jar-plugin-version>3.3.0</maven-jar-plugin-version>
+		<maven-source-plugin-version>3.3.0</maven-source-plugin-version>
 		<maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
 		<git-commit-id-version>4.9.10</git-commit-id-version>
-		<maven-shade-plugin-version>3.2.4</maven-shade-plugin-version>
+		<maven-shade-plugin-version>3.4.1</maven-shade-plugin-version>
 
 		<!-- Dependencies -->
-		<common-core-version>4.0.0-SNAPSHOT</common-core-version>
-		<common-logger-version>4.0.0-SNAPSHOT</common-logger-version>
-		<common-app-version>4.0.0-SNAPSHOT</common-app-version>
-		<common-version>4.0.0-SNAPSHOT</common-version>
+		<common-core-version>[4.0.0,)</common-core-version>
+		<common-logger-version>[4.0.0,)</common-logger-version>
+		<common-app-version>[4.0.0,)</common-app-version>
+		<common-shell-version>[4.0.0,)</common-shell-version>
+		<jansi-version>2.4.0</jansi-version>
+		<jline-version>3.23.0</jline-version>
 
 	</properties>
 	<scm>
@@ -59,7 +63,7 @@
 				<directory>resources/</directory>
 				<filtering>true</filtering>
 				<includes>
-					<include>plugin.yml</include>
+					<include>app.properties</include>
 				</includes>
 			</resource>
 		</resources>
@@ -83,10 +87,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin-version}</version>
-				<configuration>
-					<source>11</source>
-					<target>11</target>
-				</configuration>
 			</plugin>
 
 			<!-- Jar Plugin -->
@@ -193,9 +193,19 @@
 			<version>${common-app-version}</version>
 		</dependency>
 		<dependency>
-			<artifactId>common</artifactId>
-			<groupId>com.growcontrol</groupId>
-			<version>${common-version}</version>
+			<artifactId>common-shell</artifactId>
+			<groupId>com.poixson</groupId>
+			<version>${common-shell-version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>jansi</artifactId>
+			<groupId>org.fusesource.jansi</groupId>
+			<version>${jansi-version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>jline</artifactId>
+			<groupId>org.jline</groupId>
+			<version>${jline-version}</version>
 		</dependency>
 	</dependencies>
 </project>
