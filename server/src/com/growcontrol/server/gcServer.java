@@ -1,18 +1,100 @@
-/*
 package com.growcontrol.server;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.growcontrol.server.app.steps.gcServerLogo;
-import com.growcontrol.server.plugins.gcServerPluginManager;
-import com.poixson.app.xAppStep.StepType;
-import com.poixson.app.steps.xAppStandard;
-import com.poixson.app.steps.xAppSteps_Console;
+import com.growcontrol.server.app.steps.gcServer_Logo;
+import com.poixson.app.xApp;
+import com.poixson.app.xAppMoreSteps;
+import com.poixson.app.xAppStep;
+import com.poixson.app.xAppStepType;
+import com.poixson.app.commands.xCommandHandler;
+import com.poixson.app.steps.xAppSteps_ConsolePrompt;
+import com.poixson.app.steps.xAppSteps_UserNotRoot;
 
 
-/ *
+/*
  * Startup sequence
- *   10  prevent root        - xAppSteps_Tool
+ *   5 | prevent root   | xAppSteps_UserNotRoot
+ *  10 | startup time   | xApp
+ *  15 | display logo   | gcServer_Logo
+ *  90 | commands
+ *  95 | command prompt | xAppSteps_ConsolePrompt
+ *
+ * Shutdown sequence
+ *  95 | command prompt    | xAppSteps_ConsolePrompt
+ *  60 | display uptime    | xApp
+ *  50 | stop thread pools | xApp
+ *  10 | garbage collect   | xApp
+ *   1 | exit              | xApp
+ */
+public class gcServer extends xApp {
+
+	protected final AtomicReference<xCommandHandler> commands = new AtomicReference<xCommandHandler>(null);
+
+
+
+	public gcServer(final String[] args) {
+		super(args);
+		// commands
+		{
+			final xCommandHandler commands = new xCommandHandler();
+			this.commands.set(commands);
+		}
+	}
+
+
+
+	@xAppMoreSteps
+	public Object[] steps(final xAppStepType type) {
+		return new Object[] {
+			new xAppSteps_UserNotRoot(), //  5
+			new gcServer_Logo(this),     // 15
+			new xAppSteps_ConsolePrompt(this.getCommandHandler()), // 95
+//TODO
+//			gcServerPluginManager.get(),
+		};
+	}
+
+
+
+	// -------------------------------------------------------------------------------
+	// startup steps
+
+
+
+	@xAppStep(type=xAppStepType.STARTUP, title="Commands", step=90)
+	public void __START__commands() {
+		this.getCommandHandler().register(
+//TODO
+//			new xCommands_ExitKill()
+//			new gcCommandsCommon(),
+//			new gcCommandsServer()
+		);
+	}
+
+//			// load commands
+//			// start console input
+//			console.start();
+
+
+
+	// -------------------------------------------------------------------------------
+	// shutdown steps
+
+
+
+	// -------------------------------------------------------------------------------
+
+
+
+	public xCommandHandler getCommandHandler() {
+		return this.commands.get();
+	}
+
+
+
+}
+/*
  *   50  load configs        - xAppSteps_Config
  *   70  lock file           - xAppSteps_LockFile
  *   80  display logo        - xAppSteps_Logo
@@ -36,16 +118,11 @@ import com.poixson.app.steps.xAppSteps_Console;
  *  105  stop console input  - xAppSteps_Console
  *  100  stop thread pools   - xAppStandard
  *   60  display uptime      - xAppStandard
- *   10  garbage collect     - xApp
- *    1  exit
  * /
-public class gcServer extends xAppStandard {
+
 
 	private static final AtomicReference<gcServer> instance =
 			new AtomicReference<gcServer>(null);
-
-
-
 	/ **
 	 * Get the server class instance.
 	 * @return gcServer instance object.
@@ -56,7 +133,6 @@ public class gcServer extends xAppStandard {
 
 
 
-	public gcServer() {
 		super();
 		if ( ! instance.compareAndSet(null, this) )
 			throw new RuntimeException("gcServer instance already exists! Cannot create a second instance.");
@@ -71,34 +147,14 @@ public class gcServer extends xAppStandard {
 
 
 
-	@Override
-	protected Object[] getStepObjects(final StepType type) {
-		return new Object[] {
-			new gcServerLogo(),
-			xAppSteps_Console.get(),
-			gcServerPluginManager.get()
-		};
-	}
 
 
 
-	// ------------------------------------------------------------------------------- //
+	// -------------------------------------------------------------------------------
 	// startup steps
 
 
 
-/ *
-	// standard commands
-	@xAppStep( Type=StepType.STARTUP, Title="Commands", StepValue=91 )
-	public void __STARTUP_commands(final xApp app) {
-		ShellUtils.RegisterCommands(
-			new Commands_Standard()
-		);
-	}
-
-
-
-/ *
 	// load configs
 	@xAppStep(type=StepType.STARTUP, title="Configs", priority=55)
 	public void __STARTUP_load_configs() {
@@ -141,27 +197,6 @@ public class gcServer extends xAppStandard {
 
 
 
-	// command prompt
-	@xAppStep(type=StepType.STARTUP, title="CommandPrompt", priority=85)
-	public void __STARTUP_command_prompt() {
-		try {
-			// load console
-			final xConsole console = new jLineConsole();
-			xLog.setConsole(console);
-			// load commands
-			final xCommandHandler handler = xLog.getCommandHandler();
-			handler.register(
-				new gcCommandsCommon()
-			);
-			handler.register(
-				new gcCommandsServer()
-			);
-			// start console input
-			console.start();
-		} catch (Exception e) {
-			Failure.fail(e);
-		}
-	}
 
 
 
@@ -316,7 +351,7 @@ public class gcServer extends xAppStandard {
 
 
 
-	// ------------------------------------------------------------------------------- //
+	// -------------------------------------------------------------------------------
 	// shutdown steps
 
 

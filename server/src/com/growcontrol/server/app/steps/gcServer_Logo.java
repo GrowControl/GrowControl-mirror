@@ -1,4 +1,3 @@
-/*
 package com.growcontrol.server.app.steps;
 
 import com.growcontrol.server.gcServer;
@@ -7,6 +6,10 @@ import com.poixson.logger.xLog;
 import com.poixson.tools.AsciiArtBuilder;
 
 
+/*
+ * Startup sequence
+ *  15 | display logo
+ */
 public class gcServer_Logo extends xAppSteps_Logo {
 
 
@@ -31,7 +34,7 @@ public class gcServer_Logo extends xAppSteps_Logo {
 //   0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6
 //   0         1         2         3         4         5         6
 	@Override
-	protected void displayLogo(final xLog log) {
+	protected String[] display_logo(final xLog log) {
 		final String version = this.getAppVersionPadded();
 		// define colors
 		final String COLOR_BG = "black";
@@ -145,10 +148,9 @@ public class gcServer_Logo extends xAppSteps_Logo {
 		// line 11   color                   x   y
 		art.setColor(COLOR_GRASS,            0, 10);
 		// display generated art
-		log.publish(art.build());
+		return art.build();
 	}
 
 
 
 }
-*/
