@@ -3,6 +3,7 @@ package com.growcontrol.server;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.poixson.logger.xLog;
+import com.poixson.logger.xLogRoot;
 import com.poixson.logger.formatters.xLogFormat_Color;
 import com.poixson.logger.handlers.xLogHandler_Console;
 import com.poixson.threadpool.types.xThreadPool_Main;
@@ -25,10 +26,11 @@ public class Main {
 		instance_server.set(server);
 		// logger
 		{
-			final xLog log = xLog.Get();
-			final xConsolePrompt console = new xConsolePrompt();
+			final xLog log = xLogRoot.Get();
+			final xConsolePrompt console = new xConsolePrompt(server);
 			final xLogHandler_Console handler = new xLogHandler_Console(console);
 			final xLogFormat_Color format = new xLogFormat_Color();
+			log.setConsole(console);
 			handler.setFormat(format);
 			log.addHandler(handler);
 		}

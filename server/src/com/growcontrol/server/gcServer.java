@@ -3,13 +3,17 @@ package com.growcontrol.server;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.growcontrol.server.app.steps.gcServer_Logo;
+import com.growcontrol.server.commands.gcCommands_Common;
+import com.growcontrol.server.commands.gcCommands_Server;
 import com.poixson.app.xApp;
 import com.poixson.app.xAppMoreSteps;
 import com.poixson.app.xAppStep;
 import com.poixson.app.xAppStepType;
-import com.poixson.app.commands.xCommandHandler;
-import com.poixson.app.steps.xAppSteps_ConsolePrompt;
+import com.poixson.app.commands.xCommandProcessor;
+import com.poixson.app.commands.xCommands_ExitKill;
 import com.poixson.app.steps.xAppSteps_UserNotRoot;
+import com.poixson.logger.xConsole;
+import com.poixson.logger.xLogRoot;
 
 
 /*
@@ -29,7 +33,7 @@ import com.poixson.app.steps.xAppSteps_UserNotRoot;
  */
 public class gcServer extends xApp {
 
-	protected final AtomicReference<xCommandHandler> commands = new AtomicReference<xCommandHandler>(null);
+	protected final AtomicReference<xCommandProcessor> commands = new AtomicReference<xCommandProcessor>(null);
 
 
 
@@ -37,7 +41,7 @@ public class gcServer extends xApp {
 		super(args);
 		// commands
 		{
-			final xCommandHandler commands = new xCommandHandler();
+			final xCommandProcessor commands = new xCommandProcessor(this);
 			this.commands.set(commands);
 		}
 	}
@@ -49,7 +53,7 @@ public class gcServer extends xApp {
 		return new Object[] {
 			new xAppSteps_UserNotRoot(), //  5
 			new gcServer_Logo(this),     // 15
-			new xAppSteps_ConsolePrompt(this.getCommandHandler()), // 95
+			this.log().getConsole()      // 95
 //TODO
 //			gcServerPluginManager.get(),
 		};
@@ -64,17 +68,28 @@ public class gcServer extends xApp {
 
 	@xAppStep(type=xAppStepType.STARTUP, title="Commands", step=90)
 	public void __START__commands() {
-		this.getCommandHandler().register(
-//TODO
-//			new xCommands_ExitKill()
-//			new gcCommandsCommon(),
-//			new gcCommandsServer()
+		final xCommandProcessor proc = this.getCommandProcessor();
+		proc.unregisterAll();
+		proc.register(
+			this.getCommands()
 		);
 	}
+	@Override
+	public Object[] getCommands() {
+		return new Object[] {
+			new xCommands_ExitKill(this),
+			new gcCommands_Common(this),
+			new gcCommands_Server(this)
+		};
+	}
 
-//			// load commands
-//			// start console input
-//			console.start();
+	@xAppStep(type=xAppStepType.STARTUP, title="ConsolePrompt", step=95)
+	public void __START__command_prompt() {
+		// start reading console input
+		final xConsole console = xLogRoot.Get().getConsole();
+		if (console != null)
+			console.start();
+	}
 
 
 
@@ -83,11 +98,23 @@ public class gcServer extends xApp {
 
 
 
+	// stop console input
+	@xAppStep(type=xAppStepType.SHUTDOWN, title="ConsolePrompt", step=95)
+	public void __STOP__console() {
+		// stop reading console input
+		final xConsole console = xLogRoot.Get().getConsole();
+		if (console != null)
+			console.stop();
+	}
+
+
+
 	// -------------------------------------------------------------------------------
 
 
 
-	public xCommandHandler getCommandHandler() {
+	@Override
+	public xCommandProcessor getCommandProcessor() {
 		return this.commands.get();
 	}
 
