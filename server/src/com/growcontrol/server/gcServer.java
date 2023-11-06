@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import com.growcontrol.server.app.steps.gcServer_Logo;
 import com.growcontrol.server.commands.gcCommands_Common;
 import com.growcontrol.server.commands.gcCommands_Server;
+import com.growcontrol.server.configs.gcServerConfig;
 import com.poixson.app.xApp;
 import com.poixson.app.xAppMoreSteps;
 import com.poixson.app.xAppStep;
@@ -14,6 +15,7 @@ import com.poixson.app.commands.xCommands_ExitKill;
 import com.poixson.app.steps.xAppSteps_UserNotRoot;
 import com.poixson.logger.xConsole;
 import com.poixson.logger.xLogRoot;
+import com.poixson.tools.config.xConfigLoader;
 
 
 /*
@@ -21,6 +23,7 @@ import com.poixson.logger.xLogRoot;
  *   5 | prevent root   | xAppSteps_UserNotRoot
  *  10 | startup time   | xApp
  *  15 | display logo   | gcServer_Logo
+ *  50 | load configs
  *  90 | commands
  *  95 | command prompt | xAppSteps_ConsolePrompt
  *
@@ -34,6 +37,8 @@ import com.poixson.logger.xLogRoot;
 public class gcServer extends xApp {
 
 	protected final AtomicReference<xCommandProcessor> commands = new AtomicReference<xCommandProcessor>(null);
+
+	protected final AtomicReference<gcServerConfig> config = new AtomicReference<gcServerConfig>(null);
 
 
 
@@ -183,20 +188,23 @@ public class gcServer extends xApp {
 
 
 	// load configs
-	@xAppStep(type=StepType.STARTUP, title="Configs", priority=55)
+	@xAppStep(type=xAppStepType.STARTUP, title="Configs", step=50)
 	public void __STARTUP_load_configs() {
+//TODO: find config
+		final String file = "gc.conf";
+		final gcServerConfig config = xConfigLoader.FromFile(file, gcServerConfig.class);
+		this.config.set(config);
 		try {
-			xVars.setJLineHistorySize(200);
-			xVars.setJLineHistoryFile(
-				FileUtils.MergePaths(
-					FileUtils.cwd(),
-					"history.txt"
-				)
-			);
+//			xVars.setJLineHistorySize(200);
+//			xVars.setJLineHistoryFile(
+//				FileUtils.MergePaths(
+//					FileUtils.cwd(),
+//					"history.txt"
+//				)
+//			);
 		} catch (Exception e) {
-			Failure.fail(e);
+			this.fail(e);
 		}
-//TODO:
 //		final gcServerConfig config = gcServerVars.getConfig();
 //		{
 //			// debug mode

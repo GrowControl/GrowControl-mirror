@@ -1,24 +1,65 @@
-/*
 package com.growcontrol.server.configs;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.growcontrol.common.configs.gcAppConfig;
-import com.growcontrol.server.gcServerDefines;
-import com.poixson.commonapp.config.xConfig;
-import com.poixson.commonapp.config.xConfigException;
-import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.Utils.utilsNumbers;
-import com.poixson.commonjava.Utils.xTime;
-import com.poixson.commonjava.Utils.xTimeU;
-import com.poixson.commonjava.Utils.threads.xThreadPool;
+import com.poixson.logger.xLevel;
+import com.poixson.tools.config.xConfig;
 
 
-public final class gcServerConfig extends gcAppConfig {
+public final class gcServerConfig extends xConfig {
 
+	private final String  version;
+	private final xLevel  level;
+	private final boolean debug;
+
+
+
+	public gcServerConfig(final Map<String, Object> datamap) {
+//TODO
+//			throws xConfigException {
+		super(datamap);
+//TODO
+this.version = "";
+this.level = xLevel.ALL;
+this.debug = true;
+//// config version
+//this.version = this.getString(gcCommonDefines.CONFIG_VERSION);
+//if (Utils.isEmpty(this.version)) throw new xConfigException("Version is missing from config!");
+//// log level
+//{
+//	final String levelStr = this.getString(gcCommonDefines.CONFIG_VERSION);
+//	final xLevel lvl = xLevel.parse(levelStr);
+//	this.level =
+//		lvl == null
+//		? gcCommonDefines.DEFAULT_LOG_LEVEL
+//		: lvl;
+//}
+//// debug mode
+//this.debug = this.getBool(
+//	gcCommonDefines.CONFIG_DEBUG,
+//	gcCommonDefines.DEFAULT_DEBUG
+//);
+	}
+
+
+
+	// config version
+	public String getVersion() {
+		return this.version;
+	}
+	// log level
+	public xLevel getLogLevel() {
+		return this.level;
+	}
+	// debug mode
+	public boolean getDebug() {
+		return this.debug;
+	}
+
+
+
+}
+/*
 	private final boolean promptTickerEnabled;
 	private final xTime   tickInterval;
 	private final int     logicThreads;
@@ -29,9 +70,6 @@ public final class gcServerConfig extends gcAppConfig {
 
 
 
-	public gcServerConfig(final Map<String, Object> datamap)
-			throws xConfigException {
-		super(datamap);
 		// prompt ticker enabled
 		this.promptTickerEnabled = this.getBool(
 			gcServerDefines.CONFIG_PROMPT_TICKER,
@@ -76,7 +114,6 @@ public final class gcServerConfig extends gcAppConfig {
 			gcServerDefines.CONFIG_SOCKET_BACKLOG,
 			gcServerDefines.DEFAULT_SOCKET_BACKLOG
 		);
-	}
 
 
 
