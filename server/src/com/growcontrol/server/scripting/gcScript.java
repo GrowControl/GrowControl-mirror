@@ -1,25 +1,38 @@
-/*
-package com.growcontrol.common.scripting;
+package com.growcontrol.server.scripting;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Iterator;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptException;
-
-import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.Utils.xStartable;
-import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
-import com.poixson.commonjava.Utils.threads.xThreadPool;
-import com.poixson.commonjava.xLogger.xLog;
+import com.poixson.tools.abstractions.xStartable;
 
 
 public class gcScript implements xStartable {
+	public static final String LOG_NAME = "SCRIPT";
+	public static final String LANGUAGE = "JavaScript";
 
+
+
+	public gcScript() {
+	}
+
+
+
+	@Override
+	public void start() {
+	}
+	@Override
+	public void stop() {
+	}
+	@Override
+	public boolean isRunning() {
+return false;
+	}
+	@Override
+	public boolean isStopping() {
+return false;
+	}
+
+
+
+}
+/*
 	public final String name;
 	public final int id;
 

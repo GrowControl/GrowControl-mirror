@@ -6,6 +6,7 @@ import com.growcontrol.server.app.steps.gcServer_Logo;
 import com.growcontrol.server.commands.gcCommands_Common;
 import com.growcontrol.server.commands.gcCommands_Server;
 import com.growcontrol.server.configs.gcServerConfig;
+import com.growcontrol.server.scripting.gcScriptManager;
 import com.poixson.app.xApp;
 import com.poixson.app.xAppMoreSteps;
 import com.poixson.app.xAppStep;
@@ -26,8 +27,10 @@ import com.poixson.tools.config.xConfigLoader;
  *  50 | load configs
  *  90 | commands
  *  95 | command prompt | xAppSteps_ConsolePrompt
+ * 450 | start scripts
  *
  * Shutdown sequence
+ * 450 | stop scripts
  *  95 | command prompt    | xAppSteps_ConsolePrompt
  *  60 | display uptime    | xApp
  *  50 | stop thread pools | xApp
@@ -38,7 +41,8 @@ public class gcServer extends xApp {
 
 	protected final AtomicReference<xCommandProcessor> commands = new AtomicReference<xCommandProcessor>(null);
 
-	protected final AtomicReference<gcServerConfig> config = new AtomicReference<gcServerConfig>(null);
+	protected final AtomicReference<gcServerConfig>  config  = new AtomicReference<gcServerConfig>(null);
+	protected final AtomicReference<gcScriptManager> scripts = new AtomicReference<gcScriptManager>(null);
 
 
 
@@ -141,8 +145,38 @@ public class gcServer extends xApp {
 
 
 
+	@xAppStep(type=xAppStepType.STARTUP, title="Scripts", step=450)
+	public void __START__scripts() {
+		try {
+			final gcScriptManager manager = new gcScriptManager(this);
+			final gcScriptManager previous = this.scripts.getAndSet(manager);
+			if (previous != null)
+				previous.stop();
+//TODO: load scripts
+			manager.start();
+		} catch (Exception e) {
+			this.fail(e);
+		}
+	}
+
+
+
 	// -------------------------------------------------------------------------------
 	// shutdown steps
+
+
+
+	@xAppStep(type=xAppStepType.SHUTDOWN, title="Scripts", step=450)
+	public void __STOP__scripts() {
+		try {
+			final gcScriptManager manager = this.scripts.getAndSet(null);
+			if (manager != null)
+				manager.stop();
+//TODO: wait for scripts to finish
+		} catch (Exception e) {
+			this.fail(e);
+		}
+	}
 
 
 

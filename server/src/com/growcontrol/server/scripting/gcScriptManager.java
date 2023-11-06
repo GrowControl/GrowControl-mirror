@@ -1,29 +1,34 @@
+package com.growcontrol.server.scripting;
+
+import com.poixson.app.xApp;
+import com.poixson.tools.abstractions.xStartStop;
+
+
+public class gcScriptManager implements xStartStop {
+
+	protected final xApp app;
+
+
+
+	public gcScriptManager(final xApp app) {
+		this.app = app;
+	}
+
+
+
+	@Override
+	public void start() {
+	}
+
+	@Override
+	public void stop() {
+	}
+
+
+
+}
 /*
-package com.growcontrol.common.scripting;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-
-import com.poixson.commonjava.Utils.Keeper;
-import com.poixson.commonjava.Utils.utils;
-import com.poixson.commonjava.Utils.utilsDirFile;
-import com.poixson.commonjava.Utils.utilsString;
-import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;
-import com.poixson.commonjava.Utils.threads.xThreadPool;
-import com.poixson.commonjava.xLogger.xLog;
-
-
 //https://docs.oracle.com/javase/6/docs/technotes/guides/scripting/programmer_guide/
-public class gcScriptManager {
-	private static final String LOG_NAME = "SCRIPT";
-
-	public static final String LANGUAGE = "JavaScript";
 
 	private static volatile gcScriptManager instance = null;
 	private static final Object instanceLock = new Object();
@@ -36,17 +41,6 @@ public class gcScriptManager {
 
 
 
-	public static gcScriptManager get() {
-		if(instance == null) {
-			synchronized(instanceLock) {
-				if(instance == null)
-					instance = new gcScriptManager();
-			}
-		}
-		return instance;
-	}
-	private gcScriptManager() {
-		Keeper.add(this);
 		this.factory = new ScriptEngineManager();
 //TODO:
 //		this.factory.put("ServerVersion", gcServer.get().getVersion());
