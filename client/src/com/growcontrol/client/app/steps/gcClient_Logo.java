@@ -1,12 +1,14 @@
-/*
 package com.growcontrol.client.app.steps;
 
 import com.growcontrol.client.gcClient;
 import com.poixson.app.steps.xAppSteps_Logo;
-import com.poixson.logger.xLog;
 import com.poixson.tools.AsciiArtBuilder;
 
 
+/*
+ * Startup sequence
+ *  20 | display logo
+ */
 public class gcClient_Logo extends xAppSteps_Logo {
 
 
@@ -31,18 +33,18 @@ public class gcClient_Logo extends xAppSteps_Logo {
 //   0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8
 //             1         2         3         4         5         6
 	@Override
-	protected void displayLogo(final xLog log) {
+	public String[] display_logo() {
 		final String version = this.getAppVersionPadded();
 		// define colors
 		final String COLOR_BG = "black";
+		final String COLOR_SOFTWARE = "cyan";
+		final String COLOR_VERSION  = "cyan";
 		final String COLOR_PXN_P    = "bold,green";
 		final String COLOR_PXN_OI   = "bold,blue";
 		final String COLOR_PXN_X    = "bold,green";
 		final String COLOR_PXN_SON  = "bold,blue";
 		final String COLOR_GROW     = "bold,green";
 		final String COLOR_CONTROL  = "bold,white";
-		final String COLOR_SOFTWARE = "cyan";
-		final String COLOR_VERSION  = "cyan";
 		final String COLOR_GRASS    = "green";
 		final String COLOR_FLOWER_STEM     = "green";
 		final String COLOR_FLOWER_A_PEDALS = "blue";
@@ -129,10 +131,9 @@ public class gcClient_Logo extends xAppSteps_Logo {
 		// line 11   color                   x   y
 		art.setColor(COLOR_GRASS,            0, 10);
 		// display generated art
-		log.publish(art.build());
+		return art.build();
 	}
 
 
 
 }
-*/

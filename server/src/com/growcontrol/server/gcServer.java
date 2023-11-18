@@ -23,7 +23,7 @@ import com.poixson.tools.config.xConfigLoader;
  * Startup sequence
  *   5 | prevent root   | xAppSteps_UserNotRoot
  *  10 | startup time   | xApp
- *  15 | display logo   | gcServer_Logo
+ *  20 | display logo   | gcServer_Logo
  *  50 | load configs
  *  90 | commands
  *  95 | command prompt | xAppSteps_ConsolePrompt
@@ -61,7 +61,7 @@ public class gcServer extends xApp {
 	public Object[] steps(final xAppStepType type) {
 		return new Object[] {
 			new xAppSteps_UserNotRoot(), //  5
-			new gcServer_Logo(this),     // 15
+			new gcServer_Logo(this),     // 20
 			this.log().getConsole()      // 95
 		};
 	}

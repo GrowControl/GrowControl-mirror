@@ -2,13 +2,12 @@ package com.growcontrol.server.app.steps;
 
 import com.growcontrol.server.gcServer;
 import com.poixson.app.steps.xAppSteps_Logo;
-import com.poixson.logger.xLog;
 import com.poixson.tools.AsciiArtBuilder;
 
 
 /*
  * Startup sequence
- *  15 | display logo
+ *  20 | display logo
  */
 public class gcServer_Logo extends xAppSteps_Logo {
 
@@ -34,18 +33,18 @@ public class gcServer_Logo extends xAppSteps_Logo {
 //   0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6 8 0 2 4 6
 //   0         1         2         3         4         5         6
 	@Override
-	protected String[] display_logo(final xLog log) {
+	public String[] display_logo() {
 		final String version = this.getAppVersionPadded();
 		// define colors
 		final String COLOR_BG = "black";
+		final String COLOR_SOFTWARE = "cyan";
+		final String COLOR_VERSION  = "cyan";
 		final String COLOR_PXN_P    = "bold,green";
 		final String COLOR_PXN_OI   = "bold,blue";
 		final String COLOR_PXN_X    = "bold,green";
 		final String COLOR_PXN_SON  = "bold,blue";
 		final String COLOR_GROW     = "bold,green";
 		final String COLOR_CONTROL  = "bold,white";
-		final String COLOR_SOFTWARE = "cyan";
-		final String COLOR_VERSION  = "cyan";
 		final String COLOR_GRASS    = "green";
 		final String COLOR_FLOWER_STEM     = "green";
 		final String COLOR_FLOWER_A_PEDALS = "red";
