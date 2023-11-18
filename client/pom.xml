@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated: Mon Mar 14 03:01:17 PM EDT 2022 -->
+<!-- Generated: Fri Nov 17 09:18:38 PM EST 2023 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<name>gcClient</name>
 	<artifactId>client</artifactId>
 	<groupId>com.growcontrol</groupId>
-	<version>4.0.0-SNAPSHOT</version>
+	<version>3.3.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<url>https://growcontrol.com</url>
 	<description>Client framework for Grow Control</description>
@@ -17,23 +17,28 @@
 	</organization>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>17</java.version>
+		<maven.compiler.release>17</maven.compiler.release>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 
 		<!-- Maven Plugins -->
-		<maven-resources-plugin-version>3.2.0</maven-resources-plugin-version>
-		<maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
-		<maven-jar-plugin-version>3.2.0</maven-jar-plugin-version>
-		<maven-source-plugin-version>3.2.1</maven-source-plugin-version>
+		<maven-resources-plugin-version>3.3.1</maven-resources-plugin-version>
+		<maven-compiler-plugin-version>3.11.0</maven-compiler-plugin-version>
+		<maven-jar-plugin-version>3.3.0</maven-jar-plugin-version>
+		<maven-source-plugin-version>3.3.0</maven-source-plugin-version>
 		<maven-eclipse-plugin-version>2.10</maven-eclipse-plugin-version>
 		<git-commit-id-version>4.9.10</git-commit-id-version>
 
 		<!-- Dependencies -->
-		<common-core-version>4.0.0-SNAPSHOT</common-core-version>
-		<common-logger-version>4.0.0-SNAPSHOT</common-logger-version>
-		<common-app-version>4.0.0-SNAPSHOT</common-app-version>
-		<common-version>4.0.0-SNAPSHOT</common-version>
-		<server-version>4.0.0-SNAPSHOT</server-version>
+		<common-core-version>[4.0.0,)</common-core-version>
+		<common-logger-version>[4.0.0,)</common-logger-version>
+		<common-app-version>[4.0.0,)</common-app-version>
+		<common-config-version>[4.0.0,)</common-config-version>
+		<common-plugin-version>[4.0.0,)</common-plugin-version>
+		<classgraph-version>[4.8,)</classgraph-version>
+		<snakeyaml-version>2.2</snakeyaml-version>
+		<server-version>[0.0.0,)</server-version>
 
 	</properties>
 	<scm>
@@ -59,7 +64,7 @@
 				<directory>resources/</directory>
 				<filtering>true</filtering>
 				<includes>
-					<include>plugin.yml</include>
+					<include>app.properties</include>
 				</includes>
 			</resource>
 		</resources>
@@ -83,10 +88,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin-version}</version>
-				<configuration>
-					<source>11</source>
-					<target>11</target>
-				</configuration>
 			</plugin>
 
 			<!-- Jar Plugin -->
@@ -168,9 +169,27 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<artifactId>common</artifactId>
-			<groupId>com.growcontrol</groupId>
-			<version>${common-version}</version>
+			<artifactId>common-config</artifactId>
+			<groupId>com.poixson</groupId>
+			<version>${common-config-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<artifactId>common-plugin</artifactId>
+			<groupId>com.poixson</groupId>
+			<version>${common-plugin-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<artifactId>classgraph</artifactId>
+			<groupId>io.github.classgraph</groupId>
+			<version>${classgraph-version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<artifactId>snakeyaml</artifactId>
+			<groupId>org.yaml</groupId>
+			<version>${snakeyaml-version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

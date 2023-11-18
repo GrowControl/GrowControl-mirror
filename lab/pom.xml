@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated: Wed Oct 18 07:42:47 PM EDT 2023 -->
+<!-- Generated: Fri Nov 17 09:18:16 PM EST 2023 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -7,7 +7,7 @@
 	<name>gcLab</name>
 	<artifactId>lab</artifactId>
 	<groupId>com.growcontrol</groupId>
-	<version>-SNAPSHOT</version>
+	<version>3.3.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<url>https://growcontrol.com</url>
 	<description>Simple client for Grow Control</description>
@@ -35,7 +35,12 @@
 		<common-core-version>[4.0.0,)</common-core-version>
 		<common-logger-version>[4.0.0,)</common-logger-version>
 		<common-app-version>[4.0.0,)</common-app-version>
-		<client-version>4.0.0-SNAPSHOT</client-version>
+		<common-config-version>[4.0.0,)</common-config-version>
+		<common-plugin-version>[4.0.0,)</common-plugin-version>
+		<classgraph-version>[4.8,)</classgraph-version>
+		<snakeyaml-version>2.2</snakeyaml-version>
+		<client-version>[0.0.0,)</client-version>
+		<server-version>[0.0.0,)</server-version>
 
 	</properties>
 	<scm>
@@ -56,6 +61,15 @@
 		<sourceDirectory>src/</sourceDirectory>
 		<outputDirectory>target/classes/</outputDirectory>
 		<finalName>${project.name}-${project.version}</finalName>
+		<resources>
+			<resource>
+				<directory>resources/</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>app.properties</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 
 			<!-- Resource Plugin -->
@@ -87,7 +101,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.growcontrol.lab.Main</mainClass>
+							<mainClass>com.growcontrol.client.lab.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
@@ -182,9 +196,34 @@
 			<version>${common-app-version}</version>
 		</dependency>
 		<dependency>
+			<artifactId>common-config</artifactId>
+			<groupId>com.poixson</groupId>
+			<version>${common-config-version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>common-plugin</artifactId>
+			<groupId>com.poixson</groupId>
+			<version>${common-plugin-version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>classgraph</artifactId>
+			<groupId>io.github.classgraph</groupId>
+			<version>${classgraph-version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>snakeyaml</artifactId>
+			<groupId>org.yaml</groupId>
+			<version>${snakeyaml-version}</version>
+		</dependency>
+		<dependency>
 			<artifactId>client</artifactId>
 			<groupId>com.growcontrol</groupId>
 			<version>${client-version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>server</artifactId>
+			<groupId>com.growcontrol</groupId>
+			<version>${server-version}</version>
 		</dependency>
 	</dependencies>
 </project>
