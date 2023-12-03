@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated: Fri Nov 17 03:05:41 PM EST 2023 -->
+<!-- Generated: Sat Dec  2 09:00:09 PM EST 2023 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -38,10 +38,12 @@
 		<common-config-version>[4.0.0,)</common-config-version>
 		<common-shell-version>[4.0.0,)</common-shell-version>
 		<common-plugin-version>[4.0.0,)</common-plugin-version>
+		<common-scheduler-version>[4.0.0,)</common-scheduler-version>
 		<jansi-version>2.4.0</jansi-version>
 		<jline-version>3.23.0</jline-version>
 		<classgraph-version>[4.8,)</classgraph-version>
 		<snakeyaml-version>2.2</snakeyaml-version>
+		<quartz-version>2.5.0-rc1</quartz-version>
 
 	</properties>
 	<scm>
@@ -212,6 +214,11 @@
 			<version>${common-plugin-version}</version>
 		</dependency>
 		<dependency>
+			<artifactId>common-scheduler</artifactId>
+			<groupId>com.poixson</groupId>
+			<version>${common-scheduler-version}</version>
+		</dependency>
+		<dependency>
 			<artifactId>jansi</artifactId>
 			<groupId>org.fusesource.jansi</groupId>
 			<version>${jansi-version}</version>
@@ -230,6 +237,11 @@
 			<artifactId>snakeyaml</artifactId>
 			<groupId>org.yaml</groupId>
 			<version>${snakeyaml-version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>quartz</artifactId>
+			<groupId>org.quartz-scheduler</groupId>
+			<version>${quartz-version}</version>
 		</dependency>
 	</dependencies>
 </project>
