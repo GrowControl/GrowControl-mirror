@@ -52,7 +52,7 @@ return false;
 	public gcScript(final String name) {
 		final gcScriptManager manager = gcScriptManager.get();
 		this.id   = manager.getNextId();
-		this.name = (utils.isEmpty(name) ? "script-"+Integer.toString(this.id) : name);
+		this.name = (IsEmpty(name) ? "script-"+Integer.toString(this.id) : name);
 		this.queue.add(
 				new ScriptCode_Text(
 						"function log() {"+
@@ -106,7 +106,7 @@ return false;
 	protected static class ScriptCode_Text implements ScriptCode {
 		protected final String text;
 		public ScriptCode_Text(final String text) {
-			if(utils.isEmpty(text)) throw new RequiredArgumentException("text");
+			if (IsEmpty(text)) throw new RequiredArgumentException("text");
 			this.text = text;
 		}
 		@Override
@@ -227,7 +227,7 @@ break;
 	}
 	public String getName() {
 		final String name = this.name;
-		if(utils.isEmpty(name))
+		if (IsEmpty(name))
 			return "script-"+Integer.toString(this.id);
 		return name;
 	}

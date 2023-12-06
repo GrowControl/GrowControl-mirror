@@ -24,7 +24,7 @@ this.level = xLevel.ALL;
 this.debug = true;
 //// config version
 //this.version = this.getString(gcCommonDefines.CONFIG_VERSION);
-//if (Utils.isEmpty(this.version)) throw new xConfigException("Version is missing from config!");
+//if (isEmpty(this.version)) throw new xConfigException("Version is missing from config!");
 //// log level
 //{
 //	final String levelStr = this.getString(gcCommonDefines.CONFIG_VERSION);
@@ -89,9 +89,8 @@ this.debug = true;
 			if (longValue != null) {
 				time = xTime.get(longValue.longValue(), xTimeU.MS);
 			}
-			if (time == null && utils.notEmpty(strValue)) {
+			if (time == null && !IsEmpty(strValue))
 				time = xTime.parse(strValue);
-			}
 			if (time == null) {
 				time = gcServerDefines.DEFAULT_TICK_INTERVAL;
 			}

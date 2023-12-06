@@ -168,7 +168,7 @@ public class NetServerManager implements xCloseableMany {
 //		synchronized(this.tempConfigs) {
 //			for (final NetConfig cfg : this.tempConfigs) {
 //				final String key = cfg.toString();
-//				if (utils.isEmpty(key))    continue;
+//				if (IsEmpty(key))          continue;
 //				if (cfgs.containsKey(key)) continue;
 //				cfgs.put(key, cfg);
 //			}
@@ -183,7 +183,7 @@ public class NetServerManager implements xCloseableMany {
 //					final NetConfig cfg = cfgs.get(entry.getKey());
 //					if (cfg == null || !cfg.enabled) {
 //						final NetServer server = entry.getValue();
-//						utils.safeClose(server);
+//						SafeClose(server);
 //						it.remove();
 //					}
 //				}

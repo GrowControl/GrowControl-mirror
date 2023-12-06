@@ -71,7 +71,7 @@ public class gcScriptManager implements xStartStop {
 	}
 	public void loadAll(final String dir) {
 		this.loadAll(new File(
-				utils.isEmpty(dir) ? "scripts/" : dir
+			IsEmpty(dir) ? "scripts/" : dir
 		));
 	}
 	// load all scripts from dir

@@ -51,7 +51,7 @@ public class NetServerConfig extends xConfig implements xHashable {
 		}
 		// host
 		this.host = this.getString(gcCommonDefines.CONFIG_SOCKET_HOST);
-		if (utils.isEmpty(this.host)) throw new xConfigException("Host is missing from config!");
+		if (IsEmpty(this.host)) throw new xConfigException("Host is missing from config!");
 		// port
 		this.port = this.getInt(
 			gcCommonDefines.CONFIG_SOCKET_PORT,
@@ -67,7 +67,7 @@ public class NetServerConfig extends xConfig implements xHashable {
 //			final String host, final int port) {
 //		this.enabled = enabled;
 //		this.ssl     = ssl;
-//		this.host    = (utils.isEmpty(host) ? null : host);
+//		this.host    = (IsEmpty(host) ? null : host);
 //		this.port    = port;
 //		this.key = this.genKey();
 //	}
@@ -82,7 +82,7 @@ public class NetServerConfig extends xConfig implements xHashable {
 	}
 	public String getHost() {
 		final String host = this.host;
-		if (utils.isEmpty(host) || "*".equals(host) || "any".equalsIgnoreCase(host)) {
+		if (IsEmpty(host) || "*".equals(host) || "any".equalsIgnoreCase(host)) {
 			return null;
 		}
 		return host;
