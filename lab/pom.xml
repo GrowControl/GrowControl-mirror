@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated: Sat Dec  2 09:26:16 PM EST 2023 -->
+<!-- Generated: Sat Dec  9 09:37:11 AM EST 2023 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -12,11 +12,12 @@
 	<url>https://growcontrol.com</url>
 	<description>Simple client for Grow Control</description>
 	<organization>
-		<name>PoiXson</name>
-		<url>https://poixson.com</url>
+		<name>GrowControl</name>
+		<url>https://growcontrol.com</url>
 	</organization>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.license>AGPLv3</project.license>
 		<java.version>17</java.version>
 		<maven.compiler.release>17</maven.compiler.release>
 		<maven.compiler.source>17</maven.compiler.source>
