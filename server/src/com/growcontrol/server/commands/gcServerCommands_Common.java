@@ -9,13 +9,13 @@ import com.poixson.app.commands.xCommandEvent;
 import com.poixson.logger.xLog;
 
 
-public class gcCommands_Common {
+public class gcServerCommands_Common {
 
 	protected final xApp app;
 
 
 
-	public gcCommands_Common(final xApp app) {
+	public gcServerCommands_Common(final xApp app) {
 		this.app = app;
 	}
 

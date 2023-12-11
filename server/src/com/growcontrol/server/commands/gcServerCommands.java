@@ -6,13 +6,13 @@ import com.poixson.app.commands.xCommandEvent;
 import com.poixson.app.commands.xCommandProcessor;
 
 
-public class gcCommands_Server {
+public class gcServerCommands {
 
 	protected final xApp app;
 
 
 
-	public gcCommands_Server(final xApp app) {
+	public gcServerCommands(final gcServer server) {
 		this.app = app;
 	}
 

@@ -9,14 +9,14 @@ import com.poixson.app.commands.xCommandEvent;
 import com.poixson.app.commands.xCommandProcessor;
 
 
-public class gcCommands_Server_Config {
+public class gcServerCommands_Config extends xCommandGroup {
 
 	protected final xApp app;
 	protected final AtomicReference<xCommandDAO[]> parent = new AtomicReference<xCommandDAO[]>(null);
 
 
 
-	public gcCommands_Server_Config(final xApp app) {
+	public gcServerCommands_Config() {
 		this.app = app;
 	}
 
