@@ -1,5 +1,5 @@
 /*
-package com.growcontrol.common.meta;
+package com.growcontrol.datum;
 
 import java.io.Serializable;
 

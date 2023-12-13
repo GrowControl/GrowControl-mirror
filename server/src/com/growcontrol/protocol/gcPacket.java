@@ -1,5 +1,5 @@
 /*
-package com.growcontrol.common.packets;
+package com.growcontrol.protocol;
 
 import java.util.List;
 import java.util.Map;

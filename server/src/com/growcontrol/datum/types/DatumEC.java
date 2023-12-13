@@ -1,5 +1,5 @@
 /*
-package com.growcontrol.common.meta.metaTypes;
+package com.growcontrol.datum.types;
 
 import com.growcontrol.common.meta.MetaType;
 import com.growcontrol.common.meta.exceptions.InvalidMetaValueException;

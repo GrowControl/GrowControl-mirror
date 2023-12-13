@@ -1,5 +1,5 @@
+package com.growcontrol.protocol.list;
 /*
-package com.growcontrol.common.packets.list;
 
 import java.util.HashMap;
 import java.util.Map;

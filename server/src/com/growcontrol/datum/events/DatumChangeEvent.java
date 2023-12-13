@@ -1,5 +1,5 @@
 /*
-package com.growcontrol.common.meta;
+package com.growcontrol.datum.events;
 
 import com.growcontrol.common.meta.exceptions.UnknownAddressException;
 import com.poixson.commonjava.Utils.exceptions.RequiredArgumentException;

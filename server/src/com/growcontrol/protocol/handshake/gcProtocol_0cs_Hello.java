@@ -1,5 +1,5 @@
+package com.growcontrol.protocol.handshake;
 /*
-package com.growcontrol.common.packets.handshake;
 
 import java.util.HashMap;
 import java.util.Map;
