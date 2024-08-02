@@ -42,6 +42,8 @@ settings.gradle text
 *.bin binary
 *.rpm binary
 *.exe binary
+*.cmd binary
+*.scr binary
 *.dll binary
 *.class binary
 *.so binary
@@ -50,3 +52,10 @@ settings.gradle text
 *.map binary
 *.woff binary
 *.woff2 binary
+*.mp3 binary
+*.mp4 binary
+*.ogg binary
+*.avi binary
+*.mkv binary
+*.wav binary
+*.ttf binary
