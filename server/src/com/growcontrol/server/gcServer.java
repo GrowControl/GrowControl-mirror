@@ -139,7 +139,7 @@ public class gcServer extends xApp {
 
 
 
-	// load configs
+	// 50 | load configs
 	@xAppStep(type=xAppStepType.STARTUP, title="Configs", step=50)
 	public void __STARTUP__load_configs() {
 //TODO: find config
@@ -181,7 +181,7 @@ public class gcServer extends xApp {
 
 
 
-	// command prompt
+	// 90 | command prompt
 	@xAppStep(type=xAppStepType.STARTUP, title="Commands", step=90)
 	public void __START__commands() {
 		// start reading console input
@@ -200,7 +200,7 @@ public class gcServer extends xApp {
 
 
 
-	// plugins
+	// 400 | load plugins
 	@xAppStep(type=xAppStepType.STARTUP, title="LoadPlugins", step=400)
 	public void __START__plugins_load() {
 		final gcServerPluginManager manager = this.getPluginManager();
@@ -220,6 +220,7 @@ public class gcServer extends xApp {
 		manager.load();
 	}
 
+	// 405 | init plugins
 	@xAppStep(type=xAppStepType.STARTUP, title="InitPlugins", step=405, multi=true)
 	public void __START__plugins_init(final xAppStepDAO step) {
 		final gcServerPluginManager manager = this.plugins.get();
@@ -229,6 +230,7 @@ public class gcServer extends xApp {
 			throw new xAppStepMultiFinishedException();
 	}
 
+	// 410 | start plugins
 	@xAppStep(type=xAppStepType.STARTUP, title="StartPlugins", step=410, multi=true)
 	public void __START__plugins_start(final xAppStepDAO step) {
 		final gcServerPluginManager manager = this.plugins.get();
@@ -314,6 +316,7 @@ public class gcServer extends xApp {
 
 
 
+	// 600 | close sockets
 	@xAppStep(type=xAppStepType.SHUTDOWN, title="SocketServer", step=600)
 	public void __STOP__sockets() {
 		final NetServer server = this.socket_server.getAndSet(null);
@@ -351,7 +354,7 @@ public class gcServer extends xApp {
 
 
 
-	// plugins
+	// 410 | stop plugins
 	@xAppStep(type=xAppStepType.SHUTDOWN, title="StopPlugins", step=410, multi=true)
 	public void __STOP__plugins_stop(final xAppStepDAO step) {
 		final gcServerPluginManager manager = this.plugins.get();
@@ -363,6 +366,7 @@ public class gcServer extends xApp {
 		}
 	}
 
+	// 400 | unload plugins
 	@xAppStep(type=xAppStepType.SHUTDOWN, title="UnloadPlugins", step=400, multi=true)
 	public void __STOP__plugins_unload(final xAppStepDAO step) {
 		final gcServerPluginManager manager = this.plugins.get();
@@ -378,7 +382,7 @@ public class gcServer extends xApp {
 
 
 
-	// stop command prompt
+	// 90 | stop command prompt
 	@xAppStep(type=xAppStepType.SHUTDOWN, title="Commands", step=90)
 	public void __STOP__commands() {
 		// stop reading console input
