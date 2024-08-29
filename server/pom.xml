@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated: Tue Aug 20 02:21:57 AM EDT 2024 -->
+<!-- Generated: Thu Aug 29 03:41:31 PM EDT 2024 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -35,7 +35,6 @@
 
 		<!-- Dependencies -->
 		<common-core-version>[4.0.0,)</common-core-version>
-		<common-logger-version>[4.0.0,)</common-logger-version>
 		<common-app-version>[4.0.0,)</common-app-version>
 		<common-config-version>[4.0.0,)</common-config-version>
 		<common-scheduler-version>[4.0.0,)</common-scheduler-version>
@@ -216,11 +215,6 @@
 			<artifactId>common-core</artifactId>
 			<groupId>com.poixson</groupId>
 			<version>${common-core-version}</version>
-		</dependency>
-		<dependency>
-			<artifactId>common-logger</artifactId>
-			<groupId>com.poixson</groupId>
-			<version>${common-logger-version}</version>
 		</dependency>
 		<dependency>
 			<artifactId>common-app</artifactId>
